@@ -1,0 +1,41 @@
+{
+  "name": "chutte",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KGB-JS/chutte.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KGB-JS/chutte/issues"
+  },
+  "homepage": "https://github.com/KGB-JS/chutte#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.5",
+    "body-parser": "^1.14.2",
+    "chai": "^3.4.1",
+    "express": "^4.13.3",
+    "express-partials": "^0.3.0",
+    "history": "^1.17.0",
+    "jwt-simple": "^0.4.1",
+    "mocha": "^2.3.4",
+    "mongoose": "^4.3.5",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "react-router": "^1.0.3",
+    "redux": "^3.0.5"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "5.0.0"
+  }
+}
