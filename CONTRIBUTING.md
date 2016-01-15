@@ -9,11 +9,11 @@ the development branch.
 1. Fork the development branch
 2. Clone your personal fork onto your local computer
 
-    `git clone https://github.com/<contributor>/KGB-JS.git`
+    `git clone https://github.com/<contributor>/chutte.git`
 
 3. Add a remote upstream to the development branch
 
-    `git remote add upstream https://github.com/<contributor>/KGB-JS.git`
+    `git remote add upstream https://github.com/KGB-JS/chutte.git`
     
 4. Create a feature branch on your fork and commit changes
 
