@@ -16,8 +16,8 @@ module.exports = function(app,express){
     app.use('/api/users', userRouter);
     require('../user/userRoutes.js')(userRouter);
 
-    // app.use('/api/items',itemsRouter);
-    // require('../items/itemRoutes.js')(itemsRouter);
+    app.use('/api/items',itemsRouter);
+    require('../items/itemRoutes.js')(itemsRouter);
 
 
     app.use('*',function(req,res){
