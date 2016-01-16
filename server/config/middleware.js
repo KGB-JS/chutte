@@ -27,4 +27,4 @@ module.exports = function(app,express){
     app.use(utils.logError);
     app.use(utils.handleError);
 
-}
+};
