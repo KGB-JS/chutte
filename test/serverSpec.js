@@ -7,7 +7,7 @@ var User = require('../server/user/userModel.js');
 describe('', function() {
   var req = request.defaults();
   var server;
-  before(function() {
+  beforeEach(function() {
     server = app.listen(8080);
   });
 
@@ -20,7 +20,7 @@ describe('', function() {
 
       request(options, function(error, res, body) {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.items.length).to.equal(db.items.length);
+        expect(res.body.length).to.equal(db.items.length);
         done();
       });
     });
