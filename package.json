@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run test-server",
+    "test-server": "mocha -R spec ./test/serverSpec.js",
     "webserver": "nodemon server/server.js",
     "build": "node_modules/.bin/webpack",
     "dev": "node_modules/.bin/webpack-dev-server"
@@ -39,6 +40,7 @@
     "react-dom": "^0.14.6",
     "react-router": "^1.0.3",
     "redux": "^3.0.5",
+    "request": "^2.67.0",
     "webpack": "^1.12.11"
   },
   "devDependencies": {
