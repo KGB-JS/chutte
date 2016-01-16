@@ -29,24 +29,23 @@ module.exports = {
                                 res.status(401).send('User or password is incorrect');
                                 next(new Error('User or password is incorrect'));
                             }
-                        })
+                        });
                 }
             })
             .fail(function(error) {
                 next(error);
-            })
+            });
     },
     signup: function(req, res, next) {
         var username = req.body.username;
         var password = req.body.password;
-
         var findOne = Q.nbind(User.findOne, User);
-
         // check to see if user already exists
         findOne({
                 username: username
             })
             .then(function(user) {
+                console.log(user);
                 if (user) {
                     res.status(403).send({
                         error: 'User already exist!'

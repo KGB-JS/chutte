@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
-var db = require('./data.js');
+var db = require('./db.js');
+
 
 require('./config/middleware.js')(app,express);
 
