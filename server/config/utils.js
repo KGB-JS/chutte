@@ -1,13 +1,12 @@
 var jwt = require('jwt-simple');
 
 module.exports = {
-    logError: function(err, req, res, next){
+    logError: function(err,req,res,next){
         console.error(err.stack);
         next(err);
     },
-    handleError: function(err, req, res){
-        console.dir(res);
-        res.status(500).send({error: err.message});
+    handleError: function(err,req,res){
+        res.status(500).send({error:err.message});
     },
     decode: function(req,res,next){
         var token = req.headers['x-assess-token'];
