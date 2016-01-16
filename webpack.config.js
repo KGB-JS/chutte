@@ -5,7 +5,7 @@ const ROOT_PATH = path.resolve(__dirname);
 module.exports = {
   devtool: 'source-map',
   entry: [
-    path.resolve(ROOT_PATH, 'client/src/index.jsx');
+    path.resolve(ROOT_PATH, 'client/src/index.jsx')
   ],
   module: {
     preLoaders: [
@@ -30,6 +30,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(ROOT_PATH, 'client/public/dist'),
+    filename: 'bundle.js',
     historyApiFallback: true,
     hot: true,
     inline: true,
