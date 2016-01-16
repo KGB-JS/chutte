@@ -11,16 +11,16 @@ describe('', function() {
     server = app.listen(3000);
   });
 
-  describe('Server route: /api/recipes', function() {
-    it('Responds with all recipes', function() {
+  describe('Server route: /api/items', function() {
+    it('Responds with all items', function() {
       var options = {
         'method': 'GET',
-        'uri': 'http://127.0.0.1:3000/api/recipes'
+        'uri': 'http://127.0.0.1:3000/api/items'
       };
 
       request(options, function(error, res, body) {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.length).to.equal(db.matches.length);
+        expect(res.body.items.length).to.equal(db.items.length);
         done();
       });
     });
