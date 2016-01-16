@@ -13,6 +13,33 @@ var UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  firstname: {
+    type: String
+  },
+  lastname: {
+    type: String
+  },
+  phone: {
+    type: Number
+  },
+  streetAddress: {
+    type: String
+  },
+  unitNumber: {
+    type: String
+  },
+  country: {
+    type: String
+  },
+  zip: {
+    type: String
+  },
+  stateRegion: {
+    type: String
+  },
+  city: {
+    type: String
+  },
   salt: String
 });
 
