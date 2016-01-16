@@ -11,8 +11,7 @@ module.exports = function(app,express){
     app.use(bodyParser.urlencoded({extended:true}));
     app.use(bodyParser.json());
     app.use(express.static(path.join(__dirname, '/../../client')));
-    app.use(utils.logError);
-    app.use(utils.handleError);
+
 
     app.use('/api/users', userRouter);
     require('../user/userRoutes.js')(userRouter);
@@ -22,8 +21,10 @@ module.exports = function(app,express){
 
 
     app.use('*',function(req,res){
-        res.send(404).send('404: Page not found');
-    })
+        res.status(404).send('404: Page not found');
+    });
 
+    app.use(utils.logError);
+    app.use(utils.handleError);
 
 }
