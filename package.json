@@ -30,6 +30,8 @@
     "jwt-simple": "^0.4.1",
     "mocha": "^2.3.4",
     "mongoose": "^4.3.5",
+    "morgan": "^1.6.1",
+    "q": "^1.4.1",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-router": "^1.0.3",
