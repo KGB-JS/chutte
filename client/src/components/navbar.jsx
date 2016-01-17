@@ -16,7 +16,4 @@ var NavBar = React.createClass({
   }
 });
 
-ReactDOM.render(
-  <NavBar/>,
-  document.getElementById('container')
-);
+export default Navbar;
