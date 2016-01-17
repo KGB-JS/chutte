@@ -16,14 +16,14 @@ module.exports = {
             items.forEach(function(item) {
                 itemMap.push(item);
             });
-            res.send(itemMap);
+            // res.send(itemMap);
+        res.send(db.items);
+            
         });
-        // res.send(db.items);
 
     },
     postItem: function(req, res, next) {
 
-        console.log(req.body);
         var productName = req.body.productName;
         var createdBy = req.body.createdBy;
         var category = req.body.category;

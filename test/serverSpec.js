@@ -1,26 +1,49 @@
 var expect = require('chai').expect;
 var request = require('request');
 var app = require('../server/server.js');
-var db = require('../server/data.js');
+//var db = require('../server/data.js');
+//uncomment for POST
+var db = require('../server/db.js');
 var User = require('../server/user/userModel.js');
 
 describe('', function() {
   var req = request.defaults();
   var server;
   before(function() {
-    server = app.listen(3000);
+    server = app.listen(8080);
   });
 
   describe('Server route: /api/items', function() {
     it('Responds with all items', function() {
       var options = {
         'method': 'GET',
-        'uri': 'http://127.0.0.1:3000/api/items'
+        'uri': 'http://127.0.0.1:8080/api/items'
       };
 
       request(options, function(error, res, body) {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.items.length).to.equal(db.items.length);
+        expect(res.body.length).to.equal(db.items.length);
+        done();
+      });
+    });
+
+    it('Can post new items', function() {
+      var options = {
+        'method': 'POST',
+        'uri': 'http://127.0.0.1:8080/api/items',
+        'json': {
+            "productName": "The best product",
+            "createdBy": "Superman",
+            "category": "toy",
+            "quantity": 700,
+            "price": 70,
+            "auctionEnds": "today",
+            "description": "this product is amazing"
+        }
+      };
+
+      request(options, function(error, res, body) {
+        expect(res.statusCode).to.equal(200);
         done();
       });
     });
@@ -29,7 +52,7 @@ describe('', function() {
   describe('Server route: /api/user/signup', function() {
     var options = {
       'method': 'POST',
-      'uri': 'http://127.0.0.1:3000/api/user/signup',
+      'uri': 'http://127.0.0.1:8080/api/user/signup',
       'json': {
         'username': 'test@test.com',
         'password': 'password'
@@ -39,6 +62,7 @@ describe('', function() {
     it('Should create a new user', function() {
       var foundUser;
       req(options, function(error, res, body) {
+        console.log(res.statusCode);
         expect(res.statusCode).to.equal(200);
         expect(body.token).to.not.be.null;
         done();
@@ -62,7 +86,7 @@ describe('', function() {
     it('Should signin an existing user', function() {
       var options = {
         'method': 'POST',
-        'uri': 'http://127.0.0.1:3000/api/user/signin',
+        'uri': 'http://127.0.0.1:8080/api/user/signin',
         'json': {
           'username': 'test@test.com',
           'password': 'password'
@@ -79,7 +103,7 @@ describe('', function() {
     it('Should not signin a user with incorrect password', function() {
       var options = {
         'method': 'POST',
-        'uri': 'http://127.0.0.1:3000/api/user/signin',
+        'uri': 'http://127.0.0.1:8080/api/user/signin',
         'json': {
           'username': 'test@test.com',
           'password': 'pass'
