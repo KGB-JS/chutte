@@ -1,5 +1,7 @@
-var NavBar = React.createClass({
-  render: function() {
+import React from 'react';
+
+class NavBar extends React.Component {
+  render() {
     return (
       <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -14,6 +16,6 @@ var NavBar = React.createClass({
       </nav>
     );
   }
-});
+};
 
 export default Navbar;
