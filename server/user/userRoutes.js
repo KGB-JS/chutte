@@ -5,3 +5,4 @@ module.exports = function(app){
     app.post('/signin', userController.signin);
     app.post('/signedin',userController.checkAuth);
 };
+

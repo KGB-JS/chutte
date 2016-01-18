@@ -12,7 +12,6 @@ module.exports = function(app,express){
     app.use(bodyParser.json());
     app.use(express.static(path.join(__dirname, '/../../client/public')));
 
-
     app.use('/api/users', userRouter);
     require('../user/userRoutes.js')(userRouter);
 
@@ -28,3 +27,4 @@ module.exports = function(app,express){
     app.use(utils.handleError);
 
 };
+

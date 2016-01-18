@@ -45,7 +45,6 @@ module.exports = {
                 username: username
             })
             .then(function(user) {
-                console.log(user);
                 if (user) {
                     res.status(403).send({
                         error: 'User already exist!'
