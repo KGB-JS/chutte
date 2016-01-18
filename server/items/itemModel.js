@@ -21,6 +21,10 @@ var itemSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  minPrice: {
+    type: Number,
+    required: true
+  },
   auctionEnds: {
     type: String,
     required: true

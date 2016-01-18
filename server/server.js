@@ -7,6 +7,7 @@ require('./config/middleware.js')(app,express);
 var port = process.env.PORT || 8080;
 
 app.set('port', port);
+app.itemStorage = {};
 
 app.listen(port,function(){
     console.log("Listening to port "+ port);

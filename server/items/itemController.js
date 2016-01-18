@@ -1,13 +1,10 @@
-//var _ = require('underscore');
 var db = require('../data.js');
 var Item = require('./itemModel.js');
 var jwt = require('jwt-simple');
-//var request = require('request');
-//var url = require('url');
 var Q = require('q');
-// commented out for deployment
-// uncomment for development
-//var apiInfo = require('./apiKeys.js');
+var interval = require('./intervalController.js');
+var userController = require('./../user/userController.js');
+var tempItem = '569d6db5cb40b4336a16593a';
 
 module.exports = {
     getItems: function(req, res, next) {
@@ -16,7 +13,6 @@ module.exports = {
             items.forEach(function(item) {
                 itemMap.push(item);
             });
-            // res.send(itemMap);
         res.send(db.items);
             
         });
@@ -29,6 +25,7 @@ module.exports = {
         var category = req.body.category;
         var quantity = req.body.quantity;
         var price = req.body.price;
+        var minPrice = req.body.minPrice;
         var auctionEnds = req.body.auctionEnds;
         var description = req.body.description;
 
@@ -38,6 +35,7 @@ module.exports = {
             category: category,
             quantity: quantity,
             price: price,
+            minPrice: minPrice,
             auctionEnds: auctionEnds,
             description: description
         };
@@ -45,14 +43,38 @@ module.exports = {
         Q.ninvoke(makeNewItem, 'save')
             .then(function() {
                 res.status(200).send();
+                interval.findTimeReduce(price, minPrice);
             })
             .fail(function(err) {
                 console.log(err.errors);
                 res.status(400).send();
                 next(err);
             });
-
-
-
+    },
+    buyItem: function(req, res, next) {
+        var token = req.headers['x-access-token'];
+        var productId = req.body.productId;
+        var quantityRequested = req.body.quantity;
+        var findItem = Q.nbind(Item.findOne, Item);
+        // var timeoutId = app.itemStorage[productId];
+        // clearTimeout(timeoutId);
+        // setTimeOut(interval.findTimeReduce(item.price, item.minPrice, item.auctionEnds), 3600);
+        // res.status(400).send({'Item purchased'});
+        findItem({_id: productId})
+            .then(function(item) {
+                if (item.quantity > 0 && quantityRequested < item.quantity) {
+                    item.quantity = item.quantity - quantityRequested
+                    item.save()
+                        .then(function() {
+                          console.log(item)
+                          res.status(200).send();
+                        })
+                } else {
+                    res.status(401).send('quantityRequested exceeds quantity available');
+                }
+              })
+              .fail(function(error) {
+                next(error);
+              });
     }
 };
