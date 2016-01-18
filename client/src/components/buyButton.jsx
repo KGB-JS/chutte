@@ -1,12 +1,22 @@
 import React from 'react';
 
-class buyButton extends React.Component({
-  render(){
-    return (
-      <div>
-      </div>
-    )
+class BuyButton extends React.Component {
+  getInitialState() {
+    return {bought: false};
   }
-})
 
-export default buyButton;
+  handleClick(event) {
+    this.setState({bought: !this.state.bought});
+  }
+
+  render() {
+    var text = this.state.bought ? 'bought' : 'haven\'t bought';
+    return (
+      <p onClick={this.handleClick}>
+        You {text} this.
+      </p>
+    );
+  }
+}
+
+export default BuyButton;
