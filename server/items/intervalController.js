@@ -1,12 +1,14 @@
 var app = require('../../server/server.js');
 var socketServer = require('http').createServer(app);
 var io = require('socket.io')(socketServer);
+var moment = require('moment');
 
 module.exports = {
 	    //setInterval fo make call to db to update price
         findTimeReduce : function (currentPrice, minPrice, endDate) {
-            endDate = endDate || 7;
-            var sec = ((endDate * 24)*60*60);
+            var now = new Date();
+            var millisecondsUntil = Math.abs(now.getTime() - endDate.getTime());
+
             var count = 0;
             var amountToDecrease = currentPrice/minPrice;
             var results = [];
@@ -16,7 +18,7 @@ module.exports = {
                 count++;
             }
 
-            var numberOfSecUntilDecrment = sec/count;
+            var numberOfSecUntilDecrment = millisecondsUntil/count;
             var priceIndex = 0;
             var timeoutId;
             
@@ -28,7 +30,7 @@ module.exports = {
 
                     timeoutId = setTimeout(recurse, numberOfSecUntilDecrment);
                 }
-            }
+            };
             setTimeout(recurse, numberOfSecUntilDecrment);
         }
 };
