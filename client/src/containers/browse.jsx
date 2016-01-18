@@ -6,4 +6,3 @@ class BrowsePage extends React.Component {
     return <NavBar/>
   }
 };
-

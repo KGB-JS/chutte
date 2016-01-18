@@ -14,5 +14,3 @@ class JumboTronButton extends React.Component {
 };
 
 export default JumboTronButton;
-
-
