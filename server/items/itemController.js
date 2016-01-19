@@ -4,7 +4,7 @@ var jwt = require('jwt-simple');
 var Q = require('q');
 var interval = require('./intervalController.js');
 var userController = require('./../user/userController.js');
-var tempItem = '569d6db5cb40b4336a16593a';
+var itemStorage = require('./itemStorage.js');
 
 module.exports = {
     getItems: function(req, res, next) {
@@ -42,8 +42,9 @@ module.exports = {
         var makeNewItem = new Item(newItem);
         Q.ninvoke(makeNewItem, 'save')
             .then(function() {
-                res.status(200).send();
-                interval.findTimeReduce(price, minPrice);
+                res.status(200).send(makeNewItem);
+                var timeId = interval.findTimeReduce(price, minPrice, auctionEnds);
+                itemStorage.storage[makeNewItem._id] = timeId;
             })
             .fail(function(err) {
                 console.log(err.errors);
@@ -56,18 +57,17 @@ module.exports = {
         var productId = req.body.productId;
         var quantityRequested = req.body.quantity;
         var findItem = Q.nbind(Item.findOne, Item);
-        // var timeoutId = app.itemStorage[productId];
-        // clearTimeout(timeoutId);
-        // setTimeOut(interval.findTimeReduce(item.price, item.minPrice, item.auctionEnds), 3600);
-        // res.status(400).send({'Item purchased'});
         findItem({_id: productId})
             .then(function(item) {
                 if (item.quantity > 0 && quantityRequested < item.quantity) {
                     item.quantity = item.quantity - quantityRequested
                     item.save()
                         .then(function() {
-                          console.log(item)
+                          console.log(itemStorage, ' itemStorage');
                           res.status(200).send();
+                          clearInterval(itemStorage.storage[item._id]);
+                          var timeId = interval.findTimeReduce(item.price, item.minPrice, item.auctionEnds);
+                          itemStorage.storage[item._id] = timeId;
                         })
                 } else {
                     res.status(401).send('quantityRequested exceeds quantity available');
