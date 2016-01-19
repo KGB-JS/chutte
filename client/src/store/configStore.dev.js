@@ -7,7 +7,6 @@ import rootReducer from '../reducers/rootReducer';
 
 const finalCreateStore = compose(
   applyMiddleware(thunk),
-  reduxReactRouter({routes}),
   applyMiddleware(createLogger()),
   DevTools.instrument()
 )(createStore);
