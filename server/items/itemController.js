@@ -43,8 +43,9 @@ module.exports = {
         Q.ninvoke(makeNewItem, 'save')
             .then(function() {
                 res.status(200).send(makeNewItem);
-                var timeId = interval.findTimeReduce(price, minPrice, auctionEnds);
+                var timeId = interval.findTimeReduce(makeNewItem._id, price, minPrice, auctionEnds);
                 itemStorage.storage[makeNewItem._id] = timeId;
+                console.log(itemStorage)
             })
             .fail(function(err) {
                 console.log(err.errors);
@@ -65,9 +66,10 @@ module.exports = {
                         .then(function() {
                           console.log(itemStorage, ' itemStorage');
                           res.status(200).send();
-                          clearInterval(itemStorage.storage[item._id]);
-                          var timeId = interval.findTimeReduce(item.price, item.minPrice, item.auctionEnds);
+                          clearInterval(itemStorage.storage[item._id].timeId);
+                          var timeId = interval.findTimeReduce(item._id, itemStorage.storage[item._id].price, item.minPrice, item.auctionEnds);
                           itemStorage.storage[item._id] = timeId;
+                          console.log(timeId.price, 'TIMEIDPRICE');
                         })
                 } else {
                     res.status(401).send('quantityRequested exceeds quantity available');

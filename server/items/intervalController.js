@@ -6,11 +6,11 @@ var itemStorage = require('./itemStorage.js');
 
 
 module.exports = {
-        findTimeReduce : function (currentPrice, minPrice, endDate) {
+        findTimeReduce : function (itemId, currentPrice, minPrice, endDate) {
+            var startPrice = currentPrice;
             var now = moment().valueOf();
             endDate = moment('2016-01-18 17').valueOf();
             var millisecondsUntil = Math.abs(now - endDate);
-            console.log(millisecondsUntil)
             var count = 0;
             var amountToDecrease = currentPrice/minPrice;
             var results = [];
@@ -24,16 +24,21 @@ module.exports = {
             var priceIndex = 0;
             var timeoutId;
             results.push(minPrice);
-            console.log(results);
             var recurse = function() {
                 if(priceIndex < results.length){
-                    currentPrice = results[priceIndex];
                     priceIndex++;
+                    startPrice = results[priceIndex];
                     //current price in database update
                     //make 'POST' to update price
                 }
+                console.log('recurse', startPrice);
+                if(itemStorage.storage[itemId].price){ 
+                   itemStorage.storage[itemId].price = startPrice;
+                }
+                console.log('item storage', itemStorage);
+
             };
-            return setInterval(recurse, 10000);
+            return { timeId:setInterval(recurse, 10000), price: startPrice };
 
         }
 };
