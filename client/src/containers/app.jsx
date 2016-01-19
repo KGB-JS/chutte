@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Navbar from '../components/navbar';
 import HomeJumbo from '../components/homeJumbotron';
+import DevTools from './devTools';
 
 
 export default class App extends Component {
@@ -9,6 +10,7 @@ export default class App extends Component {
       <div>
         <Navbar/>
         <HomeJumbo/>
+        <DevTools/>
       </div>
     )
   }
