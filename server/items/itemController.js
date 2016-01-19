@@ -62,6 +62,7 @@ module.exports = {
             .then(function(item) {
                 if (item.quantity > 0 && quantityRequested < item.quantity) {
                     item.quantity = item.quantity - quantityRequested
+                    item.price = itemStorage.storage[item._id].price
                     item.save()
                         .then(function() {
                           console.log(itemStorage, ' itemStorage');
