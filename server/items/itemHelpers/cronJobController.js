@@ -1,6 +1,6 @@
-var itemStorage = require('./itemStorage.js');
-var Item = require('./itemModel.js');
-var db = require('../data.js');
+var itemStorage = require('./../itemStorage.js');
+var Item = require('./../itemModel.js');
+var db = require('./../../data.js');
 
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
                   item.save()
                 }
             });
-        res.status(400).send(db.items);
+        res.status(200).send(db.items);
             
         });
 
