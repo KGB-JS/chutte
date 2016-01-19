@@ -37,6 +37,10 @@ module.exports = {
                     //make 'POST' to update price
 
                 }
+
+                if(priceIndex === results.length - 1) {
+                    clearInterval(itemStorage.storage[itemId].timeId);
+                }
                 console.log('recurse', startPrice);
                 if(itemStorage.storage[itemId].price){ 
                    itemStorage.storage[itemId].price = startPrice;
@@ -44,7 +48,7 @@ module.exports = {
                 console.log('item storage', itemStorage);
 
             };
-            return { timeId:setInterval(recurse, 10000), price: startPrice };
+            return { timeId:setInterval(recurse, 1000), price: startPrice };
 
         }
 };

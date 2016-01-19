@@ -14,7 +14,7 @@ io.on('connection', function(){
 
 io.on('connect', function() {
     console.log("user connected");
-    });
+});
 
 server.listen(port, function () {
   console.log('Server listening at port %d', port);
