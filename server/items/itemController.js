@@ -11,10 +11,14 @@ module.exports = {
         Item.find({}, function(err, items) {
             var itemMap = [];
             items.forEach(function(item) {
-                itemMap.push(item);
+                // still need to check for categories
+                if(item.active){
+                    itemMap.push(item);
+                }
             });
         res.send(db.items);
-            
+        // Uncommit when we are ready to server from DB
+        // res.send(itemMap);
         });
 
     },
