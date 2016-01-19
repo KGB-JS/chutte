@@ -5,8 +5,7 @@ import thunk from 'redux-thunk';
 import rootReducer from '../reducers/rootReducer';
 
 const finalCreateStore = compose(
-  applyMiddleware(thunk),
-  reduxReactRouter({routes}),
+  applyMiddleware(thunk)
 )(createStore);
 
 export default function configureStore(initialState){
