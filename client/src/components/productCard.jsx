@@ -23,6 +23,7 @@ class ProductCard extends React.Component {
           {this.props.productPrice}
         </div>
 
+        <BuyButton />
       </div>
     );
   }
