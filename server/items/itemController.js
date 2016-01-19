@@ -44,9 +44,7 @@ module.exports = {
             .then(function() {
                 res.status(200).send(makeNewItem);
                 var timeId = interval.findTimeReduce(price, minPrice, auctionEnds);
-                console.log(timeId);
                 itemStorage.storage[makeNewItem._id] = timeId;
-                console.log(itemStorage)
             })
             .fail(function(err) {
                 console.log(err.errors);
@@ -65,9 +63,9 @@ module.exports = {
                     item.quantity = item.quantity - quantityRequested
                     item.save()
                         .then(function() {
-                          console.log(itemStorage);
+                          console.log(itemStorage, ' itemStorage');
                           res.status(200).send();
-                          clearTimeout(itemStorage.storage[item._id]);
+                          clearInterval(itemStorage.storage[item._id]);
                           var timeId = interval.findTimeReduce(item.price, item.minPrice, item.auctionEnds);
                           itemStorage.storage[item._id] = timeId;
                         })
