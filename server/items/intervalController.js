@@ -9,7 +9,7 @@ module.exports = {
         findTimeReduce : function (itemId, currentPrice, minPrice, endDate) {
             var startPrice = currentPrice;
             var now = moment().valueOf();
-            endDate = moment('2016-01-18 17').valueOf();
+            endDate = moment('2016-01-20 17').valueOf();
             var millisecondsUntil = Math.abs(now - endDate);
             var count = 0;
             var amountToDecrease = currentPrice/minPrice;
@@ -25,11 +25,17 @@ module.exports = {
             var timeoutId;
             results.push(minPrice);
             var recurse = function() {
+                var rightNow = moment().valueOf();
+                if(rightNow > endDate.valueOf()){
+                    itemStorage.storage[itemId].active = false;
+                }
+            
                 if(priceIndex < results.length){
                     priceIndex++;
                     startPrice = results[priceIndex];
                     //current price in database update
                     //make 'POST' to update price
+
                 }
                 console.log('recurse', startPrice);
                 if(itemStorage.storage[itemId].price){ 

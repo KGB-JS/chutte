@@ -31,6 +31,10 @@ var itemSchema = new mongoose.Schema({
   },
   description: {
     type: String
+  },
+  active:{
+    type: Boolean,
+    default: true
   }
 });
 
