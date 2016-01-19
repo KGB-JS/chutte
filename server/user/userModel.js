@@ -40,6 +40,7 @@ var UserSchema = new mongoose.Schema({
   city: {
     type: String
   },
+    purchasedItems: [],
   salt: String
 });
 
