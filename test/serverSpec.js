@@ -10,7 +10,7 @@ describe('', function() {
   var req = request.defaults();
   var server;
   before(function() {
-    server = app.listen(3000);
+    // server = app.listen(3000);
   });
 
   describe('Server route: /api/items', function() {
