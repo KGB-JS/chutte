@@ -1,6 +1,5 @@
 import {combineReducers} from 'redux';
 import {List, Map} from 'immutable';
-import * from '/../actions/actionConstants';
 
 const initialState = Map({
   products: List(),
