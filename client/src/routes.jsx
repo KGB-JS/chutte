@@ -8,8 +8,8 @@ import Dashboard from './containers/dashboard';
 export default (
   <Route path='/' component={CoreLayout}>
     <IndexRoute component={Home}/>
-    <Route path='/browse' component={Browse}/>
-    <Route path='/dashboard' component={Dashboard}/>
+    <Route path='browse' component={Browse}/>
+    <Route path='dashboard' component={Dashboard}/>
     <Redirect from='*' to='/' />
   </Route>
 );
