@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import {createHistory, useBasename} from 'history';
 import {syncReduxAndRouter} from 'redux-simple-router';
 import configureStore from './store/configStore';
+import routes from './routes';
 import App from './containers/app';
 
 const history = useBasename(createHistory)({
