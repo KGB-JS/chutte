@@ -1,8 +1,8 @@
-var app = require('../../server/server.js');
+var app = require('../../server.js');
 //var socketServer = require('http').createServer(app);
 //var io = require('socket.io')(socketServer);
 var moment = require('moment');
-var itemStorage = require('./itemStorage.js');
+var itemStorage = require('./../itemStorage.js');
 
 
 module.exports = {

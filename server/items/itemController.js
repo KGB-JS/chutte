@@ -2,7 +2,7 @@ var db = require('../data.js');
 var Item = require('./itemModel.js');
 var jwt = require('jwt-simple');
 var Q = require('q');
-var interval = require('./intervalController.js');
+var interval = require('./itemHelpers/intervalController.js');
 var userController = require('./../user/userController.js');
 var itemStorage = require('./itemStorage.js');
 
@@ -20,7 +20,6 @@ module.exports = {
             // Uncommit when we are ready to server from DB
             // res.send(itemMap);
         });
-
     },
     postItem: function(req, res, next) {
 
