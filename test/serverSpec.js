@@ -10,14 +10,14 @@ describe('', function() {
   var req = request.defaults();
   var server;
   before(function() {
-    server = app.listen(8080);
+    server = app.listen(3000);
   });
 
   describe('Server route: /api/items', function() {
     it('Responds with all items', function() {
       var options = {
         'method': 'GET',
-        'uri': 'http://127.0.0.1:8080/api/items'
+        'uri': 'http://127.0.0.1:3000/api/items'
       };
 
       request(options, function(error, res, body) {
@@ -30,7 +30,7 @@ describe('', function() {
     it('Can post new items', function() {
       var options = {
         'method': 'POST',
-        'uri': 'http://127.0.0.1:8080/api/items',
+        'uri': 'http://127.0.0.1:3000/api/items',
         'json': {
             "productName": "The best product",
             "createdBy": "Superman",
@@ -52,7 +52,7 @@ describe('', function() {
   describe('Server route: /api/user/signup', function() {
     var options = {
       'method': 'POST',
-      'uri': 'http://127.0.0.1:8080/api/user/signup',
+      'uri': 'http://127.0.0.1:3000/api/user/signup',
       'json': {
         'username': 'test@test.com',
         'password': 'password'
@@ -86,7 +86,7 @@ describe('', function() {
     it('Should signin an existing user', function() {
       var options = {
         'method': 'POST',
-        'uri': 'http://127.0.0.1:8080/api/user/signin',
+        'uri': 'http://127.0.0.1:3000/api/user/signin',
         'json': {
           'username': 'test@test.com',
           'password': 'password'
@@ -103,7 +103,41 @@ describe('', function() {
     it('Should not signin a user with incorrect password', function() {
       var options = {
         'method': 'POST',
-        'uri': 'http://127.0.0.1:8080/api/user/signin',
+        'uri': 'http://127.0.0.1:3000/api/user/signin',
+        'json': {
+          'username': 'test@test.com',
+          'password': 'pass'
+        }
+      };
+
+      req(options, function(error, res, body) {
+        expect(res.statusCode).to.equal(401);
+        done();
+      });
+    });
+  });
+    describe('Server route: /api/user/signin', function() {
+    it('Should signin an existing user', function() {
+      var options = {
+        'method': 'POST',
+        'uri': 'http://127.0.0.1:3000/api/user/signin',
+        'json': {
+          'username': 'test@test.com',
+          'password': 'password'
+        }
+      };
+
+      req(options, function(error, res, body) {
+        expect(res.statusCode).to.equal(200);
+        expect(body.token).to.not.be.null;
+        done();
+      });
+    });
+
+    it('Should not signin a user with incorrect password', function() {
+      var options = {
+        'method': 'POST',
+        'uri': 'http://127.0.0.1:3000/api/user/signin',
         'json': {
           'username': 'test@test.com',
           'password': 'pass'
