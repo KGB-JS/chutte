@@ -36,6 +36,13 @@ module.exports = {
     inline: true,
     progress: true
   },
+  devServer: {
+    contentBase: path.resolve(ROOT_PATH, 'client/public'),
+    historyApiFallback: true,
+    hot: true,
+    inline: true,
+    progress: true
+  },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
   ]
