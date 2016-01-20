@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Navbar extends React.Component {
+export default class HomeNavbar extends React.Component {
   render() {
     return (
       <nav className="navbar navbar-default">
@@ -8,8 +8,8 @@ export default class Navbar extends React.Component {
           <div className="navbar-header">
             <a className="navbar-brand" href="#">Chutte</a>
             <ul className="nav nav-pills">
-              <li role="presentation"><a href="#">Browse</a></li>
-              <li role="presentation"><a href="#">Profile</a></li>
+              <li role="presentation"><a href="#">Sign Up</a></li>
+              <li role="presentation"><a href="#">Login In</a></li>
             </ul>
           </div>
         </div>
