@@ -1,6 +1,4 @@
-var app = require('../../server.js');
-//var socketServer = require('http').createServer(app);
-//var io = require('socket.io')(socketServer);
+var app = require('../../server.js').server;
 var moment = require('moment');
 var itemStorage = require('./../itemStorage.js');
 
