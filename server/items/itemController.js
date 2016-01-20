@@ -16,7 +16,7 @@ module.exports = {
                     itemMap.push(item);
                 }
             });
-            res.send(db.items);
+            res.status(200).send(db.products);
             // Uncommit when we are ready to server from DB
             // res.send(itemMap);
         });
