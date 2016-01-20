@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var request = require('request');
-var app = require('../server/server.js');
+var app = require('../server/server.js').server;
 //var db = require('../server/data.js');
 //uncomment for POST
 var db = require('../server/db.js');

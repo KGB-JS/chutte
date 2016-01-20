@@ -28,4 +28,4 @@ node_modules
 .DS_Store
 
 #Api Keys
-./server/items/itemHelpers/emailAPIKeys.js
+server/items/itemHelpers/emailAPIKeys.js
