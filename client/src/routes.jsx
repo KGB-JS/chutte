@@ -9,6 +9,6 @@ export default (
     <IndexRoute component={Home}/>
     <Route path='/browse' component={Browse}/>
     <Route path='/dashboard' component={Dashboard}/>
-    <Redirect from='*' to='/'>
+    <Redirect from='*' to='/' />
   </Route>
-)
+);
