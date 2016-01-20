@@ -2,13 +2,13 @@ import React from 'react';
 import NavBar from './../components/navbar';
 import JumboTronButton from './../components/homeJumbotron';
 
-class HomePage extends React.Component {
+exports default class Home extends React.Component {
   render() {
     return (
-      <NavBar/>
-      <JumboTronButton/>
+      <div>
+        <NavBar/>
+        <JumboTronButton/>
+      </div>
     )
   }
 };
-
-ReactDOM.render(<HomePage/>, document.getElementById('app'));
