@@ -1,54 +1,55 @@
 import {combineReducers} from 'redux';
-import {List, Map} from 'immutable';
 import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, CREATE_LISTING, CREATE_LISTING_SUCCESS, CREATE_LISTING_FAILURE} from './../actions/actionConstants';
 
-const initialState = Map({
-  products: List(),
+const initialState = {
+  productList: [],
   isFetchingProducts: false,
   fetchedProducts: false,
   fetchStatus: '',
   isPostingProduct: false,
   postedProduct: false,
   postStatus: ''
-});
+};
 
-function products(state = initialState, action){
-  let newState = state;
-
+function products(state, action){
+  state = state || initialState;
+  let newState = Object.assign({}, state);
+console.log('--------State, Action: ', state, action);
   switch(action.type){
     case GET_PRODUCTS:
-      newState.set('isFetchingProducts', true);
+      newState.isFetchingProducts = true;
       return newState;
     case GET_PRODUCTS_SUCCESS:
-      newState.set('isFetchingProducts', false);
-      newState.set('fetchedProducts', true);
-      newState.set('products', List(action.products));
+      newState.isFetchingProducts = false;
+      newState.fetchedProducts = true;
+      newState.productList = action.products.slice();
       return newState;
     case GET_PRODUCTS_FAILURE:
-      newState.set('isFetchingProducts', false);
-      newState.set('fetchedProducts', false);
-      newState.set('fetchStatus', action.err);
+      newState.isFetchingProducts = false;
+      newState.fetchedProducts = false;
+      newState.fetchStatus = action.err;
       return newState;
     default:
       return state;
   }
 };
 
-function createListing(state = initialState, action){
-  let newState = state;
+function createListing(state, action){
+  state = state || initialState;
+  let newState = Object.assign({}, state);
 
   switch(action.type){
     case CREATE_LISTING:
-      newState.set('isPostingProduct', true);
+      newState.isPostingProduct = true;
       return newState;
     case CREATE_LISTING_SUCCESS:
-      newState.set('isPostingProduct', false);
-      newState.set('postedProduct', true);
-      newState.updateIn('products', newState.get('products').push(action.productedListed));
+      newState.isPostingProduct = false;
+      newState.postedProduct = true;
+      newState.productList.push(action.productedListed);
       return newState;
     case CREATE_LISTING_FAILURE:
-      newState.set('isFetchingProducts', false);
-      newState.set('postStatus', action.err);
+      newState.isFetchingProducts = false;
+      newState.postStatus = action.err;
       return newState;
     default:
       return state;

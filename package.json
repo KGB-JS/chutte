@@ -34,7 +34,6 @@
     "express-partials": "^0.3.0",
     "history": "^1.17.0",
     "http": "0.0.0",
-    "immutable": "^3.7.6",
     "isomorphic-fetch": "^2.2.1",
     "jwt-simple": "^0.4.1",
     "mocha": "^2.3.4",
