@@ -1,24 +1,26 @@
-var app = require('../../server.js').server;
 var moment = require('moment');
 var itemStorage = require('./../itemStorage.js');
 
 
+
+
 module.exports = {
         findTimeReduce : function (itemId, currentPrice, minPrice, endDate) {
+            var app = require('./../../server.js');
             var startPrice = currentPrice;
             var now = moment().valueOf();
             endDate = moment('2016-01-20 17').valueOf();
             var millisecondsUntil = Math.abs(now - endDate);
             var count = 0;
             var amountToDecrease = currentPrice/minPrice;
-            var priceSchedule = {};
+            var priceSchedule = [];
             while (currentPrice >= minPrice){
                 var decrementTime = now - (millisecondsUntil / count);
-                priceSchedule[count] = { price: currentPrice, decrementTime: decrementTime};
-                currentPrice = currentPrice - amountToDecrease;
                 count++;
+                priceSchedule.push({ price: currentPrice, decrementTime: decrementTime});
+                currentPrice = currentPrice - amountToDecrease;
             }
-            priceSchedule.push(minPrice);
+            priceSchedule.push({price:minPrice, decrementTime: endDate});
             var numberOfSecUntilDecrment = millisecondsUntil/count;
             var priceIndex = 0;
             var recurse = function() {
@@ -29,10 +31,13 @@ module.exports = {
             
                 if(priceIndex < priceSchedule.length){
                     priceIndex++;
-                    startPrice = priceSchedule[priceIndex];
-                    //current price in database update
-                    //make 'POST' to update price
-
+                    startPrice = priceSchedule[priceIndex].price;
+                    var priceObject = {
+                        itemId: itemId,
+                        price: startPrice,
+                        wholeObject: itemStorage.storage[itemId]
+                    }
+                    app.io.sockets.emit('price change', priceObject);
                 }
                 if(priceIndex === priceSchedule.length - 1) {
                     clearInterval(itemStorage.storage[itemId].timeId);

@@ -11,6 +11,9 @@
     <script src='/dist/bundle.js'></script>
     <script type="text/javascript">
     var socket = io();
+    socket.on('price change', function(obj){
+    	console.log('price change client', obj)
+    })
     </script>
   </body>
 </html>
