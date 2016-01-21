@@ -9,12 +9,12 @@ class CreateListing extends React.Component {
   }
 
   submitForm(){
-    var itemDetails {
-      productName: this.refs.name.value
-      createdBy : this.refs.name.value
-      category : this.refs.category.value
-      quantity : this.refs.quantity.value
-      price: this.refs.price.value
+    var itemDetails = {
+      productName: this.refs.name.value,
+      createdBy : this.refs.name.value,
+      category : this.refs.category.value,
+      quantity : this.refs.quantity.value,
+      price: this.refs.price.value,
       minPrice: this.refs.minPrice.value
     };
 
