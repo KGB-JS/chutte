@@ -7,23 +7,21 @@ class ProductCard extends React.Component {
     return (
       <div>
         <ProductImage/>
-        <div className="productBio">
-          <p>{this.props.productBio}</p>
+        <div className="productName">
+          <p>{this.props.productName}</p>
         </div>
 
         <div className="productTime">
-          {this.props.productTime}
+          {this.props.priceReduces}
         </div>
-        
+
         <div className="productQuantity">
-          {this.props.productQuantity}
-        </div> 
+          {this.props.quantity}
+        </div>
 
         <div className="productPrice">
-          {this.props.productPrice}
+          {this.props.price}
         </div>
-
-        <BuyButton />
       </div>
     );
   }

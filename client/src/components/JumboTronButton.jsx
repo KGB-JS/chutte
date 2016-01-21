@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 class JumboTronButton extends React.Component {
   render() {
@@ -6,7 +7,7 @@ class JumboTronButton extends React.Component {
       <div className="container">
         <div className="jumbotron">
           <h1>Welcome to Chutte Landing Page!</h1>
-           <a className= "btn btn-primary btn-lg" role="button">Explore</a>
+          <Link className="btn btn-lg btn-primary" to="/browse">Explore</Link>
         </div>
       </div>
     );
