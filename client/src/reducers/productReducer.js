@@ -14,7 +14,7 @@ const initialState = {
 function products(state, action){
   state = state || initialState;
   let newState = Object.assign({}, state);
-console.log('--------State, Action: ', state, action);
+
   switch(action.type){
     case GET_PRODUCTS:
       newState.isFetchingProducts = true;
