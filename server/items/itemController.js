@@ -23,14 +23,14 @@ module.exports = {
     },
     postItem: function(req, res, next) {
 
-        var productName = req.body.productName;
-        var createdBy = req.body.createdBy;
-        var category = req.body.category;
-        var quantity = req.body.quantity;
-        var price = req.body.price;
-        var minPrice = req.body.minPrice;
-        var auctionEnds = req.body.auctionEnds;
-        var description = req.body.description;
+        var productName = req.body.product.productName;
+        var createdBy = req.body.product.createdBy;
+        var category = req.body.product.category;
+        var quantity = req.body.product.quantity;
+        var price = req.body.product.price;
+        var minPrice = req.body.product.minPrice;
+        var auctionEnds = req.body.product.auctionEnds;
+        var description = req.body.product.description;
 
         var newItem = {
             productName: productName,
