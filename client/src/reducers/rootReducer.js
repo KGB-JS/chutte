@@ -4,7 +4,7 @@ import productReducer from './productReducer';
 
 const rootReducer = combineReducers({
   router,
-  products: productReducer
+  productStore: productReducer
 });
 
 export default rootReducer;
