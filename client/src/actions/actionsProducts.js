@@ -1,4 +1,4 @@
-import fetch from 'whatwg-fetch';
+import fetch from 'isomorphic-fetch';
 import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE} from './actionConstants';
 
 export function getProducts(){
