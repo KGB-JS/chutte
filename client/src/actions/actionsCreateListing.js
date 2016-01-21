@@ -1,4 +1,4 @@
-import fetch from 'whatwg-fetch';
+import fetch from 'isomorphic-fetch';
 import {CREATE_LISTING, CREATE_LISTING_SUCCESS, CREATE_LISTING_FAILURE} from './actionConstants';
 
 
