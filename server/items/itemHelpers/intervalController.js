@@ -11,32 +11,30 @@ module.exports = {
             var millisecondsUntil = Math.abs(now - endDate);
             var count = 0;
             var amountToDecrease = currentPrice/minPrice;
-            var results = [];
+            var priceSchedule = {};
             while (currentPrice >= minPrice){
-                results.push(currentPrice);
+                var decrementTime = now - (millisecondsUntil / count);
+                priceSchedule[count] = { price: currentPrice, decrementTime: decrementTime};
                 currentPrice = currentPrice - amountToDecrease;
                 count++;
             }
-
+            priceSchedule.push(minPrice);
             var numberOfSecUntilDecrment = millisecondsUntil/count;
             var priceIndex = 0;
-            var timeoutId;
-            results.push(minPrice);
             var recurse = function() {
                 var rightNow = moment().valueOf();
                 if(rightNow > endDate.valueOf()){
                     itemStorage.storage[itemId].active = false;
                 }
             
-                if(priceIndex < results.length){
+                if(priceIndex < priceSchedule.length){
                     priceIndex++;
-                    startPrice = results[priceIndex];
+                    startPrice = priceSchedule[priceIndex];
                     //current price in database update
                     //make 'POST' to update price
 
                 }
-
-                if(priceIndex === results.length - 1) {
+                if(priceIndex === priceSchedule.length - 1) {
                     clearInterval(itemStorage.storage[itemId].timeId);
                 }
                 console.log('recurse', startPrice);
@@ -46,7 +44,7 @@ module.exports = {
                 console.log('item storage', itemStorage);
 
             };
-            return { timeId:setInterval(recurse, 1000), price: startPrice };
+            return { timeId:setInterval(recurse, 1000), price: startPrice, priceSchedule: priceSchedule };
 
         }
 };
