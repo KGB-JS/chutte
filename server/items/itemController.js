@@ -47,7 +47,7 @@ module.exports = {
             .then(function() {
                 res.status(200).send(makeNewItem);
                 var timeId = interval.findTimeReduce(makeNewItem._id, price, minPrice, auctionEnds);
-                itemStorage.storage[makeNewItem._id] = timeId;
+                itemStorage.storage[makeNewItem._id] = { timeId: timeId, priceSchedule: priceSchedule};
                 console.log(itemStorage)
             })
             .fail(function(err) {
@@ -73,7 +73,7 @@ module.exports = {
                             res.status(200).send();
                             clearInterval(itemStorage.storage[item._id].timeId);
                             var timeId = interval.findTimeReduce(item._id, itemStorage.storage[item._id].price, item.minPrice, item.auctionEnds);
-                            itemStorage.storage[item._id] = timeId;
+                            itemStorage.storage[item._id] = { timeId: timeId, priceSchedule: priceSchedule};
                             console.log(timeId.price, 'TIMEIDPRICE');
                         });
                 } else {
