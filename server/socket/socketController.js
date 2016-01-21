@@ -1,2 +1,6 @@
-var io = require('./../server.js').io;
+module.exports = {
+	socket: function(socket) {
+		console.log('a user connection');
+	}
+}
 
