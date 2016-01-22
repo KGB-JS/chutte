@@ -12,7 +12,7 @@ module.exports = {
             var app = require('./../../server.js');
             var startPrice = currentPrice;
             var now = moment().valueOf();
-            endDate = moment(endDate).valueOf();
+            endDate = moment(endDate, "YYYY-MM-DD H").valueOf();
             var millisecondsUntil = Math.abs(now - endDate);
             var count = 0;
             var amountToDecrease = currentPrice/minPrice;
@@ -20,6 +20,9 @@ module.exports = {
             while (currentPrice >= minPrice){
                 var decrementTime = now - (millisecondsUntil / count);
                 count++;
+                if(decrementTime === -Infinity ){
+                    decrementTime = now;
+                }
                 priceSchedule.push({ price: currentPrice, decrementTime: decrementTime});
                 currentPrice = currentPrice - amountToDecrease;
             }
@@ -32,10 +35,11 @@ module.exports = {
                     new Error('Item not found');
                 } else {
                     if(now > moment(item.auctionEnds).valueOf()){
-                        console.log('bitch')
                         item.active = false;
                     }
                     item.priceSchedule = priceSchedule;
+                    itemStorage.storage[itemId].quantity = item.quantity;
+
                     item.save();
                 }
               });
@@ -48,13 +52,13 @@ module.exports = {
                 } else {
                   itemStorage.storage[itemId].active = true;
                 }
-            
                 if(priceIndex < priceSchedule.length){
                     priceIndex++;
                     startPrice = priceSchedule[priceIndex].price;
                     var priceObject = {
                         itemId: itemId,
                         price: startPrice,
+                        quantity: itemStorage.storage[itemId].quantity,
                         wholeObject: itemStorage.storage[itemId]
                     };
                     app.io.sockets.emit('productUpdate', priceObject);
@@ -69,7 +73,7 @@ module.exports = {
                 console.log('item storage', itemStorage);
 
             };
-            return { timeId:setInterval(recurse, 1000), price: startPrice, priceSchedule: priceSchedule };
+            return { timeId:setInterval(recurse, 10000), price: startPrice, priceSchedule: priceSchedule };
 
         }
 };
