@@ -3,12 +3,11 @@ var itemStorage = require('./../itemStorage.js');
 var Item = require('./../itemModel.js');
 var Q = require('q');
 
-
-
-
-
 module.exports = {
         findTimeReduce : function (itemId, currentPrice, minPrice, endDate) {
+            if(itemStorage.storage[itemId]){
+              clearInterval(itemStorage.storage[item._id].timeId);
+            }
             var app = require('./../../server.js');
             var startPrice = currentPrice;
             var now = moment().valueOf();
@@ -38,9 +37,8 @@ module.exports = {
                         item.active = false;
                     }
                     item.priceSchedule = priceSchedule;
-                    itemStorage.storage[itemId].quantity = item.quantity;
-
                     item.save();
+                    itemStorage.storage[itemId] = item;
                 }
               });
             var numberOfSecUntilDecrment = millisecondsUntil/count;
@@ -54,23 +52,18 @@ module.exports = {
                 }
                 if(priceIndex < priceSchedule.length){
                     priceIndex++;
-                    startPrice = priceSchedule[priceIndex].price;
-                    var priceObject = {
-                        itemId: itemId,
-                        price: startPrice,
-                        quantity: itemStorage.storage[itemId].quantity,
-                        wholeObject: itemStorage.storage[itemId]
-                    };
-                    app.io.sockets.emit('productUpdate', priceObject);
+                    if(priceSchedule[priceIndex].price){
+                      startPrice = priceSchedule[priceIndex].price;
+                    }
+                    console.log(itemStorage.storage[itemId]);
+                    app.io.sockets.emit('productUpdate', itemStorage.storage[itemId]);
                 }
                 if(priceIndex === priceSchedule.length - 1) {
                     clearInterval(itemStorage.storage[itemId].timeId);
                 }
-                console.log('recurse', startPrice);
                 if(itemStorage.storage[itemId].price){ 
                    itemStorage.storage[itemId].price = startPrice;
                 }
-                console.log('item storage', itemStorage);
 
             };
             return { timeId:setInterval(recurse, 10000), price: startPrice, priceSchedule: priceSchedule };
