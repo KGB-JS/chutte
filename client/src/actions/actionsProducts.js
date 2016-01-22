@@ -1,5 +1,12 @@
 import fetch from 'isomorphic-fetch';
-import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE} from './actionConstants';
+import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, UPDATE_PRODUCT} from './actionConstants';
+
+export function updateProduct(product){
+  return {
+    type: UPDATE_PRODUCT,
+    product: product
+  };
+}
 
 export function getProducts(){
   return {
