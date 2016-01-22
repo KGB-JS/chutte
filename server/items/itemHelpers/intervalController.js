@@ -12,7 +12,7 @@ module.exports = {
             var app = require('./../../server.js');
             var startPrice = currentPrice;
             var now = moment().valueOf();
-            endDate = moment('2016-01-20 17').valueOf();
+            endDate = moment(endDate).valueOf();
             var millisecondsUntil = Math.abs(now - endDate);
             var count = 0;
             var amountToDecrease = currentPrice/minPrice;
@@ -32,6 +32,7 @@ module.exports = {
                     new Error('Item not found');
                 } else {
                     if(now > moment(item.auctionEnds).valueOf()){
+                        console.log('bitch')
                         item.active = false;
                     }
                     item.priceSchedule = priceSchedule;
@@ -44,6 +45,8 @@ module.exports = {
                 var rightNow = moment().valueOf();
                 if(rightNow > endDate.valueOf()){
                     itemStorage.storage[itemId].active = false;
+                } else {
+                  itemStorage.storage[itemId].active = true;
                 }
             
                 if(priceIndex < priceSchedule.length){
