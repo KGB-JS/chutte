@@ -31,10 +31,13 @@ module.exports = {
                 if(!item){
                     new Error('Item not found');
                 } else {
+                    if(now > moment(item.auctionEnds).valueOf()){
+                        item.active = false;
+                    }
                     item.priceSchedule = priceSchedule;
-                    item.save()
+                    item.save();
                 }
-              })
+              });
             var numberOfSecUntilDecrment = millisecondsUntil/count;
             var priceIndex = 0;
             var recurse = function() {
@@ -50,8 +53,8 @@ module.exports = {
                         itemId: itemId,
                         price: startPrice,
                         wholeObject: itemStorage.storage[itemId]
-                    }
-                    app.io.sockets.emit('price change', priceObject);
+                    };
+                    app.io.sockets.emit('productUpdate', priceObject);
                 }
                 if(priceIndex === priceSchedule.length - 1) {
                     clearInterval(itemStorage.storage[itemId].timeId);
