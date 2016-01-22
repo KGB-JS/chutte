@@ -70,9 +70,9 @@ module.exports = {
                         .then(function() {
                             console.log(itemStorage, ' itemStorage');
                             res.status(200).send();
-                            clearInterval(itemStorage.storage[item._id].timeId);
+                            // clearInterval(itemStorage.storage[item._id].timeId);
                             var timeId = interval.findTimeReduce(item._id, itemStorage.storage[item._id].price, item.minPrice, item.auctionEnds);
-                            itemStorage.storage[item._id] = { timeId: timeId, priceSchedule: priceSchedule};
+                            itemStorage.storage[item._id] = { timeId: timeId.timeId, priceSchedule: priceSchedule};
                             console.log(timeId.price, 'TIMEIDPRICE');
                         });
                 } else {

@@ -3,12 +3,11 @@ var itemStorage = require('./../itemStorage.js');
 var Item = require('./../itemModel.js');
 var Q = require('q');
 
-
-
-
-
 module.exports = {
         findTimeReduce : function (itemId, currentPrice, minPrice, endDate) {
+            if(itemStorage.storage[itemId]){
+              clearInterval(itemStorage.storage[item._id].timeId);
+            }
             var app = require('./../../server.js');
             var startPrice = currentPrice;
             var now = moment().valueOf();
@@ -54,7 +53,9 @@ module.exports = {
                 }
                 if(priceIndex < priceSchedule.length){
                     priceIndex++;
-                    startPrice = priceSchedule[priceIndex].price;
+                    if(priceSchedule[priceIndex].price){
+                      startPrice = priceSchedule[priceIndex].price;
+                    }
                     var priceObject = {
                         itemId: itemId,
                         price: startPrice,
