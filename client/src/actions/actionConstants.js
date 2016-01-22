@@ -8,9 +8,9 @@ export const CREATE_LISTING_SUCCESS = 'CREATE_LISTING_SUCCESS';
 export const CREATE_LISTING_FAILURE = 'CREATE_LISTING_FAILURE';
 
 //-----------User Actions-------------------------------------
-export const USER_LOGIN = 'USER_SIGNIN';
-export const USER_LOGIN_SUCCESS = 'USER_SIGNIN_SUCCESS';
-export const USER_LOGIN_FAILURE = 'USER_SIGNIN_FAILURE';
+export const USER_LOGIN = 'USER_LOGIN';
+export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
+export const USER_LOGIN_FAILURE = 'USER_LOGIN_FAILURE';
 export const USER_SIGNUP = 'USER_SIGNUP';
 export const USER_SIGNUP_SUCCESS = 'USER_SIGNUP_SUCCESS';
 export const USER_SIGNUP_FAILURE = 'USER_SIGNUP_FAILURE';
