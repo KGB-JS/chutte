@@ -16,9 +16,9 @@ module.exports = {
                     itemMap.push(item);
                 }
             });
-            res.status(200).send(db.products);
+            //res.status(200).send(db.products);
             // Uncommit when we are ready to server from DB
-            // res.send(itemMap);
+            res.send(itemMap);
         });
     },
     postItem: function(req, res, next) {
@@ -46,9 +46,8 @@ module.exports = {
         Q.ninvoke(makeNewItem, 'save')
             .then(function() {
                 res.status(200).send(makeNewItem);
-                var timeId = interval.findTimeReduce(makeNewItem._id, price, minPrice, auctionEnds);
-                itemStorage.storage[makeNewItem._id] = { timeId: timeId, priceSchedule: priceSchedule};
-                console.log(itemStorage)
+                var itemObject = interval.findTimeReduce(makeNewItem._id, price, minPrice, auctionEnds);
+                itemStorage.storage[makeNewItem._id] = itemObject;
             })
             .fail(function(err) {
                 console.log(err.errors);

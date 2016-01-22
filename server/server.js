@@ -9,16 +9,17 @@ require('./config/middleware.js')(app,express);
 
 var port = process.env.PORT || 3000;
 
-io.on('connection', socket.socket);
+//io.on('connection', socket.socket);
 
 server.listen(port, function () {
   var host = server.address().address;
   var port = server.address().port;
 
+
   console.log('App launched and hosting at http://%s:%s',host,port);
 });
 
+module.exports = { server: server, io: io };
 
-module.exports = {server: server, io: io};
 
 
