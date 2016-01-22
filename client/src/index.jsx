@@ -13,6 +13,7 @@ const history = useBasename(createHistory)({
 });
 
 const store = configureStore(window.__INITIAL_STATE__);
+socket(store);
 
 syncReduxAndRouter(history, store, (state) => state.router);
 
