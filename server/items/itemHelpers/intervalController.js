@@ -37,9 +37,8 @@ module.exports = {
                         item.active = false;
                     }
                     item.priceSchedule = priceSchedule;
-                    itemStorage.storage[itemId].quantity = item.quantity;
-
                     item.save();
+                    itemStorage.storage[itemId] = item;
                 }
               });
             var numberOfSecUntilDecrment = millisecondsUntil/count;
@@ -56,22 +55,15 @@ module.exports = {
                     if(priceSchedule[priceIndex].price){
                       startPrice = priceSchedule[priceIndex].price;
                     }
-                    var priceObject = {
-                        itemId: itemId,
-                        price: startPrice,
-                        quantity: itemStorage.storage[itemId].quantity,
-                        wholeObject: itemStorage.storage[itemId]
-                    };
-                    app.io.sockets.emit('productUpdate', priceObject);
+                    console.log(itemStorage.storage[itemId]);
+                    app.io.sockets.emit('productUpdate', itemStorage.storage[itemId]);
                 }
                 if(priceIndex === priceSchedule.length - 1) {
                     clearInterval(itemStorage.storage[itemId].timeId);
                 }
-                console.log('recurse', startPrice);
                 if(itemStorage.storage[itemId].price){ 
                    itemStorage.storage[itemId].price = startPrice;
                 }
-                console.log('item storage', itemStorage);
 
             };
             return { timeId:setInterval(recurse, 10000), price: startPrice, priceSchedule: priceSchedule };
