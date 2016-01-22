@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, CREATE_LISTING, CREATE_LISTING_SUCCESS, CREATE_LISTING_FAILURE} from './../actions/actionConstants';
+import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, UPDATE_PRODUCT, CREATE_LISTING, CREATE_LISTING_SUCCESS, CREATE_LISTING_FAILURE} from './../actions/actionConstants';
 
 const initialState = {
   productList: [],
@@ -27,6 +27,14 @@ function products(state, action){
       newState.isFetchingProducts = false;
       newState.fetchedProducts = false;
       newState.fetchStatus = action.err;
+      return newState;
+    case UPDATE_PRODUCT:
+      newState.productList = newState.productList.map(function(product){
+        if(product._id === action.product.itemId){
+          product.price = action.product.price;
+          product.quantity = action.product.quantity;
+        }
+      });
       return newState;
     default:
       return state;
