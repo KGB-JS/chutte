@@ -35,7 +35,8 @@ var itemSchema = new mongoose.Schema({
   active:{
     type: Boolean,
     default: true
-  }
+  },
+  priceSchedule: []
 });
 
 module.exports = mongoose.model('item', itemSchema);

@@ -1,5 +1,8 @@
 var moment = require('moment');
 var itemStorage = require('./../itemStorage.js');
+var Item = require('./../itemModel.js');
+var Q = require('q');
+
 
 
 
@@ -21,6 +24,17 @@ module.exports = {
                 currentPrice = currentPrice - amountToDecrease;
             }
             priceSchedule.push({price:minPrice, decrementTime: endDate});
+            //add priceSchedule to Item
+            var findItem = Q.nbind(Item.findOne, Item);
+            findItem({_id: itemId})
+              .then(function(item){
+                if(!item){
+                    new Error('Item not found');
+                } else {
+                    item.priceSchedule = priceSchedule;
+                    item.save()
+                }
+              })
             var numberOfSecUntilDecrment = millisecondsUntil/count;
             var priceIndex = 0;
             var recurse = function() {
