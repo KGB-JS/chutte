@@ -2,26 +2,37 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {postListing} from './../actions/actionsCreateListing';
-import CategorySelection from './CategorySelection';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
 
-class CreateListing extends React.Component {
+export default class CreateListing extends React.Component {
   constructor(props){
     super(props);
-    this.state =  {categorySelected: ''};
+    
+    this.state = { categorySelected: '', startDate: moment(), endDate: moment() };
   }
 
-  _handleChange(event) {
-    this.setState({categorySelected: event.target.value});
+  _handleChange(event){ 
+    this.setState({categorySelected: event.value.target});
+  }
+  
+  _startDate(firstDate) {
+    this.setState({startDate: firstDate});
+  }
+
+  _endDate(lastDate) {
+    this.setState({endDate: lastDate});
   }
 
   submitForm(){
     var itemDetails = {
-      productName: this.refs.name.value,
-      createdBy : this.refs.name.value,
-      category : this.state.categorySelected,
-      quantity : this.refs.quantity.value,
-      price: this.refs.price.value,
-      minPrice: this.refs.minPrice.value
+      productName: String(this.refs.name.value),
+      createdBy : String(this.refs.name.value),
+      category : String(this.state.categorySelected),
+      quantity : Number(this.refs.quantity.value),
+      auctionEnds : String(this.state.endDate),
+      price: Number(this.refs.price.value),
+      minPrice: Number(this.refs.minPrice.value)
     };
     this.props.submitListing(itemDetails);
   }
@@ -29,17 +40,35 @@ class CreateListing extends React.Component {
   render() {
     return (
       <form role="form">
-      <div>
-        <label>Name</label>
-        <input type="text" ref="name" />
+        <div className="form-group">
+          <label>Name</label>
+          <input type="text" ref="name" className="form-group col-md-4"/>
+        </div>
 
-        <label>Quantity</label>
-        <input type="text" ref="quantity"/>
+        <div className="form-group">
+          <label>Quantity</label>
+          <input type="text" ref="quantity" className="form-group col-md-4"/>
+        </div>
+
+        <div className="form-group">
+          <DatePicker
+            placeholderText="Start date"
+            selected={this.state.startDate}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            onChange={this._startDate.bind(this)} />
+
+          <DatePicker
+            placeholderText="End date"
+            selected={this.state.endDate}
+            startDate={this.state.startDate}
+            aunctionEnds={this.state.endDate}
+            onChange={this._endDate.bind(this)} />
+        </div>
 
         <select
           value={this.state.categorySelected}
           onChange={this._handleChange.bind(this)} >
-
           <option value="AntiquesCollectibles">Antiques & Collectibles</option>
           <option value="Art">Art</option>
           <option value="Automobiles">Automobiles</option>
@@ -50,14 +79,17 @@ class CreateListing extends React.Component {
           <option value="Travel">Travel</option>
         </select>
 
-        <label>Price</label>
-        <input type="text" ref="price" />
+        <div className="form-group">
+          <label>Price</label>
+          <input type="number" ref="price" className="form-group col-md-2"/>
+        </div>
 
-        <label>Minimum Sales Price</label>
-        <input type="text" ref="minPrice" />
-     
-        <button type="button" onClick={this.submitForm.bind(this)}>List Item</button>
-      </div>
+        <div className="form-group">
+          <label>Minimum Sales Price</label>
+          <input type="number" ref="minPrice" className="form-group col-md-2"/>
+        </div>
+
+        <button type="button" onClick={this.submitForm.bind(this)}>List Item</button> 
       </form>
     )
   }
