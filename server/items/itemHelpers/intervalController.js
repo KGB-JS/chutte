@@ -99,10 +99,10 @@ module.exports = {
                 console.log(itemStorage.storage[itemId]);
                 // once the price is increaed emit from server to all clients the entire object
                 app.io.sockets.emit('productUpdate', itemStorage.storage[itemId]);
-            }
-            // when the price index gets to the end clear the interval the auction is over
-            if (priceIndex === priceSchedule.length - 1) {
-                clearInterval(itemStorage.storage[itemId].timeId);
+                // when the price index gets to the end clear the interval the auction is over
+                if (priceIndex === priceSchedule.length - 1) {
+                    clearInterval(itemStorage.storage[itemId].timeId);
+                }
             }
             // this is another doulbe check to make sure the price is there
             if (itemStorage.storage[itemId].price) {
