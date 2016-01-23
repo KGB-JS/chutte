@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 export default class HomeNavbar extends React.Component {
   render() {
@@ -8,8 +9,8 @@ export default class HomeNavbar extends React.Component {
           <div className="navbar-header">
             <a className="navbar-brand" href="#">Chutte</a>
             <ul className="nav navbar-nav navbar-right">
-              <li><a href="#">Sign Up</a></li>
-              <li><a href="#">Login In</a></li>
+              <li><Link to='signup'>Sign Up</Link></li>
+              <li><Link to='signin'>Sign In</Link></li>
             </ul>
           </div>
         </div>
