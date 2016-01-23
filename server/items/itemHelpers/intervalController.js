@@ -24,7 +24,10 @@ module.exports = {
         // count keep tracks of how many times the price will need to change
         var count = 0;
         // this is the amount that will be decreased each time 
-        var amountToDecrease = currentPrice / minPrice;
+        var amountToDecrease = startPrice / minPrice;
+        if(minPrice === 1 || 0){
+            amountToDecrease = 1;
+        }
         // this is used the hold the price and time at which to decreased/decrement
         var priceSchedule = [];
         // each time the current price is larger or = the min price do the following
@@ -44,6 +47,7 @@ module.exports = {
             });
             // changes the current price with the correct amount to decrease
             currentPrice = currentPrice - amountToDecrease;
+
         }
         // this adds the final min price and end time of the auction
         priceSchedule.push({
@@ -112,7 +116,7 @@ module.exports = {
         };
         // this is the return from findTimeReduce
         return {
-            timeId: setInterval(recurse, 1000),
+            timeId: setInterval(recurse, 30000),
             price: startPrice,
             priceSchedule: priceSchedule
         };
