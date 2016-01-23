@@ -46,7 +46,6 @@ Requirements
     socket.io: ^1.4.4,
     socket.io-client: ^1.4.4,
     webpack: ^1.12.11,
-    whatwg-fetch: ^0.11.0
     babel-core: ^6.4.0,
     babel-loader: ^6.2.1,
     babel-preset-es2015: ^6.3.13,
@@ -74,9 +73,8 @@ Some technologies we used:
   * [Redux](https://github.com/rackt/redux) architecture for predictable app state, with [react-redux](https://github.com/rackt/react-redux) bindings
   * [react-router](https://github.com/rackt/react-router) and [redux-router](https://github.com/rackt/redux-router) for routing
   * [redux-devtools](https://github.com/gaearon/redux-devtools) for time travel debugging
-  * [react-dnd](https://github.com/gaearon/react-dnd) for stateful drag-and-drop UI
   * [Babel](https://babeljs.io/) to transpile ES6/7 syntax
-  * [Webpack](https://webpack.github.io/) for builds/automation, with [eslint](http://eslint.org/) linting and [karma](http://karma-runner.github.io/)/[mocha](https://mochajs.org/)/[chai](http://chaijs.com/) testing
+  * [Webpack](https://webpack.github.io/) for builds/automation, with [eslint](http://eslint.org/) linting and [mocha](https://mochajs.org/)/[chai](http://chaijs.com/) testing
   * [BootStrap](http://getbootstrap.com/) React components implementing BootStrap's Material Design
   * [MongoDB](https://www.mongodb.org/) database with [Sequelize](http://docs.sequelizejs.com/en/latest/) ORM
   * [bcrypt](https://www.npmjs.com/package/bcrypt-nodejs) for user authentication
