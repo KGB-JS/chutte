@@ -28,16 +28,7 @@ export function postListing(product){
     // dispatch(createListing());
       return fetch('/api/items/', {
         method: 'post',
-        body: {product:{
-              productName: "Shiny Car",
-            createdBy: "SuperMan",
-            category: "Car",
-            quantity: 30,
-            price: 30000,
-            minPrice: 4500,
-            auctionEnds: "2016-1-27 17",
-            description: "Best car ever"
-        }},
+        body: product,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'

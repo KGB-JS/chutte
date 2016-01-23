@@ -26,13 +26,13 @@ export default class CreateListing extends React.Component {
 
   submitForm(){
     var itemDetails = {
-      productName: this.refs.name.value,
-      createdBy : this.refs.name.value,
-      category : this.state.categorySelected,
-      quantity : this.refs.quantity.value,
-      auctionEnds : this.state.endDate,
-      price: this.refs.price.value,
-      minPrice: this.refs.minPrice.value
+      productName: String(this.refs.name.value),
+      createdBy : String(this.refs.name.value),
+      category : String(this.state.categorySelected),
+      quantity : Number(this.refs.quantity.value),
+      auctionEnds : String(this.state.endDate),
+      price: Number(this.refs.price.value),
+      minPrice: Number(this.refs.minPrice.value)
     };
     this.props.submitListing(itemDetails);
   }
