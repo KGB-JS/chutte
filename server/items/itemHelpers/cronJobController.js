@@ -3,7 +3,8 @@ var Item = require('./../itemModel.js');
 var db = require('./../../data.js');
 
 
-
+// this is the backup in case of using a server that goes down every 30 mins
+// this will update the database from the item storage 
 module.exports = {
 	cronJob: function(req, res, next) {
         Item.find({}, function(err, items) {

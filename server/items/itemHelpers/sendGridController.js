@@ -9,9 +9,11 @@ var jwt = require('jwt-simple');
 
 
 module.exports = {
+	// on a confirmed buy this will connect the buyer and seller
 	buyItemConfirmation: function(req, res, next) {
 		//token to get username
-	    var token = false//req.headers['x-access-token'];
+	    var token = false;
+	    //req.headers['x-access-token'];
 	    //var user = jwt.decode(token, 'secret');
 
 	    //check for login with token
@@ -20,6 +22,7 @@ module.exports = {
 	    } else {
 	    	//var subject = 'Your Order has been placed' + req.body.seller;
 	    	//var item = req.body.item;
+	    	// this is dummy info and will need to be replace with user info
 			sendgrid.send({
 				  to:       'mickberber@gmail.com',
 				  from:     'noreply@chutte.com',
@@ -28,7 +31,7 @@ module.exports = {
 				}, function(err, json) {
 				  if (err) { return console.error(err); }
 				  console.log(json);
-				})
+				});
 	    }
 	  }
 };

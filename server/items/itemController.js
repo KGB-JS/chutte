@@ -12,17 +12,19 @@ module.exports = {
             var itemMap = [];
             items.forEach(function(item) {
                 // still need to check for categories
+                // returns only items that are active
                 if (item.active) {
                     itemMap.push(item);
                 }
             });
+            // the db products shoudl be used for tests
             //res.status(200).send(db.products);
             // Uncommit when we are ready to server from DB
             res.send(itemMap);
         });
     },
     postItem: function(req, res, next) {
-
+        // setting var needed to make an item
         var productName = req.body.product.productName;
         var createdBy = req.body.product.createdBy;
         var category = req.body.product.category;
@@ -31,7 +33,7 @@ module.exports = {
         var minPrice = req.body.product.minPrice;
         var auctionEnds = req.body.product.auctionEnds;
         var description = req.body.product.description;
-
+        // repackageing for new item
         var newItem = {
             productName: productName,
             createdBy: createdBy,
@@ -42,13 +44,20 @@ module.exports = {
             auctionEnds: auctionEnds,
             description: description
         };
+        // make the new item
         var makeNewItem = new Item(newItem);
         Q.ninvoke(makeNewItem, 'save')
             .then(function() {
+                // once the item has been saved send back a 200 along with the newly made item
                 res.status(200).send(makeNewItem);
+                // this starts an active auction passing in the needed vars
                 var itemObject = interval.findTimeReduce(makeNewItem._id, price, minPrice, auctionEnds);
+                // this will update the item storage with the result of item object 
+                // should be something like this { timeId:setInterval(recurse, 10000), price: startPrice, priceSchedule: priceSchedule }
+                // Note might need to add quantity here double check
                 itemStorage.storage[makeNewItem._id] = itemObject;
             })
+            // if it fakes to save the item this will show it
             .fail(function(err) {
                 console.log(err.errors);
                 res.status(400).send();
@@ -56,22 +65,37 @@ module.exports = {
             });
     },
     buyItem: function(req, res, next) {
+        //Note need to add in access token logic
+        // sets up the id and number quantity of the buy
         var productId = req.body.productId;
         var quantityRequested = req.body.quantity;
+        // make a var to search for an item
         var findItem = Q.nbind(Item.findOne, Item);
+        // search for Item with the ID
         findItem({
                 _id: productId
             })
+            // if that item is found do the following
             .then(function(item) {
+                // checks to make sure the quantity is not more then there is available 
                 if (item.quantity > 0 && quantityRequested < item.quantity) {
+                    // update the new quantity remaining
                     item.quantity = item.quantity - quantityRequested;
+                    // update the DB with the current active price which the item was purchased
                     item.price = itemStorage.storage[item._id].price;
+                    // save the Info to the DB
                     item.save()
+                    // once the save is complete
                         .then(function() {
+                            // send back a 200
                             console.log(itemStorage, ' itemStorage');
                             res.status(200).send();
+                            // timeId creates a new auction at the price that it was purchased at.
                             var timeId = interval.findTimeReduce(item._id, itemStorage.storage[item._id].price, item.minPrice, item.auctionEnds);
-                            itemStorage.storage[item._id] = { timeId: timeId.timeId, priceSchedule: priceSchedule};
+                            // this will update the new timeId used to clear the interval
+                            itemStorage.storage[item._id].timeId =  timeId.timeId;
+                            // this will update the item Storage with the newly made priceSchedule 
+                            itemStorage.storage[item._id].priceSchedule =  timeId.priceSchedule;
                             console.log(timeId.price, 'TIMEIDPRICE');
                         });
                 } else {

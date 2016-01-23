@@ -1,5 +1,7 @@
 var jwt = require('jwt-simple');
 
+// this is to help with all the routes and tokens
+
 module.exports = {
     logError: function(err,req,res,next){
         console.error(err.stack);
