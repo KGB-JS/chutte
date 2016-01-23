@@ -85,7 +85,7 @@ module.exports = {
                     item.price = itemStorage.storage[item._id].price;
                     // save the Info to the DB
                     item.save()
-                    // once the save is complete
+                        // once the save is complete
                         .then(function() {
                             // send back a 200
                             console.log(itemStorage, ' itemStorage');
@@ -93,9 +93,9 @@ module.exports = {
                             // timeId creates a new auction at the price that it was purchased at.
                             var timeId = interval.findTimeReduce(item._id, itemStorage.storage[item._id].price, item.minPrice, item.auctionEnds);
                             // this will update the new timeId used to clear the interval
-                            itemStorage.storage[item._id].timeId =  timeId.timeId;
+                            itemStorage.storage[item._id].timeId = timeId.timeId;
                             // this will update the item Storage with the newly made priceSchedule 
-                            itemStorage.storage[item._id].priceSchedule =  timeId.priceSchedule;
+                            itemStorage.storage[item._id].priceSchedule = timeId.priceSchedule;
                             console.log(timeId.price, 'TIMEIDPRICE');
                         });
                 } else {
@@ -105,8 +105,8 @@ module.exports = {
             .fail(function(error) {
                 next(error);
             });
-            // Uncomment when we start using login to save items to user profile.
-            //this need to be tested
+        // Uncomment when we start using login to save items to user profile.
+        //this need to be tested
         // var token = req.headers['x-access-token'];
         // if (!token) {
         //     next(new Error('no token'));

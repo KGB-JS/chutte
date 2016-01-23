@@ -2,7 +2,7 @@ var itemController = require('./itemController.js');
 var cronJobController = require('./itemHelpers/cronJobController.js');
 var sendGridController = require('./itemHelpers/sendGridController.js');
 
-module.exports = function(app){
+module.exports = function(app) {
     // this is used for adding an auction
     app.post('/', itemController.postItem);
     // this will return all the items with a currently active auction
