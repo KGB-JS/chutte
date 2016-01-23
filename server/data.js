@@ -1,3 +1,4 @@
+// this is dummy data from testing
 module.exports = {
     "products": [{
         "_id": 1051645,
