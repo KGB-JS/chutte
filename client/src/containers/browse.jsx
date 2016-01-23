@@ -10,7 +10,7 @@ class BrowsePage extends React.Component {
   }
 
   render(){
-    var productCards;
+    let productCards;
     this.props.products ? productCards = this.props.products.map(product => {
       return <ProductCard productDetail={product} />
     }) : [];
