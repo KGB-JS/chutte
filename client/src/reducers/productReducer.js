@@ -29,7 +29,7 @@ function products(state, action){
       newState.fetchStatus = action.err;
       return newState;
     case UPDATE_PRODUCT:
-      var index = stateContainsProduct(newState, action.product);
+      var index = stateContainsProduct(newState.productList, action.product);
       if(index > -1){
         newState.productList[index] = action.product;
       } else {
@@ -41,12 +41,14 @@ function products(state, action){
   }
 };
 
-function stateContainsProduct(state, product){
-  var productIndex = state.productList.reduce(function(productIndex, currentProduct, index){
-    if(currentProduct._id === product._id){
+function stateContainsProduct(productList, product){
+  var productIndex = - 1;
+
+  for(var index = 0; index < productList.length; index++){
+    if(productList[index]._id === product._id){
       productIndex = index;
     }
-  }, -1);
+  }
 
   return productIndex;
 }
