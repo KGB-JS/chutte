@@ -42,9 +42,9 @@ function products(state, action){
 };
 
 function stateContainsProduct(state, product){
-  var productIndex = state.productList.reduce(function(currentProduct, memo, index){
+  var productIndex = state.productList.reduce(function(productIndex, currentProduct, index){
     if(currentProduct._id === product._id){
-      memo = index;
+      productIndex = index;
     }
   }, -1);
 
