@@ -22,12 +22,22 @@ export function createListingFailure(err){
   };
 }
 
-export function createListing(product){
-  return function(dispatch){
-    dispatch(createListing());
+export function postListing(product){
+  console.log(product, "products")
+  // return function(dispatch){
+    // dispatch(createListing());
       return fetch('/api/items/', {
         method: 'post',
-        body: product,
+        body: {product:{
+              productName: "Shiny Car",
+            createdBy: "SuperMan",
+            category: "Car",
+            quantity: 30,
+            price: 30000,
+            minPrice: 4500,
+            auctionEnds: "2016-1-27 17",
+            description: "Best car ever"
+        }},
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -39,5 +49,5 @@ export function createListing(product){
       .catch(function(err){
         dispatch(createListingFailure(err));
       });
-  };
+  // };
 }
