@@ -29,17 +29,27 @@ function products(state, action){
       newState.fetchStatus = action.err;
       return newState;
     case UPDATE_PRODUCT:
-      newState.productList = newState.productList.map(function(product){
-        if(product._id === action.product.itemId){
-          product.price = action.product.price;
-          product.quantity = action.product.quantity;
-        }
-      });
+      var index = stateContainsProduct(newState, action.product);
+      if(index > -1){
+        newState.productList[index] = action.product;
+      } else {
+        newState.productList.push(action.product);
+      }
       return newState;
     default:
       return state;
   }
 };
+
+function stateContainsProduct(state, product){
+  var productIndex = state.productList.reduce(function(currentProduct, memo, index){
+    if(currentProduct._id === product._id){
+      memo = index;
+    }
+  }, -1);
+
+  return productIndex;
+}
 
 function createListing(state, action){
   state = state || initialState;
