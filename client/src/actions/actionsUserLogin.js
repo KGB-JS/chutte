@@ -24,6 +24,7 @@ export function userLoginFailure(err){
 };
 
 export function authenticateUser(user){
+console.log(user);
   return function(dispatch){
     dispatch(userLogin(user.userName));
     return fetch('/api/users/signin', {
