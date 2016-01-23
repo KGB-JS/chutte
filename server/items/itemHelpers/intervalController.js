@@ -93,10 +93,9 @@ module.exports = {
 
                 priceIndex++;
                 // this is to double chekc the price is a value
-                if (priceSchedule[priceIndex].price) {
-                    startPrice = priceSchedule[priceIndex].price;
+                if(priceSchedule[priceIndex] !== undefined){
+                  startPrice = priceSchedule[priceIndex].price;
                 }
-
                 console.log(itemStorage.storage[itemId]);
                 // once the price is increaed emit from server to all clients the entire object
                 app.io.sockets.emit('productUpdate', itemStorage.storage[itemId]);
@@ -113,7 +112,7 @@ module.exports = {
         };
         // this is the return from findTimeReduce
         return {
-            timeId: setInterval(recurse, 10000),
+            timeId: setInterval(recurse, 1000),
             price: startPrice,
             priceSchedule: priceSchedule
         };
