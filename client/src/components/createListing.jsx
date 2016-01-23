@@ -8,14 +8,14 @@ import moment from 'moment';
 export default class CreateListing extends React.Component {
   constructor(props){
     super(props);
-    
+
     this.state = { categorySelected: '', startDate: moment(), endDate: moment() };
   }
 
-  _handleChange(event){ 
+  _handleChange(event){
     this.setState({categorySelected: event.value.target});
   }
-  
+
   _startDate(firstDate) {
     this.setState({startDate: firstDate});
   }
@@ -89,18 +89,10 @@ export default class CreateListing extends React.Component {
           <input type="number" ref="minPrice" className="form-group col-md-2"/>
         </div>
 
-        <button type="button" onClick={this.submitForm.bind(this)}>List Item</button> 
+        <button type="button" onClick={this.submitForm.bind(this)}>List Item</button>
       </form>
     )
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return {
-    submitListing: function(itemDetails){
-      bindActionCreators(postListing(itemDetails), dispatch)
-    }
-  }
-}
-
-export default connect(mapDispatchToProps)(CreateListing);
+export default CreateListing;
