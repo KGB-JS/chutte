@@ -1,3 +1,28 @@
+.browse{
+  background-color: #FFFFFF;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #D6D6D6;
+}
+
+li > a{
+  color: #00AC69;
+}
+
+.nav > li{
+  border-width: 1px;
+  border-color: #8E8E8E;
+}
+
+.nav > li > a:hover, .nav > li > a:focus{
+  color: #FFFFFF;
+  background-color: #00AC69;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #D6D6D6;
+}
+
+
 .hero {
   
  background: url("../assets/landing-bkg.png") no-repeat center center fixed;
