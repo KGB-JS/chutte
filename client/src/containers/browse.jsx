@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import NavBar from './../components/navbar';
+import SearchBar from './../components/search';
 import ProductCard from './../components/productCard';
 import {fetchProducts} from './../actions/actionsProducts';
 
@@ -19,6 +20,7 @@ class BrowsePage extends React.Component {
       <div>
         <NavBar/>
         <div className="container-fluid">
+          <SearchBar className="serach-bar col-sm-10"/>
           <div className="row">
             {productCards}
           </div>

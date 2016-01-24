@@ -5,23 +5,26 @@ import BuyButton from './buyButton';
 class ProductCard extends React.Component {
   render() {
     return (
-      <div className="productCard col-sm-6 col-md-4" id={this.props.productDetail._id}>
-        <ProductImage image={this.props.productDetail.imageURL}/>
+      <div className="productCard col-sm-6 col-md-3" id={this.props.productDetail._id}>
         <div className="productName">
-          <p>Product: {this.props.productDetail.productName}</p>
+          <p> {this.props.productDetail.productName} </p>
         </div>
 
-        <div className="productTime">
-          <p>Time Remaining: {this.props.productDetail.priceReduces}</p>
-        </div>
+        <ProductImage className="productImage" image={this.props.productDetail.imageURL}/>
+        
+        <row>
+          <div className="productTime col-md-4">
+            <p>Time Left: {this.props.productDetail.priceReduces}</p>
+          </div>
 
-        <div className="productQuantity">
-          <p>Quantity: {this.props.productDetail.quantity}</p>
-        </div>
+          <div className="productQuantity col-md-4">
+            <p>Quantity: {this.props.productDetail.quantity}</p>
+          </div>
 
-        <div className="productPrice">
-          <p>Price: ${this.props.productDetail.price}</p>
-        </div>
+          <div className="productPrice col-md-4">
+            <p>Price: ${this.props.productDetail.price}</p>
+          </div>
+        </row>
       </div>
     );
   }
