@@ -1,21 +1,24 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-var SearchBar = React.createClass({
-  getInitialState: function(){
-    this.state.searchVal = '';
-  },
+class SearchBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { searchVal : '' };
+  }
 
+  render() {
+    return (
+      <div>
+        <input 
+          value = {this.state.searchVal}
+          onChange={(event) => this.onChangeFunc(event.target.value)} />
+      </div>
+    )
+  }
 
-  render : function(){
-    return {
-      <input 
-        value = {this.state.searchVal};
-        onChange={(event)=> this.onChangeFunc(event.target.value)}/>
-    }
-  },
+  onChangeFunc(inputVal){
+    this.setState({searchVal : inputVal});
+  }
+}
 
-  onChangeFunc: function(inputVal){
-    this.setState({searchVal = inputVal});
-  }  
-
-});
+export default SearchBar;

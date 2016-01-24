@@ -1,3 +1,12 @@
+.hero {
+  
+ background: url("../assets/landing-bkg.png") no-repeat center center fixed;
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover; 
+}
+
 .tether-element-attached-top .datepicker__triangle, .tether-element-attached-bottom .datepicker__triangle, .datepicker__year-read-view--down-arrow {
   margin-left: -8px;
   position: absolute;
@@ -302,4 +311,38 @@
   right: 7px;
   text-align: center;
   top: 50%;
+}
+
+.productCard {
+  margin: 20px;
+  border: 2px solid;
+  border-radius: 25px;
+  padding: 10px;
+}
+
+.productName {
+  text-align: center;
+  color: #00AC69;
+  font-size: 30px;
+}
+
+.productImage {
+
+}
+
+
+.productTime .productPrice .productQuantity{
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.search-bar{
+  margin: 20px;
+  text-align: center;
+}
+
+.search-bar input {
+  width: 75%;
+  background-color: yellow;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {postListing} from './../actions/actionsCreateListing';
+import {createListing, postListing} from './../actions/actionsCreateListing';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
@@ -12,8 +12,10 @@ export default class CreateListing extends React.Component {
     this.state = { categorySelected: '', startDate: moment(), endDate: moment() };
   }
 
-  _handleChange(event){
-    this.setState({categorySelected: event.value.target});
+
+  _handleChange(value){ 
+    console.log(value.target.text, "this should return the value");
+    this.setState({categorySelected: value});
   }
 
   _startDate(firstDate) {
@@ -34,7 +36,9 @@ export default class CreateListing extends React.Component {
       price: Number(this.refs.price.value),
       minPrice: Number(this.refs.minPrice.value)
     };
-    this.props.submitListing(itemDetails);
+    // this.props.submitListing(itemDetails);
+    dispatch(createListing());
+    postListing(itemDetails);
   }
 
   render() {
