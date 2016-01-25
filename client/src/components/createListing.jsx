@@ -1,6 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import { bindActionCreators } from 'redux';
 import {createListing, postListing} from './../actions/actionsCreateListing';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -13,7 +11,7 @@ export default class CreateListing extends React.Component {
   }
 
 
-  _handleChange(value){ 
+  _handleChange(value){
     console.log(value.target.text, "this should return the value");
     this.setState({categorySelected: value});
   }
@@ -36,9 +34,7 @@ export default class CreateListing extends React.Component {
       price: Number(this.refs.price.value),
       minPrice: Number(this.refs.minPrice.value)
     };
-    // this.props.submitListing(itemDetails);
-    dispatch(createListing());
-    postListing(itemDetails);
+    this.props.submitListing(itemDetails);
   }
 
   render() {
@@ -99,4 +95,4 @@ export default class CreateListing extends React.Component {
   }
 }
 
-export default CreateListing;
+export default CreateListing
