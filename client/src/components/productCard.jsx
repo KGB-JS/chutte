@@ -8,7 +8,7 @@ class ProductCard extends React.Component {
     return (
       <div className="productCard col-sm-6 col-md-4" id={this.props.productDetail._id}>
         <div className="productName">
-          <Link to={`browse/${this.props.productDetail._id}`}> {this.props.productDetail.productName} </Link>
+          <Link to={`browse/product/${this.props.productDetail._id}`}> {this.props.productDetail.productName} </Link>
         </div>
 
         <ProductImage className="productImage" image={this.props.productDetail.imageURL}/>
