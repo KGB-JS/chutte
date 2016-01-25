@@ -5,6 +5,8 @@ var Q = require('q');
 var interval = require('./itemHelpers/intervalController.js');
 var userController = require('./../user/userController.js');
 var itemStorage = require('./itemStorage.js');
+var User = require('./../user/userModel.js');
+var imageController = require('./imageController.js');
 
 module.exports = {
     getItems: function(req, res, next) {
@@ -33,6 +35,7 @@ module.exports = {
         var minPrice = req.body.product.minPrice;
         var auctionEnds = req.body.product.auctionEnds;
         var description = req.body.product.description;
+        var productImage = imageController.getImageUrl(req.body.product.productImage) || '';
         // repackageing for new item
         var newItem = {
             productName: productName,
@@ -42,7 +45,8 @@ module.exports = {
             price: price,
             minPrice: minPrice,
             auctionEnds: auctionEnds,
-            description: description
+            description: description,
+            image: productImage
         };
         // make the new item
         var makeNewItem = new Item(newItem);

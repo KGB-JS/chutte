@@ -36,7 +36,10 @@ var itemSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
-    priceSchedule: []
+    priceSchedule: [],
+    image: {
+        type: String
+    }
 });
 
 module.exports = mongoose.model('item', itemSchema);
