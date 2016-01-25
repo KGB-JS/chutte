@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import NavBar from '../components/navbar';
 import CreateListing from '../components/createListing';
+import ProfileSideNavBar from './../components/profileSideBar';
 import {postListing} from './../actions/actionsCreateListing';
 
 class Dashboard extends React.Component {
@@ -9,6 +10,7 @@ class Dashboard extends React.Component {
     return (
       <div>
         <NavBar/>
+        <ProfileSideNavBar/>
         <CreateListing submitListing={this.props.submitListing}/>
       </div>
     )

@@ -7,13 +7,12 @@ export default class CreateListing extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = { categorySelected: '', startDate: moment(), endDate: moment() };
+    this.state = { categorySelected:'Choose a Category', startDate: moment(), endDate: moment() };
   }
 
 
-  _handleChange(value){
-    console.log(value, "this should return the value");
-    this.setState({categorySelected: value});
+  _handleChange(event){
+    this.setState({categorySelected: event.target.value});
   }
 
   _startDate(firstDate) {
@@ -34,7 +33,6 @@ export default class CreateListing extends React.Component {
       price: Number(this.refs.price.value),
       minPrice: Number(this.refs.minPrice.value)
     }};
-    console.log(itemDetails);
     this.props.submitListing(itemDetails);
   }
 
@@ -67,8 +65,7 @@ export default class CreateListing extends React.Component {
             onChange={this._endDate.bind(this)} />
         </div>
 
-        <select
-          value={this.state.categorySelected}
+        <select value={this.state.categorySelected}
           onChange={this._handleChange.bind(this)} >
           <option value="AntiquesCollectibles">Antiques & Collectibles</option>
           <option value="Art">Art</option>
