@@ -23,9 +23,8 @@ export function createListingFailure(err){
 }
 
 export function postListing(product){
-  console.log(product, "products")
-  // return function(dispatch){
-    // dispatch(createListing());
+  return function(dispatch){
+    dispatch(createListing());
       return fetch('/api/items/', {
         method: 'post',
         body: product,
@@ -40,5 +39,5 @@ export function postListing(product){
       .catch(function(err){
         dispatch(createListingFailure(err));
       });
-  // };
+  };
 }
