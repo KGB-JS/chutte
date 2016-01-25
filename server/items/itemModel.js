@@ -26,7 +26,7 @@ var itemSchema = new mongoose.Schema({
         required: true
     },
     auctionEnds: {
-        type: String,
+        type: Number,
         required: true
     },
     description: {

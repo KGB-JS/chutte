@@ -7,6 +7,7 @@ module.exports = {
 
     // this is used to make the price reduction schedule
     findTimeReduce: function(itemId, currentPrice, minPrice, endDate) {
+        
         // this is a double check to prevent multiple interval for each auction
         if (itemStorage.storage[itemId]) {
             clearInterval(itemStorage.storage[item._id].timeId);
@@ -17,8 +18,9 @@ module.exports = {
         var startPrice = currentPrice;
         // this sets up the current moment in time in epoch time aka milliseconds until now
         var now = moment().valueOf();
-        // this converts the string into epoch time
-        endDate = moment(endDate, "YYYY-MM-DD H").valueOf();
+        // this converts the string into epoch time if it isn't already
+        
+        
         // this will find out how many milliseconds between the two times
         var millisecondsUntil = Math.abs(now - endDate);
         // count keep tracks of how many times the price will need to change
