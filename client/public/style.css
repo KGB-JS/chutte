@@ -1,12 +1,14 @@
 .browse{
   background-color: #FFFFFF;
   border-style: solid;
-  border-width: 1px;
+  border-width: 2px;
   border-color: #D6D6D6;
 }
 
 li > a{
   color: #00AC69;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .nav > li{
@@ -345,13 +347,30 @@ li > a{
   padding: 10px;
 }
 
+.productinfo {
+  font-size: 15px;
+  font-weight: bold;
+}
+
 .productName {
   text-align: center;
   color: #00AC69;
   font-size: 30px;
 }
 
+
+.chutteGreen {
+  background-color: #00AC69;
+  color: #FFFFFF;
+}
+
+.chutteSymbol {
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .productImage {
+  text-align: center;
 
 }
 
@@ -370,4 +389,8 @@ li > a{
 .search-bar input {
   width: 75%;
   background-color: yellow;
+  border-radius: 20px;
+  width: 45%;
+  background-color: #D3D3D3;
+  padding: 10px;
 }

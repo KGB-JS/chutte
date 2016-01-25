@@ -40,7 +40,7 @@ export default class CreateListing extends React.Component {
   render() {
     return (
       <form role="form">
-        <div className="form-group">
+        <div className="form col-md-8">
           <label>Name</label>
           <input type="text" ref="name" className="form-group col-md-4"/>
         </div>

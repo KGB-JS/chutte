@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import NavBar from './../components/navbar';
 import SearchBar from './../components/search';
 import ProductCard from './../components/productCard';
+import BrowseSideBar from './../components/BrowseSideBar'
 import {fetchProducts} from './../actions/actionsProducts';
 
 class BrowsePage extends React.Component {
@@ -17,15 +18,18 @@ class BrowsePage extends React.Component {
     }) : [];
 
     return (
-      <div>
-        <NavBar/>
+    <div>
+      <NavBar/>
         <div className="container-fluid">
-          <SearchBar className="serach-bar col-sm-10"/>
-          <div className="row">
-            {productCards}
-          </div>
+          <SearchBar className="serach-bar col-md-5"/>
+          <row>
+            <BrowseSideBar className="col-sm-2"/>
+            <div className="col-sm-9">
+              {productCards}
+            </div>
+          </row>
         </div>
-      </div>
+    </div>
     )
   }
 }
