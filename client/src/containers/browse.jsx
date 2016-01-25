@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import NavBar from './../components/navbar';
 import SearchBar from './../components/search';
 import ProductCard from './../components/productCard';
-import BrowseSideBar from './../components/BrowseSideBar'
+import BrowseSideBar from './../components/BrowseSideBar';
+import ProductList from './../components/productList';
 import {fetchProducts} from './../actions/actionsProducts';
 
 class BrowsePage extends React.Component {
@@ -12,11 +13,6 @@ class BrowsePage extends React.Component {
   }
 
   render(){
-    let productCards;
-    this.props.products ? productCards = this.props.products.map(product => {
-      return <ProductCard productDetail={product} />
-    }) : [];
-
     return (
     <div>
       <NavBar/>
@@ -25,7 +21,7 @@ class BrowsePage extends React.Component {
           <row>
             <BrowseSideBar className="col-sm-2"/>
             <div className="col-sm-9">
-              {productCards}
+              <ProductList products={this.props.products}/>
             </div>
           </row>
         </div>
