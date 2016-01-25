@@ -12,7 +12,7 @@ export default class CreateListing extends React.Component {
 
 
   _handleChange(value){
-    console.log(value.target.text, "this should return the value");
+    console.log(value, "this should return the value");
     this.setState({categorySelected: value});
   }
 
@@ -25,15 +25,16 @@ export default class CreateListing extends React.Component {
   }
 
   submitForm(){
-    var itemDetails = {
+    var itemDetails ={product: {
       productName: String(this.refs.name.value),
       createdBy : String(this.refs.name.value),
       category : String(this.state.categorySelected),
       quantity : Number(this.refs.quantity.value),
-      auctionEnds : String(this.state.endDate),
+      auctionEnds : Number(this.state.endDate.valueOf()),
       price: Number(this.refs.price.value),
       minPrice: Number(this.refs.minPrice.value)
-    };
+    }};
+    console.log(itemDetails);
     this.props.submitListing(itemDetails);
   }
 
