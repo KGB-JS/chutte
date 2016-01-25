@@ -70,6 +70,7 @@ export default class CreateListing extends React.Component {
         <select
           value={this.state.categorySelected}
           onChange={this._handleChange.bind(this)} >
+          <option selected="selected">Choose a category</option>
           <option value="AntiquesCollectibles">Antiques & Collectibles</option>
           <option value="Art">Art</option>
           <option value="Automobiles">Automobiles</option>
