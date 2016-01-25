@@ -27,7 +27,7 @@ export function postListing(product){
     dispatch(createListing());
       return fetch('/api/items/', {
         method: 'post',
-        body: product,
+        body: JSON.stringify(product),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
