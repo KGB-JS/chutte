@@ -35,7 +35,7 @@ function userAuth(state, action){
       newState.signingUp = true;
       return newState;
     case USER_SIGNUP_SUCCESS:
-      newState.token = token;
+      newState.token = action.token;
       newState.signingUp = false;
       return newState;
     case USER_SIGNUP_FAILURE:
