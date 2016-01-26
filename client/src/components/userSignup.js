@@ -29,11 +29,11 @@ export default class UserSignup extends React.Component {
   render() {
     var userAttributes = ["firstname", "lastname", "phone", "address", "country",
     "zip", "state", "city", "username", "password"];
-            
+
     return (
       <div className="form col-md-3 userinput">
        {userAttributes.map(function(attribute, index) {
-          return ( 
+          return (
               <div>
                 <label>{attribute}</label>
                 <input key={index} ref={attribute}/>

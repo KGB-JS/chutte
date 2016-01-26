@@ -13,6 +13,8 @@ import Browse from './containers/browse';
 import Dashboard from './containers/dashboard';
 import ProductDetail from './components/productDetail';
 import ProductList from './components/productList';
+import UserAuth from './components/userAuth';
+import UserSignup from './components/UserSignup';
 
 const history = useBasename(createHistory)({
   basename: '/'
@@ -34,6 +36,8 @@ ReactDOM.render(
         <Route path='browse' component={Browse}/>
         <Route path='browse/product/:id' component={ProductDetail}/>
         <Route path='dashboard' component={Dashboard}/>
+        <Route path='signin' component={UserAuth}/>
+        <Route path='signup' component={UserSignup}/>
         <Redirect from='*' to='/' />
       </Route>
     </Router>
