@@ -69,6 +69,7 @@ module.exports = {
             });
     },
     buyItem: function(req, res, next) {
+        console.log(req.body)
         //Note need to add in access token logic
         // sets up the id and number quantity of the buy
         var productId = req.body._id;
@@ -86,7 +87,7 @@ module.exports = {
                     // update the new quantity remaining
                     item.quantity = item.quantity - quantityRequested;
                     // update the DB with the current active price which the item was purchased
-                    item.price = itemStorage.storage[item._id].price;
+                    //item.price = itemStorage.storage[item._id].price;
                     // save the Info to the DB
                     item.save()
                         // once the save is complete
