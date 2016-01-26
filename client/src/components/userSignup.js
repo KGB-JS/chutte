@@ -1,48 +1,103 @@
 import React from 'react';
-import {createListing, postListing} from './../actions/actionsCreateListing';
-
+import {connect} from 'react-redux';
+import {postUserSignup} from './../actions/actionsUserSignup';
 
 export default class UserSignup extends React.Component {
   constructor(props){
     super(props);
-
-    this.state = {};
   }
 
-  submitSignUp(){
-    var signupDetails = {
-      firstname : String(this.state.categorySelected),
-      lastname : String(this.refs.quantity.value),
-      phone : Number(this.resf.phone.value),
+  submitSignUp(e){
+    e.preventDefault();
+    var newUser = {
+      firstName : String(this.refs.firstName.value),
+      lastName : String(this.refs.lastName.value),
+      phone : Number(this.refs.phoneNumber.value),
       address: String(this.refs.address.value),
-      country: String(this.refs.phone.value),
-      zip: Number(this.refs.zip.value),
+      country: String(this.refs.country.value),
       state: String(this.refs.state.value),
       city: String(this.refs.city.value),
+      zip: Number(this.refs.zip.value),
       username: String(this.refs.username.value),
-      password : String(this.refs.name.value)
+      password : String(this.refs.password.value)
     };
-    console.log(signupDetails);
-    this.props.submitListing(itemDetails);
+    console.log(newUser);
+    this.props.signupUser(newUser);
   }
 
   render() {
-    var userAttributes = ["firstname", "lastname", "phone", "address", "country",
-    "zip", "state", "city", "username", "password"];
-
     return (
-      <div className="form col-md-3 userinput">
-       {userAttributes.map(function(attribute, index) {
-          return (
-              <div>
-                <label>{attribute}</label>
-                <input key={index} ref={attribute}/>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-10">
+            <form role="form">
+              <div className="form-group">
+                <label>First Name</label>
+                <input type="text" ref="firstName" className="form-control" placeholder='First Name'/>
               </div>
-          )
-        })}
+              <div className="form-group">
+                <label>Last Name</label>
+                <input type="text" ref="lastName" className="form-control" placeholder='Last Name'/>
+              </div>
+              <div className="form-group">
+                <label>Phone Number</label>
+                <input type="text" ref="phoneNumber" className="form-control" placeholder='Phone Number'/>
+              </div>
+              <div className="form-group">
+                <label>Address</label>
+                <input type="text" ref="address" className="form-control" placeholder='Address'/>
+              </div>
+              <div className="form-group">
+                <label>City</label>
+                <input type="text" ref="city" className="form-control" placeholder='City'/>
+              </div>
+              <div className="form-group">
+                <label>State</label>
+                <input type="text" ref="state" className="form-control" placeholder='State'/>
+              </div>
+              <div className="form-group">
+                <label>Zip Code</label>
+                <input type="text" ref="zip" className="form-control" placeholder='Zip Code'/>
+              </div>
+              <div className="form-group">
+                <label>Country</label>
+                <input type="text" ref="country" className="form-control" placeholder='Country'/>
+              </div>
+              <div className="form-group">
+                <label>Email/Username</label>
+                <input type="text" ref="username" className="form-control" placeholder='Email/Username'/>
+              </div>
+              <div className="form-group">
+                <label>Enter Password</label>
+                <input type="password" ref="password" className="form-control" placeholder='Enter Password'/>
+              </div>
+              <div className="form-group">
+                <label>Re-enter Password</label>
+                <input type="password" ref="passwordConfirm" className="form-control" placeholder='Re-enter Password' />
+              </div>
+              <div className="form-group">
+                <button className="btn btn-primary btn-lg" onClick={this.submitSignUp.bind(this)}>Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     )
-  }
-}
+   }
+ }
 
-export default UserSignup;
+ function mapDispatchToProps(dispatch){
+   return {
+     signupUser: function(user) {
+       dispatch(postUserSignup(user));
+     }
+   }
+ }
+
+ function mapStateToProps(state){
+   return {
+     user: state.userStore.userAuth
+   }
+ }
+
+ export default connect(mapStateToProps, mapDispatchToProps)(UserSignup);
