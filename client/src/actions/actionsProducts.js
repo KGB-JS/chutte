@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, UPDATE_PRODUCT} from './actionConstants';
+import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, UPDATE_PRODUCT, POST_BUY, POST_BUY_SUCCESS, POST_BUY_FAILURE} from './actionConstants';
 
 export function updateProduct(product){
   return {
@@ -28,6 +28,26 @@ export function getProductsFailure(err){
   };
 }
 
+export function postingBuy(purchaseDetails){
+  return {
+    type: POST_BUY,
+    product: purchaseDetails
+  };
+}
+
+export function postBuySuccess(){
+  return {
+    type: POST_BUY_SUCCESS
+  };
+}
+
+export function postBuyFailure(err){
+  return {
+    type: POST_BUY_FAILURE,
+    err: err
+  };
+}
+
 export function fetchProducts(){
   return function(dispatch){
     dispatch(getProducts());
@@ -41,5 +61,28 @@ export function fetchProducts(){
       .catch(function(err){
         dispatch(getProductsFailure(err));
       });
+  };
+}
+
+export function postBuy(purchaseDetails){
+  return function(dispatch){
+    dispatch(postingBuy(purchaseDetails));
+    return fetch('/api/items/buyItem', {
+      method: 'post',
+      body: JSON.stringify(purchaseDetails),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(response){
+      return response.json();
+    })
+    .then(function(parsedJson){
+      dispatch(postBuySuccess(parsedJson));
+    })
+    .catch(function(err){
+      dispatch(postBuyFailure(err));
+    });
   };
 }

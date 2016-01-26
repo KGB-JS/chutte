@@ -6,6 +6,9 @@ export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const CREATE_LISTING = 'CREATE_LISTING';
 export const CREATE_LISTING_SUCCESS = 'CREATE_LISTING_SUCCESS';
 export const CREATE_LISTING_FAILURE = 'CREATE_LISTING_FAILURE';
+export const POST_BUY = 'POST_BUY';
+export const POST_BUY_SUCCESS = 'POST_BUY_SUCCESS';
+export const POST_BUY_FAILURE = 'POST_BUY_FAILURE';
 
 //-----------User Actions-------------------------------------
 export const USER_LOGIN = 'USER_LOGIN';
