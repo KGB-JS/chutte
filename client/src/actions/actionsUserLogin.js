@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import {checkStatus} from './actionsHelper';
 import {USER_LOGIN, USER_LOGIN_SUCCESS, USER_LOGIN_FAILURE} from './actionConstants';
 
 export function userLogin(userName){
@@ -43,13 +44,3 @@ export function authenticateUser(user){
     });
   };
 };
-
-function checkStatus(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response
-  } else {
-    var error = new Error(response.statusText)
-    error.response = response
-    throw error
-  }
-}

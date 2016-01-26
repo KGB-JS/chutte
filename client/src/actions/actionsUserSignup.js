@@ -1,4 +1,5 @@
-import {fetch} from 'isomorphic-fetch';
+import fetch from 'isomorphic-fetch';
+import {checkStatus} from './actionsHelper';
 import {USER_SIGNUP, USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILURE} from './actionConstants';
 
 export function userSignup(userName){
@@ -25,19 +26,24 @@ export function userSignupFailure(err){
 export function postUserSignup(user){
   return function(dispatch){
     dispatch(userSignup(user.userName));
+    let newUser = {
+      username: user.username,
+      password: user.password
+    }
     return fetch('/api/users/signup', {
       method: 'post',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(newUser)
     })
+    .then(checkStatus)
     .then(function(response){
-      dispatch(userLoginSuccess(response.token));
+      dispatch(userSignupSuccess(response.token));
     })
     .catch(function(error){
-      dispatch(userLoginFailure(error));
+      dispatch(userSignupFailure(error));
     });
   };
 }
