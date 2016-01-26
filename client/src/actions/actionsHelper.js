@@ -7,3 +7,7 @@ export function checkStatus(response) {
     throw error
   }
 }
+
+export function parseJSON(response) {
+     return response.json();
+}
