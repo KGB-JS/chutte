@@ -71,8 +71,8 @@ module.exports = {
     buyItem: function(req, res, next) {
         //Note need to add in access token logic
         // sets up the id and number quantity of the buy
-        var productId = req.body.productId;
-        var quantityRequested = req.body.quantity;
+        var productId = req.body._id;
+        var quantityRequested = req.body.quantity || 1;
         // make a var to search for an item
         var findItem = Q.nbind(Item.findOne, Item);
         // search for Item with the ID

@@ -15,10 +15,11 @@ class ProductDetail extends React.Component {
       }
     }
   }
+  handleBuy() {
+    this.props.buyProduct(this.props.products[this.productIndex]._id)
+  }
   componentWillMount() {
-    console.log(this.productIndex, 'productIndex')
     this.findIndex();
-    console.log(this.productIndex, 'productIndex2')
   }
   render() {
     return (
@@ -39,9 +40,18 @@ class ProductDetail extends React.Component {
         <div className="productPrice">
           <p>Price: ${this.props.products[this.productIndex].price}</p>
         </div>
+        <BuyButton buyProduct={this.handleBuy}/>
       </div>
     );
   }
+}
+
+function mapDispatchToProps(dispatch){
+  return { 
+    buyProduct: function(item) {
+      dispatch(postBuy(item));
+    } 
+  };
 }
 
 function mapStateToProps(state){
