@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import {checkStatus} from './actionsHelper';
+import {checkStatus, parseJSON} from './actionsHelper';
 import {USER_SIGNUP, USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILURE} from './actionConstants';
 
 export function userSignup(userName){
@@ -39,6 +39,7 @@ export function postUserSignup(user){
       body: JSON.stringify(newUser)
     })
     .then(checkStatus)
+    .then(parseJSON)
     .then(function(response){
       dispatch(userSignupSuccess(response.token));
     })
