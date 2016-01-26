@@ -1,4 +1,4 @@
-import {fetch} from 'isomorphic-fetch';
+import fetch from 'isomorphic-fetch';
 import {USER_LOGIN, USER_LOGIN_SUCCESS, USER_LOGIN_FAILURE} from './actionConstants';
 
 export function userLogin(userName){
@@ -24,7 +24,6 @@ export function userLoginFailure(err){
 };
 
 export function authenticateUser(user){
-console.log(user);
   return function(dispatch){
     dispatch(userLogin(user.userName));
     return fetch('/api/users/signin', {

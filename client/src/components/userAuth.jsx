@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {userLogin} from '../actions/actionsUserLogin';
+import {authenticateUser} from '../actions/actionsUserLogin';
 
 class UserAuth extends React.Component{
-  submitUserLogin(){
+  submitUserLogin(e){
+    e.preventDefault();
     let user = {
       userName: this.refs.userName.value,
       password: this.refs.password.value
@@ -14,7 +15,7 @@ class UserAuth extends React.Component{
   render(){
     return (
       <div className="container-fluid">
-        <form>
+        <form onSubmit={this.submitUserLogin.bind(this)}>
           <div className="row">
             <span><i className="fa fa-envelope-o fa-fw"></i></span>
             <input className="form-control" ref="userName" type="email" placeholder="Email" />
@@ -24,18 +25,22 @@ class UserAuth extends React.Component{
             <input className="form-control" ref="password" type="password" placeholder="Password" />
           </div>
           <div className="row">
-            <button className="btn btn-primary" onClick={this.submitUserLogin.bind(this)}>Sign In</button>
+            <button className="btn btn-primary" type="submit">Sign In</button>
           </div>
         </form>
       </div>
     )
   }
-}
+};
+
+UserAuth.contextTypes = {
+  router: React.PropTypes.func
+};
 
 function mapDispatchToProps(dispatch){
   return {
     signInUser: function(user) {
-      dispatch(userLogin(user));
+      dispatch(authenticateUser(user));
     }
   }
 }
