@@ -8,13 +8,14 @@ class UserAuth extends React.Component{
       userName: this.refs.userName.value,
       password: this.refs.password.value
     }
+    this.context.router.transitionTo('browse');
     this.props.signInUser(user);
   }
 
   render(){
     return (
       <div className="container-fluid">
-        <form>
+        <form onSubmit={this.submitUserLogin.bind(this)}>
           <div className="row">
             <span><i className="fa fa-envelope-o fa-fw"></i></span>
             <input className="form-control" ref="userName" type="email" placeholder="Email" />
@@ -24,13 +25,17 @@ class UserAuth extends React.Component{
             <input className="form-control" ref="password" type="password" placeholder="Password" />
           </div>
           <div className="row">
-            <button className="btn btn-primary" onClick={this.submitUserLogin.bind(this)}>Sign In</button>
+            <button className="btn btn-primary" type="submit">Sign In</button>
           </div>
         </form>
       </div>
     )
   }
-}
+};
+
+UserAuth.contextTypes = {
+  router: React.PropTypes.func
+};
 
 function mapDispatchToProps(dispatch){
   return {
