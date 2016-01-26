@@ -368,8 +368,9 @@ li > a{
 .productCard {
   margin: 20px;
   border: 2px solid;
-  border-radius: 25px;
+  border-radius: 12px;
   padding: 10px;
+  border-color: #A5A4A5;
 }
 
 .productinfo {
@@ -380,7 +381,8 @@ li > a{
 .productName {
   text-align: center;
   color: #00AC69;
-  font-size: 30px;
+  font-size: 20px;
+  border-bottom: 2px #ccc solid;
 }
 
 
@@ -396,6 +398,9 @@ li > a{
 
 .productImage {
   text-align: center;
+  border: 1px solid #979797;
+  border-radius: 12px;
+  margin: 5px;
 
 }
 
@@ -457,3 +462,7 @@ li > a{
   -o-background-size: cover;
   background-size: cover;
 }
+.portfolio-item{
+ 
+}
+
