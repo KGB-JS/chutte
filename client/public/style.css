@@ -31,7 +31,7 @@ li > a{
   color: #FFFFFF;
   background-color: #00AC69;
   border-style: solid;
-  border-width: 1px;
+  border-width: 0px;
   border-color: #D6D6D6;
 }
 
@@ -425,6 +425,11 @@ li > a{
   color: #FFFFFF;
   font-weight: bold;
   font-size: 20px;
+  border-width:0px;
+}
+
+.navbar {
+  border-radius: 0px;
 }
 
 .navbar-brand .logo {
