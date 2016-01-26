@@ -1,15 +1,20 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {createListing, postListing} from './../actions/actionsCreateListing';
+import DropZone from 'react-dropzone';
+import ImageDrop from './imageDrop';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
 export default class CreateListing extends React.Component {
   constructor(props){
     super(props);
-
-    this.state = { categorySelected:'Choose a Category', startDate: moment(), endDate: moment() };
+    this.state = { categorySelected:'Choose a Category', description: "", startDate: moment(), endDate: moment() };
   }
 
+  _descriptionInput(details){
+    this.setState({ description: details.target.value });
+  }
 
   _handleChange(event){
     this.setState({categorySelected: event.target.value});
@@ -38,27 +43,37 @@ export default class CreateListing extends React.Component {
 
   render() {
     return (
+      <div className="col-sm-offset-3 col-md-10 col-md-offset-2">
       <form role="form">
-        <div className="form col-md-8">
-          <label>Name</label>
-          <input type="text" ref="name" className="form-group col-md-4"/>
+      <div className="col-md-5">
+        <ImageDrop/>
+        <textarea placeholder="Enter a Description"
+        onChange={this._descriptionInput}
+        value={this.state.description}
+        name="description" rows="3" className="form-control"/>
+      </div>
+
+      <div className ="col-md-5">
+        <div className="form-group">
+          <label>Product Name</label>
+          <input type="text" className="form-control" placeholder="Product Name" ref="name"/>
         </div>
 
         <div className="form-group">
           <label>Quantity</label>
-          <input type="text" ref="quantity" className="form-group col-md-4"/>
+          <input type="number" className="form-control" placeholder="Quantity" ref="quantity"/>
         </div>
 
         <div className="form-group">
           <DatePicker
-            placeholderText="Start date"
+            placeholder="Start date"
             selected={this.state.startDate}
             startDate={this.state.startDate}
             endDate={this.state.endDate}
             onChange={this._startDate.bind(this)} />
 
           <DatePicker
-            placeholderText="End date"
+            placeholder="End date"
             selected={this.state.endDate}
             startDate={this.state.startDate}
             aunctionEnds={this.state.endDate}
@@ -79,16 +94,19 @@ export default class CreateListing extends React.Component {
 
         <div className="form-group">
           <label>Price</label>
-          <input type="number" ref="price" className="form-group col-md-2"/>
+          <input type="number" className="form-control" placeholder="Price" ref="price"/>
         </div>
 
         <div className="form-group">
           <label>Minimum Sales Price</label>
-          <input type="number" ref="minPrice" className="form-group col-md-2"/>
+          <input type="number" className="form-control" placeholder="Minimum Sales Price" ref="minPrice"/>
         </div>
 
+
         <button type="button" onClick={this.submitForm.bind(this)}>List Item</button>
-      </form>
+        </div>
+        </form>
+      </div>
     )
   }
 }
