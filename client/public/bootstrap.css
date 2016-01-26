@@ -274,6 +274,7 @@ th {
   font-style: normal;
   font-weight: normal;
   line-height: 1;
+  padding-right: 5px;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -4504,7 +4505,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: #5e5e5e;
+  color: #085E3D;
   background-color: transparent;
 }
 .navbar-default .navbar-text {
@@ -4515,7 +4516,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #333;
+  color: #085E3D;
   background-color: transparent;
 }
 .navbar-default .navbar-nav > .active > a,
