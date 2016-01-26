@@ -43,7 +43,7 @@ function mapDispatchToProps(dispatch){
 
 function mapStateToProps(state){
   return {
-    user: state.userStore.userLogin
+    user: state.userStore.userAuth
   }
 }
 

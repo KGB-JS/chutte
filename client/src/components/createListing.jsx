@@ -53,7 +53,7 @@ export default class CreateListing extends React.Component {
         name="description" rows="3" className="form-control"/>
       </div>
 
-      <div className ="col-md-5">
+      <div className="col-sm-offset-3 col-md-10 col-md-offset-2">
         <div className="form-group">
           <label>Product Name</label>
           <input type="text" className="form-control" placeholder="Product Name" ref="name"/>
