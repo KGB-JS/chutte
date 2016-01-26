@@ -17,10 +17,11 @@ class BrowsePage extends React.Component {
     <div>
       <NavBar/>
         <div className="container-fluid">
-          <SearchBar className="serach-bar col-md-5"/>
+        <BrowseSideBar className="col-sm-2 col-md-2"/>
+          <SearchBar className="serach-bar col-md-5 col-md-offset-2"/>
           <row>
-            <BrowseSideBar className="col-sm-2"/>
-            <div className="col-sm-9">
+            
+            <div className="col-sm-9 col-md-9 col-md-offset-2">
               <ProductList products={this.props.products}/>
             </div>
           </row>

@@ -1,8 +1,19 @@
+.sideBar{
+    z-index: 3;
+    position: fixed;
+    height: 100%;
+    overflow-y: auto;
+
+}
+
 .browse{
   background-color: #FFFFFF;
   border-style: solid;
   border-width: 2px;
   border-color: #D6D6D6;
+}
+a{
+  color: #00AC69;
 }
 
 li > a{
@@ -22,6 +33,20 @@ li > a{
   border-style: solid;
   border-width: 1px;
   border-color: #D6D6D6;
+}
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
 }
 
 
@@ -393,4 +418,37 @@ li > a{
   width: 45%;
   background-color: #D3D3D3;
   padding: 10px;
+}
+
+.navbar-default{
+  background-color:#00AC69;
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.navbar-brand .logo {
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.navbar-brand{
+  font-size: 20px;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+.navbar-default .navbar-brand{
+  color: #FFFFFF;
+}
+
+.navbar-default .navbar-nav > li > a{
+  color: #FFFFFF;
+}
+
+.full{
+  background: url('../assets/landing-bkg.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
