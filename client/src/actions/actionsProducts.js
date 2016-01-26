@@ -65,6 +65,7 @@ export function fetchProducts(){
 }
 
 export function postBuy(purchaseDetails){
+  console.log(purchaseDetails)
   return function(dispatch){
     dispatch(postingBuy(purchaseDetails));
     return fetch('/api/items/buyItem', {
@@ -76,11 +77,12 @@ export function postBuy(purchaseDetails){
       }
     })
     .then(function(response){
-      return response.json();
+      //return response.json();
+      dispatch(postBuySuccess());
     })
-    .then(function(parsedJson){
-      dispatch(postBuySuccess(parsedJson));
-    })
+    // .then(function(parsedJson){
+    //   dispatch(postBuySuccess(parsedJson));
+    // })
     .catch(function(err){
       dispatch(postBuyFailure(err));
     });

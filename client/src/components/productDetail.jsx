@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import ProductImage from './productImage';
-import BuyButton from './buyButton';
+import {postBuy} from './../actions/actionsProducts';
 
 class ProductDetail extends React.Component {
   constructor (props) {
@@ -16,7 +16,12 @@ class ProductDetail extends React.Component {
     }
   }
   handleBuy() {
-    this.props.buyProduct(this.props.products[this.productIndex]._id)
+    var purchaseDetails = {
+      _id: this.props.products[this.productIndex]._id,
+      quantity: this.refs.purchaseQuantity.value,
+      price: this.props.products[this.productIndex].price
+    }
+    this.props.buyProduct(purchaseDetails)
   }
   componentWillMount() {
     this.findIndex();
@@ -40,7 +45,10 @@ class ProductDetail extends React.Component {
         <div className="productPrice">
           <p>Price: ${this.props.products[this.productIndex].price}</p>
         </div>
-        <BuyButton buyProduct={this.handleBuy}/>
+        <div>
+        <button onClick={this.handleBuy.bind(this)}>Buy</button>
+        <input type="number" ref="purchaseQuantity"></input>
+        </div>
       </div>
     );
   }
@@ -58,4 +66,4 @@ function mapStateToProps(state){
   return {products: state.productStore.products.productList};
 }
 
-export default connect(mapStateToProps)(ProductDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail)
