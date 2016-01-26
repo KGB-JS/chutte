@@ -6,13 +6,20 @@ import BuyButton from './buyButton';
 class ProductDetail extends React.Component {
   constructor (props) {
     super(props)
-    this.productIndex = this.props.products.reduce((prevVal, product, index) =>{
-      if(product._id === this.props.params.id){
-        prevVal = index;
-      }
-    });
+    this.productIndex = null;
   }
-
+  findIndex() {
+    for(var i = 0; i < this.props.products.length; i++){
+      if(this.props.products[i]._id === this.props.params.id){
+        this.productIndex = i;
+      }
+    }
+  }
+  componentWillMount() {
+    console.log(this.productIndex, 'productIndex')
+    this.findIndex();
+    console.log(this.productIndex, 'productIndex2')
+  }
   render() {
     return (
       <div className="productCard" id={this.props.products[this.productIndex]._id}>
