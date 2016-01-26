@@ -7,7 +7,7 @@ export default class BrowseSideNavbar extends React.Component {
     var category = ["Antiques", "Art", "Automobiles", "Clothing", "Electronics",
     "Entertainment", "Jewelry", "Tickets and Experiences", "Travel"];
     return (
-      <div className="col-sm-3 col-md-2 sidebar">
+      <div className="col-sm-2 col-md-2 sideBar">
         <ul className="nav nav-sidebar browse">
             {category.map(function(subCategory, index) {
               return <li key={index}><a href={index}>{subCategory}</a></li>;

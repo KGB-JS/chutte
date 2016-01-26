@@ -5,7 +5,7 @@ import JumboTronButton from './../components/JumboTronButton';
 export default class Home extends React.Component {
   render() {
     return (
-      <div>
+      <div className="full">
         <HomeNavBar/>
         <JumboTronButton/>
       </div>
