@@ -21,10 +21,12 @@ function userAuth(state, action){
     case USER_LOGIN:
       newState.userName = action.userName;
       newState.loggingIn = true;
+      newState.authErrorMessage = '';
       return newState;
     case USER_LOGIN_SUCCESS:
       newState.token = action.token;
       newState.loggingIn = false;
+      newState.authErrorMessage = '';
       return newState;
     case USER_LOGIN_FAILURE:
       newState.loggingIn = false;
@@ -33,10 +35,12 @@ function userAuth(state, action){
     case USER_SIGNUP:
       newState.userName = action.userName;
       newState.signingUp = true;
+      newState.authErrorMessage = '';
       return newState;
     case USER_SIGNUP_SUCCESS:
       newState.token = action.token;
       newState.signingUp = false;
+      newState.authErrorMessage = '';
       return newState;
     case USER_SIGNUP_FAILURE:
       newState.signingUp = false;
