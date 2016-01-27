@@ -35,7 +35,9 @@ module.exports = {
         var minPrice = req.body.product.minPrice;
         var auctionEnds = req.body.product.auctionEnds;
         var description = req.body.product.description;
-        var productImage = imageController.getImageUrl(req.body.product.imgFile);
+        // var productImage = imageController.getImageUrl(req.body.product.imgFile);
+        var productImage = req.body.product.productImage;
+
         // repackageing for new item
         var newItem = {
             productName: productName,
@@ -48,6 +50,9 @@ module.exports = {
             description: description,
             image: productImage
         };
+        // if(newItem.image=== ""){
+        //     newItem.image = "http://res.cloudinary.com/chutteapi/image/upload/c_scale,w_225/v1453918622/default_oczf9m.png"
+        // }
         // make the new item
         var makeNewItem = new Item(newItem);
         Q.ninvoke(makeNewItem, 'save')

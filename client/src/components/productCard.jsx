@@ -12,7 +12,7 @@ class ProductCard extends React.Component {
           <Link to={`browse/product/${this.props.productDetail._id}`}> {this.props.productDetail.productName} </Link>
         </div>
 
-        <ProductImage className="productImage" image={this.props.productDetail.imageURL}/>
+        <ProductImage className="productImage" image={this.props.productDetail.image}/>
 
         <row>
           <div className="productTime">
