@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import {checkStatus, parseJSON} from './actionsHelper';
 import {CREATE_LISTING, CREATE_LISTING_SUCCESS, CREATE_LISTING_FAILURE} from './actionConstants';
 
 
@@ -33,6 +34,8 @@ export function postListing(product){
           'Content-Type': 'application/json'
         }
       })
+      .then(checkStatus)
+      .then(parseJSON)
       .then(function(response){
         dispatch(createListingSuccess(response));
       })
