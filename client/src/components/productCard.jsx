@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import ProductImage from './productImage';
+import Timer from './timer';
 import BuyButton from './buyButton';
 
 class ProductCard extends React.Component {
@@ -16,7 +17,7 @@ class ProductCard extends React.Component {
 
         <row>
           <div className="productTime">
-            <p className="productinfo">Time Left: {this.props.productDetail.priceReduces}</p>
+            <Timer secondsRemaining={this.props.productDetail.decrementTime}/>
           </div>
 
           <div className="productQuantity">
