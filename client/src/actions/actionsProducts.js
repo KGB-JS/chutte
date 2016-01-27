@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import {checkStatus, parseJSON} from './actionsHelper';
 import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, UPDATE_PRODUCT, POST_BUY, POST_BUY_SUCCESS, POST_BUY_FAILURE} from './actionConstants';
 
 export function updateProduct(product){
@@ -52,9 +53,8 @@ export function fetchProducts(){
   return function(dispatch){
     dispatch(getProducts());
       return fetch('/api/items/')
-      .then(function(response) {
-        return response.json();
-      })
+      .then(checkStatus)
+      .then(parseJSON)
       .then(function(parsedJson){
         dispatch(getProductsSuccess(parsedJson));
       })
