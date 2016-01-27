@@ -2,123 +2,118 @@ var moment = require('moment');
 var itemStorage = require('./../itemStorage.js');
 var Item = require('./../itemModel.js');
 var Q = require('q');
-// this is confusing so buckle in
+
 module.exports = {
 
     // this is used to make the price reduction schedule
     findTimeReduce: function(itemId, currentPrice, minPrice, endDate) {
-        
-        // this is a double check to prevent multiple interval for each auction
+        //kill old auction process
         if (itemStorage.storage[itemId]) {
             clearInterval(itemStorage.storage[item._id].timeId);
         }
-        // this is required for sockets
+        //require at runtime to aviod dependency
         var app = require('./../../server.js');
-
         var startPrice = currentPrice;
-        // this sets up the current moment in time in epoch time aka milliseconds until now
         var now = moment().valueOf();
-        // this converts the string into epoch time if it isn't already
-        
-        
-        // this will find out how many milliseconds between the two times
+        //total time of auction
         var millisecondsUntil = Math.abs(now - endDate);
-        // count keep tracks of how many times the price will need to change
-        var count = 0;
-        // this is the amount that will be decreased each time 
-        var amountToDecrease = startPrice / minPrice;
+        //amount of price decrements
+        var count = 0; 
+        var amountToDecreasePrice = startPrice / minPrice;
         if(minPrice === 1 || 0){
-            amountToDecrease = 1;
+            amountToDecreasePrice = 1;
         }
-        // this is used the hold the price and time at which to decreased/decrement
+        //holds decrement times and corresponding prices
         var priceSchedule = [];
-        // each time the current price is larger or = the min price do the following
         while (currentPrice >= minPrice) {
             // calculates the decrementTime
-            var decrementTime = now - (millisecondsUntil / count);
-            // increase the count by one keep track of how many times the while function has run
+            var decrementTime = Math.floor(now - (millisecondsUntil / count));
+            //update count to for correct decrement time on next loop
             count++;
-            // this is a catch for the decrementTime on the first creation
+            //catch intial time
             if (decrementTime === -Infinity) {
                 decrementTime = now;
             }
-            // adds the price and decreased/decrement time
             priceSchedule.push({
                 price: currentPrice,
                 decrementTime: decrementTime
             });
-            // changes the current price with the correct amount to decrease
-            currentPrice = currentPrice - amountToDecrease;
-
+            //adjust price for next push
+            currentPrice = Math.floor(currentPrice - amountToDecreasePrice);
         }
         // this adds the final min price and end time of the auction
         priceSchedule.push({
             price: minPrice,
             decrementTime: endDate
         });
-        //this updates info on the item
+        //add priceSchedule to item in database
         var findItem = Q.nbind(Item.findOne, Item);
-        // find the item based on the id
         findItem({
                 _id: itemId
             })
             .then(function(item) {
-                // if the item is not found throw and error
                 if (!item) {
                     new Error('Item not found');
-                } else {
-                    // this will update the item if the auciton is over
-                    if (now > moment(item.auctionEnds).valueOf()) {
-                        item.active = false;
-                    }
-                    // add the price Schedule 
+                } else { 
                     item.priceSchedule = priceSchedule;
                     item.save();
-                    // update the live storage with the current info
-                    itemStorage.storage[itemId] = item;
                 }
             });
-        // this is the avgerage number of milliseconds between decreased/decrement
-        var numberOfSecUntilDecrment = millisecondsUntil / count;
-        // this keeps track of the price schedule index
+        //number of seconds between decrements
+        var numberOfSecUntilDecrment = Math.floor(millisecondsUntil / count);
         var priceIndex = 0;
-        // here is the big old recurse interval func 
+        var socketIndex = 0;
         var recurse = function() {
-            // this gets the current moment as of right now
-            var rightNow = moment().valueOf();
-            // this is a double check see if the auciton should be over
-            if (rightNow > endDate.valueOf()) {
-                // if the auciton is over set it to false
-                itemStorage.storage[itemId].active = false;
-            } else {
-                // if the auction isn't over set active to true
-                itemStorage.storage[itemId].active = true;
+            var now = moment().valueOf();
+            if(now > endDate){
+                var findItem = Q.nbind(Item.findOne, Item);
+                findItem({
+                    _id: itemId
+                  })
+                  .then(function(item) {
+                    if (!item) {
+                        new Error('Item not found');
+                    } else {
+                        //update the auction to inactive
+                        item.active = false;
+                        itemStorage.storage[itemId].active = false;
+                        item.save();
+                    }
+                });
             }
-            // this runs thru the price Schedule from start to finish i.e 0 to the end
-            if (priceIndex < priceSchedule.length) {
+            priceIndex++;
+            //reset price
+            if(priceSchedule[priceIndex] !== undefined){
+              startPrice = priceSchedule[priceIndex].price;
+            }
+            //object to emit 
 
-                priceIndex++;
-                // this is to double chekc the price is a value
-                if(priceSchedule[priceIndex] !== undefined){
-                  startPrice = priceSchedule[priceIndex].price;
-                }
-                console.log(itemStorage.storage[itemId]);
-                // once the price is increaed emit from server to all clients the entire object
-                app.io.sockets.emit('productUpdate', itemStorage.storage[itemId]);
-                // when the price index gets to the end clear the interval the auction is over
-                if (priceIndex === priceSchedule.length - 1) {
-                    clearInterval(itemStorage.storage[itemId].timeId);
-                }
+            var transmitObject = {
+                _id: itemId, 
+                price: itemStorage.storage[itemId].priceSchedule[socketIndex].price, 
+                timeRemaining: numberOfSecUntilDecrment,
+                description: itemStorage.storage[itemId].description,
+                productName: itemStorage.storage[itemId].productName,
+                createdBy: itemStorage.storage[itemId].createdBy,
+                quantity: itemStorage.storage[itemId].quantity,
+                image: itemStorage.storage[itemId].image
+                //itemObject: holder
             }
-            // this is another doulbe check to make sure the price is there
+            app.io.sockets.emit('productUpdate', transmitObject);
+            socketIndex++;
+            //clear Interval at auction end
+            if (priceIndex === priceSchedule.length - 1) {
+                clearInterval(itemStorage.storage[itemId].timeId);
+            }
+            //double check price
             if (itemStorage.storage[itemId].price) {
                 itemStorage.storage[itemId].price = startPrice;
             }
 
         };
-        // this is the return from findTimeReduce
+        //return timeId for clearing Interval on buy
         return {
-            timeId: setInterval(recurse, 30000),
+            timeId: setInterval(recurse, 3000),
             price: startPrice,
             priceSchedule: priceSchedule
         };
