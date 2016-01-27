@@ -83,7 +83,7 @@ module.exports = {
             // if that item is found do the following
             .then(function(item) {
                 // checks to make sure the quantity is not more then there is available 
-                if (item.quantity > 0 && quantityRequested < item.quantity) {
+                if (item.quantity > 0 && quantityRequested <= item.quantity) {
                     // update the new quantity remaining
                     item.quantity = item.quantity - quantityRequested;
                     // update the DB with the current active price which the item was purchased
