@@ -77,6 +77,7 @@ module.exports = {
                         //update the auction to inactive
                         item.active = false;
                         itemStorage.storage[itemId].active = false;
+                        console.log( "whole item",itemStorage.storage[itemId].active)
                         item.save();
                     }
                 });
@@ -109,8 +110,11 @@ module.exports = {
             if (itemStorage.storage[itemId].price) {
                 itemStorage.storage[itemId].price = startPrice;
             }
-
+            console.log( "whole item",itemStorage.storage[itemId]);
         };
+        
+        
+
         //return timeId for clearing Interval on buy
         return {
             timeId: setInterval(recurse, 3000),

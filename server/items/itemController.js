@@ -75,7 +75,7 @@ module.exports = {
     buyItem: function(req, res, next) {
         //Note need to add in access token logic
         // sets up the id and number quantity of the buy
-        var productId = req.body.productId;
+        var productId = req.body._id;
         var quantityRequested = req.body.quantity || 1;
         // make a var to search for an item
         var findItem = Q.nbind(Item.findOne, Item);
@@ -87,18 +87,22 @@ module.exports = {
             .then(function(item) {
                 // checks to make sure the quantity is not more then there is available 
                 if (item.quantity > 0 && quantityRequested <= item.quantity) {
+                    
                     // update the new quantity remaining
                     item.quantity = item.quantity - quantityRequested;
                     itemStorage.storage[item._id].quantity = item.quantity;
                     // update the DB with the current active price which the item was purchased
-
+                    if(item.quantity === 0){
+                        item.active = false;
+                        itemStorage.storage[item._id].active = false;
+                    }
                     //item.price = itemStorage.storage[item._id].price;
                     // save the Info to the DB
                     item.save()
                         // once the save is complete
                         .then(function() {
                             // send back a 200
-                            res.status(200).send();
+                            res.status(200).send(item);
                             // timeId creates a new auction at the price that it was purchased at.
                             var timeId = interval.findTimeReduce(item._id, itemStorage.storage[item._id].price, item.minPrice, item.auctionEnds);
                             // this will update the new timeId used to clear the interval
