@@ -15,6 +15,7 @@ import ProductDetail from './components/productDetail';
 import ProductList from './components/productList';
 import UserAuth from './components/userAuth';
 import UserSignup from './components/UserSignup';
+import {fetchProducts} from './actions/actionsProducts';
 
 const history = useBasename(createHistory)({
   basename: '/'
@@ -23,6 +24,8 @@ const history = useBasename(createHistory)({
 const store = configureStore();
 
 syncReduxAndRouter(history, store, (state) => state.router);
+
+store.dispatch(fetchProducts());
 
 socket(store);
 
