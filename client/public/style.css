@@ -397,12 +397,25 @@ li > a{
 }
 
 .productImage {
-  text-align: center;
   border: 1px solid #979797;
   border-radius: 12px;
   margin: 5px;
+  overflow: hidden;
+  min-width: 50px;
+  min-height: 100px;
+  background-image: url('http://res.cloudinary.com/chutteapi/image/upload/c_scale,w_225/v1453918622/default_oczf9m.png'); 
+  background-repeat: no-repeat;
+  background-position: center; 
+
 
 }
+
+.displayed{
+
+   
+}
+
+
 
 
 .productTime .productPrice .productQuantity{

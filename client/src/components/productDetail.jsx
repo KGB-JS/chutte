@@ -32,7 +32,7 @@ class ProductDetail extends React.Component {
       <div>
         <Navbar/>
         <div className="productCard" id={this.props.products[this.productIndex]._id}>
-          <ProductImage image={this.props.products[this.productIndex].imageURL}/>
+          <ProductImage image={this.props.products[this.productIndex].image}/>
           <div className="productName">
             <p>Product: {this.props.products[this.productIndex].productName}</p>
           </div>
