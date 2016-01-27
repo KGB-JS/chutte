@@ -28,14 +28,32 @@ export default class CreateListing extends React.Component {
     this.setState({endDate: lastDate});
   }
 
-  onDrop(file) {
-    this.setState({imgFile: file});
-    this.file = file
-    console.log(this.file)
+  // onDrop(file) {
+  //   this.setState({imgFile: file});
+  //   this.file = file
+  //   console.log(this.file)
+  // }
+  handleSubmit(e) {
+    e.preventDefault();
+  }
+
+  handleFile(e) {
+    var self = this;
+    console.log(self)
+    var reader = new FileReader();
+    var file = e.target.files[0];
+
+    reader.onload = function(upload) {
+      self.setState({
+        imgFile: upload.target.result,
+      });
+    }
+
+    reader.readAsDataURL(file);
   }
 
   submitForm(){
-    console.log(this.onDrop.file)
+    console.log(this.state.imgFile)
     var itemDetails ={product: {
       productName: String(this.refs.name.value),
       createdBy : String(this.refs.name.value),
@@ -44,7 +62,7 @@ export default class CreateListing extends React.Component {
       auctionEnds : Number(this.state.endDate.valueOf()),
       price: Number(this.refs.price.value),
       minPrice: Number(this.refs.minPrice.value),
-      imgFile: this.onDrop.file
+      imgFile: this.state.imgFile
     }};
     console.log(itemDetails)
     this.props.submitListing(itemDetails);
@@ -56,9 +74,9 @@ export default class CreateListing extends React.Component {
       <form role="form">
       <div className="col-md-5">
         <div>
-            <DropZone multiple='false' onDrop={this.onDrop} value={this.state.imgFile} width={150} height={100}>
-              <div>Upload an Image here for your product.</div>
-            </DropZone>
+          <div onSubmit={this.handleSubmit.bind(this)} encType="multipart/form-data">
+            <input type="file" onChange={this.handleFile.bind(this)} />
+          </div>
         </div>
       </div>
 

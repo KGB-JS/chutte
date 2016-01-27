@@ -35,7 +35,7 @@ module.exports = {
         var minPrice = req.body.product.minPrice;
         var auctionEnds = req.body.product.auctionEnds;
         var description = req.body.product.description;
-        var productImage = imageController.getImageUrl(req.body.product.productImage) || '';
+        var productImage = imageController.getImageUrl(req.body.product.imgFile);
         // repackageing for new item
         var newItem = {
             productName: productName,
