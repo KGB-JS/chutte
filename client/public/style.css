@@ -462,7 +462,16 @@ li > a{
   -o-background-size: cover;
   background-size: cover;
 }
-.portfolio-item{
- 
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    color:#FFF;
+    background-color: #00AC69;
+    border-radius: 4px;
 }
 

@@ -74,13 +74,16 @@ export default class CreateListing extends React.Component {
       <form role="form">
       <div className="col-md-5">
         <div>
+        <label for="file-upload" className="custom-file-upload">
+        <span className="glyphicon glyphicon-upload"></span> Upload Picture
           <div onSubmit={this.handleSubmit.bind(this)} encType="multipart/form-data">
             <input type="file" onChange={this.handleFile.bind(this)} />
           </div>
+          </label>
         </div>
       </div>
 
-      <div className="col-sm-offset-3 col-md-10 col-md-offset-2">
+      <div className="col-md-5">
         <div className="form-group">
           <label>Product Name</label>
           <input type="text" className="form-control" placeholder="Product Name" ref="name"/>
@@ -130,7 +133,7 @@ export default class CreateListing extends React.Component {
         </div>
 
 
-        <button type="button" onClick={this.submitForm.bind(this)}>List Item</button>
+        <button className="btn btn-primary" type="button" onClick={this.submitForm.bind(this)}>List Item</button>
         </div>
         </form>
       </div>
