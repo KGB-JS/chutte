@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
-import {routeReducer as router} from 'redux-simple-router';
+import {routeReducer} from 'react-router-redux';
 import productReducer from './productReducer';
 import userAuthReducer from './userReducer';
 
 const rootReducer = combineReducers({
-  router,
+  router: routeReducer,
   productStore: productReducer,
   userStore: userAuthReducer
 });
