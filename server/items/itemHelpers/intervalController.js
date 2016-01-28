@@ -7,10 +7,6 @@ module.exports = {
 
     // this is used to make the price reduction schedule
     findTimeReduce: function(itemId, currentPrice, minPrice, endDate) {
-        //kill old auction process
-        if (itemStorage.storage[itemId]) {
-            clearInterval(itemStorage.storage[item._id].timeId);
-        }
         //require at runtime to aviod dependency
         var app = require('./../../server.js');
         var startPrice = currentPrice;
@@ -70,7 +66,6 @@ module.exports = {
                         //update the auction to inactive
                         item.active = false;
                         itemStorage.storage[itemId].active = false;
-                        console.log( "whole item",itemStorage.storage[itemId].active)
                         item.save();
                     }
                 });
@@ -80,8 +75,6 @@ module.exports = {
             if(priceSchedule[priceIndex] !== undefined){
               startPrice = priceSchedule[priceIndex].price;
             }
-            //object to emit
-            console.log(itemId)
 
             var transmitObject = {
                 _id: itemId, 
@@ -104,7 +97,6 @@ module.exports = {
             if (itemStorage.storage[itemId].price) {
                 itemStorage.storage[itemId].price = startPrice;
             }
-            console.log( "whole item",itemStorage.storage[itemId]);
         };
         
         
