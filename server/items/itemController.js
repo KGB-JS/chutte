@@ -91,8 +91,14 @@ module.exports = {
             });
     },
     buyItem: function(req, res, next) {
+        var token = req.headers['x-access-token'];
+        var user = jwt.decode(token, 'secret');
+        if (!token) {
+          next(new Error('no token'));
+        } else {
         //Note need to add in access token logic
         // sets up the id and number quantity of the buy
+        console.log(req.body)
         var productId = req.body._id;
         var quantityRequested = req.body.quantity || 1;
         // make a var to search for an item
@@ -120,6 +126,7 @@ module.exports = {
                         // once the save is complete
                         .then(function() {
                             sendGrid.soldItemConfirmation(item.createdBy, item, quantityRequested);
+                            sendGrid.buyItemConfirmation(user, item, quantityRequested);
                             // send back a 200
                             // timeId creates a new auction at the price that it was purchased at.
                             res.status(200).send(item);
@@ -138,6 +145,7 @@ module.exports = {
             .fail(function(error) {
                 next(error);
             });
+        }
     }
 
 };
