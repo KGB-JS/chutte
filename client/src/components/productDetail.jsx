@@ -19,7 +19,7 @@ class ProductDetail extends React.Component {
   handleBuy() {
     var purchaseDetails = {
       _id: this.props.products[this.productIndex]._id,
-      quantity: this.refs.purchaseQuantity.value,
+      quantity: Number(this.refs.purchaseQuantity.value),
       price: this.props.products[this.productIndex].price
     }
     this.props.buyProduct(purchaseDetails)
@@ -54,7 +54,7 @@ class ProductDetail extends React.Component {
             <p>Price: ${this.props.products[this.productIndex].price}</p>
           </div>
           <div className="input-group">
-      <input type="text" className="form-control" type="number" ref="purchaseQuantity" placeholder="Select Quantity"/>
+      <input className="form-control" type="number" ref="purchaseQuantity" placeholder="Select Quantity"/>
       <span className="input-group-btn">
         <button className="btn btn-default" type="button" onClick={this.handleBuy.bind(this)}>Confirm</button>
       </span>
