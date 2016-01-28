@@ -14,8 +14,8 @@ export default class Navbar extends React.Component {
       <nav className="navbar navbar-default">
         <div className="container-fluid chutteGreen">
           <div className="navbar-header">
-          {icon}
-            <Link className="navbar-brand" to="/"> Chutte</Link>
+          
+            <Link className="navbar-brand" to="/"> {icon} Chutte</Link>
           </div>
           <ul className="nav navbar-nav navbar-right">
               <li><Link to="/browse"><span className="glyphicon glyphicon-shopping-cart"></span> Browse</Link></li>
