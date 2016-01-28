@@ -12,6 +12,8 @@
     border-color: #D6D6D6;
 }
 
+
+
 a {
     color: #00AC69;
 }
@@ -20,6 +22,12 @@ li > a {
     color: #00AC69;
     font-weight: bold;
     font-size: 20px;
+
+}
+
+ul.nav.nav-sidebar.browse > li > a{
+  font-size: 1.8vw;
+
 }
 
 .nav > li {
