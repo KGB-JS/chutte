@@ -13,10 +13,19 @@ var moment = require('moment');
 module.exports = {
     getItems: function(req, res, next) {
         Item.find({}, function(err, items) {
+            var now = moment().valueOf();
             var itemMap = [];
             items.forEach(function(item) {
+                var priceFlag = true;
                 // check for categories
                 if (item.active) {
+                    for(var i = 0;i <= item.priceSchedule.length - 1; i++){
+                        if(priceFlag && item.priceSchedule[i].decrementTime > now){
+                            priceFlag = false;
+                            item.price = item.priceSchedule[i].price;
+                            item.save();
+                        }
+                    }
                     itemMap.push(item);
                 }
             });
@@ -27,6 +36,7 @@ module.exports = {
         });
     },
     postItem: function(req, res, next) {
+        
         var productName = req.body.product.productName;
         var createdBy = req.body.product.createdBy;
         var category = req.body.product.category;
@@ -36,7 +46,12 @@ module.exports = {
         var auctionEnds = req.body.product.auctionEnds;
         var description = req.body.product.description;
         var productImage = req.body.product.productImage;
-
+        //check for valid endDate
+        var now = moment().valueOf();
+        if(now > auctionEnds){
+            res.status(409).send('Auction End time is not acceptable');
+            return
+        }
 
         var newItem = {
             productName: productName,
@@ -111,7 +126,8 @@ module.exports = {
                             itemStorage.storage[item._id].priceSchedule = timeId.priceSchedule;
                         });
                 } else {
-                    res.status(401).send('quantityRequested exceeds quantity available');
+                    res.status(409).send('quantityRequested exceeds quantity available');
+                    return
                 }
             })
             .fail(function(error) {
