@@ -117,8 +117,9 @@ module.exports = {
                         // once the save is complete
                         .then(function() {
                             // send back a 200
-                            res.status(200).send(item);
                             // timeId creates a new auction at the price that it was purchased at.
+                            res.status(200).send(item);
+                            clearInterval(itemStorage.storage[item._id].timeId)
                             var timeId = interval.findTimeReduce(item._id, itemStorage.storage[item._id].price, item.minPrice, item.auctionEnds);
                             // this will update the new timeId used to clear the interval
                             itemStorage.storage[item._id].timeId = timeId.timeId;
