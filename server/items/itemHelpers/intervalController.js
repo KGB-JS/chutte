@@ -50,6 +50,9 @@ module.exports = {
             });
         //number of seconds between decrements
         var numberOfSecUntilDecrment = Math.floor(millisecondsUntil / count);
+        if(numberOfSecUntilDecrment < 60000){
+            numberOfSecUntilDecrment = 60000;
+        }
         var priceIndex = 0;
         var socketIndex = 0;
         var recurse = function() {
