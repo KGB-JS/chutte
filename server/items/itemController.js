@@ -8,6 +8,7 @@ var itemStorage = require('./itemStorage.js');
 var User = require('./../user/userModel.js');
 var imageController = require('./imageController.js');
 var moment = require('moment');
+var sendGrid = require('./itemHelpers/sendGridController.js');
 
 
 module.exports = {
@@ -71,6 +72,8 @@ module.exports = {
                 //start auction, return clearInterval ID
                 var itemObject = interval.findTimeReduce(makeNewItem._id, price, minPrice, auctionEnds);
                 res.status(200).send(makeNewItem);
+                //email confirmation
+                sendGrid.listItemConfirmation(createdBy, newItem);
                 // this will update the item storage with the result of item object
                 itemStorage.storage[makeNewItem._id] = itemObject;
                 itemStorage.storage[makeNewItem._id].category = newItem.category
@@ -88,8 +91,14 @@ module.exports = {
             });
     },
     buyItem: function(req, res, next) {
+        var token = req.headers['x-access-token'];
+        var user = jwt.decode(token, 'secret');
+        if (!token) {
+          next(new Error('no token'));
+        } else {
         //Note need to add in access token logic
         // sets up the id and number quantity of the buy
+        console.log(req.body)
         var productId = req.body._id;
         var quantityRequested = req.body.quantity || 1;
         // make a var to search for an item
@@ -116,6 +125,8 @@ module.exports = {
                     item.save()
                         // once the save is complete
                         .then(function() {
+                            sendGrid.soldItemConfirmation(item.createdBy, item, quantityRequested);
+                            sendGrid.buyItemConfirmation(user, item, quantityRequested);
                             // send back a 200
                             // timeId creates a new auction at the price that it was purchased at.
                             res.status(200).send(item);
@@ -134,6 +145,7 @@ module.exports = {
             .fail(function(error) {
                 next(error);
             });
+        }
     }
 
 };
