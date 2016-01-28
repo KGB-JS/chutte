@@ -31,7 +31,12 @@ class ProductDetail extends React.Component {
     return (
       <div>
         <Navbar/>
-        <div className="productCard" id={this.props.products[this.productIndex]._id}>
+        <div className="container-fluid">
+          <div className="row">
+          <div className="detailList">
+          <div className="panel panel-default">
+          <div className="panel-body">
+            <div className="productCard" id={this.props.products[this.productIndex]._id}>
           <ProductImage image={this.props.products[this.productIndex].image}/>
           <div className="productName">
             <p>Product: {this.props.products[this.productIndex].productName}</p>
@@ -48,11 +53,20 @@ class ProductDetail extends React.Component {
           <div className="productPrice">
             <p>Price: ${this.props.products[this.productIndex].price}</p>
           </div>
-          <div>
-            <button onClick={this.handleBuy.bind(this)}>Buy</button>
-            <input type="number" ref="purchaseQuantity"></input>
+          <div className="input-group">
+      <input type="text" className="form-control" type="number" ref="purchaseQuantity" placeholder="Select Quantity"/>
+      <span className="input-group-btn">
+        <button className="btn btn-default" type="button" onClick={this.handleBuy.bind(this)}>Confirm</button>
+      </span>
+    </div>
+        </div>
+          </div>
           </div>
         </div>
+          </div>
+        </div>
+        
+        
       </div>
     );
   }

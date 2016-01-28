@@ -6,7 +6,7 @@ export default class Navbar extends React.Component {
     var icon = (
     
       
-        <img className="logo" src="../assets/chutteLogo.png"  alt="Chutte Logo" height="50" width="50" />
+        <img className="logo" src="/assets/chutteLogo.png"  alt="Chutte Logo" height="50" width="50" />
 
   )
  
