@@ -16,9 +16,9 @@ module.exports = {
         var startPrice = currentPrice;
         var now = moment().valueOf();
         //total time of auction
-        var millisecondsUntil = Math.abs(now - endDate);
+        var millisecondsUntil = endDate - now;
         //amount of price decrements
-        var count = 0; 
+        var count = 1; 
         var amountToDecreasePrice = startPrice / minPrice;
         if(minPrice === 1 || 0){
             amountToDecreasePrice = 1;
@@ -26,27 +26,20 @@ module.exports = {
         //holds decrement times and corresponding prices
         var priceSchedule = [];
         while (currentPrice >= minPrice) {
-            // calculates the decrementTime
-            var decrementTime = Math.floor(now - (millisecondsUntil / count));
-            //update count to for correct decrement time on next loop
             count++;
-            //catch intial time
-            if (decrementTime === -Infinity) {
-                decrementTime = now;
-            }
             priceSchedule.push({
-                price: currentPrice,
-                decrementTime: decrementTime
+                price: currentPrice
             });
-            //adjust price for next push
+            // //adjust price for next push
             currentPrice = Math.floor(currentPrice - amountToDecreasePrice);
         }
-        // this adds the final min price and end time of the auction
-        priceSchedule.push({
-            price: minPrice,
-            decrementTime: endDate
-        });
-        //add priceSchedule to item in database
+        var averageTimeBetween = millisecondsUntil / count
+        var decrementTime = now
+        for(var i = 0;i < count - 1; i++){
+            priceSchedule[i].decrementTime = decrementTime;
+            decrementTime = Math.floor(decrementTime + averageTimeBetween);
+        }
+
         var findItem = Q.nbind(Item.findOne, Item);
         findItem({
                 _id: itemId
@@ -87,7 +80,8 @@ module.exports = {
             if(priceSchedule[priceIndex] !== undefined){
               startPrice = priceSchedule[priceIndex].price;
             }
-            //object to emit 
+            //object to emit
+            console.log(itemId)
 
             var transmitObject = {
                 _id: itemId, 

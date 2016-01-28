@@ -35,5 +35,31 @@ module.exports = {
                 console.log(json);
             });
         }
+    },
+    postItemConfirmation: function(req, res, next) {
+        //token to get username
+        var token = false;
+        //req.headers['x-access-token'];
+        //var user = jwt.decode(token, 'secret');
+
+        //check for login with token
+        if (token) {
+            next(new Error('no token'));
+        } else {
+            //var subject = 'Your Order has been placed' + req.body.seller;
+            //var item = req.body.item;
+            // this is dummy info and will need to be replace with user info
+            sendgrid.send({
+                to: 'mickberber@gmail.com',
+                from: 'noreply@chutte.com',
+                subject: 'test email',
+                text: 'test email'
+            }, function(err, json) {
+                if (err) {
+                    return console.error(err);
+                }
+                console.log(json);
+            });
+        }
     }
 };
