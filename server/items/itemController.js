@@ -8,6 +8,7 @@ var itemStorage = require('./itemStorage.js');
 var User = require('./../user/userModel.js');
 var imageController = require('./imageController.js');
 var moment = require('moment');
+var sendGrid = require('./itemHelpers/sendGridController.js');
 
 
 module.exports = {
@@ -71,6 +72,8 @@ module.exports = {
                 //start auction, return clearInterval ID
                 var itemObject = interval.findTimeReduce(makeNewItem._id, price, minPrice, auctionEnds);
                 res.status(200).send(makeNewItem);
+                //email confirmation
+                sendGrid.listItemConfirmation(createdBy, newItem);
                 // this will update the item storage with the result of item object
                 itemStorage.storage[makeNewItem._id] = itemObject;
                 itemStorage.storage[makeNewItem._id].category = newItem.category
@@ -116,6 +119,7 @@ module.exports = {
                     item.save()
                         // once the save is complete
                         .then(function() {
+                            sendGrid.soldItemConfirmation(item.createdBy, item, quantityRequested);
                             // send back a 200
                             // timeId creates a new auction at the price that it was purchased at.
                             res.status(200).send(item);
