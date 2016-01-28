@@ -25,7 +25,7 @@ export function userSignupFailure(err){
 
 export function postUserSignup(user){
   return function(dispatch){
-    dispatch(userSignup(user.userName));
+    dispatch(userSignup(user.username));
     let newUser = {
       username: user.username,
       password: user.password
