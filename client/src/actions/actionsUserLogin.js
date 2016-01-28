@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import {routeActions} from 'react-router-redux';
 import {checkStatus, parseJSON} from './actionsHelper';
 import {USER_LOGIN, USER_LOGIN_SUCCESS, USER_LOGIN_FAILURE} from './actionConstants';
 
@@ -39,6 +40,7 @@ export function authenticateUser(user){
     .then(parseJSON)
     .then(function(response){
       dispatch(userLoginSuccess(response.token));
+      dispatch(routeActions.push({pathname: 'browse'}));
     })
     .catch(function(error){
       dispatch(userLoginFailure(error));

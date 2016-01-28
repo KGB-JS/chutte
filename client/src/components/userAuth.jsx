@@ -10,6 +10,7 @@ class UserAuth extends React.Component{
       password: this.refs.password.value
     }
     this.props.signInUser(user);
+    this.props.history.push('browse');
   }
 
   render(){

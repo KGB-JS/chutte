@@ -4,8 +4,11 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {createHistory, useBasename} from 'history';
 import {Router, Route, IndexRoute, Redirect} from 'react-router';
-import {syncReduxAndRouter} from 'redux-simple-router';
-import configureStore from './store/configStore';
+import {createStore, applyMiddleware, compose} from 'redux';
+import {syncHistory} from 'react-router-redux';
+import thunk from 'redux-thunk';
+import createLogger from 'redux-logger';
+import rootReducer from './reducers/rootReducer';
 import socket from './socket/socket';
 import App from './containers/app';
 import Home from './containers/home';
@@ -15,15 +18,35 @@ import ProductDetail from './components/productDetail';
 import ProductList from './components/productList';
 import UserAuth from './components/userAuth';
 import UserSignup from './components/UserSignup';
+import DevTools from './containers/DevTools';
 import {fetchProducts} from './actions/actionsProducts';
 
 const history = useBasename(createHistory)({
   basename: '/'
 });
 
-const store = configureStore();
+const reduxRouterMiddleware = syncHistory(history);
 
-syncReduxAndRouter(history, store, (state) => state.router);
+const finalCreateStore = compose(
+  applyMiddleware(reduxRouterMiddleware),
+  applyMiddleware(thunk),
+  applyMiddleware(createLogger()),
+  DevTools.instrument()
+)(createStore);
+
+export default function configureStore(initialState){
+  const store = finalCreateStore(rootReducer, initialState);
+
+  if(module.hot){
+    module.hot.accept('./reducers/rootReducer', () => {
+      const nextRootReducer = require('./reducers/rootReducer');
+      store.replaceReducer(nextRootReducer);
+    })
+  }
+  return store;
+}
+
+const store = configureStore();
 
 store.dispatch(fetchProducts());
 
