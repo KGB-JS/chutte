@@ -13,6 +13,15 @@ var sendGrid = require('./itemHelpers/sendGridController.js');
 
 module.exports = {
     getItems: function(req, res, next) {
+        // var keys = 0;
+        // (function(){
+        //     for(var key in itemStorage.storage){
+        //         keys++;
+        //     }
+        //     if(keys > 0){
+        //         res.send(itemStorage.storage)
+        //     }
+        // })();
         Item.find({}, function(err, items) {
             var now = moment().valueOf();
             var itemMap = [];
@@ -54,9 +63,18 @@ module.exports = {
         var productImage = req.body.product.imgFile;
         //check for valid endDate
         var now = moment().valueOf();
+        //edge cases
         if(now > auctionEnds){
             res.status(409).send('Auction End time is not acceptable');
-            return
+            return;
+        }
+        if(price < minPrice){
+            res.status(409).send('Auction start price is less than auction minimum price');
+            return;
+        }
+        if(price < 1){
+            res.status(409).send('Auction start price is less than allowed start price');
+            return;
         }
 
         var newItem = {
