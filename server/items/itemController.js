@@ -52,7 +52,6 @@ module.exports = {
         var auctionEnds = req.body.product.auctionEnds;
         var description = req.body.product.description;
         var productImage = req.body.product.imgFile;
-        console.log(productImage)
         //check for valid endDate
         var now = moment().valueOf();
         if(now > auctionEnds){
