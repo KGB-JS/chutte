@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import numeral from 'numeral';
 import ProductImage from './productImage';
 import Navbar from './navbar';
 import Timer from './timer';
@@ -29,7 +30,8 @@ class ProductDetail extends React.Component {
     this.findIndex();
   }
   render() {
-    let secondsRemaining = this.props.products[this.productIndex].timeRemaining || 1200;
+    let milliseconds = this.props.products[this.productIndex].timeRemaining || 1200;
+    let secondsRemaining = (milliseconds / 100);
 
     return (
       <div>
@@ -50,11 +52,11 @@ class ProductDetail extends React.Component {
             </div>
 
             <div className="productQuantity">
-              <p>Quantity: {this.props.products[this.productIndex].quantity}</p>
+              <p className="productinfo">Quantity: {this.props.products[this.productIndex].quantity}</p>
             </div>
 
             <div className="productPrice">
-              <p>Price: ${this.props.products[this.productIndex].price}</p>
+              <p className="productinfo">Price: {numeral(this.props.products[this.productIndex].price).format('$0,0[.]00')}</p>
             </div>
             <div className="input-group">
               <input className="form-control" type="number" ref="purchaseQuantity" placeholder="Select Quantity"/>
