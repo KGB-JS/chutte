@@ -6,6 +6,8 @@ import BuyButton from './buyButton';
 
 class ProductCard extends React.Component {
   render() {
+    let secondsRemaining = this.props.productDetail.timeRemaining || 1200;
+
     return (
       <div className="col-md-4 portfolio-item">
       <div className="productCard" id={this.props.productDetail._id}>
@@ -17,7 +19,7 @@ class ProductCard extends React.Component {
 
         <row>
           <div className="productTime">
-            <Timer secondsRemaining={this.props.productDetail.timeRemaining}/>
+            <Timer secondsRemaining={secondsRemaining}/>
           </div>
 
           <div className="productQuantity">
