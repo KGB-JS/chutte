@@ -35,6 +35,11 @@ module.exports = {
             priceSchedule[i].decrementTime = decrementTime;
             decrementTime = Math.floor(decrementTime + averageTimeBetween);
         }
+        //number of seconds between decrements
+        var numberOfSecUntilDecrment = Math.floor(millisecondsUntil / count);
+        if(numberOfSecUntilDecrment < 60000){
+            numberOfSecUntilDecrment = 60000;
+        }
 
         var findItem = Q.nbind(Item.findOne, Item);
         findItem({
@@ -45,14 +50,10 @@ module.exports = {
                     new Error('Item not found');
                 } else { 
                     item.priceSchedule = priceSchedule;
+                    item.timeRemaining = numberOfSecUntilDecrment;
                     item.save();
                 }
             });
-        //number of seconds between decrements
-        var numberOfSecUntilDecrment = Math.floor(millisecondsUntil / count);
-        if(numberOfSecUntilDecrment < 60000){
-            numberOfSecUntilDecrment = 60000;
-        }
         var priceIndex = 0;
         var socketIndex = 0;
         var recurse = function() {
