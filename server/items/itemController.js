@@ -7,26 +7,52 @@ var userController = require('./../user/userController.js');
 var itemStorage = require('./itemStorage.js');
 var User = require('./../user/userModel.js');
 var imageController = require('./imageController.js');
+var moment = require('moment');
+var sendGrid = require('./itemHelpers/sendGridController.js');
+
 
 module.exports = {
     getItems: function(req, res, next) {
+        // var keys = 0;
+        // (function(){
+        //     for(var key in itemStorage.storage){
+        //         keys++;
+        //     }
+        //     if(keys > 0){
+        //         res.send(itemStorage.storage);
+        //         return;
+        //     }
+        // })();
         Item.find({}, function(err, items) {
+            var now = moment().valueOf();
             var itemMap = [];
             items.forEach(function(item) {
-                // still need to check for categories
-                // returns only items that are active
+                var priceFlag = true;
+                // check for categories
                 if (item.active) {
+                    for(var i = 0;i <= item.priceSchedule.length - 1; i++){
+                        if(priceFlag && item.priceSchedule[i].decrementTime > now){
+                            priceFlag = false;
+                            item.price = item.priceSchedule[i].price;
+                            item.save();
+                        }
+                    }
                     itemMap.push(item);
                 }
             });
-            // the db products shoudl be used for tests
+            //commented out for production
             //res.status(200).send(db.products);
-            // Uncommit when we are ready to server from DB
+            //comment out for testing
             res.send(itemMap);
         });
     },
     postItem: function(req, res, next) {
-        // setting var needed to make an item
+        // var token = req.headers['x-access-token'];
+        // var user = jwt.decode(token, 'secret');
+        // if (!token) {
+        //   next(new Error('no token'));
+        // } else {
+        
         var productName = req.body.product.productName;
         var createdBy = req.body.product.createdBy;
         var category = req.body.product.category;
@@ -35,8 +61,23 @@ module.exports = {
         var minPrice = req.body.product.minPrice;
         var auctionEnds = req.body.product.auctionEnds;
         var description = req.body.product.description;
-        var productImage = imageController.getImageUrl(req.body.product.productImage) || '';
-        // repackageing for new item
+        var productImage = req.body.product.imgFile;
+        //check for valid endDate
+        var now = moment().valueOf();
+        //edge cases
+        if(now > auctionEnds){
+            res.status(409).send('Auction End time is not acceptable');
+            return;
+        }
+        if(price < minPrice){
+            res.status(409).send('Auction start price is less than auction minimum price');
+            return;
+        }
+        if(price < 1){
+            res.status(409).send('Auction start price is less than allowed start price');
+            return;
+        }
+
         var newItem = {
             productName: productName,
             createdBy: createdBy,
@@ -48,30 +89,50 @@ module.exports = {
             description: description,
             image: productImage
         };
-        // make the new item
+
         var makeNewItem = new Item(newItem);
         Q.ninvoke(makeNewItem, 'save')
             .then(function() {
-                // once the item has been saved send back a 200 along with the newly made item
-                res.status(200).send(makeNewItem);
-                // this starts an active auction passing in the needed vars
+                //start auction, return clearInterval ID
                 var itemObject = interval.findTimeReduce(makeNewItem._id, price, minPrice, auctionEnds);
-                // this will update the item storage with the result of item object 
-                // should be something like this { timeId:setInterval(recurse, 10000), price: startPrice, priceSchedule: priceSchedule }
-                // Note might need to add quantity here double check
+                res.status(200).send(makeNewItem);
+                //email confirmation
+                sendGrid.listItemConfirmation(createdBy, newItem);
+                // this will update the item storage with the result of item object
                 itemStorage.storage[makeNewItem._id] = itemObject;
+                itemStorage.storage[makeNewItem._id].category = newItem.category
+                itemStorage.storage[makeNewItem._id].description = newItem.description
+                itemStorage.storage[makeNewItem._id].createdBy = newItem.createdBy
+                itemStorage.storage[makeNewItem._id].quantity = newItem.quantity
+                itemStorage.storage[makeNewItem._id].productName = newItem.productName
+                itemStorage.storage[makeNewItem._id].image = newItem.image
+                //console.log(itemStorage.storage[makeNewItem._id])
+                var findUser = Q.nbind(User.findOne, User);
+                findUser({ username: createdBy })
+                  .then(function(user){
+                    if(user){
+                        user.postedItems.push(makeNewItem);
+                        user.save();
+                    }
+                  })
+
             })
-            // if it fakes to save the item this will show it
             .fail(function(err) {
                 console.log(err.errors);
                 res.status(400).send();
                 next(err);
             });
+            //------- uncomment when tokens work}
     },
     buyItem: function(req, res, next) {
-        console.log(req.body)
+        // var token = req.headers['x-access-token'];
+        // var user = jwt.decode(token, 'secret');
+        // if (!token) {
+        //   next(new Error('no token'));
+        // } else {
         //Note need to add in access token logic
         // sets up the id and number quantity of the buy
+        console.log(req.body)
         var productId = req.body._id;
         var quantityRequested = req.body.quantity || 1;
         // make a var to search for an item
@@ -83,90 +144,39 @@ module.exports = {
             // if that item is found do the following
             .then(function(item) {
                 // checks to make sure the quantity is not more then there is available 
-                if (item.quantity > 0 && quantityRequested < item.quantity) {
+                if (item.quantity > 0 && quantityRequested <= item.quantity) {
                     // update the new quantity remaining
                     item.quantity = item.quantity - quantityRequested;
+                    itemStorage.storage[item._id].quantity = item.quantity;
                     // update the DB with the current active price which the item was purchased
+                    if(item.quantity === 0){
+                        item.active = false;
+                        itemStorage.storage[item._id].active = false;
+                    }
                     //item.price = itemStorage.storage[item._id].price;
                     // save the Info to the DB
                     item.save()
-                        // once the save is complete
                         .then(function() {
-                            // send back a 200
-                            console.log(itemStorage, ' itemStorage');
-                            res.status(200).send();
+                            sendGrid.soldItemConfirmation(item.createdBy, item, quantityRequested);
+                            sendGrid.buyItemConfirmation(user, item, quantityRequested);
+                            res.status(200).send(item);
                             // timeId creates a new auction at the price that it was purchased at.
+                            clearInterval(itemStorage.storage[item._id].timeId)
                             var timeId = interval.findTimeReduce(item._id, itemStorage.storage[item._id].price, item.minPrice, item.auctionEnds);
-                            // this will update the new timeId used to clear the interval
+                            // only overwrite price schedule and timeoutID
                             itemStorage.storage[item._id].timeId = timeId.timeId;
                             // this will update the item Storage with the newly made priceSchedule 
                             itemStorage.storage[item._id].priceSchedule = timeId.priceSchedule;
-                            console.log(timeId.price, 'TIMEIDPRICE');
                         });
                 } else {
-                    res.status(401).send('quantityRequested exceeds quantity available');
+                    res.status(409).send('quantityRequested exceeds quantity available');
+                    return
                 }
             })
             .fail(function(error) {
                 next(error);
             });
-        // Uncomment when we start using login to save items to user profile.
-        //this need to be tested
-        // var token = req.headers['x-access-token'];
-        // if (!token) {
-        //     next(new Error('no token'));
-        // } else {
-        //     var user = jwt.decode(token, 'secret');
-        //     var findUser = Q.nbind(User.findOne, User);
-        //     findUser({
-        //             username: user.username
-        //         })
-        //         .then(function(foundUser) {
-        //             if (foundUser) {
-        //                 var productId = req.body.productId;
-        //                 var quantityRequested = req.body.quantity;
-        //                 var findItem = Q.nbind(Item.findOne, Item);
-        //                 findItem({
-        //                         _id: productId
-        //                     })
-        //                     .then(function(item) {
-        //                         if (item.quantity > 0 && quantityRequested < item.quantity) {
-        //                             item.quantity = item.quantity - quantityRequested;
-        //                             item.price = itemStorage.storage[item._id].price;
-        //                             item.save()
-        //                                 .then(function() {
-        //                                     console.log(itemStorage, ' itemStorage');
-        //                                     clearInterval(itemStorage.storage[item._id].timeId);
-        //                                     var timeId = interval.findTimeReduce(item._id, itemStorage.storage[item._id].price, item.minPrice, item.auctionEnds);
-        //                                     itemStorage.storage[item._id] = timeId;
-        //                                     console.log(timeId.price, 'TIMEIDPRICE');
-        //                                     foundUser.purchasedItems.push(item);
-        //                                     Q.ninvoke(foundUser, 'save')
-        //                                       .then(function() {
-        //                                         console.log("Item saved to userProfile");
-        //                                       })
-        //                                       .fail(function(error) {
-        //                                         console.log("Item did not saved to userProfile");
-        //                                         res.status(400).send();
-        //                                         next(error);
-        //                                       });
-        //                                 });
-        //                         } else {
-        //                             res.status(401).send('quantityRequested exceeds quantity available');
-        //                         }
-        //                     })
-        //                     .fail(function(error) {
-        //                         next(error);
-        //                     });
-        //                     res.status(200).send();
-        //             } else {
-        //                 res.status(401).send();
-        //             }
-        //         })
-        //         .fail(function(error) {
-        //             next(error);
-        //         });
-        // }
+        //-------> uncomment when tokens work}
     }
 
 };

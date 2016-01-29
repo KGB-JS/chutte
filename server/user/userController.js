@@ -1,6 +1,8 @@
 var User = require('./userModel.js');
 var Q = require('q');
 var jwt = require('jwt-simple');
+var sendGrid = require('./../items/itemHelpers/sendGridController.js');
+
 
 module.exports = {
     signin: function(req, res, next) {
@@ -60,6 +62,7 @@ module.exports = {
                 }
             })
             .then(function(user) {
+                sendGrid.signUpConfirmation(user.username);
                 // create token to send back for auth
                 var token = jwt.encode(user, 'secret');
                 res.json({

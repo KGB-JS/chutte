@@ -39,6 +39,9 @@ var itemSchema = new mongoose.Schema({
     priceSchedule: [],
     image: {
         type: String
+    },
+    timeRemaining: {
+        type: Number
     }
 });
 

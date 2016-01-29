@@ -129,7 +129,8 @@ Structure
    |---priceSchedule
    |---socket
    |---user
-   |-test                    # Unit tests
+   |-test                    
+```
 
 
 Using Redux DevTools

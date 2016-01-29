@@ -10,6 +10,7 @@ export function userSignup(userName){
 };
 
 export function userSignupSuccess(token){
+  localStorage.setItem('token', token);
   return {
     type: USER_SIGNUP_SUCCESS,
     token: token
@@ -25,7 +26,7 @@ export function userSignupFailure(err){
 
 export function postUserSignup(user){
   return function(dispatch){
-    dispatch(userSignup(user.userName));
+    dispatch(userSignup(user.username));
     let newUser = {
       username: user.username,
       password: user.password

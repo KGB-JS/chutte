@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import numeral from 'numeral';
 import ProductImage from './productImage';
 import Navbar from './navbar';
+import Timer from './timer';
 import {postBuy} from './../actions/actionsProducts';
 
 class ProductDetail extends React.Component {
@@ -19,7 +21,7 @@ class ProductDetail extends React.Component {
   handleBuy() {
     var purchaseDetails = {
       _id: this.props.products[this.productIndex]._id,
-      quantity: this.refs.purchaseQuantity.value,
+      quantity: Number(this.refs.purchaseQuantity.value),
       price: this.props.products[this.productIndex].price
     }
     this.props.buyProduct(purchaseDetails)
@@ -28,32 +30,47 @@ class ProductDetail extends React.Component {
     this.findIndex();
   }
   render() {
+    let milliseconds = this.props.products[this.productIndex].timeRemaining || 1200;
+    let secondsRemaining = (milliseconds / 100);
+
     return (
       <div>
         <Navbar/>
-        <div className="productCard" id={this.props.products[this.productIndex]._id}>
-          <ProductImage image={this.props.products[this.productIndex].imageURL}/>
-          <div className="productName">
-            <p>Product: {this.props.products[this.productIndex].productName}</p>
-          </div>
+        <div className="container-fluid">
+          <div className="row">
+          <div className="detailList">
+          <div className="panel panel-default">
+          <div className="panel-body">
+            <div className="productCard" id={this.props.products[this.productIndex]._id}>
+              <ProductImage image={this.props.products[this.productIndex].image}/>
+            <div className="productName">
+              <p>Product: {this.props.products[this.productIndex].productName}</p>
+            </div>
 
-          <div className="productTime">
-            <p>Time Remaining: {this.props.products[this.productIndex].priceReduces}</p>
-          </div>
+            <div className="productTime">
+              <Timer secondsRemaining={secondsRemaining}/>
+            </div>
 
-          <div className="productQuantity">
-            <p>Quantity: {this.props.products[this.productIndex].quantity}</p>
-          </div>
+            <div className="productQuantity">
+              <p className="productinfo">Quantity: {this.props.products[this.productIndex].quantity}</p>
+            </div>
 
-          <div className="productPrice">
-            <p>Price: ${this.props.products[this.productIndex].price}</p>
-          </div>
-          <div>
-            <button onClick={this.handleBuy.bind(this)}>Buy</button>
-            <input type="number" ref="purchaseQuantity"></input>
+            <div className="productPrice">
+              <p className="productinfo">Price: {numeral(this.props.products[this.productIndex].price).format('$0,0[.]00')}</p>
+            </div>
+            <div className="input-group">
+              <input className="form-control" type="number" ref="purchaseQuantity" placeholder="Select Quantity"/>
+              <span className="input-group-btn">
+                <button className="btn btn-default" type="button" onClick={this.handleBuy.bind(this)}>Confirm</button>
+              </span>
+            </div>
+            </div>
           </div>
         </div>
-      </div>
+        </div>
+        </div>
+        </div>
+        </div>
     );
   }
 }
