@@ -1,12 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router';
+import numeral from 'numeral';
 import ProductImage from './productImage';
 import Timer from './timer';
 import BuyButton from './buyButton';
 
 class ProductCard extends React.Component {
   render() {
-    let secondsRemaining = this.props.productDetail.timeRemaining || 1200;
+    let milliseconds = this.props.productDetail.timeRemaining || 1200;
+    let secondsRemaining = (milliseconds / 100);
 
     return (
       <div className="col-md-4 portfolio-item">
@@ -27,7 +29,7 @@ class ProductCard extends React.Component {
           </div>
 
           <div className="productPrice">
-            <p className="productinfo">Price: ${this.props.productDetail.price}</p>
+            <p className="productinfo">Price: {numeral(this.props.productDetail.price).format('$0,0[.]00')}</p>
           </div>
         </row>
         <row>

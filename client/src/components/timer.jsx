@@ -1,4 +1,5 @@
 import React from 'react';
+import numeral from 'numeral';
 
 class Timer extends React.Component{
   constructor(props){
@@ -24,9 +25,11 @@ class Timer extends React.Component{
   }
 
   render(){
+    let time = this.state.secondsRemaining;
+
     return(
-      <div>Time Remaining: {this.state.secondsRemaining}
-      </div>
+      <p className="productinfo">Time Remaining: {numeral(time).format('00:00:00')}
+      </p>
     )
   }
 }
