@@ -29,7 +29,7 @@ class ProductDetail extends React.Component {
     this.findIndex();
   }
   render() {
-    let secondsRemaining = this.props.productDetail.timeRemaining || 1200;
+    let secondsRemaining = this.props.products[this.productIndex].timeRemaining || 1200;
 
     return (
       <div>
