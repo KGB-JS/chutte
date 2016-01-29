@@ -4,6 +4,7 @@ var db = require('./db.js');
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var socket = require('./socket/socketController.js');
+var init = require('./items/initController.js');
 
 require('./config/middleware.js')(app, express);
 
@@ -18,6 +19,8 @@ server.listen(port, function() {
 
     console.log('App launched and hosting at http://%s:%s', host, port);
 });
+
+init.itemStorageInit();
 
 module.exports = {
     server: server,

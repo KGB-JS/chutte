@@ -19,7 +19,8 @@ module.exports = {
         //         keys++;
         //     }
         //     if(keys > 0){
-        //         res.send(itemStorage.storage)
+        //         res.send(itemStorage.storage);
+        //         return;
         //     }
         // })();
         Item.find({}, function(err, items) {
@@ -144,7 +145,6 @@ module.exports = {
             .then(function(item) {
                 // checks to make sure the quantity is not more then there is available 
                 if (item.quantity > 0 && quantityRequested <= item.quantity) {
-                    
                     // update the new quantity remaining
                     item.quantity = item.quantity - quantityRequested;
                     itemStorage.storage[item._id].quantity = item.quantity;
