@@ -11,31 +11,47 @@ const initialState = {
   postStatus: ''
 };
 
-function products(state, action){
-  state = state || initialState;
-  let newState = Object.assign({}, state);
+function products(state = initialState, action){
+
   switch(action.type){
     case GET_PRODUCTS:
-      newState.isFetchingProducts = true;
-      return newState;
+      return Object.assign({}, state, {
+        isFetchingProducts: true
+      });
     case GET_PRODUCTS_SUCCESS:
-      newState.isFetchingProducts = false;
-      newState.fetchedProducts = true;
-      newState.productList = action.products.slice();
-      return newState;
+      return Object.assign({}, state, {
+        isFetchingProducts: false,
+        fetchedProducts: true,
+        productList: [...action.products]
+      });
     case GET_PRODUCTS_FAILURE:
-      newState.isFetchingProducts = false;
-      newState.fetchedProducts = false;
-      newState.fetchStatus = action.err;
-      return newState;
+      return Object.assign({}, state, {
+        isFetchingProducts: false,
+        fetchedProducts: false,
+        fetchStatus: action.err
+      });
     case UPDATE_PRODUCT:
-      var index = stateContainsProduct(newState.productList, action.product);
+      var index = stateContainsProduct(state.productList, action.product);
       if(index > -1){
-        newState.productList[index] = action.product;
+        return Object.assign({}, state, {
+          productList: [
+            ...state.productList.slice(0, index),
+            Object.assign({}, state.productList[index],{
+              price: action.product.price,
+              timeRemaining: action.product.timeRemaining,
+              quantity: action.product.quantity
+            }),
+            ...state.productList.slice(index + 1)
+          ]
+        });
       } else {
-        newState.productList.push(action.product);
+        return Object.assign({}, state, {
+          productList: [
+            ...state.productList.slice(),
+            action.product
+          ]
+        });
       }
-      return newState;
     default:
       return state;
   }
@@ -53,23 +69,27 @@ function stateContainsProduct(productList, product){
   return productIndex;
 }
 
-function createListing(state, action){
-  state = state || initialState;
-  let newState = Object.assign({}, state);
+function createListing(state = initialState, action){
 
   switch(action.type){
     case CREATE_LISTING:
-      newState.isPostingProduct = true;
-      return newState;
+      return Object.assign({}, state, {
+        isPostingProduct: true
+      });
     case CREATE_LISTING_SUCCESS:
-      newState.isPostingProduct = false;
-      newState.postedProduct = true;
-      newState.productList.push(action.productedListed);
-      return newState;
+      return Object.assign({}, state, {
+        isPostingProduct: false,
+        postedProduct: true,
+        productList: [
+          ...state.productList.slice(),
+          action.productedListed
+        ]
+      });
     case CREATE_LISTING_FAILURE:
-      newState.isFetchingProducts = false;
-      newState.postStatus = action.err;
-      return newState;
+      return Object.assign({}, state, {
+        isFetchingProducts: false,
+        postStatus: action.err
+      });
     default:
       return state;
   }
