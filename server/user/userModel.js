@@ -41,6 +41,7 @@ var UserSchema = new mongoose.Schema({
         type: String
     },
     purchasedItems: [],
+    postedItems: [], 
     salt: String
 });
 

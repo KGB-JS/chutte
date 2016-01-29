@@ -37,6 +37,11 @@ module.exports = {
         });
     },
     postItem: function(req, res, next) {
+        // var token = req.headers['x-access-token'];
+        // var user = jwt.decode(token, 'secret');
+        // if (!token) {
+        //   next(new Error('no token'));
+        // } else {
         
         var productName = req.body.product.productName;
         var createdBy = req.body.product.createdBy;
@@ -83,19 +88,29 @@ module.exports = {
                 itemStorage.storage[makeNewItem._id].productName = newItem.productName
                 itemStorage.storage[makeNewItem._id].image = newItem.image
                 //console.log(itemStorage.storage[makeNewItem._id])
+                var findUser = Q.nbind(User.findOne, User);
+                findUser({ username: createdBy })
+                  .then(function(user){
+                    if(user){
+                        user.postedItems.push(makeNewItem);
+                        user.save();
+                    }
+                  })
+
             })
             .fail(function(err) {
                 console.log(err.errors);
                 res.status(400).send();
                 next(err);
             });
+            //------- uncomment when tokens work}
     },
     buyItem: function(req, res, next) {
-        var token = req.headers['x-access-token'];
-        var user = jwt.decode(token, 'secret');
-        if (!token) {
-          next(new Error('no token'));
-        } else {
+        // var token = req.headers['x-access-token'];
+        // var user = jwt.decode(token, 'secret');
+        // if (!token) {
+        //   next(new Error('no token'));
+        // } else {
         //Note need to add in access token logic
         // sets up the id and number quantity of the buy
         console.log(req.body)
@@ -145,7 +160,7 @@ module.exports = {
             .fail(function(error) {
                 next(error);
             });
-        }
+        //-------> uncomment when tokens work}
     }
 
 };
