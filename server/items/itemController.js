@@ -156,16 +156,14 @@ module.exports = {
                     //item.price = itemStorage.storage[item._id].price;
                     // save the Info to the DB
                     item.save()
-                        // once the save is complete
                         .then(function() {
                             sendGrid.soldItemConfirmation(item.createdBy, item, quantityRequested);
                             sendGrid.buyItemConfirmation(user, item, quantityRequested);
-                            // send back a 200
-                            // timeId creates a new auction at the price that it was purchased at.
                             res.status(200).send(item);
+                            // timeId creates a new auction at the price that it was purchased at.
                             clearInterval(itemStorage.storage[item._id].timeId)
                             var timeId = interval.findTimeReduce(item._id, itemStorage.storage[item._id].price, item.minPrice, item.auctionEnds);
-                            // this will update the new timeId used to clear the interval
+                            // only overwrite price schedule and timeoutID
                             itemStorage.storage[item._id].timeId = timeId.timeId;
                             // this will update the item Storage with the newly made priceSchedule 
                             itemStorage.storage[item._id].priceSchedule = timeId.priceSchedule;

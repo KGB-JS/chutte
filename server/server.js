@@ -19,7 +19,7 @@ server.listen(port, function() {
 
     console.log('App launched and hosting at http://%s:%s', host, port);
 });
-
+//initialize item storage for sockets to update prices
 init.itemStorageInit();
 
 module.exports = {

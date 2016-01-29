@@ -7,7 +7,6 @@ module.exports = {
     itemStorageInit: function() {
         Item.find({}, function(err, items) {
             var now = moment().valueOf();
-            var itemMap = [];
             items.forEach(function(item) {
                 var priceFlag = true;
                 if (item.active) {
@@ -18,7 +17,7 @@ module.exports = {
                             item.save();
                         }
                     }
-                    var itemObject = interval.findTimeReduce(item._id, item.price, item.minPrice, item.endDate);
+                    var itemObject = interval.findTimeReduce(item._id, item.price, item.minPrice, item.auctionEnds);
                     itemStorage.storage[item._id] = itemObject;
                     itemStorage.storage[item._id].category = item.category
                     itemStorage.storage[item._id].description = item.description
