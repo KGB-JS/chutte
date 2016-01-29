@@ -29,6 +29,8 @@ class ProductDetail extends React.Component {
     this.findIndex();
   }
   render() {
+    let secondsRemaining = this.props.productDetail.timeRemaining || 1200;
+
     return (
       <div>
         <Navbar/>
@@ -44,7 +46,7 @@ class ProductDetail extends React.Component {
             </div>
 
             <div className="productTime">
-              <Timer secondsRemaining={this.props.productDetail.timeRemaining}/>
+              <Timer secondsRemaining={secondsRemaining}/>
             </div>
 
             <div className="productQuantity">
