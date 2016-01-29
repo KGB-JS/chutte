@@ -10,6 +10,7 @@ export function userSignup(userName){
 };
 
 export function userSignupSuccess(token){
+  localStorage.setItem('token', token);
   return {
     type: USER_SIGNUP_SUCCESS,
     token: token

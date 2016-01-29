@@ -29,12 +29,30 @@ export default class UserSignup extends React.Component {
   render() {
     return (
       <div>
-        <HomeNavBar/>
+      <HomeNavBar/>
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-10">
-              <form role="form">
+            <div className="col-md-12">
+            <form role="form">
+             <div className="col-md-3">
+              <div className="form-group">
+                  <label>Email</label>
+                  <input type="text" ref="username" className="form-control" placeholder='Email'/>
+                </div>
                 <div className="form-group">
+                  <label>Enter Password</label>
+                  <input type="password" ref="password" className="form-control" placeholder='Enter Password'/>
+                </div>
+                <div className="form-group">
+                  <label>Re-enter Password</label>
+                  <input type="password" ref="passwordConfirm" className="form-control" placeholder='Re-enter Password' />
+                </div>
+
+                
+              
+              </div>
+              <div className="col-md-3">
+              <div className="form-group">
                   <label>First Name</label>
                   <input type="text" ref="firstName" className="form-control" placeholder='First Name'/>
                 </div>
@@ -46,6 +64,10 @@ export default class UserSignup extends React.Component {
                   <label>Phone Number</label>
                   <input type="text" ref="phoneNumber" className="form-control" placeholder='Phone Number'/>
                 </div>
+
+                
+              </div>
+              <div className="col-md-3">
                 <div className="form-group">
                   <label>Address</label>
                   <input type="text" ref="address" className="form-control" placeholder='Address'/>
@@ -63,24 +85,11 @@ export default class UserSignup extends React.Component {
                   <input type="text" ref="zip" className="form-control" placeholder='Zip Code'/>
                 </div>
                 <div className="form-group">
-                  <label>Country</label>
-                  <input type="text" ref="country" className="form-control" placeholder='Country'/>
-                </div>
-                <div className="form-group">
-                  <label>Email/Username</label>
-                  <input type="text" ref="username" className="form-control" placeholder='Email/Username'/>
-                </div>
-                <div className="form-group">
-                  <label>Enter Password</label>
-                  <input type="password" ref="password" className="form-control" placeholder='Enter Password'/>
-                </div>
-                <div className="form-group">
-                  <label>Re-enter Password</label>
-                  <input type="password" ref="passwordConfirm" className="form-control" placeholder='Re-enter Password' />
-                </div>
-                <div className="form-group">
                   <button className="btn btn-primary btn-lg" onClick={this.submitSignUp.bind(this)}>Submit</button>
                 </div>
+
+                
+              </div>
               </form>
             </div>
           </div>
