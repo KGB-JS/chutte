@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import ProductImage from './productImage';
 import Navbar from './navbar';
+import Timer from './timer';
 import {postBuy} from './../actions/actionsProducts';
 
 class ProductDetail extends React.Component {
@@ -37,37 +38,35 @@ class ProductDetail extends React.Component {
           <div className="panel panel-default">
           <div className="panel-body">
             <div className="productCard" id={this.props.products[this.productIndex]._id}>
-          <ProductImage image={this.props.products[this.productIndex].image}/>
-          <div className="productName">
-            <p>Product: {this.props.products[this.productIndex].productName}</p>
-          </div>
+              <ProductImage image={this.props.products[this.productIndex].image}/>
+            <div className="productName">
+              <p>Product: {this.props.products[this.productIndex].productName}</p>
+            </div>
 
-          <div className="productTime">
-            <p>Time Remaining: {this.props.products[this.productIndex].priceReduces}</p>
-          </div>
+            <div className="productTime">
+              <Timer secondsRemaining={this.props.productDetail.timeRemaining}/>
+            </div>
 
-          <div className="productQuantity">
-            <p>Quantity: {this.props.products[this.productIndex].quantity}</p>
-          </div>
+            <div className="productQuantity">
+              <p>Quantity: {this.props.products[this.productIndex].quantity}</p>
+            </div>
 
-          <div className="productPrice">
-            <p>Price: ${this.props.products[this.productIndex].price}</p>
-          </div>
-          <div className="input-group">
-      <input className="form-control" type="number" ref="purchaseQuantity" placeholder="Select Quantity"/>
-      <span className="input-group-btn">
-        <button className="btn btn-default" type="button" onClick={this.handleBuy.bind(this)}>Confirm</button>
-      </span>
-    </div>
-        </div>
-          </div>
-          </div>
-        </div>
+            <div className="productPrice">
+              <p>Price: ${this.props.products[this.productIndex].price}</p>
+            </div>
+            <div className="input-group">
+              <input className="form-control" type="number" ref="purchaseQuantity" placeholder="Select Quantity"/>
+              <span className="input-group-btn">
+                <button className="btn btn-default" type="button" onClick={this.handleBuy.bind(this)}>Confirm</button>
+              </span>
+            </div>
+            </div>
           </div>
         </div>
-        
-        
-      </div>
+        </div>
+        </div>
+        </div>
+        </div>
     );
   }
 }

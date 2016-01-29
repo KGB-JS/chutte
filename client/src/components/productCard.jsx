@@ -17,7 +17,7 @@ class ProductCard extends React.Component {
 
         <row>
           <div className="productTime">
-            <Timer secondsRemaining={this.props.productDetail.decrementTime}/>
+            <Timer secondsRemaining={this.props.productDetail.timeRemaining}/>
           </div>
 
           <div className="productQuantity">
