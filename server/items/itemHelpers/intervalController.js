@@ -107,7 +107,7 @@ module.exports = {
 
         //return timeId for clearing Interval on buy
         return {
-            timeId: setInterval(recurse, 3000),
+            timeId: setInterval(recurse, numberOfSecUntilDecrment),
             price: startPrice,
             priceSchedule: priceSchedule
         };
