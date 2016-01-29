@@ -9,7 +9,7 @@ import moment from 'moment';
 export default class CreateListing extends React.Component {
   constructor(props){
     super(props);
-    this.state = { categorySelected:'Choose a Category', description: "", startDate: moment(), endDate: moment(), imgFile: ['mynuts'] };
+    this.state = { categorySelected:'Choose a Category', description: "", startDate: moment(), endDate: moment(), imgFile: '' };
   }
 
   _descriptionInput(details){
