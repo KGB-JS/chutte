@@ -91,17 +91,20 @@ export default class CreateListing extends React.Component {
 
         <div className="form-group">
           <label>Quantity</label>
-          <input type="number" className="form-control" placeholder="Quantity" ref="quantity"/>
+          <input type="number" className="form-control" min="0" placeholder="Quantity" ref="quantity"/>
         </div>
 
         <div className="form-group">
+          <label>Start Date</label>
           <DatePicker
             placeholder="Start date"
             selected={this.state.startDate}
             startDate={this.state.startDate}
             endDate={this.state.endDate}
             onChange={this._startDate.bind(this)} />
-
+        </div>
+        <div className="form-group">
+          <label>End Date</label>
           <DatePicker
             placeholder="End date"
             selected={this.state.endDate}
@@ -110,26 +113,29 @@ export default class CreateListing extends React.Component {
             onChange={this._endDate.bind(this)} />
         </div>
 
-        <select value={this.state.categorySelected}
-          onChange={this._handleChange.bind(this)} >
-          <option value="AntiquesCollectibles">Antiques & Collectibles</option>
-          <option value="Art">Art</option>
-          <option value="Automobiles">Automobiles</option>
-          <option value="Clothing">Clothing, Shoes and Accessories</option>
-          <option value="Entertainment">Entertainment Memorabilia</option>
-          <option value="JewelryWatches">Jewelry and Watches</option>
-          <option value="TicketsExperiences">Tickets and Experiences</option>
-          <option value="Travel">Travel</option>
-        </select>
+        <div className="form-group">
+          <label>Category</label>
+          <select className="form-control" id="select" value={this.state.categorySelected}
+            onChange={this._handleChange.bind(this)} >
+            <option value="AntiquesCollectibles">Antiques & Collectibles</option>
+            <option value="Art">Art</option>
+            <option value="Automobiles">Automobiles</option>
+            <option value="Clothing">Clothing, Shoes and Accessories</option>
+            <option value="Entertainment">Entertainment Memorabilia</option>
+            <option value="JewelryWatches">Jewelry and Watches</option>
+            <option value="TicketsExperiences">Tickets and Experiences</option>
+            <option value="Travel">Travel</option>
+          </select>
+        </div>
 
         <div className="form-group">
           <label>Price</label>
-          <input type="number" className="form-control" placeholder="Price" ref="price"/>
+          <input type="number" className="form-control" min="0" placeholder="Price" ref="price"/>
         </div>
 
         <div className="form-group">
           <label>Minimum Sales Price</label>
-          <input type="number" className="form-control" placeholder="Minimum Sales Price" ref="minPrice"/>
+          <input type="number" className="form-control" min="0" placeholder="Minimum Sales Price" ref="minPrice"/>
         </div>
 
 
