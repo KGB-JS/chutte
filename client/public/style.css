@@ -552,3 +552,16 @@ input[type="file"] {
  .panel-body{
   padding:0px;
 }
+
+.homeInfo{
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#infoHeader{
+    font-size: 5vw;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
