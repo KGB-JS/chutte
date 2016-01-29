@@ -19,6 +19,7 @@ class UserAuth extends React.Component{
       <div>
       <HomeNavBar/>
         <div className="container-fluid">
+        <div className="col-md-7 col-md-offset-2">
           <form>
             <div className="row">
               <span><i className="fa fa-envelope-o fa-fw"></i></span>
@@ -32,6 +33,7 @@ class UserAuth extends React.Component{
               <button className="btn btn-primary" onClick={this.submitUserLogin.bind(this)}>Sign In</button>
             </div>
           </form>
+          </div>
         </div>
       </div>
     )
