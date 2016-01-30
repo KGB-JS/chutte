@@ -1,5 +1,3 @@
-var itemStorage = require('./itemStorage.js');
-var interval = require('./itemHelpers/intervalController.js');
 var moment = require('moment');
 var Item = require('./itemModel.js');
 var emit = require('./itemHelpers/emitAuction.js');
