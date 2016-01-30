@@ -1,8 +1,8 @@
 import React from 'react';
 import {Popover, Tooltip, OverlayTrigger, Button, Modal} from 'react-bootstrap';
-import UserSignIn from './userAuth';
+import UserSignup from './userSignup';
 
-class SignInModal extends React.Component {
+class SignUpModal extends React.Component {
   constructor(props){
     super(props);
     this.state = { showModal: false };
@@ -25,15 +25,15 @@ class SignInModal extends React.Component {
         <Button bsStyle="primary"
           bsSize="large"
           onClick={this.open.bind(this)}>
-          Sign In
+          Signup
         </Button>
 
         <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
           <Modal.Header closeButton>
-            <Modal.Title>Sign In</Modal.Title>
+            <Modal.Title>Sign Up</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <UserSignIn/>
+            <UserSignup/>
           </Modal.Body>
         </Modal>
       </div>
@@ -41,4 +41,4 @@ class SignInModal extends React.Component {
   }
 };
 
-export default SignInModal;
+export default SignUpModal;

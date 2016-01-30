@@ -17,7 +17,6 @@ class UserAuth extends React.Component{
   render(){
     return (
       <div>
-      <HomeNavBar/>
         <div className="container-fluid">
         <div className="col-md-7 col-md-offset-2">
           <form>
