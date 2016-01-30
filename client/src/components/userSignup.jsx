@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {postUserSignup} from './../actions/actionsUserSignup';
-import HomeNavBar from './homenavbar';
 
 export default class UserSignup extends React.Component {
   constructor(props){
@@ -28,12 +27,11 @@ export default class UserSignup extends React.Component {
   render() {
     return (
       <div>
-      <HomeNavBar/>
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-12">
             <form role="form">
-             <div className="col-md-3">
+             <div className="col-md-4">
               <div className="form-group">
                   <label>Email</label>
                   <input type="text" ref="username" className="form-control" placeholder='Email'/>
@@ -50,7 +48,7 @@ export default class UserSignup extends React.Component {
 
 
               </div>
-              <div className="col-md-3">
+              <div className="col-md-4">
               <div className="form-group">
                   <label>First Name</label>
                   <input type="text" ref="firstName" className="form-control" placeholder='First Name'/>
@@ -66,7 +64,7 @@ export default class UserSignup extends React.Component {
 
 
               </div>
-              <div className="col-md-3">
+              <div className="col-md-4">
                 <div className="form-group">
                   <label>Address</label>
                   <input type="text" ref="address" className="form-control" placeholder='Address'/>
