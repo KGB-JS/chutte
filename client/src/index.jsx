@@ -2,8 +2,7 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {createHistory, useBasename} from 'history';
-import {Router, Route, IndexRoute, Redirect} from 'react-router';
+import {Router, Route, IndexRoute, Redirect, browserHistory} from 'react-router';
 import {createStore, applyMiddleware, compose} from 'redux';
 import {syncHistory} from 'react-router-redux';
 import thunk from 'redux-thunk';
@@ -22,9 +21,7 @@ import UserSignup from './components/UserSignup';
 import DevTools from './containers/DevTools';
 import {fetchProducts} from './actions/actionsProducts';
 
-const history = useBasename(createHistory)({
-  basename: '/'
-});
+const history = browserHistory;
 
 const reduxRouterMiddleware = syncHistory(history);
 
@@ -74,7 +71,7 @@ ReactDOM.render(
         <Route path='dashboard' component={Dashboard}/>
         <Route path='signin' component={UserAuth}/>
         <Route path='signup' component={UserSignup}/>
-        <Redirect from='*' to='/' />
+        <Route path='*' component={Home} />
       </Route>
     </Router>
   </Provider>, app);
