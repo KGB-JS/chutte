@@ -8,6 +8,7 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import {syncHistory} from 'react-router-redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
+import persistState from 'redux-localstorage';
 import rootReducer from './reducers/rootReducer';
 import socket from './socket/socket';
 import App from './containers/app';
@@ -31,6 +32,7 @@ const finalCreateStore = compose(
   applyMiddleware(reduxRouterMiddleware),
   applyMiddleware(thunk),
   applyMiddleware(createLogger()),
+  persistState(),
   DevTools.instrument()
 )(createStore);
 
