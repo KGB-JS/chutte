@@ -22,7 +22,8 @@ module.exports = {
         //         res.send(itemStorage.storage);
         //         return;
         //     }
-        // })();
+        // })(); 
+
         Item.find({}, function(err, items) {
             var now = moment().valueOf();
             var itemMap = [];
@@ -34,6 +35,7 @@ module.exports = {
                         if(priceFlag && item.priceSchedule[i].decrementTime > now){
                             priceFlag = false;
                             item.price = item.priceSchedule[i].price;
+                            item.timeRemaining = (item.priceSchedule[i].decrementTime - now);
                             item.save();
                         }
                     }
@@ -132,7 +134,6 @@ module.exports = {
         // } else {
         //Note need to add in access token logic
         // sets up the id and number quantity of the buy
-        console.log(req.body)
         var productId = req.body._id;
         var quantityRequested = req.body.quantity || 1;
         // make a var to search for an item
