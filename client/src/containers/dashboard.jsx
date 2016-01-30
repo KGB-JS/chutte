@@ -4,7 +4,6 @@ import NavBar from '../components/navbar';
 import CreateListing from '../components/createListing';
 import ProfileSideNavBar from './../components/profileSideBar';
 import {postListing} from './../actions/actionsCreateListing';
-import CurrentListing from './../components/currentListing';
 
 class Dashboard extends React.Component {
   render(){
@@ -13,7 +12,6 @@ class Dashboard extends React.Component {
         <NavBar/>
         <ProfileSideNavBar/>
         <CreateListing submitListing={this.props.submitListing}/>
-        <CurrentListing  />
       </div>
     )
   }
