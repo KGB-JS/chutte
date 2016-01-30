@@ -3,7 +3,6 @@ var app = express();
 var db = require('./db.js');
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-var socket = require('./socket/socketController.js');
 var init = require('./items/initController.js');
 
 require('./config/middleware.js')(app, express);
