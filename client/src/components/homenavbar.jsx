@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
+import SignUpModal from './../components/signupModal';
+import SignInModal from './../components/loginModal';
 
 export default class HomeNavbar extends React.Component {
   render() {
@@ -15,9 +17,9 @@ export default class HomeNavbar extends React.Component {
             <Link  to="/" className="navbar-brand">{icon} Chutte</Link>
           </div>
           <ul className="nav navbar-nav navbar-right">
-              <li><Link to='signup'>Sign Up</Link></li>
-              <li><Link to='signin'>Sign In</Link></li>
-            </ul>
+              <li><SignUpModal/></li>
+              <li><SignInModal/></li>
+          </ul>
         </div>
       </nav>
     );
