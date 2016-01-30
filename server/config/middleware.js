@@ -22,7 +22,7 @@ module.exports = function(app, express) {
 
 
     app.use('*', function(req, res) {
-        res.status(404).send('404: Page not found');
+        res.status(200).sendFile(path.join(__dirname, '/../../client/public/index.html')); //handles user page refresh
     });
 
     app.use(utils.logError);
