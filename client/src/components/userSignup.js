@@ -15,7 +15,6 @@ export default class UserSignup extends React.Component {
       lastName : String(this.refs.lastName.value),
       phone : Number(this.refs.phoneNumber.value),
       address: String(this.refs.address.value),
-      country: String(this.refs.country.value),
       state: String(this.refs.state.value),
       city: String(this.refs.city.value),
       zip: Number(this.refs.zip.value),
@@ -48,8 +47,8 @@ export default class UserSignup extends React.Component {
                   <input type="password" ref="passwordConfirm" className="form-control" placeholder='Re-enter Password' />
                 </div>
 
-                
-              
+
+
               </div>
               <div className="col-md-3">
               <div className="form-group">
@@ -65,7 +64,7 @@ export default class UserSignup extends React.Component {
                   <input type="text" ref="phoneNumber" className="form-control" placeholder='Phone Number'/>
                 </div>
 
-                
+
               </div>
               <div className="col-md-3">
                 <div className="form-group">
@@ -88,7 +87,7 @@ export default class UserSignup extends React.Component {
                   <button className="btn btn-primary btn-lg" onClick={this.submitSignUp.bind(this)}>Submit</button>
                 </div>
 
-                
+
               </div>
               </form>
             </div>
