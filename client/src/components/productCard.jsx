@@ -4,6 +4,7 @@ import numeral from 'numeral';
 import ProductImage from './productImage';
 import Timer from './timer';
 import BuyButton from './buyButton';
+import ProductDetailModal from './productDetailModal';
 
 class ProductCard extends React.Component {
   render() {
@@ -14,7 +15,7 @@ class ProductCard extends React.Component {
       <div className="col-md-4 portfolio-item">
       <div className="productCard" id={this.props.productDetail._id}>
         <div className="productName">
-          <Link to={`browse/product/${this.props.productDetail._id}`}> {this.props.productDetail.productName} </Link>
+           {this.props.productDetail.productName}
         </div>
 
         <ProductImage className="productImage" image={this.props.productDetail.image}/>
@@ -34,7 +35,7 @@ class ProductCard extends React.Component {
         </row>
         <row>
         <div className="text-center">
-        <Link to={`browse/product/${this.props.productDetail._id}`}><button type="button" className="btn btn-primary center-block"><h5>Buy Now</h5></button></Link>
+          <ProductDetailModal items={this.props.productDetail._id} />
         </div>
         </row>
 

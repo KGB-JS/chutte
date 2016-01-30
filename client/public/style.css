@@ -433,6 +433,9 @@ ul.nav.nav-sidebar.browse > li > a{
     border-color: #A5A4A5;
 }
 
+.productCardDetail{
+}   
+
 .productinfo {
     font-size: 15px;
     font-weight: bold;
@@ -541,8 +544,7 @@ input[type="file"] {
 }
 
 .detailList{
-  margin-left:20%;
-  margin-right:20%;
+
 }
 
  .panel-default{

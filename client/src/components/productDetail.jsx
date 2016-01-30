@@ -8,12 +8,12 @@ import {postBuy} from './../actions/actionsProducts';
 
 class ProductDetail extends React.Component {
   constructor (props) {
-    super(props)
+    super(props);
     this.productIndex = null;
   }
   findIndex() {
     for(var i = 0; i < this.props.products.length; i++){
-      if(this.props.products[i]._id === this.props.params.id){
+      if(this.props.products[i]._id === this.props.item){
         this.productIndex = i;
       }
     }
@@ -23,8 +23,8 @@ class ProductDetail extends React.Component {
       _id: this.props.products[this.productIndex]._id,
       quantity: Number(this.refs.purchaseQuantity.value),
       price: this.props.products[this.productIndex].price
-    }
-    this.props.buyProduct(purchaseDetails)
+    };
+    this.props.buyProduct(purchaseDetails);
   }
   componentWillMount() {
     this.findIndex();
@@ -35,13 +35,12 @@ class ProductDetail extends React.Component {
 
     return (
       <div>
-        <Navbar/>
         <div className="container-fluid">
           <div className="row">
           <div className="detailList">
           <div className="panel panel-default">
           <div className="panel-body">
-            <div className="productCard" id={this.props.products[this.productIndex]._id}>
+            <div className="productCardDetail" id={this.props.products[this.productIndex]._id}>
               <ProductImage image={this.props.products[this.productIndex].image}/>
             <div className="productName">
               <p>Product: {this.props.products[this.productIndex].productName}</p>
