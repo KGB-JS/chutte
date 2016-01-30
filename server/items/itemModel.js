@@ -42,7 +42,8 @@ var itemSchema = new mongoose.Schema({
     },
     timeRemaining: {
         type: Number
-    }
+    },
+    timeId:{}
 });
 
 module.exports = mongoose.model('item', itemSchema);
