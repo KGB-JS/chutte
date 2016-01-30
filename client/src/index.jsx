@@ -48,7 +48,15 @@ export default function configureStore(initialState){
   return store;
 }
 
-const store = configureStore();
+let state;
+
+if(window.localStorage.getItem('redux')){
+  state = JSON.parse(window.localStorage.getItem('redux'));
+} else {
+  state = window.__INITIAL__STATE__;
+}
+
+const store = configureStore(state);
 
 store.dispatch(fetchProducts());
 
