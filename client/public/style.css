@@ -12,8 +12,6 @@
     border-color: #D6D6D6;
 }
 
-
-
 a {
     color: #00AC69;
 }
@@ -22,12 +20,10 @@ li > a {
     color: #00AC69;
     font-weight: bold;
     font-size: 20px;
-
 }
 
-ul.nav.nav-sidebar.browse > li > a{
-  font-size: 1.8vw;
-
+ul.nav.nav-sidebar.browse > li > a {
+    font-size: 1.8vw;
 }
 
 .nav > li {
@@ -433,8 +429,7 @@ ul.nav.nav-sidebar.browse > li > a{
     border-color: #A5A4A5;
 }
 
-.productCardDetail{
-}   
+.productCardDetail {}
 
 .productinfo {
     font-size: 15px;
@@ -543,25 +538,23 @@ input[type="file"] {
     border-radius: 4px;
 }
 
-.detailList{
+.detailList {}
 
+.panel-default {
+    border-width: 0px;
 }
 
- .panel-default{
-  border-width: 0px;
+.panel-body {
+    padding: 0px;
 }
 
- .panel-body{
-  padding:0px;
-}
-
-.homeInfo{
+.homeInfo {
     margin-top: 20px;
     margin-left: 20px;
     margin-right: 20px;
 }
 
-#infoHeader{
+#infoHeader {
     font-size: 5vw;
     text-align: center;
     font-weight: bold;
@@ -569,8 +562,40 @@ input[type="file"] {
 }
 
 .modal-container {
-  position: relative;
+    position: relative;
 }
-.modal-container .modal, .modal-container .modal-backdrop {
-  position: absolute;
+
+.modal-container .modal,
+.modal-container .modal-backdrop {
+    position: absolute;
+}
+
+
+
+.resize_fit_center {
+    max-width:100%;
+    max-height:100%;
+    vertical-align: middle;
+}
+
+.container1 { 
+    margin: 10px;
+    height: 150px;
+    line-height: 115px;
+    overflow: hidden;
+}
+.container1 img { 
+    width: 100%;
+    background-image: url('http://res.cloudinary.com/chutteapi/image/upload/c_scale,w_225/v1453918622/default_oczf9m.png');
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.productCardDetail img {
+    max-height: 100%;
+    max-width: 100%;
+    background-image: url('http://res.cloudinary.com/chutteapi/image/upload/c_scale,w_225/v1453918622/default_oczf9m.png');
+    background-repeat: no-repeat;
+    background-position: center;
 }
