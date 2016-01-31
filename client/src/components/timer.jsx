@@ -8,9 +8,10 @@ class Timer extends React.Component{
   }
 
   tick(){
-    var counter = this.state.secondsRemaining;
-    this.setState({secondsRemaining: --counter});
-    if(counter <= 0) {
+    var counter = this.state.secondsRemaining - 1;
+    if(counter >= 0){
+      this.setState({secondsRemaining: counter});
+    } else{
       clearInterval(this.interval);
     }
   }
