@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import { Thumbnail } from 'react-bootstrap';
 import numeral from 'numeral';
 import ProductImage from './productImage';
 import Navbar from './navbar';
@@ -41,7 +42,7 @@ class ProductDetail extends React.Component {
           <div className="panel panel-default">
           <div className="panel-body">
             <div className="productCardDetail" id={this.props.products[this.productIndex]._id}>
-              <ProductImage image={this.props.products[this.productIndex].image}/>
+              <img className="productImage img-responsive center-block" src={this.props.products[this.productIndex].image} alt="242x200"/>
             <div className="productName">
               <p>Product: {this.props.products[this.productIndex].productName}</p>
             </div>
