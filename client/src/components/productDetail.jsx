@@ -61,7 +61,7 @@ class ProductDetail extends React.Component {
               <p className="productinfo">Price: {numeral(this.props.products[this.productIndex].price).format('$0,0[.]00')}</p>
             </div>
             <div className="input-group">
-              <input className="form-control" type="number" ref="purchaseQuantity" placeholder="Select Quantity"/>
+              <input className="form-control" type="number" min="0" ref="purchaseQuantity" placeholder="Select Quantity"/>
               <span className="input-group-btn">
                 <button className="btn btn-default" type="button" onClick={this.handleBuy.bind(this)}>Confirm</button>
               </span>
