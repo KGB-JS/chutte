@@ -18,9 +18,8 @@ class ProductCard extends React.Component {
             <div className="productName">
                {this.props.productDetail.productName}
             </div>
-
-            <Thumbnail className="productImage" image={this.props.productDetail.image} alt="242x200">
-            </Thumbnail>
+            <ProductImage className="productImage" image={this.props.productDetail.image}/>
+           
             <row>
               <div className="productTime">
                 <Timer secondsRemaining={secondsRemaining}/>
