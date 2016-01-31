@@ -100,6 +100,7 @@ module.exports = {
             //------- uncomment when tokens work}
     },
     buyItem: function(req, res, next) {
+        var app = require('./../server.js');
         // var token = req.headers['x-access-token'];
         // var user = jwt.decode(token, 'secret');
         // if (!token) {
@@ -119,6 +120,7 @@ module.exports = {
                     }
                     item.save()
                         .then(function() {
+                            app.io.sockets.emit('quantityUpdate', item);
                             //notify seller
                             sendGrid.soldItemConfirmation(item.createdBy, item, quantityRequested);
                             //notify buyer

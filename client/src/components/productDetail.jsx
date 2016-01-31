@@ -31,8 +31,8 @@ class ProductDetail extends React.Component {
     this.findIndex();
   }
   render() {
-    let milliseconds = this.props.products[this.productIndex].timeRemaining || 1200;
-    let secondsRemaining = (milliseconds / 100);
+    let milliseconds = this.props.products[this.productIndex].timeRemaining;
+    let secondsRemaining = (milliseconds / 1000);
 
     return (
       <div>
