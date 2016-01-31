@@ -12,7 +12,12 @@ export function createListing(){
 export function createListingSuccess(productListed){
   return {
     type: CREATE_LISTING_SUCCESS,
-    itemListed: productListed
+    itemListed: productListed,
+    meta: {
+        transition: (state, action) => ({
+          pathname: 'browse'
+        })
+    }
   };
 }
 

@@ -14,7 +14,12 @@ export function userLoginSuccess(token){
   localStorage.setItem('token', token);
   return {
     type: USER_LOGIN_SUCCESS,
-    token: token
+    token: token,
+    meta: {
+        transition: (state, action) => ({
+          pathname: 'browse'
+        })
+    }
   };
 };
 
