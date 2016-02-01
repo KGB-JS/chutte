@@ -49,6 +49,10 @@ class ProductDetail extends React.Component {
               <p>Product: {this.props.products[this.productIndex].productName}</p>
             </div>
 
+            <div>
+              <p>Description: {this.props.products[this.productIndex].description}</p>
+            </div>
+
             <div className="productTime">
               <Timer secondsRemaining={secondsRemaining}/>
             </div>
