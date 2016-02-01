@@ -6,8 +6,7 @@ var User = require('./../user/userModel.js');
 var moment = require('moment');
 var sendGrid = require('./itemHelpers/sendGridController.js');
 var emit = require('./itemHelpers/emitAuction.js');
-var timeSchedule = require('./itemHelpers/findTimeSchedule.js');
-
+var timeSchedule = require('./auctionSchedule.js');
 
 module.exports = {
     getItems: function(req, res, next) {
