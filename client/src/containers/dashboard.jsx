@@ -11,7 +11,7 @@ class Dashboard extends React.Component {
       <div>
         <NavBar/>
         <ProfileSideNavBar/>
-        <CreateListing submitListing={this.props.submitListing}/>
+        <CreateListing submitListing={this.props.submitListing} products={this.props.products} />
       </div>
     )
   }
@@ -27,7 +27,7 @@ function mapDispatchToProps(dispatch){
 
 function mapStateToProps(state){
   return {
-    products: state.productStore.products.productList
+    products: state.productStore.products
   };
 }
 
