@@ -48,7 +48,7 @@ export default class CreateListing extends React.Component {
   }
 
   submitForm(){
-    console.log(this.state.imgFile)
+    console.log("this is the desp value ",this.state.description.value)
     var itemDetails ={product: {
       productName: String(this.refs.name.value),
       createdBy : String(this.refs.name.value),
@@ -76,6 +76,7 @@ export default class CreateListing extends React.Component {
           </div>
           </label>
         </div>
+        <textarea value={this.state.description} onChange={this._descriptionInput.bind(this)}> </textarea>
       </div>
 
       <div className="col-md-5">
