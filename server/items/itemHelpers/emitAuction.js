@@ -21,6 +21,7 @@ module.exports = {
                             productName: item.productName,
                             createdBy: item.createdBy,
                             quantity: item.quantity,
+                            category: item.category,
                             image: item.image
                         };
                         console.log('emit', item._id)
