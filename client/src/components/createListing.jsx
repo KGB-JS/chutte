@@ -48,7 +48,7 @@ export default class CreateListing extends React.Component {
   }
 
   submitForm(){
-    console.log("this is the desp value ",this.state.description.value)
+    console.log("this is the desp value ",this.state.description)
     var itemDetails ={product: {
       productName: String(this.refs.name.value),
       createdBy : String(this.refs.name.value),
@@ -57,7 +57,8 @@ export default class CreateListing extends React.Component {
       auctionEnds : Number(this.state.endDate.valueOf()),
       price: Number(this.refs.price.value),
       minPrice: Number(this.refs.minPrice.value),
-      imgFile: this.state.imgFile
+      imgFile: this.state.imgFile,
+      description: String(this.state.description)
     }};
     console.log(itemDetails)
     this.props.submitListing(itemDetails);
@@ -76,7 +77,10 @@ export default class CreateListing extends React.Component {
           </div>
           </label>
         </div>
-        <textarea value={this.state.description} onChange={this._descriptionInput.bind(this)}> </textarea>
+        <div>
+        <h5>Item Description</h5>
+        <textarea className="form-control" value={this.state.description} onChange={this._descriptionInput.bind(this)}> </textarea>
+        </div>
       </div>
 
       <div className="col-md-5">
