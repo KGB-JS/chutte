@@ -35,9 +35,12 @@ function mapDispatchToProps(dispatch){
        dispatch(filterByCategory(category));
      }
    }
+}
 
 function mapStateToProps(state){
-  return {products: state.productStore.products};
+  return {
+    products: state.productStore.products
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BrowsePage);
