@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {authenticateUser} from '../actions/actionsUserLogin';
+import {authenticateUser} from './../actions/actionsUserAuth';
 import HomeNavBar from './homenavbar';
 
 class UserAuth extends React.Component{
