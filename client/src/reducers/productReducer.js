@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
-import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, UPDATE_PRODUCT, CREATE_LISTING, CREATE_LISTING_SUCCESS, CREATE_LISTING_FAILURE} from './../actions/actionConstants';
+import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, UPDATE_PRODUCT, CREATE_LISTING, CREATE_LISTING_SUCCESS, CREATE_LISTING_FAILURE, PRODUCT_CATEGORY_FILTER} from './../actions/actionConstants';
+import {stateContainsProduct, filterProductsByCategory} from './reducerHelpers';
 
 const initialState = {
   productList: [],
@@ -8,7 +9,9 @@ const initialState = {
   fetchStatus: '',
   isPostingProduct: false,
   postedProduct: false,
-  postStatus: ''
+  postStatus: '',
+  categoryFilter: 'All Products',
+  filteredProductList: []
 };
 
 function products(state = initialState, action){
@@ -31,16 +34,12 @@ function products(state = initialState, action){
         fetchStatus: action.err
       });
     case UPDATE_PRODUCT:
-      var index = stateContainsProduct(state.productList, action.product);
+      let index = stateContainsProduct(state.productList, action.product);
       if(index > -1){
         return Object.assign({}, state, {
           productList: [
             ...state.productList.slice(0, index),
-            Object.assign({}, state.productList[index],{
-              price: action.product.price,
-              timeRemaining: action.product.timeRemaining,
-              quantity: action.product.quantity
-            }),
+            Object.assign({}, action.product),
             ...state.productList.slice(index + 1)
           ]
         });
@@ -52,22 +51,17 @@ function products(state = initialState, action){
           ]
         });
       }
+      case PRODUCT_CATEGORY_FILTER:
+       let filterList = filterProductsByCategory(state.productList, action.category);
+       return Object.assign({}, state, {
+         categoryFilter: action.category,
+         filteredProductList: [...filterList.slice()]
+       });
     default:
       return state;
   }
 };
 
-function stateContainsProduct(productList, product){
-  var productIndex = - 1;
-
-  for(var index = 0; index < productList.length; index++){
-    if(productList[index]._id === product._id){
-      productIndex = index;
-    }
-  }
-
-  return productIndex;
-}
 
 function createListing(state = initialState, action){
 
