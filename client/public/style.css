@@ -599,3 +599,7 @@ input[type="file"] {
     background-repeat: no-repeat;
     background-position: center;
 }
+
+textarea{
+    width: 100%;
+}
