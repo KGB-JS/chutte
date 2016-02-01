@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import {routeActions} from 'react-router-redux';
 import {checkStatus, parseJSON} from './actionsHelper';
-import {USER_LOGIN, USER_LOGIN_SUCCESS, USER_LOGIN_FAILURE} from './actionConstants';
+import {USER_LOGIN, USER_LOGIN_SUCCESS, USER_LOGIN_FAILURE, USER_LOGOUT} from './actionConstants';
 
 export function userLogin(userName){
   return {
@@ -27,6 +27,14 @@ export function userLoginFailure(err){
   return {
     type: USER_LOGIN_FAILURE,
     err: err
+  };
+};
+
+export function userLogout(){
+  localStorage.removeItem('token');
+  localStorage.removeItem('redux');
+  return {
+    type: USER_LOGOUT
   };
 };
 
