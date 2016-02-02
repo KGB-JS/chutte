@@ -11,11 +11,11 @@ export default class UserSignup extends React.Component {
   }
 
   updatePassword(event){
-    this.setState({password : event.target.value });
+    this.setState({password: event.target.value });
   }
 
   updateUserName(event){
-    this.setState({username : event.target.value });
+    this.setState({username: event.target.value });
   }
   
   validatePassword(event){
@@ -30,15 +30,15 @@ export default class UserSignup extends React.Component {
   submitSignUp(e){
     e.preventDefault();
     var newUser = {
-      firstName : String(this.refs.firstName.value),
-      lastName : String(this.refs.lastName.value),
-      phone : Number(this.refs.phoneNumber.value),
+      username: String(this.state.username),
+      password: String(this.state.password),
+      firstName: String(this.refs.firstName.value),
+      lastName: String(this.refs.lastName.value),
+      phone: Number(this.refs.phoneNumber.value),
       address: String(this.refs.address.value),
       state: String(this.refs.state.value),
       city: String(this.refs.city.value),
-      zip: Number(this.refs.zip.value),
-      username: String(this.state.username),
-      password : String(this.state.password)
+      zip: Number(this.refs.zip.value)
     };
     this.props.signupUser(newUser);
   }
@@ -57,7 +57,7 @@ export default class UserSignup extends React.Component {
                   onChange={this.updateUserName.bind(this)}
                   name="checkemail"
                   label="Email"
-                  type="text" 
+                  type="text"
                   validate='required,isEmail'
                   errorHelp={{
                   required: 'Please enter your email',
