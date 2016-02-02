@@ -5,7 +5,6 @@ var emit = require('./itemHelpers/emitAuction.js');
 
 module.exports = {
     itemsInit: function() {
-        console.log('my ass')
         Item.find({}, function(err, items) {
             var now = moment().valueOf();
             items.forEach(function(item) {

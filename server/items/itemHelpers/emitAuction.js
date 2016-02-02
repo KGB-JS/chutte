@@ -31,7 +31,7 @@ module.exports = {
                         item.priceIndex++;
                         item.save(); 
                     } else {
-                        clearTimeout(item.timeId);
+                        clearTimeout(item.timeId[0]);
                     }
                 }
             });
