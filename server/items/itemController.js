@@ -21,7 +21,7 @@ module.exports = {
                             item.price = item.priceSchedule[i].price;
                             item.save();
                             var timeUntilDecrement = item.priceSchedule[i].decrementTime - now;
-                            emit.emitAuction(item._id, timeUntilDecrement);
+                            emit.emitAuction(item._id);
                         }
                     }
                 }
@@ -69,15 +69,17 @@ module.exports = {
             description: description,
             image: productImage,
             priceSchedule: priceSchedule[0],
-            timeRemaining: priceSchedule[1]
+            timeRemaining: priceSchedule[0].decrementTime,
+            priceIndex: 0
         };
 
         var makeNewItem = new Item(newItem);
         Q.ninvoke(makeNewItem, 'save')
             .then(function() {
-                emit.emitAuction(makeNewItem._id, makeNewItem.timeRemaining);
-                setInterval(emit.emitAuction(makeNewItem._id), priceSchedule[1]);
+                var timeId = setInterval(emit.emitAuction(makeNewItem._id), 900000);
                 res.status(200).send(makeNewItem);
+                makeNewItem.timeId.push(timeId);
+                makeNewItem.save();
                 //email confirmation
                 sendGrid.listItemConfirmation(createdBy, newItem);
 
