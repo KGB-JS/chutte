@@ -78,7 +78,7 @@ export function fetchProducts(){
   };
 }
 
-export function postBuy(purchaseDetails){
+export function postBuy(purchaseDetails, token){
   console.log(purchaseDetails)
   return function(dispatch){
     dispatch(postingBuy(purchaseDetails));
@@ -87,7 +87,8 @@ export function postBuy(purchaseDetails){
       body: JSON.stringify(purchaseDetails),
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-access-token': token
       }
     })
     .then(checkStatus)
