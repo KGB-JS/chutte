@@ -9,8 +9,6 @@ import ProductDetailModal from './productDetailModal';
 
 class ProductCard extends React.Component {
   render() {
-console.log('-------Now: ', Date.now());
-console.log('-------product time: ', this.props.productDetail.timeRemaining);
     let milliseconds = this.props.productDetail.timeRemaining - Date.now().valueOf();
     let secondsRemaining = (milliseconds / 1000);
 
