@@ -25,7 +25,7 @@ class ProductDetail extends React.Component {
       quantity: Number(this.refs.purchaseQuantity.value),
       price: this.props.products[this.productIndex].price
     };
-    this.props.buyProduct(purchaseDetails);
+    this.props.buyProduct(purchaseDetails, this.props.user.token);
   }
   componentWillMount() {
     this.findIndex();
@@ -56,7 +56,7 @@ class ProductDetail extends React.Component {
             <div className="productTime">
               <Timer secondsRemaining={secondsRemaining}/>
             </div>
-            
+
             <div className="productQuantity">
               <p className="productinfo">Quantity: {this.props.products[this.productIndex].quantity}</p>
             </div>
@@ -66,12 +66,12 @@ class ProductDetail extends React.Component {
             </div>
             <div className="input-group">
               <input className="form-control" type="number" min="0" ref="purchaseQuantity" placeholder="Select Quantity"/>
-              
+
               <span className="input-group-btn">
                 <button className="btn btn-default" type="button" onClick={this.handleBuy.bind(this)}>Confirm</button>
               </span>
             </div>
-            {userPurchaseBuy} 
+            {userPurchaseBuy}
             </div>
           </div>
         </div>
@@ -85,8 +85,8 @@ class ProductDetail extends React.Component {
 
 function mapDispatchToProps(dispatch){
   return {
-    buyProduct: function(item) {
-      dispatch(postBuy(item));
+    buyProduct: function(item, userToken) {
+      dispatch(postBuy(item, userToken));
     }
   };
 }
@@ -94,7 +94,8 @@ function mapDispatchToProps(dispatch){
 function mapStateToProps(state){
   return {
    products: state.productStore.products.productList,
-   userPurchaseBuy: state.userStore.userPurchases.postedBuy
+   userPurchaseBuy: state.userStore.userPurchases.postedBuy,
+   user: state.userStore.userAuth
  };
 }
 
