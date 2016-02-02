@@ -11,9 +11,9 @@ class Dashboard extends React.Component {
     return (
       <div>
         <NavBar submitSignout={this.props.submitSignout}
-           user={this.props.userAuth}/>
+           user={this.props.userAuth} />
         <ProfileSideNavBar/>
-        <CreateListing submitListing={this.props.submitListing} productListing={this.props.productListing} />
+        <CreateListing submitListing={this.props.submitListing} productListing={this.props.productListing} user={this.props.userAuth}/>
       </div>
     )
   }
@@ -21,8 +21,8 @@ class Dashboard extends React.Component {
 
 function mapDispatchToProps(dispatch){
   return {
-    submitListing: function(item) {
-      dispatch(postListing(item));
+    submitListing: function(item, token) {
+      dispatch(postListing(item, token));
     },
     submitSignout: function(){
        dispatch(userLogout());
