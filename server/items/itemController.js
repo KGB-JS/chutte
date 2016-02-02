@@ -21,7 +21,7 @@ module.exports = {
                             item.price = item.priceSchedule[i].price;
                             item.save();
                             var timeUntilDecrement = item.priceSchedule[i].decrementTime - now;
-                            emit.emitAuction(item._id, timeUntilDecrement);
+                            emit.emitAuction(item._id);
                         }
                     }
                 }
@@ -29,11 +29,11 @@ module.exports = {
         })
     },
     postItem: function(req, res, next) {
-        // var token = req.headers['x-access-token'];
-        // var user = jwt.decode(token, 'secret');
-        // if (!token) {
-        //   next(new Error('no token'));
-        // } else {
+        var token = req.headers['x-access-token'];
+        var user = jwt.decode(token, 'secret');
+        if (!token) {
+          next(new Error('no token'));
+        } else {
         var productName = req.body.product.productName;
         var createdBy = req.body.product.createdBy;
         var category = req.body.product.category;
@@ -69,15 +69,17 @@ module.exports = {
             description: description,
             image: productImage,
             priceSchedule: priceSchedule[0],
-            timeRemaining: priceSchedule[1]
+            timeRemaining: priceSchedule[0].decrementTime,
+            priceIndex: 0
         };
 
         var makeNewItem = new Item(newItem);
         Q.ninvoke(makeNewItem, 'save')
             .then(function() {
-                emit.emitAuction(makeNewItem._id, makeNewItem.timeRemaining);
-                setInterval(emit.emitAuction(makeNewItem._id), priceSchedule[1]);
+                var timeId = setInterval(emit.emitAuction(makeNewItem._id), 900000);
                 res.status(200).send(makeNewItem);
+                makeNewItem.timeId.push(timeId);
+                makeNewItem.save();
                 //email confirmation
                 sendGrid.listItemConfirmation(createdBy, newItem);
 
@@ -96,15 +98,15 @@ module.exports = {
                 res.status(400).send();
                 next(err);
             });
-            //------- uncomment when tokens work}
+        }
     },
     buyItem: function(req, res, next) {
         var app = require('./../server.js');
-        // var token = req.headers['x-access-token'];
-        // var user = jwt.decode(token, 'secret');
-        // if (!token) {
-        //   next(new Error('no token'));
-        // } else {
+        var token = req.headers['x-access-token'];
+        var user = jwt.decode(token, 'secret');
+        if (!token) {
+          next(new Error('no token'));
+        } else {
         var productId = req.body._id;
         var quantityRequested = req.body.quantity;
         var findItem = Q.nbind(Item.findOne, Item);
@@ -135,7 +137,7 @@ module.exports = {
             .fail(function(error) {
                 next(error);
             });
-        //-------> uncomment when tokens work}
+        }
     }
 
 };
