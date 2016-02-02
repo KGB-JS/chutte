@@ -22,3 +22,4 @@ export const USER_LOGOUT = 'USER_LOGOUT';
 
 //------------------------------------------------------------
 export const CategoryFilters = ["All Products", "Antiques", "Art", "Automobiles", "Clothing", "Electronics", "Entertainment", "Jewelry",  "Tickets and Experiences", "Travel"];
+export const UserOptions = ["User Profile", "Create Listing", "Current Listing"];
