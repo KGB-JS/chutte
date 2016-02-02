@@ -29,11 +29,11 @@ module.exports = {
         })
     },
     postItem: function(req, res, next) {
-        // var token = req.headers['x-access-token'];
-        // var user = jwt.decode(token, 'secret');
-        // if (!token) {
-        //   next(new Error('no token'));
-        // } else {
+        var token = req.headers['x-access-token'];
+        var user = jwt.decode(token, 'secret');
+        if (!token) {
+          next(new Error('no token'));
+        } else {
         var productName = req.body.product.productName;
         var createdBy = req.body.product.createdBy;
         var category = req.body.product.category;
@@ -98,15 +98,15 @@ module.exports = {
                 res.status(400).send();
                 next(err);
             });
-            //------- uncomment when tokens work}
+        }
     },
     buyItem: function(req, res, next) {
         var app = require('./../server.js');
-        // var token = req.headers['x-access-token'];
-        // var user = jwt.decode(token, 'secret');
-        // if (!token) {
-        //   next(new Error('no token'));
-        // } else {
+        var token = req.headers['x-access-token'];
+        var user = jwt.decode(token, 'secret');
+        if (!token) {
+          next(new Error('no token'));
+        } else {
         var productId = req.body._id;
         var quantityRequested = req.body.quantity;
         var findItem = Q.nbind(Item.findOne, Item);
@@ -137,7 +137,7 @@ module.exports = {
             .fail(function(error) {
                 next(error);
             });
-        //-------> uncomment when tokens work}
+        }
     }
 
 };
