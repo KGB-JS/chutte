@@ -10,7 +10,7 @@ class ProductDetailModal extends React.Component {
 
   close(){
     this.setState({ showModal: false });
-
+    this.props.resetBuyMsg();
   }
 
   open(){
