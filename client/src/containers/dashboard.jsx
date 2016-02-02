@@ -13,7 +13,7 @@ class Dashboard extends React.Component {
         <NavBar submitSignout={this.props.submitSignout}
            user={this.props.userAuth}/>
         <ProfileSideNavBar/>
-        <CreateListing submitListing={this.props.submitListing} products={this.props.products} />
+        <CreateListing submitListing={this.props.submitListing} productListing={this.props.productListing} />
       </div>
     )
   }
@@ -32,8 +32,13 @@ function mapDispatchToProps(dispatch){
 
 function mapStateToProps(state){
   return {
+<<<<<<< 12873c1af6d4bf736f0501e7b001950611ff920d
     products: state.productStore.products,
     userAuth: state.userStore.userAuth
+=======
+    productListing: state.productStore.createListing
+
+>>>>>>> [feat]: check form is filled out
   };
 }
 
