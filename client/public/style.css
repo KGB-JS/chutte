@@ -705,6 +705,13 @@ textarea{
     color: white;
     font-weight: bold;
     font-size: 20px;
+    list-style-type: none;
+}
+
+.sidebar-font > li:hover {
+    color: gray;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 @media(min-width:768px) {
