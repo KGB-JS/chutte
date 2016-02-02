@@ -31,9 +31,7 @@ class ProductDetail extends React.Component {
     this.findIndex();
   }
   render() {
-    let milliseconds = this.props.products[this.productIndex].timeRemaining - Date.now().valueOf();
-    let secondsRemaining = (milliseconds / 1000);
-    let userPurchaseBuy = this.props.userPurchaseBuy === true ? <p className="alert alert-success ">Purchase successful check your email </p>: <p className="alert alert-warning">Please Enter Valid Quantity</p>;
+    let userPurchaseBuy = this.props.userPurchaseBuy === true ? <p className="alert alert-success ">Purchase successful check your email </p>: <p></p>;
     return (
       <div>
         <div className="container-fluid">
@@ -54,7 +52,7 @@ class ProductDetail extends React.Component {
             </div>
 
             <div className="productTime">
-              <Timer secondsRemaining={secondsRemaining}/>
+              <Timer nextUpdateTime={this.props.products[this.productIndex].timeRemaining}/>
             </div>
 
             <div className="productQuantity">
@@ -65,7 +63,7 @@ class ProductDetail extends React.Component {
               <p className="productinfo">Price: {numeral(this.props.products[this.productIndex].price).format('$0,0[.]00')}</p>
             </div>
             <div className="input-group">
-              <input className="form-control" type="number" min="0" ref="purchaseQuantity" placeholder="Select Quantity"/>
+              <input className="form-control" type="number" min="1" max={this.props.products[this.productIndex].quantity} ref="purchaseQuantity" placeholder="Select Quantity"/>
 
               <span className="input-group-btn">
                 <button className="btn btn-default" type="button" onClick={this.handleBuy.bind(this)}>Confirm</button>

@@ -9,9 +9,6 @@ import ProductDetailModal from './productDetailModal';
 
 class ProductCard extends React.Component {
   render() {
-    let milliseconds = this.props.productDetail.timeRemaining - Date.now().valueOf();
-    let secondsRemaining = (milliseconds / 1000);
-
     return (
         <Col xs={6} md={3} className="portfolio-item">
           <div className="productCard" id={this.props.productDetail._id}>
@@ -22,7 +19,7 @@ class ProductCard extends React.Component {
 
             <row>
               <div className="productTime">
-                <Timer secondsRemaining={secondsRemaining}/>
+                <Timer nextUpdateTime={this.props.productDetail.timeRemaining}/>
               </div>
 
               <div className="productQuantity">
