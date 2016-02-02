@@ -26,6 +26,7 @@ function mapDispatchToProps(dispatch){
     },
     submitSignout: function(){
        dispatch(userLogout());
+    }
   }
 }
 
