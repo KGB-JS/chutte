@@ -5,7 +5,7 @@ import SearchBar from './../components/search';
 import ProductCard from './../components/productCard';
 import BrowseSideBar from './../components/BrowseSideBar';
 import ProductList from './../components/productList';
-import {filterByCategory} from './../actions/actionsProducts';
+import {filterByCategory, postBuyResetMsg} from './../actions/actionsProducts';
 import {CategoryFilters} from './../actions/actionConstants';
 import {userLogout} from './../actions/actionsUserAuth';
 
@@ -22,7 +22,7 @@ class BrowsePage extends React.Component {
           <row>
 
             <div className="col-xs-offset-2 col-sm-offset-2 col-sm-10 col-md-10 col-md-offset-2">
-              <ProductList products={products} userPurchases={this.props.userPurchases} />
+              <ProductList products={products} userPurchases={this.props.userPurchases} resetBuyMsg={this.props.resetBuyMsg}/>
             </div>
           </row>
         </div>
@@ -38,6 +38,9 @@ function mapDispatchToProps(dispatch){
      },
      submitSignout: function(){
         dispatch(userLogout());
+    },
+    resetBuyMsg: function(){
+      dispatch(postBuyResetMsg());
     }
   }
 }

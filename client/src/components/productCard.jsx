@@ -33,7 +33,7 @@ class ProductCard extends React.Component {
 
             <row>
               <div className="text-center">
-                <ProductDetailModal items={this.props.productDetail._id} />
+                <ProductDetailModal items={this.props.productDetail._id} resetBuyMsg={this.props.resetBuyMsg}/>
               </div>
             </row>
           </div>
