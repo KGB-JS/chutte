@@ -9,6 +9,7 @@ export const CREATE_LISTING_FAILURE = 'CREATE_LISTING_FAILURE';
 export const POST_BUY = 'POST_BUY';
 export const POST_BUY_SUCCESS = 'POST_BUY_SUCCESS';
 export const POST_BUY_FAILURE = 'POST_BUY_FAILURE';
+export const POST_BUY_RESET_MSG = 'POST_BUY_RESET_MSG';
 export const PRODUCT_CATEGORY_FILTER = 'PRODUCT_CATEGORY_FILTER';
 
 //-----------User Actions-------------------------------------

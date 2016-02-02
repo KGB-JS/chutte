@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {USER_LOGIN, USER_LOGIN_SUCCESS, USER_LOGIN_FAILURE, USER_SIGNUP, USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILURE, POST_BUY, POST_BUY_SUCCESS, POST_BUY_FAILURE, USER_LOGOUT} from './../actions/actionConstants';
+import {USER_LOGIN, USER_LOGIN_SUCCESS, USER_LOGIN_FAILURE, USER_SIGNUP, USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILURE, POST_BUY, POST_BUY_SUCCESS, POST_BUY_FAILURE, USER_LOGOUT, POST_BUY_RESET_MSG} from './../actions/actionConstants';
 
 const initialState = {
   userName: '',
@@ -90,6 +90,10 @@ function userPurchases(state = initialState, action){
         postingBuy: false,
         postedBuy: false,
         postBuyErrorMessage: true
+      });
+    case POST_BUY_RESET_MSG:
+      return Object.assign({}, state, {
+        postedBuy: false
       });
     default:
       return state;
