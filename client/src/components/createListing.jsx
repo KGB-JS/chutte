@@ -93,7 +93,7 @@ export default class CreateListing extends React.Component {
 
         <div className="form-group">
           <label>Quantity</label>
-          <input type="number" className="form-control" min="0" placeholder="Quantity" ref="quantity"/>
+          <input type="number" className="form-control" min="1" placeholder="Quantity" ref="quantity"/>
         </div>
 
         <div className="form-group">
@@ -133,12 +133,12 @@ export default class CreateListing extends React.Component {
 
         <div className="form-group">
           <label>Price</label>
-          <input type="number" className="form-control" min="0" placeholder="Price" ref="price"/>
+          <input type="number" className="form-control" min="1" placeholder="Price" ref="price"/>
         </div>
 
         <div className="form-group">
           <label>Minimum Sales Price</label>
-          <input type="number" className="form-control" min="0" placeholder="Minimum Sales Price" ref="minPrice"/>
+          <input type="number" className="form-control" min="1" placeholder="Minimum Sales Price" ref="minPrice"/>
         </div>
 
         {failedPostMSG}
