@@ -45,6 +45,7 @@
     "q": "^1.4.1",
     "react": "^0.14.6",
     "react-bootstrap": "^0.28.2",
+    "react-bootstrap-validation": "^0.1.11",
     "react-datepicker": "^0.18.0",
     "react-dom": "^0.14.6",
     "react-dropzone": "^3.3.2",
