@@ -32,7 +32,7 @@ function mapDispatchToProps(dispatch){
 
 function mapStateToProps(state){
   return {
-    userAuth: state.userStore.userAuth
+    userAuth: state.userStore.userAuth,
     productListing: state.productStore.createListing
   };
 }
