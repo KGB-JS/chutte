@@ -32,13 +32,8 @@ function mapDispatchToProps(dispatch){
 
 function mapStateToProps(state){
   return {
-<<<<<<< 12873c1af6d4bf736f0501e7b001950611ff920d
-    products: state.productStore.products,
     userAuth: state.userStore.userAuth
-=======
     productListing: state.productStore.createListing
-
->>>>>>> [feat]: check form is filled out
   };
 }
 
