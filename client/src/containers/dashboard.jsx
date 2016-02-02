@@ -13,7 +13,7 @@ class Dashboard extends React.Component {
         <NavBar submitSignout={this.props.submitSignout}
            user={this.props.userAuth}/>
         <ProfileSideNavBar/>
-        <CreateListing submitListing={this.props.submitListing} products={this.props.products} />
+        <CreateListing submitListing={this.props.submitListing} productListing={this.props.productListing} />
       </div>
     )
   }
@@ -32,8 +32,8 @@ function mapDispatchToProps(dispatch){
 
 function mapStateToProps(state){
   return {
-    products: state.productStore.products,
-    userAuth: state.userStore.userAuth
+    userAuth: state.userStore.userAuth,
+    productListing: state.productStore.createListing
   };
 }
 

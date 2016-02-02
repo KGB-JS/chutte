@@ -59,14 +59,14 @@ export default class CreateListing extends React.Component {
       imgFile: this.state.imgFile,
       description: String(this.state.description)
     }};
-    console.log("before ",this.props.products.fetchStatus);
-    console.log("type before ",typeof this.props.products.fetchStatus);
+    
     this.props.submitListing(itemDetails);
-    console.log("after ",this.props.products)
-    console.log("type after ",typeof this.props.products.fetchStatus);
+    
   }
 
   render() {
+    let failedPostMSG = this.props.productListing.postErrorMSG === true ? <p className="alert alert-danger alert-dismissible">Please Fill out form completely</p> : "";
+
     return (
       <div className="col-sm-offset-3 col-md-10 col-md-offset-2">
       <form role="form">
@@ -141,7 +141,7 @@ export default class CreateListing extends React.Component {
           <input type="number" className="form-control" min="0" placeholder="Minimum Sales Price" ref="minPrice"/>
         </div>
 
-
+        {failedPostMSG}
         <button className="btn btn-primary" type="button" onClick={this.submitForm.bind(this)}>List Item</button>
         </div>
         </form>

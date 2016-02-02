@@ -9,7 +9,7 @@ const initialState = {
   fetchStatus: '',
   isPostingProduct: false,
   postedProduct: false,
-  postStatus: '',
+  postErrorMSG: false,
   categoryFilter: 'All Products',
   filteredProductList: []
 };
@@ -68,7 +68,8 @@ function createListing(state = initialState, action){
   switch(action.type){
     case CREATE_LISTING:
       return Object.assign({}, state, {
-        isPostingProduct: true
+        isPostingProduct: true,
+        postErrorMSG: false
       });
     case CREATE_LISTING_SUCCESS:
       return Object.assign({}, state, {
@@ -82,7 +83,7 @@ function createListing(state = initialState, action){
     case CREATE_LISTING_FAILURE:
       return Object.assign({}, state, {
         isFetchingProducts: false,
-        postStatus: action.err
+        postErrorMSG: true
       });
     default:
       return state;
