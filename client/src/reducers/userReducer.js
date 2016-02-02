@@ -10,11 +10,10 @@ const initialState = {
   purchasedProducts: [],
   postingBuy: false,
   postedBuy: false,
-  postBuyErrorMessage: ''
+  postBuyErrorMessage: false
 };
 
 function userAuth(state = initialState, action){
-  let newState = Object.assign({}, state);
 
   switch (action.type) {
     case USER_LOGIN:
@@ -68,14 +67,13 @@ function userAuth(state = initialState, action){
   }
 }
 
-function userPurchases(state, action){
-  state = state || initialState;
-  let newState = Object.assign({}, state);
+function userPurchases(state = initialState, action){
 
   switch (action.type) {
     case POST_BUY:
       return Object.assign({}, state, {
         postingBuy: true,
+        postBuyErrorMessage: false,
         purchasedProducts: [
           ...state.purchasedProducts.slice(),
           action.product
@@ -89,7 +87,7 @@ function userPurchases(state, action){
     case POST_BUY_FAILURE:
       return Object.assign({}, state, {
         postingBuy: false,
-        postBuyErrorMessage: action.err
+        postBuyErrorMessage: true
       });
     default:
       return state;
