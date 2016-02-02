@@ -9,7 +9,7 @@ import ProductDetailModal from './productDetailModal';
 
 class ProductCard extends React.Component {
   render() {
-    let milliseconds = this.props.productDetail.timeRemaining;
+    let milliseconds = this.props.productDetail.timeRemaining - Date.now().valueOf();
     let secondsRemaining = (milliseconds / 1000);
 
     return (
@@ -19,7 +19,7 @@ class ProductCard extends React.Component {
                {this.props.productDetail.productName}
             </div>
             <ProductImage className="productImage" image={this.props.productDetail.image}/>
-           
+
             <row>
               <div className="productTime">
                 <Timer secondsRemaining={secondsRemaining}/>

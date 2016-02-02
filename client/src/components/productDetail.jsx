@@ -31,7 +31,7 @@ class ProductDetail extends React.Component {
     this.findIndex();
   }
   render() {
-    let milliseconds = this.props.products[this.productIndex].timeRemaining;
+    let milliseconds = this.props.products[this.productIndex].timeRemaining - Date.now().valueOf();
     let secondsRemaining = (milliseconds / 1000);
     let userPurchaseBuy = this.props.userPurchaseBuy === true ? <p className="alert alert-success ">Purchase successful check your email </p>: <p className="alert alert-warning">Please Enter Valid Quantity</p>;
     return (
