@@ -91,7 +91,7 @@ export function postBuy(purchaseDetails){
       }
     })
     .then(checkStatus)
-    .then(parsedJSON)
+    .then(parseJSON)
     .then(function(response){
       dispatch(postBuySuccess());
     })

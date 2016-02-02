@@ -33,7 +33,7 @@ class ProductDetail extends React.Component {
   render() {
     let milliseconds = this.props.products[this.productIndex].timeRemaining;
     let secondsRemaining = (milliseconds / 1000);
-
+    let userPurchaseBuy = this.props.userPurchaseBuy === true ? <p className="alert alert-success ">Purchase successful check your email </p>: <p className="alert alert-warning">Please Enter Valid Quantity</p>;
     return (
       <div>
         <div className="container-fluid">
@@ -56,7 +56,7 @@ class ProductDetail extends React.Component {
             <div className="productTime">
               <Timer secondsRemaining={secondsRemaining}/>
             </div>
-
+            
             <div className="productQuantity">
               <p className="productinfo">Quantity: {this.props.products[this.productIndex].quantity}</p>
             </div>
@@ -66,10 +66,12 @@ class ProductDetail extends React.Component {
             </div>
             <div className="input-group">
               <input className="form-control" type="number" min="0" ref="purchaseQuantity" placeholder="Select Quantity"/>
+              
               <span className="input-group-btn">
                 <button className="btn btn-default" type="button" onClick={this.handleBuy.bind(this)}>Confirm</button>
               </span>
             </div>
+            {userPurchaseBuy} 
             </div>
           </div>
         </div>
@@ -90,7 +92,10 @@ function mapDispatchToProps(dispatch){
 }
 
 function mapStateToProps(state){
-  return {products: state.productStore.products.productList};
+  return {
+   products: state.productStore.products.productList,
+   userPurchaseBuy: state.userStore.userPurchases.postedBuy
+ };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail)

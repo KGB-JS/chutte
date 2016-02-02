@@ -120,11 +120,12 @@ module.exports = {
                     item.save()
                         .then(function() {
                             app.io.sockets.emit('quantityUpdate', item);
+                            res.status(200).send(item);
                             //notify seller
                             sendGrid.soldItemConfirmation(item.createdBy, item, quantityRequested);
                             //notify buyer
                             sendGrid.buyItemConfirmation(user, item, quantityRequested);
-                            res.status(200).send(item);
+                            
                         });
                 } else {
                     res.status(409).send('quantityRequested exceeds quantity available');
