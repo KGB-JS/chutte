@@ -22,7 +22,7 @@ class BrowsePage extends React.Component {
           <row>
 
             <div className="col-xs-offset-2 col-sm-offset-2 col-sm-10 col-md-10 col-md-offset-2">
-              <ProductList products={products}/>
+              <ProductList products={products} userPurchases={this.props.userPurchases} />
             </div>
           </row>
         </div>
@@ -45,7 +45,8 @@ function mapDispatchToProps(dispatch){
 function mapStateToProps(state){
   return {
     products: state.productStore.products,
-    userAuth: state.userStore.userAuth
+    userAuth: state.userStore.userAuth,
+    userPurchases: state.userStore.userPurchases
   };
 }
 

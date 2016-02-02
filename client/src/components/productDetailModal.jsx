@@ -10,6 +10,7 @@ class ProductDetailModal extends React.Component {
 
   close(){
     this.setState({ showModal: false });
+
   }
 
   open(){
@@ -40,5 +41,7 @@ class ProductDetailModal extends React.Component {
     );
   }
 };
+
+
 
 export default ProductDetailModal;

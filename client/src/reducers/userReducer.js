@@ -83,10 +83,12 @@ function userPurchases(state = initialState, action){
       return Object.assign({}, state, {
         postingBuy: false,
         postedBuy: true
+
       });
     case POST_BUY_FAILURE:
       return Object.assign({}, state, {
         postingBuy: false,
+        postedBuy: false,
         postBuyErrorMessage: true
       });
     default:
