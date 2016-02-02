@@ -28,7 +28,7 @@ export function createListingFailure(err){
   };
 }
 
-export function postListing(product){
+export function postListing(product, token){
   return function(dispatch){
     dispatch(createListing());
       return fetch('/api/items/', {
@@ -36,7 +36,8 @@ export function postListing(product){
         body: JSON.stringify(product),
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'x-access-token': token
         }
       })
       .then(checkStatus)
