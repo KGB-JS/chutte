@@ -60,7 +60,7 @@ export default class CreateListing extends React.Component {
       description: String(this.state.description)
     }};
 
-    this.props.submitListing(itemDetails, this.props.userAuth.token);
+    this.props.submitListing(itemDetails, this.props.user.token);
 
   }
 
