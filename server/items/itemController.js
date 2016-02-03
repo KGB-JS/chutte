@@ -70,7 +70,7 @@ module.exports = {
             image: productImage,
             priceSchedule: priceSchedule[0],
             timeRemaining: priceSchedule[0].decrementTime,
-            priceIndex: 0
+            priceIndex: -1
         };
 
         var makeNewItem = new Item(newItem);
