@@ -119,9 +119,30 @@ module.exports = {
                     if(item.quantity === 0){
                         item.active = false;
                     }
+                    // var priceSchedule = timeSchedule.findTimeReduce(item.price, item.minPrice, item.auctionEnds);
+                    // console.log('before buy', item.priceSchedule)
+                    // console.log('before buy', item.timeId)
+                    // clearTimeout(item.timeId);
+                    // item.priceSchedule = priceSchedule[0];
+                    // item.timeRemaining = priceSchedule[0].decrementTime;
+                    // item.priceIndex = 0;
+                    // item.timeId = setInterval(emit.emitAuction(item._id), 900000);
+                    // console.log('after buy', item.priceSchedule)
+                    // console.log('after buy', item.timeId)
                     item.save()
                         .then(function() {
-                            app.io.sockets.emit('quantityUpdate', item);
+                            var transmitObject = {
+                                _id: item._id,
+                                price: item.price,
+                                timeRemaining: item.priceSchedule[item.priceIndex].decrementTime,
+                                description: item.description,
+                                productName: item.productName,
+                                createdBy: item.createdBy,
+                                quantity: item.quantity,
+                                category: item.category,
+                                image: item.image
+                            };
+                            app.io.sockets.emit('quantityUpdate', transmitObject);
                             res.status(200).send(item);
                             //notify seller
                             sendGrid.soldItemConfirmation(item.createdBy, item, quantityRequested,user.username);
