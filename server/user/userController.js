@@ -7,7 +7,7 @@ var sendGrid = require('./../items/itemHelpers/sendGridController.js');
 module.exports = {
     signin: function(req, res, next) {
       console.log(req.body)
-      var username = req.body.userName;
+      var username = req.body.username;
       var password = req.body.password;
       var findUser = Q.nbind(User.findOne, User);
       findUser({
