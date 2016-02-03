@@ -1424,6 +1424,7 @@ ol ul,
 ul ol,
 ol ol {
   margin-bottom: 0;
+  margin-left: -20px;
 }
 .list-unstyled {
   padding-left: 0;

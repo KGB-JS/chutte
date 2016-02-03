@@ -23,16 +23,55 @@ class UserProfile extends React.Component {
 			<div>
 				<NavBar submitSignout={this.props.submitSignout}
            user={this.props.userDetail} />
+           <div className = "col-md-2">
         <ProfileSideNavBar/>
-				<div className="userProfile" id={this.props.userDetail._id}>
-					<input className="userProfile" type="text" value={this.props.userDetail.username}/>
-					<input className="userProfile" type="text" value={this.props.userDetail.firstname}/>
-					<input className="userProfile" type="text" value={this.props.userDetail.lastname}/>
-					<input className="userProfile" type="text" value={this.props.userDetail.phone}/>
-					<input className="userProfile" type="text" value={this.props.userDetail.streetAddress}/>
-					<input className="userProfile" type="text" value={this.props.userDetail.stateRegion}/>
-					<input className="userProfile" type="text" value={this.props.userDetail.city}/>
-				</div>
+        </div>
+				<div className = "col-md-offset-2 col-md-10">
+                
+               <form>
+               <div className = "col-md-5">
+                  <div className="form-group">
+                    <label for="exampleInputEmail1">Username</label>
+                    <input type="email" className="form-control" id="exampleInputEmail1" placeholder={this.props.userDetail.username}/>
+                  </div>
+                  <div className="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+                  </div>
+                  <div className="form-group">
+                    <label for="exampleInputPassword1">First Name</label>
+                    <input type="text" className="form-control" placeholder={this.props.userDetail.firstname}/>
+                  </div>
+                  <div className="form-group">
+                    <label for="exampleInputPassword1">Last Name</label>
+                    <input type="text" className="form-control" placeholder={this.props.userDetail.lastname}/>
+                  </div>
+                  
+                 
+                  </div>
+                  <div className = "col-md-5">
+                      <div className="form-group">
+                        <label for="exampleInputPassword1">Phone</label>
+                        <input type="text" className="form-control" placeholder={this.props.userDetail.phone}/>
+                      </div>
+                      <div className="form-group">
+                        <label for="exampleInputPassword1">Street Address</label>
+                        <input type="text" className="form-control" placeholder={this.props.userDetail.streetAddress}/>
+                      </div>
+                      <div className="form-group">
+                        <label for="exampleInputPassword1">State Region</label>
+                        <input type="text" className="form-control" placeholder={this.props.userDetail.stateRegion}/>
+                      </div>
+                      <div className="form-group">
+                        <label for="exampleInputPassword1">City</label>
+                        <input type="text" className="form-control" placeholder={this.props.userDetail.city}/>
+                      </div>
+                       <button type="submit" className="btn btn-default">Submit</button>
+                  </div>
+                </form>
+
+                </div>
+			
 			</div>
 		)
 	}
