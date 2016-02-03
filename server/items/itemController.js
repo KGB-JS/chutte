@@ -26,6 +26,7 @@ module.exports = {
                     }
                 }
             });
+            res.status(200).send();
         })
     },
     postItem: function(req, res, next) {
@@ -35,7 +36,7 @@ module.exports = {
           next(new Error('no token'));
         } else {
         var productName = req.body.product.productName;
-        var createdBy = req.body.product.createdBy;
+        var createdBy = user.username;
         var category = req.body.product.category;
         var quantity = req.body.product.quantity;
         var price = req.body.product.price;
@@ -126,7 +127,7 @@ module.exports = {
                             //notify seller
                             sendGrid.soldItemConfirmation(item.createdBy, item, quantityRequested);
                             //notify buyer
-                            sendGrid.buyItemConfirmation(user, item, quantityRequested);
+                            sendGrid.buyItemConfirmation(user.username, item, quantityRequested);
                             
                         });
                 } else {
