@@ -28,6 +28,13 @@ module.exports = {
                     user: user,
                     username: user.username,
                     token: token,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    phone: user.phone,
+                    streetAddress: user.streetAddress,
+                    stateRegion: user.stateRegion,
+                    city: user.city,
+                    zip: user.zip
                   });
                 } else {
                   res.status(401).send('User or password is incorrect');
