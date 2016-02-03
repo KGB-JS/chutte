@@ -9,11 +9,12 @@ export function userSignup(userName){
   };
 };
 
-export function userSignupSuccess(token){
+export function userSignupSuccess(token, user){
   localStorage.setItem('token', token);
   return {
     type: USER_SIGNUP_SUCCESS,
     token: token,
+    user: user,
     meta: {
         transition: (state, action) => ({
           pathname: 'browse'
@@ -47,7 +48,7 @@ export function postUserSignup(user){
     .then(checkStatus)
     .then(parseJSON)
     .then(function(response){
-      dispatch(userSignupSuccess(response.token));
+      dispatch(userSignupSuccess(response.token, user));
     })
     .catch(function(error){
       dispatch(userSignupFailure(error));
