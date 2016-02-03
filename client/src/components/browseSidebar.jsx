@@ -17,7 +17,7 @@ export default class BrowseSideNavbar extends React.Component {
     return (
         <div id="wrapper">
           <div id="sidebar-wrapper">
-          <Link className="navbar-brand" to="/"> {icon} Chutte</Link>
+          <Link className="navbar-brand" id="logo" to="/"> {icon} Chutte</Link>
             <ul className="sidebar-font">
               <li id={categories[0]} onClick={this.handleFilter.bind(this)}>{categories[0]}</li>
               <li id={categories[1]} onClick={this.handleFilter.bind(this)}>{categories[1]}</li>
