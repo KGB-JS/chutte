@@ -14,11 +14,16 @@ module.exports = {
                     new Error('Item not found');
                 } else {
                     if(item.priceIndex < item.priceSchedule.length){
-                        console.log(item.priceSchedule[item.priceIndex].decrementTime)
+                        var priceFlag;
+                        if(item.priceIndex === -1){
+                            priceFlag = 0;
+                        } else {
+                            priceFlag = item.priceIndex;
+                        }
                         var transmitObject = {
                             _id: item._id,
                             price: item.price,
-                            timeRemaining: item.priceSchedule[item.priceIndex].decrementTime,
+                            timeRemaining: item.priceSchedule[priceFlag].decrementTime,
                             description: item.description,
                             productName: item.productName,
                             createdBy: item.createdBy,
