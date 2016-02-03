@@ -19,12 +19,13 @@ module.exports = {
 	                      if(priceFlag && item.priceSchedule[i].decrementTime > now){
 	                          priceFlag = false;
 	                          item.price = item.priceSchedule[i].price;
-	                          item.save();
-	                          var timeUntilDecrement = item.priceSchedule[i].decrementTime - now;
-	                          emit.emitAuction(item._id);
-	                          setTimeout(function(){
-	                          	setInterval(function() { emit.emitAuction(item._id) }, 900000);
-	                          }, timeUntilDecrement);
+                            var timeUntilDecrement = item.priceSchedule[i].decrementTime - now;
+                            emit.emitAuction(item._id);
+                            setTimeout(function(){
+                              var timeId = setInterval(function() { emit.emitAuction(item._id) }, 900000);
+                              item.timeId[0] = timeId;
+	                            item.save();
+                            }, timeUntilDecrement);
 	                      }
 	                  }
 	                }
