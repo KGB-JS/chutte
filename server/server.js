@@ -18,7 +18,7 @@ server.listen(port, function() {
 });
 
 //initialize item storage for sockets to update prices
-init.itemsInit();
+//init.itemsInit();
 
 module.exports = {
     server: server,

@@ -20,7 +20,7 @@ module.exports = {
                             priceFlag = false;
                             item.price = item.priceSchedule[i].price;
                             item.save();
-                            emit.emitAuction(item._id);
+                            emit.emitAuctionGet(item._id);
                         }
                     }
                 }
