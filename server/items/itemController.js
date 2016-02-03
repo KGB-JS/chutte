@@ -91,7 +91,7 @@ module.exports = {
                         user.postedItems.push(makeNewItem);
                         user.save();
                     }
-                  })
+                  });
 
             })
             .fail(function(err) {
@@ -125,9 +125,9 @@ module.exports = {
                             app.io.sockets.emit('quantityUpdate', item);
                             res.status(200).send(item);
                             //notify seller
-                            sendGrid.soldItemConfirmation(item.createdBy, item, quantityRequested);
+                            sendGrid.soldItemConfirmation(item.createdBy, item, quantityRequested,user.username);
                             //notify buyer
-                            sendGrid.buyItemConfirmation(user.username, item, quantityRequested);
+                            sendGrid.buyItemConfirmation(user.username, item, quantityRequested,item.createdBy);
                             
                         });
                 } else {
