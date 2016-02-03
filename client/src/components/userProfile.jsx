@@ -7,22 +7,22 @@ import {userLogout} from './../actions/actionsUserAuth';
 class UserProfile extends React.Component {
 	constructor(props){
 		super(props);
-		this.state({
-			username	: {this.props.userDetail.username},
-			firstname	: {this.props.userDetail.firstname},
-	    lastname  : {this.props.userDetail.lastname},
-			phone	: {this.props.userDetail.phone},
-			streetAddress	: {this.props.userDetail.streetAddress},
-			stateRegion: {this.props.userDetail.stateRegion},
-			city: {this.props.userDetail.city}
-		});
+		this.state = {
+			username: this.props.userDetail.username,
+			firstname: this.props.userDetail.firstname,
+	    lastname: this.props.userDetail.lastname,
+			phone: this.props.userDetail.phone,
+			streetAddress: this.props.userDetail.streetAddress,
+			stateRegion: this.props.userDetail.stateRegion,
+			city: this.props.userDetail.city
+		};
 	}
 
 	render() {
 		return (
 			<div>
 				<NavBar submitSignout={this.props.submitSignout}
-           user={this.props.userAuth} />
+           user={this.props.userDetail} />
         <ProfileSideNavBar/>
 				<div className="userProfile" id={this.props.userDetail._id}>
 					<input className="userProfile" type="text" value={this.props.userDetail.username}/>

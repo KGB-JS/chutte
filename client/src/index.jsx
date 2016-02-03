@@ -20,7 +20,7 @@ import ProductList from './components/productList';
 import UserAuth from './components/userAuth';
 import UserSignup from './components/UserSignup';
 import DevTools from './containers/DevTools';
-import CreateListing from './components/createListing';
+import UserProfile from './components/userProfile';
 import CurrentListing from './components/currentListing';
 import {fetchProducts} from './actions/actionsProducts';
 
