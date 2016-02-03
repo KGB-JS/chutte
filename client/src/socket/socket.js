@@ -10,7 +10,7 @@ export default function(store){
   	if(obj.quantity > 0){
       store.dispatch(updateProduct(obj));
     } else {
-      store.dispatch(removeProduct(obj));
+      store.dispatch(removeSoldoutProduct(obj));
     }
   });
 }

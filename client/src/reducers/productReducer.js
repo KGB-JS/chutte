@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, UPDATE_PRODUCT, CREATE_LISTING, CREATE_LISTING_SUCCESS, CREATE_LISTING_FAILURE, PRODUCT_CATEGORY_FILTER, REMOVE_PRODUCT} from './../actions/actionConstants';
+import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, UPDATE_PRODUCT, CREATE_LISTING, CREATE_LISTING_SUCCESS, CREATE_LISTING_FAILURE, PRODUCT_CATEGORY_FILTER, REMOVE_SOLDOUT_PRODUCT} from './../actions/actionConstants';
 import {stateContainsProduct, filterProductsByCategory} from './reducerHelpers';
 
 const initialState = {
@@ -57,7 +57,7 @@ function products(state = initialState, action){
          categoryFilter: action.category,
          filteredProductList: [...filterList.slice()]
        });
-       case REMOVE_PRODUCT:
+       case REMOVE_SOLDOUT_PRODUCT:
         let removeIndex = stateContainsProduct(state.productList, action.product);
         return Object.assign({}, state, {
           productList: [

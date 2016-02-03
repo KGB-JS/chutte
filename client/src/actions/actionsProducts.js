@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import {checkStatus, parseJSON} from './actionsHelper';
-import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, UPDATE_PRODUCT, POST_BUY, POST_BUY_SUCCESS, POST_BUY_FAILURE, PRODUCT_CATEGORY_FILTER, POST_BUY_RESET_MSG, REMOVE_PRODUCT} from './actionConstants';
+import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, UPDATE_PRODUCT, POST_BUY, POST_BUY_SUCCESS, POST_BUY_FAILURE, PRODUCT_CATEGORY_FILTER, POST_BUY_RESET_MSG, REMOVE_SOLDOUT_PRODUCT} from './actionConstants';
 
 export function updateProduct(product){
   return {
@@ -55,9 +55,9 @@ export function postBuyResetMsg(){
   };
 }
 
-export function removeProduct(product){
+export function removeSoldoutProduct(product){
   return {
-    type: REMOVE_PRODUCT,
+    type: REMOVE_SOLDOUT_PRODUCT,
     product: product
   }
 }
