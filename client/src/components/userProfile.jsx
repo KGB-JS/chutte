@@ -8,8 +8,8 @@ class UserProfile extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			username: this.props.userDetail.username,
-			firstname: this.props.userDetail.firstname,
+			username: this.props.userDetail.userName,
+			firstname: this.props.userDetail.firstName,
 	    lastname: this.props.userDetail.lastname,
 			phone: this.props.userDetail.phone,
 			streetAddress: this.props.userDetail.streetAddress,
@@ -19,6 +19,7 @@ class UserProfile extends React.Component {
 	}
 
 	render() {
+    console.log("toughestMF", this.props.userDetail);
 		return (
 			<div>
 				<NavBar submitSignout={this.props.submitSignout}
@@ -32,7 +33,7 @@ class UserProfile extends React.Component {
                <div className = "col-md-5">
                   <div className="form-group">
                     <label for="exampleInputEmail1">Username</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" placeholder={this.props.userDetail.username}/>
+                    <input type="email" className="form-control" id="exampleInputEmail1" placeholder={this.props.userDetail.userName}/>
                   </div>
                   <div className="form-group">
                     <label for="exampleInputPassword1">Password</label>
@@ -40,11 +41,11 @@ class UserProfile extends React.Component {
                   </div>
                   <div className="form-group">
                     <label for="exampleInputPassword1">First Name</label>
-                    <input type="text" className="form-control" placeholder={this.props.userDetail.firstname}/>
+                    <input type="text" className="form-control" placeholder={this.props.userDetail.firstName}/>
                   </div>
                   <div className="form-group">
                     <label for="exampleInputPassword1">Last Name</label>
-                    <input type="text" className="form-control" placeholder={this.props.userDetail.lastname}/>
+                    <input type="text" className="form-control" placeholder={this.props.userDetail.lastName}/>
                   </div>
                   
                  
@@ -56,11 +57,11 @@ class UserProfile extends React.Component {
                       </div>
                       <div className="form-group">
                         <label for="exampleInputPassword1">Street Address</label>
-                        <input type="text" className="form-control" placeholder={this.props.userDetail.streetAddress}/>
+                        <input type="text" className="form-control" placeholder={this.props.userDetail.address}/>
                       </div>
                       <div className="form-group">
                         <label for="exampleInputPassword1">State Region</label>
-                        <input type="text" className="form-control" placeholder={this.props.userDetail.stateRegion}/>
+                        <input type="text" className="form-control" placeholder={this.props.userDetail.state}/>
                       </div>
                       <div className="form-group">
                         <label for="exampleInputPassword1">City</label>
