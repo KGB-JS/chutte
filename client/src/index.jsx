@@ -20,6 +20,8 @@ import ProductList from './components/productList';
 import UserAuth from './components/userAuth';
 import UserSignup from './components/UserSignup';
 import DevTools from './containers/DevTools';
+import CreateListing from './components/createListing';
+import CurrentListing from './components/currentListing';
 import {fetchProducts} from './actions/actionsProducts';
 
 const history = browserHistory;
@@ -71,6 +73,8 @@ ReactDOM.render(
         <Route path='browse' component={Browse}/>
         <Route path='browse/product/:id' component={ProductDetail}/>
         <Route path='dashboard' component={Dashboard}/>
+        <Route path='dashboard/create' component={CreateListing}/>
+        <Route path='dashboard/current' component={CurrentListing}/>
         <Route path='signin' component={UserAuth}/>
         <Route path='signup' component={UserSignup}/>
         <Route path='*' component={Home} />
