@@ -12,6 +12,7 @@ export const POST_BUY_FAILURE = 'POST_BUY_FAILURE';
 export const POST_BUY_RESET_MSG = 'POST_BUY_RESET_MSG';
 export const PRODUCT_CATEGORY_FILTER = 'PRODUCT_CATEGORY_FILTER';
 export const REMOVE_SOLDOUT_PRODUCT = 'REMOVE_SOLDOUT_PRODUCT';
+export const REMOVE_ENDED_AUCTION_PRODUCT = 'REMOVE_ENDED_AUCTION_PRODUCT';
 
 //-----------User Actions-------------------------------------
 export const USER_LOGIN = 'USER_LOGIN';
