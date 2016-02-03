@@ -11,6 +11,11 @@
     border-width: 2px;
     border-color: #D6D6D6;
 }
+ul.sidebar-font > li:hover{
+    color: #00AC69:;
+    background-color:#FFF;
+
+}
 
 a {
     color: #00AC69;
@@ -509,6 +514,12 @@ ul.nav.nav-sidebar.browse > li > a {
     color: #FFFFFF;
 }
 
+.navbar-brand:hover {
+    font-size: 20px;
+    font-weight: bold;
+    color: #085E3D;
+}
+
 .navbar-default .navbar-brand {
     color: #FFFFFF;
 }
@@ -709,7 +720,8 @@ textarea{
 }
 
 .sidebar-font > li:hover {
-    color: gray;
+    color: #00AC69;
+    background-color: #FFF;
     font-weight: bold;
     font-size: 20px;
 }

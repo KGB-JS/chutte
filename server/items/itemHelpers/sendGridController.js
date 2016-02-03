@@ -5,12 +5,12 @@ var sendgrid = require('sendgrid')(sendgridAPIKEY.apiKEY);
 
 
 module.exports = {
-    buyItemConfirmation: function(buyer, item, quantity) {
-        var buyHtml = '<div><h1>' + item.productName + '</h1><div>You'+ quantity + 'of this item.</div></div>';
+    buyItemConfirmation: function(buyer, item, quantity,seller) {
+        var buyHtml = '<div><h1>' + item.productName + '</h1><div>You purchase '+ quantity + 'of this '+item.productName+'.</div></div>';
             sendgrid.send({
                 to: buyer,
                 from: 'noreply@chutte.com',
-                subject: 'Your purchase on Chutte has been confirmed!',
+                subject: 'Your purchase on Chutte has been confirmed! Email '+seller+'towort out details',
                 html: buyHtml
             }, function(err, json) {
                 if (err) {
@@ -19,12 +19,12 @@ module.exports = {
                 console.log(json);
             });
     },
-    soldItemConfirmation: function(seller, item, quantity) {
-        var soldHtml = '<div><h1>' + item.productName + '</h1><div>'+ quantity + ' units sold.</div></div>';
+    soldItemConfirmation: function(seller, item, quantity,buyer) {
+        var soldHtml = '<div><h1>' + item.productName + '</h1><div>'+ quantity + ' units sold .</div></div>';
             sendgrid.send({
                 to: seller,
                 from: 'noreply@chutte.com',
-                subject: 'Your Item ' + item.productName + ' has sold',
+                subject: 'Your Item ' + item.productName + ' has sold to'+ buyer,
                 html: soldHtml
             }, function(err, json) {
                 if (err) {
