@@ -6,7 +6,7 @@ var sendgrid = require('sendgrid')(sendgridAPIKEY.apiKEY);
 
 module.exports = {
     buyItemConfirmation: function(buyer, item, quantity,seller) {
-        var buyHtml = '<div><h1>' + item.productName + '</h1><div>You purchase '+ quantity + 'of this 'item.productName'.</div></div>';
+        var buyHtml = '<div><h1>' + item.productName + '</h1><div>You purchase '+ quantity + 'of this '+item.productName+'.</div></div>';
             sendgrid.send({
                 to: buyer,
                 from: 'noreply@chutte.com',
