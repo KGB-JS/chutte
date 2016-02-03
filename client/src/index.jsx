@@ -72,8 +72,8 @@ ReactDOM.render(
         <IndexRoute component={Home}/>
         <Route path='browse' component={Browse}/>
         <Route path='browse/product/:id' component={ProductDetail}/>
-        <Route path='dashboard' component={Dashboard}/>
-        <Route path='dashboard/create' component={CreateListing}/>
+        <Route path='dashboard/create' component={Dashboard}/>
+        <Route path='dashboard/profile' component={UserProfile}/>
         <Route path='dashboard/current' component={CurrentListing}/>
         <Route path='signin' component={UserAuth}/>
         <Route path='signup' component={UserSignup}/>
