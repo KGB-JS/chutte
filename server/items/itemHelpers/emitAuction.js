@@ -14,6 +14,7 @@ module.exports = {
                     new Error('Item not found');
                 } else {
                     if(item.priceIndex < item.priceSchedule.length){
+                        console.log(item.priceSchedule[item.priceIndex].decrementTime)
                         var transmitObject = {
                             _id: item._id,
                             price: item.price,
@@ -27,7 +28,7 @@ module.exports = {
                         };
                         console.log('price', item.price)
                         console.log('emit', item._id);
-                        console.log('time', item.priceSchedule[item.priceIndex].decrementTime);
+                        console.log('price priceSchedule', item.priceSchedule);
                         app.io.sockets.emit('productUpdate', transmitObject);
                         item.priceIndex++;
                         item.save(); 
