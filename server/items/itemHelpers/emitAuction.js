@@ -25,6 +25,7 @@ module.exports = {
                             category: item.category,
                             image: item.image
                         };
+                        console.log('price', item.price)
                         console.log('emit', item._id);
                         console.log('time', item.priceSchedule[item.priceIndex].decrementTime);
                         app.io.sockets.emit('productUpdate', transmitObject);

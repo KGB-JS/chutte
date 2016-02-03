@@ -10,6 +10,7 @@ module.exports = {
         var results = [];
         var priceSchedule = [];
         var decrementTime = now;
+        priceSchedule.push({ price: currentPrice, decrementTime: (now + 3000)});
         while(decrementTime < endDate && currentPrice >= minPrice){
             decrementTime = decrementTime + 900000;
             currentPrice = Math.floor(currentPrice - amountToDecrementPrice);
@@ -19,13 +20,10 @@ module.exports = {
                     decrementTime: decrementTime
                 };
                 priceSchedule.push(priceIndex);
-                console.log('pI', priceIndex);
             }
         }
         results.push(priceSchedule);
         results.push(900000);
-        console.log('results',results);
-        console.log('endDate', endDate);
         return results
     }
 

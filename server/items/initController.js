@@ -24,7 +24,7 @@ module.exports = {
                             setTimeout(function(){
                               var timeId = setInterval(function() { emit.emitAuction(item._id) }, 900000);
                               item.timeId[0] = timeId;
-	                            item.save();
+	                          item.save();
                             }, timeUntilDecrement);
 	                      }
 	                  }
