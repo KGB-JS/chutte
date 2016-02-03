@@ -38,6 +38,7 @@ module.exports = {
           next(error);
         });
     },
+    
     signup: function(req, res, next) {
       var username = req.body.username;
       var password = req.body.password;
@@ -88,6 +89,7 @@ module.exports = {
           next(error);
         });
     },
+
     checkAuth: function(req, res, next) {
       var token = req.headers['x-access-token'];
       if (!token) {
@@ -111,7 +113,7 @@ module.exports = {
       }
     },
 
-    updateUser: function(req, res, next) {
+    userUpdate: function(req, res, next) {
       var token = req.headers['x-access-token'];
       if (!token) {
         next(new Error('no token'));

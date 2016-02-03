@@ -20,7 +20,6 @@ module.exports = {
                             priceFlag = false;
                             item.price = item.priceSchedule[i].price;
                             item.save();
-                            var timeUntilDecrement = item.priceSchedule[i].decrementTime - now;
                             emit.emitAuction(item._id);
                         }
                     }

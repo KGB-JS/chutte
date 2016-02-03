@@ -22,7 +22,9 @@ module.exports = {
                             var timeUntilDecrement = item.priceSchedule[i].decrementTime - now;
                             emit.emitAuction(item._id);
                             setTimeout(function(){
-                              var timeId = setInterval(function() { emit.emitAuction(item._id) }, 900000);
+                              var timeId = setInterval(function() { 
+                                emit.emitAuction(item._id) 
+                                }, 900000);
                               item.timeId[0] = timeId;
 	                          item.save();
                             }, timeUntilDecrement);
