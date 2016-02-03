@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import {checkStatus, parseJSON} from './actionsHelper';
-import {CREATE_LISTING, CREATE_LISTING_SUCCESS, CREATE_LISTING_FAILURE} from './actionConstants';
+import {CREATE_LISTING, CREATE_LISTING_SUCCESS, CREATE_LISTING_FAILURE, ADD_TO_USER_LISTINGS} from './actionConstants';
 
 
 export function createListing(){
@@ -28,6 +28,13 @@ export function createListingFailure(err){
   };
 }
 
+export function addToUserListings(product){
+  return {
+    type: ADD_TO_USER_LISTINGS,
+    product: product
+  };
+}
+
 export function postListing(product, token){
   return function(dispatch){
     dispatch(createListing());
@@ -44,6 +51,7 @@ export function postListing(product, token){
       .then(parseJSON)
       .then(function(response){
         dispatch(createListingSuccess(response));
+        dispatch(addToUserListings(product));
       })
       .catch(function(err){
         dispatch(createListingFailure(err));
