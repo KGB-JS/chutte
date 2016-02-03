@@ -20,7 +20,6 @@ module.exports = {
                             priceFlag = false;
                             item.price = item.priceSchedule[i].price;
                             item.save();
-                            var timeUntilDecrement = item.priceSchedule[i].decrementTime - now;
                             emit.emitAuction(item._id);
                         }
                     }
@@ -108,10 +107,10 @@ module.exports = {
         if (!token) {
           next(new Error('no token'));
         } else {
-        var productId = req.body._id;
-        var quantityRequested = req.body.quantity;
-        var findItem = Q.nbind(Item.findOne, Item);
-        findItem({
+          var productId = req.body._id;
+          var quantityRequested = req.body.quantity;
+          var findItem = Q.nbind(Item.findOne, Item);
+          findItem({
                 _id: productId
             })
             .then(function(item) { 
