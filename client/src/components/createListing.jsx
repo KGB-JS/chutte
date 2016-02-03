@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {createListing, postListing} from './../actions/actionsCreateListing';
 import DropZone from 'react-dropzone';
-//import ImageDrop from './imageDrop';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import {CategoryFilters} from './../actions/actionConstants';
 
 export default class CreateListing extends React.Component {
   constructor(props){
     super(props);
-    this.state = { categorySelected:'Choose a Category', description: "", startDate: moment(), endDate: moment(), imgFile: '' };
+    this.state = { categorySelected:'', description: "", startDate: moment(), endDate: moment(), imgFile: '' };
   }
 
   _descriptionInput(details){
@@ -28,11 +28,6 @@ export default class CreateListing extends React.Component {
     this.setState({endDate: lastDate});
   }
 
-  // onDrop(file) {
-  //   this.setState({imgFile: file});
-  //   this.file = file
-  //   console.log(this.file)
-  // }
   handleSubmit(e) {
     e.preventDefault();
   }
@@ -53,7 +48,6 @@ export default class CreateListing extends React.Component {
   }
 
   submitForm(){
-    console.log(this.state.imgFile)
     var itemDetails ={product: {
       productName: String(this.refs.name.value),
       createdBy : String(this.refs.name.value),
@@ -62,13 +56,17 @@ export default class CreateListing extends React.Component {
       auctionEnds : Number(this.state.endDate.valueOf()),
       price: Number(this.refs.price.value),
       minPrice: Number(this.refs.minPrice.value),
-      imgFile: this.state.imgFile
+      imgFile: this.state.imgFile,
+      description: String(this.state.description)
     }};
-    console.log(itemDetails)
-    this.props.submitListing(itemDetails);
+
+    this.props.submitListing(itemDetails, this.props.user.token);
+
   }
 
   render() {
+    let failedPostMSG = this.props.productListing.postErrorMSG === true ? <p className="alert alert-danger alert-dismissible">Please Fill out form completely</p> : "";
+
     return (
       <div className="col-sm-offset-3 col-md-10 col-md-offset-2">
       <form role="form">
@@ -81,6 +79,10 @@ export default class CreateListing extends React.Component {
           </div>
           </label>
         </div>
+        <div>
+        <h5>Item Description</h5>
+        <textarea className="form-control" value={this.state.description} onChange={this._descriptionInput.bind(this)}> </textarea>
+        </div>
       </div>
 
       <div className="col-md-5">
@@ -91,7 +93,7 @@ export default class CreateListing extends React.Component {
 
         <div className="form-group">
           <label>Quantity</label>
-          <input type="number" className="form-control" min="0" placeholder="Quantity" ref="quantity"/>
+          <input type="number" className="form-control" min="1" placeholder="Quantity" ref="quantity"/>
         </div>
 
         <div className="form-group">
@@ -116,29 +118,30 @@ export default class CreateListing extends React.Component {
         <div className="form-group">
           <label>Category</label>
           <select className="form-control" id="select" value={this.state.categorySelected}
-            onChange={this._handleChange.bind(this)} >
-            <option value="AntiquesCollectibles">Antiques & Collectibles</option>
-            <option value="Art">Art</option>
-            <option value="Automobiles">Automobiles</option>
-            <option value="Clothing">Clothing, Shoes and Accessories</option>
-            <option value="Entertainment">Entertainment Memorabilia</option>
-            <option value="JewelryWatches">Jewelry and Watches</option>
-            <option value="TicketsExperiences">Tickets and Experiences</option>
-            <option value="Travel">Travel</option>
+            onChange={this._handleChange.bind(this)}>
+            <option value={CategoryFilters[1]}>{CategoryFilters[1]}</option>
+            <option value={CategoryFilters[2]}>{CategoryFilters[2]}</option>
+            <option value={CategoryFilters[3]}>{CategoryFilters[3]}</option>
+            <option value={CategoryFilters[4]}>{CategoryFilters[4]}</option>
+            <option value={CategoryFilters[5]}>{CategoryFilters[5]}</option>
+            <option value={CategoryFilters[6]}>{CategoryFilters[6]}</option>
+            <option value={CategoryFilters[7]}>{CategoryFilters[7]}</option>
+            <option value={CategoryFilters[8]}>{CategoryFilters[8]}</option>
+            <option value={CategoryFilters[9]}>{CategoryFilters[9]}</option>
           </select>
         </div>
 
         <div className="form-group">
           <label>Price</label>
-          <input type="number" className="form-control" min="0" placeholder="Price" ref="price"/>
+          <input type="number" className="form-control" min="1" placeholder="Price" ref="price"/>
         </div>
 
         <div className="form-group">
           <label>Minimum Sales Price</label>
-          <input type="number" className="form-control" min="0" placeholder="Minimum Sales Price" ref="minPrice"/>
+          <input type="number" className="form-control" min="1" placeholder="Minimum Sales Price" ref="minPrice"/>
         </div>
 
-
+        {failedPostMSG}
         <button className="btn btn-primary" type="button" onClick={this.submitForm.bind(this)}>List Item</button>
         </div>
         </form>

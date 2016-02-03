@@ -11,24 +11,25 @@
     border-width: 2px;
     border-color: #D6D6D6;
 }
+ul.sidebar-font > li:hover{
+    color: #00AC69:;
+    background-color:#FFF;
+    
 
-
+}
 
 a {
-    color: #00AC69;
+    color: #FFF;
+
 }
 
-li > a {
-    color: #00AC69;
+/*li > a {
+    color: white;
     font-weight: bold;
     font-size: 20px;
+}*/
 
-}
 
-ul.nav.nav-sidebar.browse > li > a{
-  font-size: 1.8vw;
-
-}
 
 .nav > li {
     border-width: 1px;
@@ -433,6 +434,8 @@ ul.nav.nav-sidebar.browse > li > a{
     border-color: #A5A4A5;
 }
 
+.productCardDetail {}
+
 .productinfo {
     font-size: 15px;
     font-weight: bold;
@@ -488,6 +491,7 @@ ul.nav.nav-sidebar.browse > li > a{
 }
 
 .navbar-default {
+    z-index: 3;
     background-color: #00AC69;
     color: #FFFFFF;
     font-weight: bold;
@@ -508,6 +512,12 @@ ul.nav.nav-sidebar.browse > li > a{
     font-size: 20px;
     font-weight: bold;
     color: #FFFFFF;
+}
+
+.navbar-brand:hover {
+    font-size: 20px;
+    font-weight: bold;
+    color: #085E3D;
 }
 
 .navbar-default .navbar-brand {
@@ -540,28 +550,220 @@ input[type="file"] {
     border-radius: 4px;
 }
 
-.detailList{
-  margin-left:20%;
-  margin-right:20%;
+.detailList {}
+
+.panel-default {
+    border-width: 0px;
 }
 
- .panel-default{
-  border-width: 0px;
+.panel-body {
+    padding: 0px;
 }
 
- .panel-body{
-  padding:0px;
-}
-
-.homeInfo{
+.homeInfo {
     margin-top: 20px;
     margin-left: 20px;
     margin-right: 20px;
 }
 
-#infoHeader{
+#infoHeader {
     font-size: 5vw;
     text-align: center;
     font-weight: bold;
     margin-bottom: 10px;
 }
+
+.modal-container {
+    position: relative;
+}
+
+.modal-container .modal,
+.modal-container .modal-backdrop {
+    position: absolute;
+}
+
+
+
+.resize_fit_center {
+    max-width:100%;
+    max-height:100%;
+    vertical-align: middle;
+}
+
+.container1 { 
+    margin: 10px;
+    height: 150px;
+    line-height: 115px;
+    overflow: hidden;
+}
+.container1 img { 
+    width: 100%;
+    background-image: url('http://res.cloudinary.com/chutteapi/image/upload/c_scale,w_225/v1453918622/default_oczf9m.png');
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.productCardDetail img {
+    max-height: 100%;
+    max-width: 100%;
+    background-image: url('http://res.cloudinary.com/chutteapi/image/upload/c_scale,w_225/v1453918622/default_oczf9m.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+textarea{
+    width: 100%;
+}
+
+
+
+
+
+
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    /*overflow-y: auto;*/
+    background: #00AC69;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+.sidebar-font > li {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    list-style-type: none;
+}
+
+.sidebar-font > li:hover {
+    color: #00AC69;
+    background-color: #FFF;
+    font-weight: bold;
+    font-size: 20px;
+    list-style-type: none;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        color: white;
+        width: 170px;
+        
+    }
+
+    #sidebar-wrapper > {
+        color: white;
+        width: 150px;
+        
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+ul{
+    margin-left: -25px;
+}
+

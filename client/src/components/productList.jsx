@@ -5,7 +5,7 @@ export default class ProductList extends React.Component{
   renderProductCards(){
     if(this.props.products){
       return this.props.products.map((product, index) => {
-        return <ProductCard key={index} productDetail={product} />
+        return <ProductCard key={index} productDetail={product} resetBuyMsg={this.props.resetBuyMsg}/>
       })
     }
   }

@@ -2,12 +2,13 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {createHistory, useBasename} from 'history';
-import {Router, Route, IndexRoute, Redirect} from 'react-router';
+import {Router, Route, IndexRoute, Redirect, browserHistory} from 'react-router';
 import {createStore, applyMiddleware, compose} from 'redux';
 import {syncHistory} from 'react-router-redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
+import persistState from 'redux-localstorage';
+import storeEnhancer from 'redux-history-transitions';
 import rootReducer from './reducers/rootReducer';
 import socket from './socket/socket';
 import App from './containers/app';
@@ -19,11 +20,11 @@ import ProductList from './components/productList';
 import UserAuth from './components/userAuth';
 import UserSignup from './components/UserSignup';
 import DevTools from './containers/DevTools';
+import UserProfile from './components/userProfile';
+import CurrentListing from './components/currentListing';
 import {fetchProducts} from './actions/actionsProducts';
 
-const history = useBasename(createHistory)({
-  basename: '/'
-});
+const history = browserHistory;
 
 const reduxRouterMiddleware = syncHistory(history);
 
@@ -31,6 +32,8 @@ const finalCreateStore = compose(
   applyMiddleware(reduxRouterMiddleware),
   applyMiddleware(thunk),
   applyMiddleware(createLogger()),
+  persistState(),
+  storeEnhancer(history),
   DevTools.instrument()
 )(createStore);
 
@@ -46,7 +49,15 @@ export default function configureStore(initialState){
   return store;
 }
 
-const store = configureStore();
+let state;
+
+if(window.localStorage.getItem('redux')){
+  state = JSON.parse(window.localStorage.getItem('redux'));
+} else {
+  state = window.__INITIAL__STATE__;
+}
+
+const store = configureStore(state);
 
 store.dispatch(fetchProducts());
 
@@ -61,10 +72,12 @@ ReactDOM.render(
         <IndexRoute component={Home}/>
         <Route path='browse' component={Browse}/>
         <Route path='browse/product/:id' component={ProductDetail}/>
-        <Route path='dashboard' component={Dashboard}/>
+        <Route path='dashboard/profile' component={UserProfile}/>
+        <Route path='create' component={Dashboard}/>
+        <Route path='current' component={CurrentListing}/>
         <Route path='signin' component={UserAuth}/>
         <Route path='signup' component={UserSignup}/>
-        <Redirect from='*' to='/' />
+        <Route path='*' component={Home} />
       </Route>
     </Router>
   </Provider>, app);

@@ -42,7 +42,11 @@ var itemSchema = new mongoose.Schema({
     },
     timeRemaining: {
         type: Number
-    }
+    },
+    priceIndex: {
+        type: Number
+    },
+    timeId: []
 });
 
 module.exports = mongoose.model('item', itemSchema);

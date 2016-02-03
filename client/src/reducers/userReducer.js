@@ -1,73 +1,129 @@
 import {combineReducers} from 'redux';
-import {USER_LOGIN, USER_LOGIN_SUCCESS, USER_LOGIN_FAILURE, USER_SIGNUP, USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILURE, POST_BUY, POST_BUY_SUCCESS, POST_BUY_FAILURE} from './../actions/actionConstants';
+import {USER_LOGIN, USER_LOGIN_SUCCESS, USER_LOGIN_FAILURE, USER_SIGNUP, USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILURE, POST_BUY, POST_BUY_SUCCESS, POST_BUY_FAILURE, USER_LOGOUT, POST_BUY_RESET_MSG, ADD_TO_USER_LISTINGS} from './../actions/actionConstants';
 
 const initialState = {
   userName: '',
   token: '',
+  firstName: '',
+  lastName: '',
+  phone: '',
+  address: '',
+  city: '',
+  state: '',
+  zip: '',
   loggingIn: false,
   signingUp: false,
   authErrorMessage: '',
   purchasedProducts: [],
   postingBuy: false,
   postedBuy: false,
-  postBuyErrorMessage: ''
+  postBuyErrorMessage: false,
+  currentListing: []
 };
 
-function userAuth(state, action){
-  state = state || initialState;
-  let newState = Object.assign({}, state);
+function userAuth(state = initialState, action){
 
   switch (action.type) {
     case USER_LOGIN:
-      newState.userName = action.userName;
-      newState.loggingIn = true;
-      newState.authErrorMessage = '';
-      return newState;
+      return Object.assign({}, state, {
+        userName: action.userName,
+        loggingIn: true,
+        authErrorMessage: ''
+      });
     case USER_LOGIN_SUCCESS:
-      newState.token = action.token;
-      newState.loggingIn = false;
-      newState.authErrorMessage = '';
-      return newState;
+      return Object.assign({}, state, {
+        token: action.token,
+        loggingIn: false,
+        authErrorMessage: ''
+      });
     case USER_LOGIN_FAILURE:
-      newState.loggingIn = false;
-      newState.AuthErrorMessage = action.err;
-      return newState;
+      return Object.assign({}, state, {
+        loggingIn: false,
+        authErrorMessage: action.err,
+      });
     case USER_SIGNUP:
-      newState.userName = action.userName;
-      newState.signingUp = true;
-      newState.authErrorMessage = '';
-      return newState;
+      return Object.assign({}, state, {
+        userName: action.userName,
+        signingUp: true,
+        authErrorMessage: ''
+      });
     case USER_SIGNUP_SUCCESS:
-      newState.token = action.token;
-      newState.signingUp = false;
-      newState.authErrorMessage = '';
-      return newState;
+      return Object.assign({}, state, {
+        token: action.token,
+        firstName: action.user.firstName,
+        lastName: action.user.lastName,
+        phone: action.user.phone,
+        address: action.user.address,
+        city: action.user.city,
+        state: action.user.state,
+        zip: action.user.zip,
+        signingUp: false,
+        authErrorMessage: ''
+      });
     case USER_SIGNUP_FAILURE:
-      newState.signingUp = false;
-      newState.authErrorMessage = action.err;
-      return newState;
+      return Object.assign({}, state, {
+        signingUp: false,
+        authErrorMessage: action.err
+      });
+    case USER_LOGOUT:
+      return Object.assign({}, state, {
+        userName: '',
+        token: '',
+        loggingIn: false,
+        signingUp: false,
+        authErrorMessage: '',
+        purchasedProducts: [],
+        postingBuy: false,
+        postedBuy: false,
+        postBuyErrorMessage: ''
+      });
     default:
       return state;
   }
 }
 
-function userPurchases(state, action){
-  state = state || initialState;
-  let newState = Object.assign({}, state);
+function userPurchases(state = initialState, action){
 
   switch (action.type) {
     case POST_BUY:
-      newState.postingBuy = true;
-      newState.purchasedProducts.push(action.product);
-      return newState;
+      return Object.assign({}, state, {
+        postingBuy: true,
+        postBuyErrorMessage: false,
+        purchasedProducts: [
+          ...state.purchasedProducts.slice(),
+          action.product
+        ]
+      });
     case POST_BUY_SUCCESS:
-      newState.postingBuy = false;
-      newState.postedBuy = true;
-      return newState;
+      return Object.assign({}, state, {
+        postingBuy: false,
+        postedBuy: true
+
+      });
     case POST_BUY_FAILURE:
-      newState.postingBuy = false;
-      newState.postBuyErrorMessage = action.err;
-      return newState;
+      return Object.assign({}, state, {
+        postingBuy: false,
+        postedBuy: false,
+        postBuyErrorMessage: true
+      });
+    case POST_BUY_RESET_MSG:
+      return Object.assign({}, state, {
+        postedBuy: false
+      });
+    default:
+      return state;
+  }
+}
+
+function userListings(state = initialState, action){
+  switch (action.type) {
+    case ADD_TO_USER_LISTINGS:
+      return Object.assign({}, state, {
+        currentListing: [
+          ...state.currentListing.slice(),
+          action.product
+        ]
+      })
     default:
       return state;
   }
@@ -75,7 +131,8 @@ function userPurchases(state, action){
 
 const userAuthReducer = combineReducers({
   userAuth,
-  userPurchases
+  userPurchases,
+  userListings
 });
 
 export default userAuthReducer;

@@ -1424,6 +1424,7 @@ ol ul,
 ul ol,
 ol ol {
   margin-bottom: 0;
+  margin-left: -20px;
 }
 .list-unstyled {
   padding-left: 0;
@@ -5457,6 +5458,7 @@ button.list-group-item-danger.active:focus {
   margin-bottom: 20px;
   background-color: #fff;
   border: 1px solid transparent;
+  min-height: 290px;
   border-radius: 4px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
           box-shadow: 0 1px 1px rgba(0, 0, 0, .05);

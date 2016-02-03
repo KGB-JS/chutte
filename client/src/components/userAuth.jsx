@@ -1,38 +1,81 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {authenticateUser} from '../actions/actionsUserLogin';
+import {authenticateUser} from './../actions/actionsUserAuth';
 import HomeNavBar from './homenavbar';
+import { Form, ValidatedInput } from 'react-bootstrap-validation';
 
 class UserAuth extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {userEmail: '' , inactiveButton: true };
+  }
+
   submitUserLogin(e){
     e.preventDefault();
     let user = {
-      userName: this.refs.userName.value,
+      username: this.state.userEmail,
       password: this.refs.password.value
-    }
+    };
+
     this.props.signInUser(user);
     this.props.history.push('browse');
   }
 
+  checkUserName(event){
+    this.setState({userEmail: event.target.value});
+    var isValidEmail = event.target.value.includes('@');
+    var isValidPassword = this.refs.password.value;
+
+    if(isValidEmail && isValidPassword.length > 5){
+      this.setState({inactiveButton: false });
+    } else {
+      this.setState({inactiveButton: true });
+    }
+  }
+
+  checkValidation(){
+    var isValidEmail = this.state.userEmail.includes('@');
+    var isValidPassword = this.refs.password.value;
+
+    if(isValidEmail && isValidPassword.length > 5){
+      this.setState({inactiveButton: false });
+    } else {
+      this.setState({inactiveButton: true });
+    }
+  }
+
+
+
   render(){
     return (
       <div>
-      <HomeNavBar/>
         <div className="container-fluid">
         <div className="col-md-7 col-md-offset-2">
-          <form>
+          <Form>
             <div className="row">
               <span><i className="fa fa-envelope-o fa-fw"></i></span>
-              <input className="form-control" ref="userName" type="email" placeholder="Email" />
+              <ValidatedInput
+                value={ this.state.userEmail }
+                onChange={this.checkUserName.bind(this)}
+                name="checkemail"
+                type="email" 
+                validate='required,isEmail'
+                errorHelp={{
+                required: 'Please enter your email',
+                isEmail: 'Email is invalid'
+                }}
+                className="form-control" placeholder='Email'/>
             </div>
             <div className="row">
               <span><i className="fa fa-key fa-fw"></i></span>
-              <input className="form-control" ref="password" type="password" placeholder="Password" />
+              <input 
+              onChange={this.checkValidation.bind(this)}
+              className="form-control" ref="password" type="password" placeholder="Password" />
             </div>
             <div className="row">
-              <button className="btn btn-primary" onClick={this.submitUserLogin.bind(this)}>Sign In</button>
+              <button className="btn btn-primary" onClick={this.submitUserLogin.bind(this)} disabled={this.state.inactiveButton}>Sign In</button>
             </div>
-          </form>
+          </Form>
           </div>
         </div>
       </div>
