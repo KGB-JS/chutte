@@ -14,11 +14,13 @@
 ul.sidebar-font > li:hover{
     color: #00AC69:;
     background-color:#FFF;
+    
 
 }
 
 a {
-    color: #00AC69;
+    color: #FFF;
+
 }
 
 /*li > a {
@@ -27,9 +29,7 @@ a {
     font-size: 20px;
 }*/
 
-ul.nav.nav-sidebar.browse > li > a {
-    font-size: 1.8vw;
-}
+
 
 .nav > li {
     border-width: 1px;
@@ -724,6 +724,7 @@ textarea{
     background-color: #FFF;
     font-weight: bold;
     font-size: 20px;
+    list-style-type: none;
 }
 
 @media(min-width:768px) {
@@ -737,7 +738,14 @@ textarea{
 
     #sidebar-wrapper {
         color: white;
-        width: 250px;
+        width: 170px;
+        
+    }
+
+    #sidebar-wrapper > {
+        color: white;
+        width: 150px;
+        
     }
 
     #wrapper.toggled #sidebar-wrapper {
@@ -754,3 +762,8 @@ textarea{
         margin-right: 0;
     }
 }
+
+ul{
+    margin-left: -25px;
+}
+
