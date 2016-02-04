@@ -70,7 +70,7 @@ module.exports = {
         Q.ninvoke(makeNewItem, 'save')
             .then(function() {
                 emit.emitAuction(makeNewItem._id);
-                var timeId = setInterval(function(){emit.emitAuction(makeNewItem._id)}, 9000);
+                var timeId = setInterval(function(){emit.emitAuction(makeNewItem._id)}, 900000);
                 timeStorage[makeNewItem._id] = timeId;
                 res.status(200).send(makeNewItem);
                 //email confirmation
@@ -117,7 +117,9 @@ module.exports = {
                     item.priceSchedule = priceSchedule[0];
                     item.priceIndex = -1;
                     emit.emitAuction(item._id);
-                    timeStorage[item._id] = setInterval(function(){emit.emitAuction(item._id)}, 2000);
+                    setTimeout(function(){
+                        timeStorage[item._id] = setInterval(function(){emit.emitAuction(item._id)}, 900000);
+                    }, 900000);
                     item.save()
                         .then(function() {
                             var transmitObject = {
