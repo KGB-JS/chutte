@@ -121,7 +121,7 @@ function userListings(state = initialState, action){
       return Object.assign({}, state, {
         currentListing: [
           ...state.currentListing.slice(),
-          action.product
+          Object.assign({}, action.product)
         ]
       })
     default:

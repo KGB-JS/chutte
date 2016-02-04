@@ -93,7 +93,7 @@ function createListing(state = initialState, action){
         postedProduct: true,
         productList: [
           ...state.productList.slice(),
-          action.productedListed
+          Object.assign({}, action.product)
         ]
       });
     case CREATE_LISTING_FAILURE:
