@@ -6,11 +6,11 @@ var sendgrid = require('sendgrid')(sendgridAPIKEY.apiKEY);
 
 module.exports = {
     buyItemConfirmation: function(buyer, item, quantity,seller) {
-        var buyHtml = '<div><h1>' + item.productName + '</h1><div>You purchase '+ quantity + 'of this '+item.productName+'.</div></div>';
+        var buyHtml = '<div><h1>' + item.productName + '</h1></div><div>Your purchase of ' + quantity + ' of ' + item.productName + '.</div>';
             sendgrid.send({
                 to: buyer,
                 from: 'noreply@chutte.com',
-                subject: 'Your purchase on Chutte has been confirmed! Email '+seller+'towort out details',
+                subject: 'Your purchase on Chutte has been confirmed!',
                 html: buyHtml
             }, function(err, json) {
                 if (err) {
@@ -20,11 +20,11 @@ module.exports = {
             });
     },
     soldItemConfirmation: function(seller, item, quantity,buyer) {
-        var soldHtml = '<div><h1>' + item.productName + '</h1><div>'+ quantity + ' units sold .</div></div>';
+        var soldHtml = '<div><h1>' + item.productName + '</h1></div><br><div><h3>'+ quantity + ' units sold.</h3></div>';
             sendgrid.send({
                 to: seller,
                 from: 'noreply@chutte.com',
-                subject: 'Your Item ' + item.productName + ' has sold to'+ buyer,
+                subject: 'Your Item ' + item.productName + ' has sold to '+ buyer + '.',
                 html: soldHtml
             }, function(err, json) {
                 if (err) {
@@ -36,7 +36,7 @@ module.exports = {
     listItemConfirmation: function(seller, item) {
         var itemHtml = '';
         for(var key in item){
-            itemHtml += '<div><h1>' + key + ':</h1>' + '<h3>'+ item[key] +'</h3>'+'</div>' 
+            itemHtml += '<div><h1>' + key + ': </h1>' + '<h3>'+ item[key] +'</h3>'+'</div>' 
         }
             sendgrid.send({
                 to: seller,
@@ -51,12 +51,12 @@ module.exports = {
             });
     },
     signUpConfirmation: function(user) {
-        var welcomeHtml = '<h1>WELCOME!</h1><div><h2>You have joined the online marketplace, Chutte</h2></div>';
+        var welcomeHtml = '<h1>WELCOME!</h1><div><h2>You have joined the online marketplace, Chutte</h2><br><h3>Supply and demand, supplied.</h3></div>';
             sendgrid.send({
                 to: user,
                 from: 'noreply@chutte.com',
                 subject: 'Welcome to Chutte!',
-                text: welcomeHtml
+                html: welcomeHtml
             }, function(err, json) {
                 if (err) {
                     return console.error(err);
