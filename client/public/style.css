@@ -564,6 +564,7 @@ input[type="file"] {
     margin-top: 20px;
     margin-left: 20px;
     margin-right: 20px;
+    margin-bottom: 40px;
 }
 
 #infoHeader {
@@ -785,4 +786,13 @@ ul{
     
     padding-right: 10px;
 }
+.service-box {
+    margin: 50px auto 0;
+    max-width: 400px;
+}
 
+.profile-image{
+    height: 125px;
+    width: auto;
+    border-radius: 4px;
+}

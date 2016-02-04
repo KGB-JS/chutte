@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import HomeNavBar from './../components/homenavbar';
 import JumboTronButton from './../components/JumboTronButton';
 import DashboardTiles from './../components/dashboardTiles';
+import MadeBy from './../components/madeBy';
 import {userLogout} from './../actions/actionsUserAuth';
 
 class Home extends React.Component {
@@ -15,6 +16,9 @@ class Home extends React.Component {
         </div>
         <div className="homeInfo">
           <DashboardTiles/>
+        </div>
+        <div className="homeInfo">
+        <MadeBy/>
         </div>
       </div>
     )
