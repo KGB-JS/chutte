@@ -34,7 +34,7 @@ function mapDispatchToProps(dispatch){
 
 function mapStateToProps(state){
   return {
-    products: state.productStore.products.productList,
+    products: state.userStore.userListings.currentListing,
     userAuth: state.userStore.userAuth
   };
 }

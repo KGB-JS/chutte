@@ -1,4 +1,4 @@
-import {updateProduct, removeProduct} from './../actions/actionsProducts';
+import {updateProduct, removeProduct, removeSoldoutProduct} from './../actions/actionsProducts';
 var socket = require('socket.io-client')();
 
 export default function(store){
