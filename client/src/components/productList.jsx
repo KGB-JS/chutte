@@ -35,7 +35,7 @@ export default class ProductList extends React.Component{
   render(){
     return(
     <div>
-      <div className="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2">
+      <div className="col-sm-12 col-md-12 ">
        <div className="input-group">
          <input type="text"
           className="form-control" 

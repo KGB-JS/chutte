@@ -68,7 +68,7 @@ export default class CreateListing extends React.Component {
     let failedPostMSG = this.props.productListing.postErrorMSG === true ? <p className="alert alert-danger alert-dismissible">Please Fill out form completely</p> : "";
 
     return (
-      <div className="col-sm-offset-3 col-md-10 col-md-offset-2">
+      <div className="bumpDown col-sm-offset-3 col-md-10 col-md-offset-2">
       <form role="form">
       <div className="col-md-5">
         <div>
