@@ -11,7 +11,7 @@ export default class Navbar extends React.Component {
     let signout = this.props.user.token !== '' ? <li onClick={this.handleSignout.bind(this)}>Sign out</li> : '';
     let icon = (<span><img className="logo" src="../assets/chutteLogo.png"  alt="Chutte Logo" height="50" width="50" /></span>);
     return (
-      <nav className="navbar navbar-default">
+      <nav className="navbar navbar-default navBrowse">
         <div className="container-fluid chutteGreen">
           <div className="navbar-header">
             <div className="navbar-header">
