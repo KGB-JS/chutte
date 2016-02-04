@@ -77,7 +77,6 @@ module.exports = {
         var makeNewItem = new Item(newItem);
         Q.ninvoke(makeNewItem, 'save')
             .then(function() {
-                console.log("i happened")
                 emit.emitAuction(makeNewItem._id)
                 var timeId = setInterval(function(){emit.emitAuction(makeNewItem._id)}, 450000);
                 res.status(200).send(makeNewItem);
