@@ -17,3 +17,12 @@ export function filterProductsByCategory(productList, category){
      }
    });
 }
+
+export function filterActiveAuctions(productList){
+  let now = Date.now();
+  return productList.filter(function(product){
+    if(product.auctionEnds){
+      return product.auctionEnds > now;
+    }
+  })
+}
