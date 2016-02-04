@@ -71,14 +71,17 @@ module.exports = {
             image: productImage,
             priceSchedule: priceSchedule[0],
             timeRemaining: auctionEnds,
-            priceIndex: 0
+            priceIndex: -1
         };
 
         var makeNewItem = new Item(newItem);
         Q.ninvoke(makeNewItem, 'save')
             .then(function() {
+                console.log("i happened")
                 emit.emitAuction(makeNewItem._id)
+                var timeId = setInterval(function(){emit.emitAuction(makeNewItem._id)}, 450000);
                 res.status(200).send(makeNewItem);
+                makeNewItem.timeId.push(timeId);
                 makeNewItem.save();
                 //email confirmation
                 sendGrid.listItemConfirmation(createdBy, newItem);
