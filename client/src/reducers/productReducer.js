@@ -39,7 +39,10 @@ function products(state = initialState, action){
         return Object.assign({}, state, {
           productList: [
             ...state.productList.slice(0, index),
-            Object.assign({}, action.product),
+            Object.assign({}, state.productList[index], {
+              quantity: action.product.quantity,
+              price: action.product.price
+            }),
             ...state.productList.slice(index + 1)
           ]
         });
@@ -47,7 +50,7 @@ function products(state = initialState, action){
         return Object.assign({}, state, {
           productList: [
             ...state.productList.slice(),
-            action.product
+            Object.assign({}, action.product)
           ]
         });
       }
