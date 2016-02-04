@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import NavBar from '../components/navbar';
 import ProfileSideNavBar from './../components/profileSideBar';
 import {userLogout} from './../actions/actionsUserAuth';
+import {postUpdateProfile} from './../actions/actionsUserSignup'
 
 class UserProfile extends React.Component {
 	constructor(props){
@@ -12,11 +13,30 @@ class UserProfile extends React.Component {
 			firstname: this.props.userDetail.firstName,
 	    lastname: this.props.userDetail.lastname,
 			phone: this.props.userDetail.phone,
-			streetAddress: this.props.userDetail.streetAddress,
+			streetAddress: this.props.userDetail.address,
 			stateRegion: this.props.userDetail.stateRegion,
 			city: this.props.userDetail.city
 		};
 	}
+  
+  submitProfileUpdate(event){
+  event.preventDefault();
+   var userUpdate = {
+      firstName: this.refs.firstName.value,
+      lastName: this.refs.lastName.value,
+      phone: this.refs.phone.value,
+      address: this.refs.address.value,
+      state: this.refs.state.value,
+      city: this.refs.city.value,
+      zip: this.refs.zip.value
+    };
+    for(var key in userUpdate){
+      if(userUpdate[key] === ""){
+        userUpdate[key] = this.props.userDetail.key;
+      }  
+    }
+    this.props.updateProfile(userUpdate);
+  }
 
 	render() {
 		return (
@@ -31,7 +51,7 @@ class UserProfile extends React.Component {
            <div className = "col-md-5">
               <div className="form-group">
                 <label for="exampleInputEmail1">Username</label>
-                <input type="email" className="form-control" id="exampleInputEmail1" placeholder={this.props.userDetail.userName}/>
+                <input ref="userName" type="email" className="form-control" id="exampleInputEmail1" placeholder={this.props.userDetail.userName}/>
               </div>
               <div className="form-group">
                 <label for="exampleInputPassword1">Password</label>
@@ -39,11 +59,11 @@ class UserProfile extends React.Component {
               </div>
               <div className="form-group">
                 <label for="exampleInputPassword1">First Name</label>
-                <input type="text" className="form-control" placeholder={this.props.userDetail.firstName}/>
+                <input ref="firstName" type="text" className="form-control" placeholder={this.props.userDetail.firstName}/>
               </div>
               <div className="form-group">
                 <label for="exampleInputPassword1">Last Name</label>
-                <input type="text" className="form-control" placeholder={this.props.userDetail.lastName}/>
+                <input ref="lastName" type="text" className="form-control" placeholder={this.props.userDetail.lastName}/>
               </div>
               
              
@@ -51,21 +71,25 @@ class UserProfile extends React.Component {
               <div className = "col-md-5">
                   <div className="form-group">
                     <label for="exampleInputPassword1">Phone</label>
-                    <input type="text" className="form-control" placeholder={this.props.userDetail.phone}/>
+                    <input ref="phone" type="text" className="form-control" placeholder={this.props.userDetail.phone}/>
                   </div>
                   <div className="form-group">
                     <label for="exampleInputPassword1">Street Address</label>
-                    <input type="text" className="form-control" placeholder={this.props.userDetail.address}/>
+                    <input ref="address" type="text" className="form-control" placeholder={this.props.userDetail.address}/>
                   </div>
                   <div className="form-group">
                     <label for="exampleInputPassword1">State Region</label>
-                    <input type="text" className="form-control" placeholder={this.props.userDetail.state}/>
+                    <input ref="state" type="text" className="form-control" placeholder={this.props.userDetail.state}/>
                   </div>
                   <div className="form-group">
                     <label for="exampleInputPassword1">City</label>
-                    <input type="text" className="form-control" placeholder={this.props.userDetail.city}/>
+                    <input ref="city" type="text" className="form-control" placeholder={this.props.userDetail.city}/>
+                  </div>           
+                  <div className="form-group">
+                    <label for="exampleInputPassword1">Zip</label>
+                    <input ref="zip" type="text" className="form-control" placeholder={this.props.userDetail.zip}/>
                   </div>
-                   <button type="submit" className="btn btn-default">Submit</button>
+                   <button type="submit" className="btn btn-default" onClick={this.submitProfileUpdate.bind(this)}>Submit</button>
               </div>
           </form>
         </div>
@@ -78,7 +102,11 @@ function mapDispatchToProps(dispatch){
   return {
     submitSignout: function(){
        dispatch(userLogout());
+    },
+    updateProfile: function(user){
+      dispatch(postUpdateProfile(user))
     }
+
   }
 }
 
