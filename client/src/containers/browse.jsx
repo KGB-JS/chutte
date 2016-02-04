@@ -18,9 +18,7 @@ class BrowsePage extends React.Component {
          user={this.props.userAuth}/>
         <div className="container-fluid">
         <BrowseSideBar className="col-xs-2 col-sm-2 col-md-2" filter={this.props.filter}/>
-          <SearchBar className="col-xs-offset-2 serach-bar col-md-10 col-md-offset-2 col-sm-10 col-sm-offset-2"/>
           <row>
-
             <div className="col-xs-offset-2 col-sm-offset-2 col-sm-10 col-md-10 col-md-offset-2">
               <ProductList products={products} userPurchases={this.props.userPurchases} resetBuyMsg={this.props.resetBuyMsg}/>
             </div>
