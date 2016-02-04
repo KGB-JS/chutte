@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, UPDATE_PRODUCT, CREATE_LISTING, CREATE_LISTING_SUCCESS, CREATE_LISTING_FAILURE, PRODUCT_CATEGORY_FILTER, REMOVE_SOLDOUT_PRODUCT} from './../actions/actionConstants';
-import {stateContainsProduct, filterProductsByCategory} from './reducerHelpers';
+import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, UPDATE_PRODUCT, CREATE_LISTING, CREATE_LISTING_SUCCESS, CREATE_LISTING_FAILURE, PRODUCT_CATEGORY_FILTER, REMOVE_SOLDOUT_PRODUCT, REMOVE_ENDED_AUCTION_PRODUCT} from './../actions/actionConstants';
+import {stateContainsProduct, filterProductsByCategory, filterActiveAuctions} from './reducerHelpers';
 
 const initialState = {
   productList: [],
@@ -64,6 +64,11 @@ function products(state = initialState, action){
             ...state.productList.slice(0, removeIndex),
             ...state.productList.slice(removeIndex + 1)
           ]
+        });
+      case REMOVE_ENDED_AUCTION_PRODUCT:
+        let activeAuctionsList = filterActiveAuctions(state.productList);
+        return Object.assign({}, state, {
+          productList: [...activeAuctionsList.slice()]
         });
     default:
       return state;
