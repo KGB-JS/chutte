@@ -4,64 +4,14 @@
 
 Table of Contents
 -----------------
-1. [Requirements](#requirements)
-2. [About](#about)
-3. [Demo](#demo)
-4. [Getting Started](#getting-started)
-5. [Usage](#usage)
-6. [Structure](#structure)
-7. [Webpack](#webpack)
-8. [Troubleshooting](#troubleshooting)
-
-Requirements
-------------
-    bcrypt: ^0.8.5,
-    body-parser: ^1.14.2,
-    bootstrap: ^3.3.6,
-    chai: ^3.4.1,
-    chai-http: ^1.0.0,
-    es6-promise: ^3.0.2,
-    express: ^4.13.3,
-    express-partials: ^0.3.0,
-    history: ^1.17.0,
-    http: 0.0.0,
-    isomorphic-fetch: ^2.2.1,
-    jwt-simple: ^0.4.1,
-    mocha: ^2.3.4,
-    moment: ^2.11.1,
-    mongoose: ^4.3.5,
-    morgan: ^1.6.1,
-    q: ^1.4.1,
-    react: ^0.14.6,
-    react-datepicker: ^0.18.0,
-    react-dom: ^0.14.6,
-    react-redux: ^4.0.6,
-    react-router: ^1.0.3,
-    redux: ^3.0.5,
-    redux-logger: ^2.3.2,
-    redux-simple-router: ^1.0.2,
-    redux-thunk: ^1.0.3,
-    request: ^2.67.0,
-    sendgrid: ^2.0.0,
-    socket.io: ^1.4.4,
-    socket.io-client: ^1.4.4,
-    webpack: ^1.12.11,
-    babel-core: ^6.4.0,
-    babel-loader: ^6.2.1,
-    babel-preset-es2015: ^6.3.13,
-    babel-preset-react: ^6.3.13,
-    babel-preset-stage-1: ^6.3.13,
-    eslint: ^1.10.3,
-    eslint-config-airbnb: ^3.1.0,
-    eslint-plugin-react: ^3.15.0,
-    react-hot-loader: ^1.3.0,
-    redux-devtools: ^3.0.1,
-    redux-devtools-dock-monitor: ^1.0.1,
-    redux-devtools-log-monitor: ^1.0.2,
-    webpack-dev-middleware: ^1.4.0,
-    webpack-dev-server: ^1.14.1,
-    webpack-hot-middleware: ^2.6.0
-
+1. [About](#about)
+2. [Demo](#demo)
+3. [Getting Started](#getting-started)
+4. [Usage](#usage)
+5. [Structure](#structure)
+6. [Webpack](#webpack)
+7. [Troubleshooting](#troubleshooting)
+  
 
 About
 --------
@@ -94,7 +44,7 @@ Clone the repo and install the necessary node modules:
 
 ```shell
 $ git clone https://github.com/KGB-JS/chutte.git
-$ cd fear-the-repo
+$ cd chutte
 $ npm install                   # Install Node modules listed in ./package.json (this will be a while)
 ```
 
