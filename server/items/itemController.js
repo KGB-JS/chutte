@@ -120,6 +120,7 @@ module.exports = {
                     setTimeout(function(){
                         timeStorage[item._id] = setInterval(function(){emit.emitAuction(item._id)}, 900000);
                     }, 900000);
+                    res.status(200).send(item);
                     item.save()
                         .then(function() {
                             var transmitObject = {
@@ -134,7 +135,6 @@ module.exports = {
                                 image: item.image
                             };
                             app.io.sockets.emit('quantityUpdate', transmitObject);
-                            res.status(200).send(item);
                             //notify seller
                             sendGrid.soldItemConfirmation(item.createdBy, item, quantityRequested,user.username);
                             //notify buyer
