@@ -19,6 +19,7 @@ module.exports = {
                         if(priceFlag && item.priceSchedule[i].decrementTime > now){
                             priceFlag = false;
                             item.price = item.priceSchedule[i].price;
+                            item.timeRemaining = item.auctionEnds;
                             item.save();
                             emit.emitAuctionGet(item._id);
                         }
@@ -69,16 +70,15 @@ module.exports = {
             description: description,
             image: productImage,
             priceSchedule: priceSchedule[0],
-            timeRemaining: priceSchedule[0].decrementTime,
-            priceIndex: -1
+            timeRemaining: auctionEnds,
+            priceIndex: 0
         };
 
         var makeNewItem = new Item(newItem);
         Q.ninvoke(makeNewItem, 'save')
             .then(function() {
-                var timeId = setInterval(emit.emitAuction(makeNewItem._id), 900000);
+                emit.emitAuction(makeNewItem._id)
                 res.status(200).send(makeNewItem);
-                makeNewItem.timeId.push(timeId);
                 makeNewItem.save();
                 //email confirmation
                 sendGrid.listItemConfirmation(createdBy, newItem);
@@ -119,22 +119,12 @@ module.exports = {
                     if(item.quantity === 0){
                         item.active = false;
                     }
-                    // var priceSchedule = timeSchedule.findTimeReduce(item.price, item.minPrice, item.auctionEnds);
-                    // console.log('before buy', item.priceSchedule)
-                    // console.log('before buy', item.timeId)
-                    // clearTimeout(item.timeId);
-                    // item.priceSchedule = priceSchedule[0];
-                    // item.timeRemaining = priceSchedule[0].decrementTime;
-                    // item.priceIndex = 0;
-                    // item.timeId = setInterval(emit.emitAuction(item._id), 900000);
-                    // console.log('after buy', item.priceSchedule)
-                    // console.log('after buy', item.timeId)
                     item.save()
                         .then(function() {
                             var transmitObject = {
                                 _id: item._id,
                                 price: item.price,
-                                timeRemaining: item.priceSchedule[item.priceIndex].decrementTime,
+                                timeRemaining: item.auctionEnds,
                                 description: item.description,
                                 productName: item.productName,
                                 createdBy: item.createdBy,
