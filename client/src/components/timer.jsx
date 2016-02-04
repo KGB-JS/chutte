@@ -4,7 +4,7 @@ import numeral from 'numeral';
 class Timer extends React.Component{
   constructor(props){
     super(props)
-    this.state = {secondsRemaining:  0, nextUpdate: this.props.nextUpdateTime}
+    this.state = {secondsRemaining:  0, auctionEnd: this.props.nextUpdateTime}
   }
 
   tick(){
@@ -17,17 +17,10 @@ class Timer extends React.Component{
   }
 
   componentDidMount(){
-    let milliseconds = this.state.nextUpdate - Date.now();
+    let milliseconds = this.props.nextUpdateTime - Date.now();
     let seconds = (milliseconds / 1000);
     this.setState({secondsRemaining: seconds});
     this.interval = setInterval(this.tick.bind(this), 1000);
-  }
-
-  componentWillReceiveProps(nextProps){
-    this.setState({nextUpdate: this.props.nextUpdateTime});
-    let milliseconds = this.state.nextUpdate - Date.now();
-    let seconds = (milliseconds / 1000);
-    this.setState({secondsRemaining: seconds});
   }
 
   componentWillUnmount(){
