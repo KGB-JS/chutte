@@ -1,7 +1,7 @@
-var sendgridAPIKEY = require('./emailAPIKeys.js');
-var sendgrid = require('sendgrid')(sendgridAPIKEY.apiKEY);
+// var sendgridAPIKEY = require('./emailAPIKeys.js');
+// var sendgrid = require('sendgrid')(sendgridAPIKEY.apiKEY);
 //for deployment
-//var sendgrid  = require('sendgrid')(process.env.SENDGRIDKEY);
+var sendgrid  = require('sendgrid')(process.env.SENDGRIDKEY);
 
 
 module.exports = {
@@ -36,7 +36,7 @@ module.exports = {
     listItemConfirmation: function(seller, item) {
         var itemHtml = '';
         for(var key in item){
-            itemHtml += '<div><h1>' + key + ': </h1>' + '<h3>'+ item[key] +'</h3>'+'</div>' 
+            itemHtml += '<div><h1>' + key + ': </h1>' + '<h3>'+ item[key] +'</h3>'+'</div>'
         }
             sendgrid.send({
                 to: seller,
