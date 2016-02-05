@@ -25,7 +25,6 @@ module.exports = {
                 if (foundUser) {
                   var token = jwt.encode(user, 'secret');
                   res.json({
-                    user: user,
                     username: user.username,
                     token: token,
                     firstName: user.firstName,
