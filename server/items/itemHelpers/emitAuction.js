@@ -6,6 +6,7 @@ module.exports = {
     emitAuction: function(dbItemID) {
         var app = require('./../../server.js');
         var findItem = Q.nbind(Item.findOne, Item);
+        var now = moment().valueOf();
         findItem({
                 _id: dbItemID
             })
@@ -13,27 +14,26 @@ module.exports = {
                 if (!item) {
                     new Error('Item not found');
                 } else {
-                    if(item.priceIndex < item.priceSchedule.length){
-                        console.log(item.priceSchedule[item.priceIndex].decrementTime)
+                    if (item.auctionEnds < now || item.quantity < 1) {
+                        item.active = false;
+                        item.save()
+                    } else {
+                        item.priceIndex++;
+                        item.save();
                         var transmitObject = {
                             _id: item._id,
-                            price: item.price,
-                            timeRemaining: item.priceSchedule[item.priceIndex].decrementTime,
+                            price: item.priceSchedule[item.priceIndex].price,
+                            timeRemaining: item.auctionEnds,
                             description: item.description,
                             productName: item.productName,
                             createdBy: item.createdBy,
                             quantity: item.quantity,
                             category: item.category,
-                            image: item.image
+                            image: item.image,
+                            auctionEnds: item.auctionEnds
                         };
-                        console.log('price', item.price)
-                        console.log('emit', item._id);
-                        console.log('price priceSchedule', item.priceSchedule);
+                        console.log(transmitObject)
                         app.io.sockets.emit('productUpdate', transmitObject);
-                        item.priceIndex++;
-                        item.save(); 
-                    } else {
-                        clearTimeout(item.timeId[0]);
                     }
                 }
             });
@@ -49,25 +49,19 @@ module.exports = {
                     new Error('Item not found');
                 } else {
                     if(item.priceIndex < item.priceSchedule.length){
-                        console.log(item.priceSchedule[item.priceIndex].decrementTime)
                         var transmitObject = {
                             _id: item._id,
-                            price: item.price,
-                            timeRemaining: item.priceSchedule[item.priceIndex].decrementTime,
+                            price: item.priceSchedule[item.priceIndex].price,
+                            timeRemaining: item.auctionEnds,
                             description: item.description,
                             productName: item.productName,
                             createdBy: item.createdBy,
                             quantity: item.quantity,
                             category: item.category,
-                            image: item.image
+                            image: item.image,
+                            auctionEnds: item.auctionEnds
                         };
-                        console.log('price', item.price)
-                        console.log('emit', item._id);
-                        console.log('price priceSchedule', item.priceSchedule);
                         app.io.sockets.emit('productUpdate', transmitObject);
-                        item.save(); 
-                    } else {
-                        clearTimeout(item.timeId[0]);
                     }
                 }
             });

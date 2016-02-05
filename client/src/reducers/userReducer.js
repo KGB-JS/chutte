@@ -32,7 +32,15 @@ function userAuth(state = initialState, action){
       });
     case USER_LOGIN_SUCCESS:
       return Object.assign({}, state, {
-        token: action.token,
+        token: action.user.token,
+        userName: action.user.username,
+        firstName: action.user.firstName,
+        lastName: action.user.lastName,
+        phone: action.user.phone,
+        address: action.user.streetAddress,
+        city: action.user.city,
+        state: action.user.stateRegion,
+        zip: action.user.zip,
         loggingIn: false,
         authErrorMessage: ''
       });
@@ -121,7 +129,7 @@ function userListings(state = initialState, action){
       return Object.assign({}, state, {
         currentListing: [
           ...state.currentListing.slice(),
-          action.product
+          Object.assign({}, action.product)
         ]
       })
     default:

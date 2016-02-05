@@ -6,7 +6,6 @@ var sendGrid = require('./../items/itemHelpers/sendGridController.js');
 
 module.exports = {
     signin: function(req, res, next) {
-      console.log(req.body)
       var username = req.body.username;
       var password = req.body.password;
       var findUser = Q.nbind(User.findOne, User);
@@ -25,11 +24,10 @@ module.exports = {
                 if (foundUser) {
                   var token = jwt.encode(user, 'secret');
                   res.json({
-                    user: user,
                     username: user.username,
                     token: token,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
+                    firstName: user.firstname,
+                    lastName: user.lastname,
                     phone: user.phone,
                     streetAddress: user.streetAddress,
                     stateRegion: user.stateRegion,
@@ -74,8 +72,8 @@ module.exports = {
             var newUser = {
               username: username,
               password: password,
-              firstName: firstName,
-              lastName: lastName,
+              firstname: firstName,
+              lastname: lastName,
               phone: phone,
               streetAddress: streetAddress,
               stateRegion: stateRegion,
@@ -133,18 +131,38 @@ module.exports = {
           username: user.username
         }).then(function(foundUser) {
           if (foundUser) {
-            User.firstName = req.body.firstName;
-            User.lastName = req.body.lastName;
-            User.phone = req.body.phone;
-            User.streetAddress = req.body.streetAddress;
-            User.stateRegion = req.body.stateRegion;
-            User.city = req.body.city;
-            User.zip = req.body.zip;
-            User.save();
-            res.status(200).send();
-          } else {
-            res.state(401).send();
-          }
+            if(foundUser.password !== req.body.password){
+              foundUser.password = req.body.password;
+              var resetToken = true;
+            } else {
+              var resetToken = false;
+            }
+              foundUser.firstname = req.body.firstname;
+              foundUser.lastname = req.body.lastname;
+              foundUser.phone = req.body.phone;
+              foundUser.streetAddress = req.body.streetAddress;
+              foundUser.stateRegion = req.body.stateRegion;
+              foundUser.city = req.body.city;
+              foundUser.zip = req.body.zip;
+              foundUser.save().then(function(user){
+              if(resetToken){
+                token = jwt.encode(user, 'secret');
+              }
+                res.json({
+                  username: user.username,
+                  token: token,
+                  firstName: user.firstname,
+                  lastName: user.lastname,
+                  phone: user.phone,
+                  address: user.streetAddress,
+                  state: user.stateRegion,
+                  city: user.city,
+                  zip: user.zip
+                });
+              });
+            } else {
+              res.state(401).send();
+            }
         }).fail(function(error) {
           next(error);
         });

@@ -5,24 +5,27 @@ class DashBoardTile extends React.Component {
     return (
       <div className="container-fluid">
         <div id="infoHeader">
-        Information
+        Why Chutte?
+        <h3>Because we do it better.</h3>
         </div>
         <div className="col-lg-4 col-md-6 col-sm-12 col-xs-12">
           <div className="panel panel-primary">
           <div className="panel-heading"><span className="glyphicon glyphicon-time"></span>
           </div>
             <div className="panel-body">
-            <p>Chutte unique reverse auction style guarantees if your item sells it will be above or at your minimum sale price. All you have to do is set the start price and minimum price. Then kick back and wait for your item to sell.</p>
+            <h2>We put time on your side</h2>
+            <p>Working off the guidlines given to Chutte, an individually tailored, price schedule is created for each item. This price schedule emulates the idea of supply and demand. As time passes, Chutte adjusts to reach an optimal price point for buyers and sellers.</p>
             </div>
           </div>
         </div>
         <div className="col-lg-4 col-md-6 col-sm-12 col-xs-12">
           <div className="panel panel-primary">
           <div className="panel-heading">
-          <span className="glyphicon glyphicon-usd"></span>
+          <span className="glyphicon glyphicon-user"></span>
           </div>
             <div className="panel-body">
-            <p>Chutte allows sellers to obtain the maximum amount for their products. A reverse auction sale starts with the highest price possible and slowly decreases until the auction ends. Reverse auctions work best with unique items or giving early access to ticket sales. Post an item today to try. </p>
+            <h2>Buy and Sell</h2>
+            <p>Chutte does the extra work for you. Many online marketplaces bring people together to buy and sell. What happens when an item does not sell or it is too expensive? It ends up being an opportunity missed. Chutte is in place to remove those barriers.</p>
             </div>
           </div>
         </div>
@@ -32,7 +35,8 @@ class DashBoardTile extends React.Component {
           <span className="glyphicon glyphicon-tags"></span>
           </div>
             <div className="panel-body">
-            <p>If you are looking for the right place to sell the most exclusive and unique items Chutte is your one stop shop. When dealing with a unique product finding the market demand can be challenging. By using Chutte that is all taken care of. Giving youthe best change for selling your product for as much as possible.</p>
+            <h2>Supply and demand</h2>
+            <p>We want everyone to get the best deal for their listings. From the beginning of time, humans have had the problem, What should I sell this for? Should I raise the price? Chutte down those problems. With Chutte.</p>
             </div>
           </div>
         </div>

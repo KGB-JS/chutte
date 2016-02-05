@@ -31,7 +31,10 @@ class ProductDetail extends React.Component {
     this.findIndex();
   }
   render() {
-    let userPurchaseBuy = this.props.userPurchaseBuy === true ? <p className="alert alert-success ">Purchase successful check your email </p>: <p></p>;
+    let userAuthMsg = this.props.user.token === '' ? <p className="alert alert-danger">Please signup or signin</p> : <p></p>;
+
+  let userPurchaseBuy = this.props.userPurchaseBuy === true ? <p className="alert alert-success ">Thank you for the purchase! A purchase confirmation will be emailed shortly.</p>: <p></p>;
+
     return (
       <div>
         <div className="container-fluid">
@@ -66,9 +69,10 @@ class ProductDetail extends React.Component {
               <input className="form-control" type="number" min="1" max={this.props.products[this.productIndex].quantity} ref="purchaseQuantity" placeholder="Select Quantity"/>
 
               <span className="input-group-btn">
-                <button className="btn btn-default" type="button" onClick={this.handleBuy.bind(this)}>Confirm</button>
+                <button className="btn btn-default" type="button" disabled={this.props.user.token === ''} onClick={this.handleBuy.bind(this)}>Confirm</button>
               </span>
             </div>
+            {userAuthMsg}
             {userPurchaseBuy}
             </div>
           </div>

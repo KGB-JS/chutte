@@ -11,7 +11,8 @@ export const POST_BUY_SUCCESS = 'POST_BUY_SUCCESS';
 export const POST_BUY_FAILURE = 'POST_BUY_FAILURE';
 export const POST_BUY_RESET_MSG = 'POST_BUY_RESET_MSG';
 export const PRODUCT_CATEGORY_FILTER = 'PRODUCT_CATEGORY_FILTER';
-export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
+export const REMOVE_SOLDOUT_PRODUCT = 'REMOVE_SOLDOUT_PRODUCT';
+export const REMOVE_ENDED_AUCTION_PRODUCT = 'REMOVE_ENDED_AUCTION_PRODUCT';
 
 //-----------User Actions-------------------------------------
 export const USER_LOGIN = 'USER_LOGIN';
@@ -22,6 +23,8 @@ export const USER_SIGNUP_SUCCESS = 'USER_SIGNUP_SUCCESS';
 export const USER_SIGNUP_FAILURE = 'USER_SIGNUP_FAILURE';
 export const USER_LOGOUT = 'USER_LOGOUT';
 export const ADD_TO_USER_LISTINGS = 'ADD_TO_USER_LISTINGS';
+export const USER_PROFILE_UPDATE = 'USER_PROFILE_UPDATE';
+export const USER_PROFILE_UPDATE_ERR = 'USER_PROFILE_UPDATE_ERR';
 
 //------------------------------------------------------------
 export const CategoryFilters = ["All Products", "Antiques", "Art", "Automobiles", "Clothing", "Electronics", "Entertainment", "Jewelry",  "Tickets and Experiences", "Travel"];

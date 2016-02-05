@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import {checkStatus, parseJSON} from './actionsHelper';
-import {USER_SIGNUP, USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILURE} from './actionConstants';
+import {USER_SIGNUP, USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILURE, USER_PROFILE_UPDATE, USER_PROFILE_UPDATE_ERR } from './actionConstants';
 
 export function userSignup(userName){
   return {
@@ -30,12 +30,35 @@ export function userSignupFailure(err){
   };
 };
 
+export function userProfileUpdate(user){
+  return {
+    type: USER_PROFILE_UPDATE,
+    user: user
+  };
+}
+
+export function userProfileUpdateErr(err){
+  return {
+    type: USER_PROFILE_UPDATE_ERR,
+    err: err
+  };
+}
+
+
+
 export function postUserSignup(user){
-  return function(dispatch){
+    return function(dispatch){
     dispatch(userSignup(user.username));
     let newUser = {
       username: user.username,
-      password: user.password
+      password: user.password,
+      firstname: user.firstName,
+      lastname: user.lastName,
+      phone: user.phone,
+      streetAddress: user.address,
+      stateRegion: user.state,
+      city: user.city,
+      zip: user.zip
     }
     return fetch('/api/users/signup', {
       method: 'post',
@@ -43,7 +66,7 @@ export function postUserSignup(user){
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(newUser)
+      body: JSON.stringify(user)
     })
     .then(checkStatus)
     .then(parseJSON)
@@ -52,6 +75,38 @@ export function postUserSignup(user){
     })
     .catch(function(error){
       dispatch(userSignupFailure(error));
+    });
+  };
+};
+
+export function postUpdateProfile(user, token){
+  return function(dispatch){
+    let userUpdated = {
+      username: user.userName,
+      password: user.password,
+      firstname: user.firstName,
+      lastname: user.lastName,
+      phone: user.phone,
+      streetAddress: user.address,
+      stateRegion: user.state,
+      city: user.city,
+      zip: user.zip
+    };
+    return fetch('/api/users/userUpdate', {
+      method: 'post',
+      body: JSON.stringify(userUpdated),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      }
+    }).then(checkStatus)
+    .then(parseJSON)
+    .then(function(response){
+      dispatch(userProfileUpdate(response));
+    })
+    .catch(function(error){
+      dispatch(userProfileUpdateErr(error));
     });
   };
 }

@@ -36,8 +36,8 @@ export default class HomeNavbar extends React.Component {
             <div className="navbar-header">
               <Link  to="/" className="navbar-brand">{icon} Chutte</Link>
             </div>
-            <ul className="nav navbar-nav navbar-right">
-              <li onClick={this.handleSignout.bind(this)}>Sign out</li>
+            <ul className="nav navbar-nav navbar-right" >
+              <li id="signOut"  onClick={this.handleSignout.bind(this)}><a>Sign out</a></li>
             </ul>
           </div>
         </nav>

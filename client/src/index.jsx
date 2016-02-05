@@ -22,7 +22,7 @@ import UserSignup from './components/UserSignup';
 import DevTools from './containers/DevTools';
 import UserProfile from './components/userProfile';
 import CurrentListing from './components/currentListing';
-import {fetchProducts} from './actions/actionsProducts';
+import {fetchProducts, removeEndedAuction} from './actions/actionsProducts';
 
 const history = browserHistory;
 
@@ -59,6 +59,7 @@ if(window.localStorage.getItem('redux')){
 
 const store = configureStore(state);
 
+store.dispatch(removeEndedAuction());
 store.dispatch(fetchProducts());
 
 socket(store);

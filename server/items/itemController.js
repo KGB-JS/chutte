@@ -7,6 +7,7 @@ var moment = require('moment');
 var sendGrid = require('./itemHelpers/sendGridController.js');
 var emit = require('./itemHelpers/emitAuction.js');
 var timeSchedule = require('./auctionSchedule.js');
+var timeStorage = {};
 
 module.exports = {
     getItems: function(req, res, next) {
@@ -14,15 +15,7 @@ module.exports = {
             var now = moment().valueOf();
             items.forEach(function(item) {
                 if (item.active) {
-                    var priceFlag = true;
-                    for(var i = 0; i < item.priceSchedule.length; i++){
-                        if(priceFlag && item.priceSchedule[i].decrementTime > now){
-                            priceFlag = false;
-                            item.price = item.priceSchedule[i].price;
-                            item.save();
-                            emit.emitAuctionGet(item._id);
-                        }
-                    }
+                    emit.emitAuctionGet(item._id);
                 }
             });
             res.status(200).send();
@@ -40,9 +33,10 @@ module.exports = {
         var quantity = req.body.product.quantity;
         var price = req.body.product.price;
         var minPrice = req.body.product.minPrice;
-        var auctionEnds = req.body.product.auctionEnds;
+        var auctionEnds = (req.body.product.auctionEnds + 86340000);
         var description = req.body.product.description;
         var productImage = req.body.product.imgFile;
+        console.log(auctionEnds)
         //check for valid endDate
         var now = moment().valueOf();
         if(now > auctionEnds){
@@ -69,17 +63,17 @@ module.exports = {
             description: description,
             image: productImage,
             priceSchedule: priceSchedule[0],
-            timeRemaining: priceSchedule[0].decrementTime,
-            priceIndex: 0
+            timeRemaining: auctionEnds,
+            priceIndex: -1
         };
 
         var makeNewItem = new Item(newItem);
         Q.ninvoke(makeNewItem, 'save')
             .then(function() {
-                var timeId = setInterval(emit.emitAuction(makeNewItem._id), 900000);
+                emit.emitAuction(makeNewItem._id);
+                var timeId = setInterval(function(){emit.emitAuction(makeNewItem._id)}, 900000);
+                timeStorage[makeNewItem._id] = timeId;
                 res.status(200).send(makeNewItem);
-                makeNewItem.timeId.push(timeId);
-                makeNewItem.save();
                 //email confirmation
                 sendGrid.listItemConfirmation(createdBy, newItem);
 
@@ -119,22 +113,21 @@ module.exports = {
                     if(item.quantity === 0){
                         item.active = false;
                     }
-                    // var priceSchedule = timeSchedule.findTimeReduce(item.price, item.minPrice, item.auctionEnds);
-                    // console.log('before buy', item.priceSchedule)
-                    // console.log('before buy', item.timeId)
-                    // clearTimeout(item.timeId);
-                    // item.priceSchedule = priceSchedule[0];
-                    // item.timeRemaining = priceSchedule[0].decrementTime;
-                    // item.priceIndex = 0;
-                    // item.timeId = setInterval(emit.emitAuction(item._id), 900000);
-                    // console.log('after buy', item.priceSchedule)
-                    // console.log('after buy', item.timeId)
+                    clearInterval(timeStorage[item._id]);
+                    var priceSchedule = timeSchedule.findTimeReduce(item.priceSchedule[item.priceIndex].price, item.minPrice, item.auctionEnds);
+                    item.priceSchedule = priceSchedule[0];
+                    item.priceIndex = -1;
+                    emit.emitAuction(item._id);
+                    setTimeout(function(){
+                        timeStorage[item._id] = setInterval(function(){emit.emitAuction(item._id)}, 900000);
+                    }, 900000);
+                    res.status(200).send(item);
                     item.save()
                         .then(function() {
                             var transmitObject = {
                                 _id: item._id,
-                                price: item.price,
-                                timeRemaining: item.priceSchedule[item.priceIndex].decrementTime,
+                                price: item.priceSchedule[item.priceIndex].price,
+                                timeRemaining: item.auctionEnds,
                                 description: item.description,
                                 productName: item.productName,
                                 createdBy: item.createdBy,
@@ -143,7 +136,6 @@ module.exports = {
                                 image: item.image
                             };
                             app.io.sockets.emit('quantityUpdate', transmitObject);
-                            res.status(200).send(item);
                             //notify seller
                             sendGrid.soldItemConfirmation(item.createdBy, item, quantityRequested,user.username);
                             //notify buyer

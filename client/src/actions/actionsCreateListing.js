@@ -12,7 +12,7 @@ export function createListing(){
 export function createListingSuccess(productListed){
   return {
     type: CREATE_LISTING_SUCCESS,
-    itemListed: productListed,
+    product: productListed,
     meta: {
         transition: (state, action) => ({
           pathname: 'browse'
@@ -51,7 +51,7 @@ export function postListing(product, token){
       .then(parseJSON)
       .then(function(response){
         dispatch(createListingSuccess(response));
-        dispatch(addToUserListings(product));
+        dispatch(addToUserListings(response));
       })
       .catch(function(err){
         dispatch(createListingFailure(err));

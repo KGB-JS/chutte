@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, UPDATE_PRODUCT, CREATE_LISTING, CREATE_LISTING_SUCCESS, CREATE_LISTING_FAILURE, PRODUCT_CATEGORY_FILTER, REMOVE_PRODUCT} from './../actions/actionConstants';
-import {stateContainsProduct, filterProductsByCategory} from './reducerHelpers';
+import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, UPDATE_PRODUCT, CREATE_LISTING, CREATE_LISTING_SUCCESS, CREATE_LISTING_FAILURE, PRODUCT_CATEGORY_FILTER, REMOVE_SOLDOUT_PRODUCT, REMOVE_ENDED_AUCTION_PRODUCT} from './../actions/actionConstants';
+import {stateContainsProduct, filterProductsByCategory, filterActiveAuctions} from './reducerHelpers';
 
 const initialState = {
   productList: [],
@@ -39,7 +39,10 @@ function products(state = initialState, action){
         return Object.assign({}, state, {
           productList: [
             ...state.productList.slice(0, index),
-            Object.assign({}, action.product),
+            Object.assign({}, state.productList[index], {
+              quantity: action.product.quantity,
+              price: action.product.price
+            }),
             ...state.productList.slice(index + 1)
           ]
         });
@@ -47,7 +50,7 @@ function products(state = initialState, action){
         return Object.assign({}, state, {
           productList: [
             ...state.productList.slice(),
-            action.product
+            Object.assign({}, action.product)
           ]
         });
       }
@@ -57,13 +60,18 @@ function products(state = initialState, action){
          categoryFilter: action.category,
          filteredProductList: [...filterList.slice()]
        });
-       case REMOVE_PRODUCT:
+       case REMOVE_SOLDOUT_PRODUCT:
         let removeIndex = stateContainsProduct(state.productList, action.product);
         return Object.assign({}, state, {
           productList: [
             ...state.productList.slice(0, removeIndex),
             ...state.productList.slice(removeIndex + 1)
           ]
+        });
+      case REMOVE_ENDED_AUCTION_PRODUCT:
+        let activeAuctionsList = filterActiveAuctions(state.productList);
+        return Object.assign({}, state, {
+          productList: [...activeAuctionsList.slice()]
         });
     default:
       return state;
@@ -85,7 +93,7 @@ function createListing(state = initialState, action){
         postedProduct: true,
         productList: [
           ...state.productList.slice(),
-          action.productedListed
+          Object.assign({}, action.product)
         ]
       });
     case CREATE_LISTING_FAILURE:
