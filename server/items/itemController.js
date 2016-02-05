@@ -33,9 +33,10 @@ module.exports = {
         var quantity = req.body.product.quantity;
         var price = req.body.product.price;
         var minPrice = req.body.product.minPrice;
-        var auctionEnds = req.body.product.auctionEnds;
+        var auctionEnds = (req.body.product.auctionEnds + 86340000);
         var description = req.body.product.description;
         var productImage = req.body.product.imgFile;
+        console.log(auctionEnds)
         //check for valid endDate
         var now = moment().valueOf();
         if(now > auctionEnds){
