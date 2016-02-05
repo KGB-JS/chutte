@@ -47,8 +47,19 @@ export function userProfileUpdateErr(err){
 
 
 export function postUserSignup(user){
-  return function(dispatch){
+    return function(dispatch){
     dispatch(userSignup(user.username));
+    let newUser = {
+      username: user.username,
+      password: user.password,
+      firstname: user.firstName,
+      lastname: user.lastName,
+      phone: user.phone,
+      streetAddress: user.address,
+      stateRegion: user.state,
+      city: user.city,
+      zip: user.zip
+    }
     return fetch('/api/users/signup', {
       method: 'post',
       headers: {
@@ -68,30 +79,31 @@ export function postUserSignup(user){
   };
 };
 
-export function postUpdateProfile(user){
+export function postUpdateProfile(user, token){
   return function(dispatch){
-    user = {
-      firstName: user.firstName,
-      lastName: user.lastName,
+    let userUpdated = {
+      username: user.userName,
+      password: user.password,
+      firstname: user.firstName,
+      lastname: user.lastName,
       phone: user.phone,
       streetAddress: user.address,
       stateRegion: user.state,
       city: user.city,
       zip: user.zip
-    }
+    };
     return fetch('/api/users/userUpdate', {
       method: 'post',
+      body: JSON.stringify(userUpdated),
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'x-access-token': token
-      },
-      body: JSON.stringify(user)
-    })
-    .then(checkStatus)
+      }
+    }).then(checkStatus)
     .then(parseJSON)
     .then(function(response){
-      dispatch(userProfileUpdate(user));
+      dispatch(userProfileUpdate(response));
     })
     .catch(function(error){
       dispatch(userProfileUpdateErr(error));
