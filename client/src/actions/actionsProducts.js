@@ -59,7 +59,7 @@ export function removeSoldoutProduct(product){
   return {
     type: REMOVE_SOLDOUT_PRODUCT,
     product: product
-  }
+  };
 }
 
 export function removeEndedAuction(){
@@ -98,7 +98,6 @@ export function fetchProducts(){
 }
 
 export function postBuy(purchaseDetails, token){
-  console.log(purchaseDetails)
   return function(dispatch){
     dispatch(postingBuy(purchaseDetails));
     return fetch('/api/items/buyItem', {

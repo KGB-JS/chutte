@@ -34,7 +34,7 @@ export default class UserSignup extends React.Component {
       password: String(this.state.password),
       firstName: String(this.refs.firstName.value),
       lastName: String(this.refs.lastName.value),
-      phone: Number(this.refs.phoneNumber.value),
+      phone: String(this.refs.phoneNumber.value),
       address: String(this.refs.address.value),
       state: String(this.refs.state.value),
       city: String(this.refs.city.value),
