@@ -134,6 +134,8 @@ module.exports = {
             if(foundUser.password !== req.body.password){
               foundUser.password = req.body.password;
               var resetToken = true;
+            } else {
+              var resetToken = false;
             }
               foundUser.firstname = req.body.firstname;
               foundUser.lastname = req.body.lastname;
@@ -144,7 +146,7 @@ module.exports = {
               foundUser.zip = req.body.zip;
               foundUser.save().then(function(user){
               if(resetToken){
-                var token = jwt.encode(user, 'secret');
+                token = jwt.encode(user, 'secret');
               }
                 res.json({
                   username: user.username,
