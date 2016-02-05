@@ -39,7 +39,7 @@ function userAuth(state = initialState, action){
         phone: action.user.phone,
         address: action.user.streetAddress,
         city: action.user.city,
-        state: action.user.state,
+        state: action.user.stateRegion,
         zip: action.user.zip,
         loggingIn: false,
         authErrorMessage: ''
