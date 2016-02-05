@@ -26,8 +26,8 @@ module.exports = {
                   res.json({
                     username: user.username,
                     token: token,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
+                    firstName: user.firstname,
+                    lastName: user.lastname,
                     phone: user.phone,
                     streetAddress: user.streetAddress,
                     stateRegion: user.stateRegion,
@@ -72,8 +72,8 @@ module.exports = {
             var newUser = {
               username: username,
               password: password,
-              firstName: firstName,
-              lastName: lastName,
+              firstname: firstName,
+              lastname: lastName,
               phone: phone,
               streetAddress: streetAddress,
               stateRegion: stateRegion,
