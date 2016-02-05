@@ -10,11 +10,11 @@ export function userLogin(userName){
   };
 };
 
-export function userLoginSuccess(token){
-  localStorage.setItem('token', token);
+export function userLoginSuccess(user){
+  localStorage.setItem('token', user.token);
   return {
     type: USER_LOGIN_SUCCESS,
-    token: token,
+    user: user,
     meta: {
         transition: (state, action) => ({
           pathname: 'browse'
@@ -52,7 +52,7 @@ export function authenticateUser(user){
     .then(checkStatus)
     .then(parseJSON)
     .then(function(response){
-      dispatch(userLoginSuccess(response.token));
+      dispatch(userLoginSuccess(response));
       dispatch(routeActions.push({pathname: 'browse'}));
     })
     .catch(function(error){

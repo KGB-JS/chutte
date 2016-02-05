@@ -32,7 +32,15 @@ function userAuth(state = initialState, action){
       });
     case USER_LOGIN_SUCCESS:
       return Object.assign({}, state, {
-        token: action.token,
+        token: action.user.token,
+        userName: action.user.username,
+        firstName: action.user.firstName,
+        lastName: action.user.lastName,
+        phone: action.user.phone,
+        address: action.user.streetAddress,
+        city: action.user.city,
+        state: action.user.state,
+        zip: action.user.zip,
         loggingIn: false,
         authErrorMessage: ''
       });
