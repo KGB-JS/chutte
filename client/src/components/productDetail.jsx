@@ -44,7 +44,7 @@ class ProductDetail extends React.Component {
           <div className="panel-body">
             <div className="productCardDetail" id={this.props.products[this.productIndex]._id}>
             <div className="container1 center-block">
-              <img src={this.props.products[this.productIndex].image} alt="242x200" />
+              <img src={this.props.products[this.productIndex].image} alt="Default Image" />
             </div>
             <div className="productName">
               <p>Product: {this.props.products[this.productIndex].productName}</p>

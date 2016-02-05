@@ -436,7 +436,7 @@ a {
 
 }
 
-.productCardDetail {}
+
 
 .productinfo {
     font-size: 15px;
@@ -596,6 +596,7 @@ input[type="file"] {
     height: 150px;
     line-height: 115px;
     overflow: hidden;
+
 }
 .container1 img { 
     width: 100%;
@@ -606,8 +607,10 @@ input[type="file"] {
 }
 
 .productCardDetail img {
-    max-height: 100%;
+    width: auto;
+    height: auto;
     max-width: 100%;
+    min-width: 225px;
     background-image: url('http://res.cloudinary.com/chutteapi/image/upload/c_scale,w_225/v1453918622/default_oczf9m.png');
     background-repeat: no-repeat;
     background-position: center;
