@@ -49,17 +49,13 @@ export function userProfileUpdateErr(err){
 export function postUserSignup(user){
   return function(dispatch){
     dispatch(userSignup(user.username));
-    let newUser = {
-      username: user.username,
-      password: user.password
-    }
     return fetch('/api/users/signup', {
       method: 'post',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(newUser)
+      body: JSON.stringify(user)
     })
     .then(checkStatus)
     .then(parseJSON)
