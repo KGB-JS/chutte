@@ -1,34 +1,17 @@
 # Chutte.com #
-
+Chutte.com is a reverse auction style web application. Our aim is to create a marketplace optimized for sellers to move product, and buyers to aquire those products at prices that appeal to them. We understand that pricing can make or break a product, our **Chutte pricing algorithm** removes the stressful burden of having to get pricing perfect. The price algorithm changes over the course of an items' listing, decreasing when there is no demand and holding when demand exists at a price point.  
 ---
 
 Table of Contents
 -----------------
-1. [About](#about)
-2. [Demo](#demo)
-3. [Getting Started](#getting-started)
-4. [Usage](#usage)
-5. [Structure](#structure)
+1. [Demo](#demo)
+2. [Getting Started](#getting-started)
+3. [Usage](#usage)
+4. [Structure](#structure)
+5. [Tech Stack](#tech-stack)
 6. [Webpack](#webpack)
 7. [Troubleshooting](#troubleshooting)
-  
-
-About
---------
-
-Chutte.com is a reverse auction web app.
-*[Reverse Auction](https://en.wikipedia.org/wiki/Reverse_auction)
-Some technologies we used:
-  * [React](https://facebook.github.io/react/) for unidirectional data flow and performant UI
-  * [Redux](https://github.com/rackt/redux) architecture for predictable app state, with [react-redux](https://github.com/rackt/react-redux) bindings
-  * [react-router](https://github.com/rackt/react-router) and [redux-router](https://github.com/rackt/redux-router) for routing
-  * [redux-devtools](https://github.com/gaearon/redux-devtools) for time travel debugging
-  * [Babel](https://babeljs.io/) to transpile ES6/7 syntax
-  * [Webpack](https://webpack.github.io/) for builds/automation, with [eslint](http://eslint.org/) linting and [mocha](https://mochajs.org/)/[chai](http://chaijs.com/) testing
-  * [BootStrap](http://getbootstrap.com/) React components implementing BootStrap's Material Design
-  * [MongoDB](https://www.mongodb.org/) database with [Sequelize](http://docs.sequelizejs.com/en/latest/) ORM
-  * [bcrypt](https://www.npmjs.com/package/bcrypt-nodejs) for user authentication
-  * [Node](https://nodejs.org/en/)/[Express](http://expressjs.com/en/index.html) server with [redux-thunk](https://github.com/gaearon/redux-thunk) middleware
+8. [Contributing](#contributing)
 
 Demo
 ----
@@ -52,7 +35,10 @@ Usage
 -----
 
 #### `npm run build`
-Runs the webpack build system with webpack-dev-server (by default found at `localhost:3000`).
+Runs the webpack build system
+
+#### `node server/server.js`
+(by default found at `localhost:3000`).
 
 
 Structure
@@ -82,6 +68,20 @@ Structure
    |-test                    
 ```
 
+Tech Stack
+----------
+*[Reverse Auction](https://en.wikipedia.org/wiki/Reverse_auction)
+Some technologies we used:
+  * [React](https://facebook.github.io/react/) for unidirectional data flow and performant UI
+  * [Redux](https://github.com/rackt/redux) architecture for predictable app state, with [react-redux](https://github.com/rackt/react-redux) bindings
+  * [react-router](https://github.com/rackt/react-router) and [redux-router](https://github.com/rackt/redux-router) for routing
+  * [redux-devtools](https://github.com/gaearon/redux-devtools) for time travel debugging
+  * [Babel](https://babeljs.io/) to transpile ES6/7 syntax
+  * [Webpack](https://webpack.github.io/) for builds/automation, with [eslint](http://eslint.org/) linting and [mocha](https://mochajs.org/)/[chai](http://chaijs.com/) testing
+  * [MongoDB](https://www.mongodb.org/) database with [Sequelize](http://docs.sequelizejs.com/en/latest/) ORM
+  * [bcrypt](https://www.npmjs.com/package/bcrypt-nodejs) for user authentication
+  * [Node](https://nodejs.org/en/)/[Express](http://expressjs.com/en/index.html) server with [redux-thunk](https://github.com/gaearon/redux-thunk) middleware
+
 
 Using Redux DevTools
 --------------------
@@ -100,9 +100,6 @@ The webpack compiler configuration is located in `~/build/webpack`. Here you'll 
 **Note**: There has been a conscious decision to keep development-specific configuration (such as hot-reloading) out of `.babelrc`. By doing this, it's possible to create cleaner development builds (such as for teams that have a `dev` -> `stage` -> `production` workflow) that don't, for example, constantly poll for HMR updates.
 
 So why not just disable HMR? Well, as a further explanation, enabling `react-transform-hmr` in `.babelrc` but building the project without HMR enabled (think of running tests with `NODE_ENV=development` but without a dev server) causes errors to be thrown, so this decision also alleviates that issue.
-
-
-
 
 Troubleshooting
 ---------------
