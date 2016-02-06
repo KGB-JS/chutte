@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import NavBar from '../components/navbar';
+import DefaultNavbar from '../components/navbar';
 import ProfileSideNavBar from './../components/profileSideBar';
 import {userLogout} from './../actions/actionsUserAuth';
 import {postUpdateProfile} from './../actions/actionsUserSignup';
@@ -21,7 +21,7 @@ class UserProfile extends React.Component {
       confirmPassword: ''
     };
   }
-  
+
   validatePassword(event){
     this.setState({password: event.target.value });
   }
@@ -52,7 +52,7 @@ class UserProfile extends React.Component {
     for(var key in userUpdate){
       if(userUpdate[key] === ""){
         userUpdate[key] = this.props.userDetail[key];
-      }  
+      }
     }
     console.log(userUpdate, "this is the user update profile");
     this.props.updateProfile(userUpdate, this.props.userDetail.token);
@@ -61,12 +61,12 @@ class UserProfile extends React.Component {
   render() {
     return (
       <div>
-        <NavBar submitSignout={this.props.submitSignout}
+        <DefaultNavbar submitSignout={this.props.submitSignout}
            user={this.props.userDetail} />
            <div className = "col-md-2">
         <ProfileSideNavBar/>
         </div>
-        <div className = "bumpDown col-md-offset-2 col-md-10">        
+        <div className = "bumpDown col-md-offset-2 col-md-10">
          <form>
            <div className = "col-md-6">
               <div className="form-group">
@@ -92,7 +92,7 @@ class UserProfile extends React.Component {
               <div className="form-group">
                 <label htmlFor="exampleInputPassword1">City</label>
                 <input ref="city" type="text" className="form-control" placeholder={this.props.userDetail.city}/>
-              </div>           
+              </div>
               <div className="form-group">
                 <label htmlFor="exampleInputPassword1">Zip</label>
                 <input ref="zip" type="text" className="form-control" placeholder={this.props.userDetail.zip}/>
