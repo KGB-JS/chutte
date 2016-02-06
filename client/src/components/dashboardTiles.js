@@ -6,7 +6,6 @@ class DashBoardTile extends React.Component {
       <div className="container-fluid">
         <div id="infoHeader">
         Why Chutte?
-        <h3>Because we do it better.</h3>
         </div>
         <div className="col-lg-4 col-md-6 col-sm-12 col-xs-12">
           <div className="panel panel-primary">
@@ -36,7 +35,7 @@ class DashBoardTile extends React.Component {
           </div>
             <div className="panel-body">
             <h2>Supply and demand</h2>
-            <p>We want everyone to get the best deal for their listings. From the beginning of time, humans have had the problem, What should I sell this for? Should I raise the price? Chutte down those problems. With Chutte.</p>
+            <p>We want everyone to get the best deal for their listings. From the beginning of time, people have had the problem, What should I sell this for? Our pricing algorithm solves that problem for you and helps you put focus back on the product.</p>
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import JumboTronButton from './../components/JumboTronButton';
 import DashboardTiles from './../components/dashboardTiles';
 import MadeBy from './../components/madeBy';
 import {userLogout} from './../actions/actionsUserAuth';
+import HomeFooter from './../components/homeFooter';
 
 class Home extends React.Component {
   render() {
@@ -19,6 +20,9 @@ class Home extends React.Component {
         </div>
         <div className="homeInfo">
         <MadeBy/>
+        </div>
+        <div>
+        <HomeFooter/>
         </div>
       </div>
     )
