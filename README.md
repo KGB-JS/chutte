@@ -44,7 +44,6 @@ Runs the webpack build system
 Structure
 ---------
 
-
 ```
 
    |-client
@@ -67,6 +66,7 @@ Structure
    |---user
    |-test                    
 ```
+![overall-application-structure](documentation/chutte-simple.png)
 
 Tech Stack
 ----------
