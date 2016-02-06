@@ -1,5 +1,9 @@
 # Chutte.com #
+![chutte-green-icon](documentation/icon-green.png)
+
 Chutte.com is a reverse auction style web application. Our aim is to create a marketplace optimized for sellers to move product, and buyers to aquire those products at prices that appeal to them. We understand that pricing can make or break a product, our **Chutte pricing algorithm** removes the stressful burden of having to get pricing perfect. The price algorithm changes over the course of an items' listing, decreasing when there is no demand and holding when demand exists at a price point.  
+
+
 ---
 
 Table of Contents
@@ -44,7 +48,6 @@ Runs the webpack build system
 Structure
 ---------
 
-
 ```
 
    |-client
@@ -67,6 +70,7 @@ Structure
    |---user
    |-test                    
 ```
+![overall-application-structure](documentation/chutte-simple.png)
 
 Tech Stack
 ----------
