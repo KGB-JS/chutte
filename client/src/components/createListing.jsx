@@ -20,7 +20,6 @@ export default class CreateListing extends React.Component {
     }
   }
 
-
   _descriptionInput(details){
     this.setState({ description: details.target.value });
   }
@@ -48,7 +47,6 @@ export default class CreateListing extends React.Component {
 
   handleFile(e) {
     var self = this;
-    console.log(self)
     var reader = new FileReader();
     var file = e.target.files[0];
 
@@ -56,7 +54,7 @@ export default class CreateListing extends React.Component {
       self.setState({
         imgFile: upload.target.result,
       });
-    }
+    };
 
     reader.readAsDataURL(file);
   }
@@ -83,6 +81,9 @@ export default class CreateListing extends React.Component {
     var defaultV = "Select a category";
     return (
       <div className="bumpDown col-sm-offset-3 col-md-10 col-md-offset-2">
+      <div>
+      <img src={ this.state.imgFile } height="225"></img>
+      </div>
       <form role="form">
       <div className="col-md-5">
         <div>

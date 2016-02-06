@@ -25,8 +25,8 @@ export default class DefaultNavbar extends React.Component {
           <Navbar.Collapse>
             <Nav pullRight>
               <NavItem><Link to="/browse"><span className="glyphicon glyphicon-shopping-cart"></span> Browse</Link></NavItem>
-              <NavItem><Link to="/dashboard/profile"><span className="glyphicon glyphicon-user"></span> Dashboard</Link></NavItem>
-              <NavItem><a onClick={this.handleSignout.bind(this)}>Sign out</a></NavItem>
+              <NavItem><Link to="/dashboard/profile"><span className="glyphicon glyphicon-dashboard"></span> Dashboard</Link></NavItem>
+              <NavItem><a onClick={this.handleSignout.bind(this)}><span className="glyphicon glyphicon-log-out"></span>Sign out</a></NavItem>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
