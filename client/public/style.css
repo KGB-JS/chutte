@@ -802,7 +802,7 @@ ul{
 }
 
 .profile-image{
-    height: 125px;
+    height: 200px;
     width: auto;
-    border-radius: 4px;
+    border-radius: 50%;
 }
