@@ -39,7 +39,7 @@ a {
 .nav > li > a:hover,
 .nav > li > a:focus {
     color: #FFFFFF;
-    background-color: #00AC69;
+    background-color: #085E3D;
     border-style: solid;
     border-width: 0px;
     border-color: #D6D6D6;
@@ -721,6 +721,7 @@ textarea{
     font-weight: bold;
     font-size: 20px;
     list-style-type: none;
+    padding-top: 25px
 }
 
 .sidebar-font > li:hover {
