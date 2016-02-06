@@ -81,13 +81,14 @@ export default class CreateListing extends React.Component {
     var defaultV = "Select a category";
     return (
       <div className="bumpDown col-sm-offset-3 col-md-10 col-md-offset-2">
-      <div>
-      <img src={ this.state.imgFile } height="225"></img>
-      </div>
+
       <form role="form">
       <div className="col-md-5">
+        <div className="row text-center">
         <div>
-        <label for="file-upload" className="custom-file-upload">
+          <img src={ this.state.imgFile } height="225"></img>
+        </div>
+        <label for="file-upload" className="btn btn-primary custom-file-upload">
         <span className="glyphicon glyphicon-upload"></span> Upload Picture
           <div onSubmit={this.handleSubmit.bind(this)} encType="multipart/form-data">
             <input type="file" onChange={this.handleFile.bind(this)} />
@@ -103,18 +104,18 @@ export default class CreateListing extends React.Component {
       <div className="col-md-5">
         <div className="form-group">
           <label>Product Name</label>
-          <input type="text" className="form-control" placeholder="Product Name" ref="name"/>
+          <input type="text" className="form-control" placeholder="Enter Product Name" ref="name"/>
         </div>
 
         <div className="form-group">
           <label>Quantity</label>
-          <input type="number" className="form-control" min="1" placeholder="Quantity" ref="quantity"/>
+          <input type="number" className="form-control" min="1" placeholder="Enter Quantity" ref="quantity"/>
         </div>
 
         <div className="form-group">
           <label>Start Date</label>
           <DatePicker
-            placeholder="Start date"
+            placeholder="Select Start date"
             selected={this.state.startDate}
             startDate={this.state.startDate}
             endDate={this.state.endDate}
@@ -123,7 +124,7 @@ export default class CreateListing extends React.Component {
         <div className="form-group">
           <label>End Date</label>
           <DatePicker
-            placeholder="End date"
+            placeholder="Select End date"
             selected={this.state.endDate}
             startDate={this.state.startDate}
             aunctionEnds={this.state.endDate}
@@ -149,12 +150,12 @@ export default class CreateListing extends React.Component {
 
         <div className="form-group">
           <label>Price</label>
-          <input type="number" className="form-control" min="1" placeholder="Price" ref="price"/>
+          <input type="number" className="form-control" min="1" placeholder="Enter Starting Price" ref="price"/>
         </div>
 
         <div className="form-group">
           <label>Minimum Sales Price</label>
-          <input type="number" className="form-control" min="1" placeholder="Minimum Sales Price" ref="minPrice"/>
+          <input type="number" className="form-control" min="1" placeholder="Enter Minimum Sales Price" ref="minPrice"/>
         </div>
 
         {failedPostMSG}
