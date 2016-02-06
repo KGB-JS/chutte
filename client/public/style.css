@@ -732,10 +732,18 @@ textarea{
     list-style-type: none;
 }
 
+ul{
+    margin-left: -225px;
+}
+
 @media(min-width:768px) {
     #wrapper {
         padding-left: 250px;
     }
+    ul{
+        margin-left: -25px;
+    }
+
 
     #wrapper.toggled {
         padding-left: 0;
@@ -768,9 +776,7 @@ textarea{
     }
 }
 
-ul{
-    margin-left: -25px;
-}
+
 
 .navBrowse{
     position: fixed;
