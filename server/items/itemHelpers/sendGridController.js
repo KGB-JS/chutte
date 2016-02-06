@@ -1,7 +1,7 @@
-var sendgridAPIKEY = require('./emailAPIKeys.js');
-var sendgrid = require('sendgrid')(sendgridAPIKEY.apiKEY);
+// var sendgridAPIKEY = require('./emailAPIKeys.js');
+// var sendgrid = require('sendgrid')(sendgridAPIKEY.apiKEY);
 //for deployment
-// var sendgrid  = require('sendgrid')(process.env.SENDGRIDKEY);
+var sendgrid  = require('sendgrid')(process.env.SENDGRIDKEY);
 var emailTemp = require('./sendGridHTML.js');
 
 module.exports = {
