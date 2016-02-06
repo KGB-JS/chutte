@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import ProductList from './../components/productList';
-import NavBar from '../components/navbar';
+import DefaultNavBar from '../components/navbar';
 import ProfileSideNavBar from './../components/profileSideBar';
 import {userLogout} from './../actions/actionsUserAuth';
 
@@ -9,7 +9,7 @@ class CurrentListing extends React.Component {
   render(){
     return (
     <div>
-      <NavBar submitSignout={this.props.submitSignout}
+      <DefaultNavBar submitSignout={this.props.submitSignout}
          user={this.props.userAuth} />
       <ProfileSideNavBar/>
         <div className="container-fluid">
