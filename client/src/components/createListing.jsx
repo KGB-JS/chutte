@@ -9,14 +9,28 @@ import {CategoryFilters} from './../actions/actionConstants';
 export default class CreateListing extends React.Component {
   constructor(props){
     super(props);
-    this.state = { categorySelected:'', description: "", startDate: moment(), endDate: moment(), imgFile: '' };
+    this.state = { categorySelected: 'Select a category', description: '', startDate: moment(), endDate: moment(), imgFile: '', validateCategory: true };
   }
+
+  validateForm(event){
+    if(this.state.password === event.target.value){
+      this.setState({ validation: false });
+    } else {
+      this.setState({ validation: true });
+    }
+  }
+
 
   _descriptionInput(details){
     this.setState({ description: details.target.value });
   }
 
   _handleChange(event){
+    if(event.target.value !== 'Select a category'){
+      this.setState({ validateCategory: false });
+    } else {
+      this.setState({ validateCategory: true });
+    }  
     this.setState({categorySelected: event.target.value});
   }
 
@@ -66,7 +80,7 @@ export default class CreateListing extends React.Component {
 
   render() {
     let failedPostMSG = this.props.productListing.postErrorMSG === true ? <p className="alert alert-danger alert-dismissible">Please Fill out form completely</p> : "";
-
+    var defaultV = "Select a category";
     return (
       <div className="bumpDown col-sm-offset-3 col-md-10 col-md-offset-2">
       <form role="form">
@@ -119,6 +133,7 @@ export default class CreateListing extends React.Component {
           <label>Category</label>
           <select className="form-control" id="select" value={this.state.categorySelected}
             onChange={this._handleChange.bind(this)}>
+            <option>{defaultV}</option>
             <option value={CategoryFilters[1]}>{CategoryFilters[1]}</option>
             <option value={CategoryFilters[2]}>{CategoryFilters[2]}</option>
             <option value={CategoryFilters[3]}>{CategoryFilters[3]}</option>
@@ -142,7 +157,7 @@ export default class CreateListing extends React.Component {
         </div>
 
         {failedPostMSG}
-        <button className="btn btn-primary" type="button" onClick={this.submitForm.bind(this)}>List Item</button>
+        <button className="btn btn-primary" type="button" onClick={this.submitForm.bind(this)} disabled={ this.state.validateCategory }>List Item</button>
         </div>
         </form>
       </div>
