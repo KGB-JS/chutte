@@ -1,11 +1,12 @@
-// var sendgridAPIKEY = require('./emailAPIKeys.js');
-// var sendgrid = require('sendgrid')(sendgridAPIKEY.apiKEY);
+var sendgridAPIKEY = require('./emailAPIKeys.js');
+var sendgrid = require('sendgrid')(sendgridAPIKEY.apiKEY);
 //for deployment
-var sendgrid  = require('sendgrid')(process.env.SENDGRIDKEY);
+// var sendgrid  = require('sendgrid')(process.env.SENDGRIDKEY);
+var emailTemp = require('./sendGridHTML.js');
 
 module.exports = {
-  buyItemConfirmation: function(buyer, item, quantity,seller) {
-    var buyHtml = '<div><h1>' + item.productName + '</h1></div><div>Your purchase of ' + quantity + ' of ' + item.productName + '.</div>';
+  buyItemConfirmation: function(buyer, item, quantity,seller,soldPrice) {
+    var buyHtml = emailTemp.buyerTemp(buyer, item.productName, quantity, seller, soldPrice)
     sendgrid.send({
       to: buyer,
       from: 'noreply@chutte.com',
@@ -18,8 +19,9 @@ module.exports = {
         console.log(json);
     });
   },
-  soldItemConfirmation: function(seller, item, quantity,buyer) {
-    var soldHtml = '<div><h1>' + item.productName + '</h1></div><br><div><h3>'+ quantity + ' units sold.</h3></div>';
+  soldItemConfirmation: function(seller, item, quantity, buyer, soldPrice) {
+    console.log(seller, item.productName, quantity, buyer, soldPrice);
+    var soldHtml = emailTemp.sellerTemp(buyer, item.productName, quantity, seller, soldPrice)
     sendgrid.send({
       to: seller,
       from: 'noreply@chutte.com',
@@ -33,14 +35,11 @@ module.exports = {
     });
   },
   listItemConfirmation: function(seller, item) {
-    var itemHtml = '';
-    for(var key in item){
-      itemHtml += '<div><h1>' + key + ': </h1>' + '<h3>'+ item[key] +'</h3>'+'</div>';
-    };
+    var itemHtml = emailTemp.postItemTemp(seller,item.productName,item.quantity);
     sendgrid.send({
       to: seller,
       from: 'noreply@chutte.com',
-      subject: 'Your item has been posted on Chutte!',
+      subject: 'Your listing has been posted on Chutte!',
       html: itemHtml
     }, function(err, json) {
         if (err) {
@@ -50,7 +49,7 @@ module.exports = {
     });
   },
   signUpConfirmation: function(user) {
-    var welcomeHtml = '<h1>WELCOME!</h1><div><h2>You have joined the online marketplace, Chutte</h2><br><h3>Supply and demand, supplied.</h3></div>';
+    var welcomeHtml = emailTemp.signUpTemp(user)
     sendgrid.send({
       to: user,
       from: 'noreply@chutte.com',

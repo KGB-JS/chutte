@@ -113,6 +113,10 @@ module.exports = {
             if(item.quantity === 0){
               item.active = false;
             }
+             //notify seller
+                sendGrid.soldItemConfirmation(item.createdBy, item, quantityRequested,user.username,item.priceSchedule[item.priceIndex].price);
+                //notify buyer
+                sendGrid.buyItemConfirmation(user.username, item, quantityRequested, item.createdBy,item.priceSchedule[item.priceIndex].price);          
             clearInterval(timeStorage[item._id]);
             var priceSchedule = timeSchedule.findTimeReduce(item.priceSchedule[item.priceIndex].price, item.minPrice, item.auctionEnds);
             item.priceSchedule = priceSchedule[0];
@@ -122,6 +126,10 @@ module.exports = {
               timeStorage[item._id] = setInterval(function(){emit.emitAuction(item._id)}, 900000);
             }, 900000);
             res.status(200).send(item);
+            console.log(item.priceIndex)
+            console.log(item.priceSchedule[item.priceIndex])
+
+               
             item.save()
               .then(function() {
                 var transmitObject = {
@@ -136,10 +144,6 @@ module.exports = {
                   image: item.image
                 };
                 app.io.sockets.emit('quantityUpdate', transmitObject);
-                //notify seller
-                sendGrid.soldItemConfirmation(item.createdBy, item, quantityRequested,user.username);
-                //notify buyer
-                sendGrid.buyItemConfirmation(user.username, item, quantityRequested,item.createdBy);          
               });
           } else {
             res.status(409).send('quantityRequested exceeds quantity available');
