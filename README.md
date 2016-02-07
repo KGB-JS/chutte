@@ -1,7 +1,7 @@
 # Chutte.com #
 ![chutte-green-icon](documentation/icon-green.png)
 
-Chutte.com is a reverse auction style web application. Our aim is to create a marketplace optimized for sellers to move product, and buyers to aquire those products at prices that appeal to them. We understand that pricing can make or break a product, our **Chutte pricing algorithm** removes the stressful burden of having to get pricing perfect. The price algorithm changes over the course of an items' listing, decreasing when there is no demand and holding when demand exists at a price point.  
+Chutte.com is a reverse auction style web application. Our aim is to create a marketplace optimized for sellers to sell rare and unique items, and buyers to aquire those products at prices that appeal to them. We understand that pricing can make or break a product, our **Chutte pricing algorithm** removes the stressful burden of having to get pricing perfect. The price algorithm changes over the course of an items' listing, decreasing when there is no demand and holding when demand exists at a price point.  
 
 
 ---
@@ -41,7 +41,7 @@ Usage
 #### `npm run build`
 Runs the webpack build system
 
-#### `node server/server.js`
+#### `npm run webserver`
 (by default found at `localhost:3000`).
 
 
@@ -57,9 +57,8 @@ Structure
    |-----actions             # Redux action creators
    |-----Components          # Generic React Components
    |-----containers          # Components that provide context
-   |-----core-layout         # Components that dictate major page structure
    |-----reducers            # Redux reducers
-   |-----socket
+   |-----socket              # Client side socket connections
    |-----store               # Redux store configuration
    |-server
    |---config
@@ -74,17 +73,18 @@ Structure
 
 Tech Stack
 ----------
-*[Reverse Auction](https://en.wikipedia.org/wiki/Reverse_auction)
+
 Some technologies we used:
   * [React](https://facebook.github.io/react/) for unidirectional data flow and performant UI
   * [Redux](https://github.com/rackt/redux) architecture for predictable app state, with [react-redux](https://github.com/rackt/react-redux) bindings
+  * [redux-thunk](https://github.com/gaearon/redux-thunk) middleware
   * [react-router](https://github.com/rackt/react-router) and [redux-router](https://github.com/rackt/redux-router) for routing
   * [redux-devtools](https://github.com/gaearon/redux-devtools) for time travel debugging
   * [Babel](https://babeljs.io/) to transpile ES6/7 syntax
   * [Webpack](https://webpack.github.io/) for builds/automation, with [eslint](http://eslint.org/) linting and [mocha](https://mochajs.org/)/[chai](http://chaijs.com/) testing
-  * [MongoDB](https://www.mongodb.org/) database with [Sequelize](http://docs.sequelizejs.com/en/latest/) ORM
+  * [MongoDB](https://www.mongodb.org/) database with [Mongoose](http://mongoosejs.com/docs/guide.html) ODM
   * [bcrypt](https://www.npmjs.com/package/bcrypt-nodejs) for user authentication
-  * [Node](https://nodejs.org/en/)/[Express](http://expressjs.com/en/index.html) server with [redux-thunk](https://github.com/gaearon/redux-thunk) middleware
+  * [Node](https://nodejs.org/en/)/[Express](http://expressjs.com/en/index.html) server
 
 
 Using Redux DevTools
