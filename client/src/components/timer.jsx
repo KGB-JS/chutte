@@ -1,5 +1,6 @@
 import React from 'react';
 import numeral from 'numeral';
+import moment from 'moment';
 
 class Timer extends React.Component{
   constructor(props){
@@ -8,8 +9,8 @@ class Timer extends React.Component{
   }
 
   tick(){
-    var counter = this.state.secondsRemaining - 1;
-    if(counter >= 0){
+    if(this.state.secondsRemaining > 0){
+      let counter = this.state.secondsRemaining - 1;
       this.setState({secondsRemaining: counter});
     } else{
       clearInterval(this.interval);
@@ -28,10 +29,17 @@ class Timer extends React.Component{
   }
 
   render(){
-    let time = this.state.secondsRemaining;
+    let time;
+    if(((this.props.nextUpdateTime - Date.now()) / 1000) > 172800){
+      let today = moment();
+      let endDate = moment.unix((this.props.nextUpdateTime / 1000));
+      time = today.to(endDate);
+    } else {
+      time = numeral(this.state.secondsRemaining).format('00:00:00')
+    }
 
     return(
-      <p className="productinfo">Time Remaining: {numeral(time).format('00:00:00')}
+      <p className="productinfo">Auction Ends: {time}
       </p>
     )
   }
