@@ -35,15 +35,13 @@ export default class ProductList extends React.Component{
   render(){
     return(
     <div>
-      <div className="col-sm-12 col-md-12 ">
-       <div className="input-group">
-         <input type="text"
-          className="form-control" 
+      <div className="col-sm-12 col-md-12 input-lg">
+       <div>
+         <input className="col-md-offset-4 col-md-6 input-lg" type="text"
           placeholder="Search for..." 
           value = {this.state.searchVal}
           onChange={(event) => this.onChangeFunc(event.target.value)} />
               <span className="input-group-btn">
-              <button className="btn btn-default" type="button">Search</button>
             </span>
         </div>
       </div>

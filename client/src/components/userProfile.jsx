@@ -66,7 +66,7 @@ class UserProfile extends React.Component {
            <div className = "col-md-2">
         <ProfileSideNavBar/>
         </div>
-        <div className = "bumpDown col-md-offset-2 col-md-offset-2 col-md-10">
+        <div className = "bumpDown col-sm-offset-3 col-md-offset-2 col-md-offset-2 col-md-10">
          <form>
            <div className = "col-md-6">
               <div className="form-group">

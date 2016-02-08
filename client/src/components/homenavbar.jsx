@@ -12,39 +12,36 @@ export default class HomeNavbar extends React.Component {
 
    render() {
      let icon = (<span><img className="logo" src="../assets/chutteLogo.png"  alt="Chutte Logo" height="50" width="50" /></span>);
-
      if(this.props.user.token === ''){
        return (
-         <Navbar>
-           <Navbar.Header>
-             <Navbar.Brand>
-               <Link  to="/" className="navbar-brand">{icon} Chutte</Link>
-             </Navbar.Brand>
-             <Navbar.Toggle />
-           </Navbar.Header>
-           <Navbar.Collapse>
-             <Nav pullRight>
-               <NavItem><SignUpModal/></NavItem>
-               <NavItem><SignInModal/></NavItem>
-             </Nav>
-           </Navbar.Collapse>
-         </Navbar>
-       );
-     } else {
-       return (
-         <Navbar>
-           <Navbar.Header>
-             <Navbar.Brand>
-               <Link  to="/" className="navbar-brand">{icon} Chutte</Link>
-             </Navbar.Brand>
-             <Navbar.Toggle />
-           </Navbar.Header>
-           <Navbar.Collapse>
-             <Nav pullRight>
-               <NavItem><a onClick={this.handleSignout.bind(this)}>Sign out</a></NavItem>
-             </Nav>
-           </Navbar.Collapse>
-         </Navbar>
+        <nav className="navbar navbar-default">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <Link to="/" className="navbar-brand">{icon} Chutte </Link>
+            </div>
+              <ul className="nav navbar-nav navbar-right">
+                <li><SignUpModal/></li>
+                <li><SignInModal/></li>
+              </ul>
+          </div>
+        </nav>
+      );
+    } else {
+      return (
+        <nav className="navbar navbar-default">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <Link to="/" className="navbar-brand">{icon} Chutte</Link>
+            </div>
+              <ul className="nav navbar-nav navbar-right">
+                <li id="signOut" onClick={this.handleSignout.bind(this)}>
+                  <a>
+                  Sign Out
+                  </a>
+                </li>
+              </ul>
+            </div>
+        </nav>
        );
      }
    }
