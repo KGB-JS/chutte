@@ -596,14 +596,14 @@ input[type="file"] {
     vertical-align: middle;
 }
 
-.container1 { 
+.container1 {
     margin: 10px;
     height: 150px;
     line-height: 115px;
     overflow: hidden;
 
 }
-.container1 img { 
+.container1 img {
     width: 100%;
     background-image: url('http://res.cloudinary.com/chutteapi/image/upload/c_scale,w_225/v1453918622/default_oczf9m.png');
     background-repeat: no-repeat;
@@ -611,14 +611,14 @@ input[type="file"] {
 
 }
 
-.container2 { 
+.container2 {
     margin: 10px;
     height: 250px;
     line-height: 115px;
     overflow: hidden;
 
 }
-.container2 img { 
+.container2 img {
     width: 100%;
     background-image: url('http://res.cloudinary.com/chutteapi/image/upload/c_scale,w_225/v1453918622/default_oczf9m.png');
     background-repeat: no-repeat;
@@ -746,7 +746,7 @@ textarea{
 
 .sidebar-font > li:hover {
     color: #085E3D;
-    
+
     font-weight: bold;
     font-size: 20px;
     list-style-type: none;
@@ -772,13 +772,13 @@ ul{
     #sidebar-wrapper {
         color: white;
         width: 170px;
-        
+
     }
 
     #sidebar-wrapper > {
         color: white;
         width: 150px;
-        
+
     }
 
     #wrapper.toggled #sidebar-wrapper {
@@ -811,7 +811,7 @@ ul{
     top:95px;
 }
 
-#signOut{  
+#signOut{
     padding-right: 10px;
 }
 .service-box {
@@ -838,10 +838,10 @@ ul{
 
 
 .productDetailQuantity {
-    width: 175px;
-    height: 50px;
-    padding: 10px 12px;
-    font-size: 18px;
+    width: 140px;
+    height: 35px;
+    padding: 5px 10px;
+    font-size: 14px;
     line-height: 1.3333333;
     border-radius: 6px;
     margin-bottom: 15px;

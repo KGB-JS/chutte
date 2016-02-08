@@ -7,7 +7,7 @@ class DashBoardTile extends React.Component {
         <div id="infoHeader">
         Why Chutte?
         </div>
-        <div className="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+        <div className="col-lg-4 col-md-12 col-sm-12 col-xs-12">
           <div className="panel panel-primary">
           <div className="panel-heading"><span className="glyphicon glyphicon-time"></span>
           </div>
@@ -17,7 +17,7 @@ class DashBoardTile extends React.Component {
             </div>
           </div>
         </div>
-        <div className="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+        <div className="col-lg-4 col-md-12 col-sm-12 col-xs-12">
           <div className="panel panel-primary">
           <div className="panel-heading">
           <span className="glyphicon glyphicon-user"></span>
@@ -28,14 +28,14 @@ class DashBoardTile extends React.Component {
             </div>
           </div>
         </div>
-        <div className="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+        <div className="col-lg-4 col-md-12 col-sm-12 col-xs-12">
           <div className="panel panel-primary">
           <div className="panel-heading">
           <span className="glyphicon glyphicon-tags"></span>
           </div>
             <div className="panel-body">
             <h2>Supply and demand</h2>
-            <p>We want everyone to get the best deal for their listings. From the beginning of time, people have had the problem, What should I sell this for? Our pricing algorithm solves that problem for you and helps you put focus back on the product.</p>
+            <p>We want everyone to get the best deal for their listings. From the beginning of time, people have had the problem, what should I sell this for? Our pricing algorithm solves that problem for you and helps you put focus back on the product.</p>
             </div>
           </div>
         </div>
