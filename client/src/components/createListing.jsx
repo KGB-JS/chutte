@@ -86,7 +86,7 @@ export default class CreateListing extends React.Component {
       <div className="col-md-5">
         <div className="row text-center">
         <div className="container2">
-          <img src={ this.state.imgFile } height="250"></img>
+          <img src={ this.state.imgFile } height="250" width="250"></img>
         </div>
         <label for="file-upload" className="btn btn-primary custom-file-upload">
         <span className="glyphicon glyphicon-upload"></span> Upload Picture
