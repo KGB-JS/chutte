@@ -611,6 +611,21 @@ input[type="file"] {
 
 }
 
+.container2 { 
+    margin: 10px;
+    height: 250px;
+    line-height: 115px;
+    overflow: hidden;
+
+}
+.container2 img { 
+    width: 100%;
+    background-image: url('http://res.cloudinary.com/chutteapi/image/upload/c_scale,w_225/v1453918622/default_oczf9m.png');
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
 .productCardDetail img {
     width: auto;
     height: auto;
@@ -819,4 +834,15 @@ ul{
 
 .footerImg {
     text-align: center;
+}
+
+
+.productDetailQuantity {
+    width: 150px;
+    height: 50px;
+    padding: 10px 12px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+    margin-bottom: 15px;
 }
