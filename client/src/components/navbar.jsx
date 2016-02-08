@@ -21,10 +21,10 @@ export default class DefaultNavbar extends React.Component {
                 <Link to="/" className="navbar-brand">{icon} Chutte</Link>
               </div> 
             </div>     
-            <ul className="nav navbar-nav navbar-right col-xs-4"> 
+            <ul className="nav navbar-nav navbar-right"> 
               <li><Link to="/browse"><span className="glyphicon glyphicon-shopping-cart"></span> Browse</Link></li>
               <li><Link to="/dashboard/profile"><span className="glyphicon glyphicon-user"></span> Dashboard</Link></li>            
-              <li><a onClick={this.handleSignout.bind(this)}><span className="glyphicon glyphicon-signout"></span> Sign out</a></li>
+              <li><a onClick={this.handleSignout.bind(this)}><span className="glyphicon glyphicon-log-out"></span> Sign out</a></li>
             </ul>          
           </div>
         </nav> 
