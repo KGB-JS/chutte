@@ -67,7 +67,7 @@ class ProductDetail extends React.Component {
             </div>
           
             <div>
-              <input className="input-lg" type="number" min="1" max={this.props.products[this.productIndex].quantity} ref="purchaseQuantity" placeholder="Select Quantity"/>
+              <input className="productDetailQuantity" type="number" min="1" max={this.props.products[this.productIndex].quantity} ref="purchaseQuantity" placeholder="Select Quantity"/>
             </div>
 
             <div>
