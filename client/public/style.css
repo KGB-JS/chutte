@@ -11,11 +11,9 @@
     border-width: 2px;
     border-color: #D6D6D6;
 }
-ul.sidebar-font > li:hover{
-    color: #085E3D:;
-    
-    
 
+ul.sidebar-font > li:hover{
+    color: #085E3D;
 }
 
 a {
@@ -437,6 +435,11 @@ a {
 }
 
 
+.buyModalDetails {
+    border-top: 2px #ccc solid;
+    padding-top: 5px;
+}
+
 
 .productinfo {
     font-size: 15px;
@@ -444,6 +447,7 @@ a {
 }
 
 .productName {
+    font-weight: bold;
     text-align: center;
     color: #00AC69;
     font-size: 20px;
@@ -456,7 +460,7 @@ a {
 }
 
 .chutteSymbol {
-    font-size: 20px;
+    font-size: 40px;
     font-weight: bold;
 }
 
@@ -563,8 +567,8 @@ input[type="file"] {
 
 .homeInfo {
     margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 15%;
+    margin-right: 15%;
     margin-bottom: 40px;
 }
 
@@ -790,11 +794,9 @@ ul{
 
 .bumpDown{
     top:70px;
-
 }
 
-#signOut{
-    
+#signOut{  
     padding-right: 10px;
 }
 .service-box {

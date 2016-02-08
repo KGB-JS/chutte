@@ -18,7 +18,7 @@ class ProductCard extends React.Component {
             <ProductImage className="productImage" image={this.props.productDetail.image}/>
 
             <row>
-              <div className="productTime">
+              <div className="productTime buyModalDetails">
                 <Timer nextUpdateTime={this.props.productDetail.timeRemaining}/>
               </div>
 

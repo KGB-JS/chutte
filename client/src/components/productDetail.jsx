@@ -65,15 +65,16 @@ class ProductDetail extends React.Component {
             <div className="productPrice">
               <p className="productinfo">Price: {numeral(this.props.products[this.productIndex].price).format('$0,0[.]00')}</p>
             </div>
-            <div className="input-group">
-              <input className="form-control" type="number" min="1" max={this.props.products[this.productIndex].quantity} ref="purchaseQuantity" placeholder="Select Quantity"/>
-
-              <span className="input-group-btn">
-                <button className="btn btn-default" type="button" disabled={this.props.user.token === ''} onClick={this.handleBuy.bind(this)}>Confirm</button>
-              </span>
+          
+            <div>
+              <input className="input-lg" type="number" min="1" max={this.props.products[this.productIndex].quantity} ref="purchaseQuantity" placeholder="Select Quantity"/>
             </div>
-            {userAuthMsg}
-            {userPurchaseBuy}
+
+            <div>
+              <button className="btn btn-lg btn-primary" type="button" disabled={this.props.user.token === ''} onClick={this.handleBuy.bind(this)}>Confirm</button>
+            </div>
+                {userAuthMsg}
+                {userPurchaseBuy}
             </div>
           </div>
         </div>
