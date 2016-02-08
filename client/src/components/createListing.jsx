@@ -9,7 +9,15 @@ import {CategoryFilters} from './../actions/actionConstants';
 export default class CreateListing extends React.Component {
   constructor(props){
     super(props);
-    this.state = { categorySelected:'', description: "", startDate: moment(), endDate: moment(), imgFile: '' };
+    this.state = { categorySelected: 'Select a category', description: '', startDate: moment(), endDate: moment(), imgFile: '', validateCategory: true };
+  }
+
+  validateForm(event){
+    if(this.state.password === event.target.value){
+      this.setState({ validation: false });
+    } else {
+      this.setState({ validation: true });
+    }
   }
 
   _descriptionInput(details){
@@ -17,6 +25,11 @@ export default class CreateListing extends React.Component {
   }
 
   _handleChange(event){
+    if(event.target.value !== 'Select a category'){
+      this.setState({ validateCategory: false });
+    } else {
+      this.setState({ validateCategory: true });
+    }  
     this.setState({categorySelected: event.target.value});
   }
 
@@ -34,7 +47,6 @@ export default class CreateListing extends React.Component {
 
   handleFile(e) {
     var self = this;
-    console.log(self)
     var reader = new FileReader();
     var file = e.target.files[0];
 
@@ -42,7 +54,7 @@ export default class CreateListing extends React.Component {
       self.setState({
         imgFile: upload.target.result,
       });
-    }
+    };
 
     reader.readAsDataURL(file);
   }
@@ -66,13 +78,17 @@ export default class CreateListing extends React.Component {
 
   render() {
     let failedPostMSG = this.props.productListing.postErrorMSG === true ? <p className="alert alert-danger alert-dismissible">Please Fill out form completely</p> : "";
-
+    var defaultV = "Select a category";
     return (
       <div className="bumpDown col-sm-offset-3 col-md-10 col-md-offset-2">
+
       <form role="form">
       <div className="col-md-5">
-        <div>
-        <label for="file-upload" className="custom-file-upload">
+        <div className="row text-center">
+        <div className="container2">
+          <img src={ this.state.imgFile } height="250" width="250"></img>
+        </div>
+        <label for="file-upload" className="btn btn-primary custom-file-upload">
         <span className="glyphicon glyphicon-upload"></span> Upload Picture
           <div onSubmit={this.handleSubmit.bind(this)} encType="multipart/form-data">
             <input type="file" onChange={this.handleFile.bind(this)} />
@@ -88,18 +104,18 @@ export default class CreateListing extends React.Component {
       <div className="col-md-5">
         <div className="form-group">
           <label>Product Name</label>
-          <input type="text" className="form-control" placeholder="Product Name" ref="name"/>
+          <input type="text" className="form-control" placeholder="Enter Product Name" ref="name"/>
         </div>
 
         <div className="form-group">
           <label>Quantity</label>
-          <input type="number" className="form-control" min="1" placeholder="Quantity" ref="quantity"/>
+          <input type="number" className="form-control" min="1" placeholder="Enter Quantity" ref="quantity"/>
         </div>
 
         <div className="form-group">
           <label>Start Date</label>
           <DatePicker
-            placeholder="Start date"
+            placeholder="Select Start date"
             selected={this.state.startDate}
             startDate={this.state.startDate}
             endDate={this.state.endDate}
@@ -108,7 +124,7 @@ export default class CreateListing extends React.Component {
         <div className="form-group">
           <label>End Date</label>
           <DatePicker
-            placeholder="End date"
+            placeholder="Select End date"
             selected={this.state.endDate}
             startDate={this.state.startDate}
             aunctionEnds={this.state.endDate}
@@ -119,6 +135,7 @@ export default class CreateListing extends React.Component {
           <label>Category</label>
           <select className="form-control" id="select" value={this.state.categorySelected}
             onChange={this._handleChange.bind(this)}>
+            <option>{defaultV}</option>
             <option value={CategoryFilters[1]}>{CategoryFilters[1]}</option>
             <option value={CategoryFilters[2]}>{CategoryFilters[2]}</option>
             <option value={CategoryFilters[3]}>{CategoryFilters[3]}</option>
@@ -133,16 +150,16 @@ export default class CreateListing extends React.Component {
 
         <div className="form-group">
           <label>Price</label>
-          <input type="number" className="form-control" min="1" placeholder="Price" ref="price"/>
+          <input type="number" className="form-control" min="1" placeholder="Enter Starting Price" ref="price"/>
         </div>
 
         <div className="form-group">
           <label>Minimum Sales Price</label>
-          <input type="number" className="form-control" min="1" placeholder="Minimum Sales Price" ref="minPrice"/>
+          <input type="number" className="form-control" min="1" placeholder="Enter Minimum Sales Price" ref="minPrice"/>
         </div>
 
         {failedPostMSG}
-        <button className="btn btn-primary" type="button" onClick={this.submitForm.bind(this)}>List Item</button>
+        <button className="btn btn-primary" type="button" onClick={this.submitForm.bind(this)} disabled={ this.state.validateCategory }>List Item</button>
         </div>
         </form>
       </div>

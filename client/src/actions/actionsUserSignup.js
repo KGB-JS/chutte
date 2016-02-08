@@ -31,6 +31,7 @@ export function userSignupFailure(err){
 };
 
 export function userProfileUpdate(user){
+  localStorage.setItem('token', user.token);
   return {
     type: USER_PROFILE_UPDATE,
     user: user

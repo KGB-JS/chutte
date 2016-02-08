@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {USER_LOGIN, USER_LOGIN_SUCCESS, USER_LOGIN_FAILURE, USER_SIGNUP, USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILURE, POST_BUY, POST_BUY_SUCCESS, POST_BUY_FAILURE, USER_LOGOUT, POST_BUY_RESET_MSG, ADD_TO_USER_LISTINGS} from './../actions/actionConstants';
+import {USER_LOGIN, USER_LOGIN_SUCCESS, USER_LOGIN_FAILURE, USER_SIGNUP, USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILURE, POST_BUY, POST_BUY_SUCCESS, POST_BUY_FAILURE, USER_LOGOUT, POST_BUY_RESET_MSG, ADD_TO_USER_LISTINGS, USER_PROFILE_UPDATE, USER_PROFILE_UPDATE_ERR} from './../actions/actionConstants';
 
 const initialState = {
   userName: '',
@@ -14,6 +14,7 @@ const initialState = {
   loggingIn: false,
   signingUp: false,
   authErrorMessage: '',
+  updateProfileError: '',
   purchasedProducts: [],
   postingBuy: false,
   postedBuy: false,
@@ -85,6 +86,21 @@ function userAuth(state = initialState, action){
         postedBuy: false,
         postBuyErrorMessage: ''
       });
+    case USER_PROFILE_UPDATE:
+      return Object.assign({}, state, {
+        token: action.user.token,
+        firstName: action.user.firstName,
+        lastName: action.user.lastName,
+        phone: action.user.phone,
+        address: action.user.address,
+        city: action.user.city,
+        state: action.user.state,
+        zip: action.user.zip
+      });
+    case USER_PROFILE_UPDATE_ERR:
+      return Object.assign({}, state, {
+        updateProfileError: action.err
+      })
     default:
       return state;
   }

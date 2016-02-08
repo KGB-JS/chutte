@@ -44,7 +44,7 @@ class ProductDetail extends React.Component {
           <div className="panel-body">
             <div className="productCardDetail" id={this.props.products[this.productIndex]._id}>
             <div className="container1 center-block">
-              <img src={this.props.products[this.productIndex].image} alt="242x200" />
+              <img src={this.props.products[this.productIndex].image} alt="Default Image" />
             </div>
             <div className="productName">
               <p>Product: {this.props.products[this.productIndex].productName}</p>
@@ -65,15 +65,16 @@ class ProductDetail extends React.Component {
             <div className="productPrice">
               <p className="productinfo">Price: {numeral(this.props.products[this.productIndex].price).format('$0,0[.]00')}</p>
             </div>
-            <div className="input-group">
-              <input className="form-control" type="number" min="1" max={this.props.products[this.productIndex].quantity} ref="purchaseQuantity" placeholder="Select Quantity"/>
-
-              <span className="input-group-btn">
-                <button className="btn btn-default" type="button" disabled={this.props.user.token === ''} onClick={this.handleBuy.bind(this)}>Confirm</button>
-              </span>
+          
+            <div>
+              <input className="productDetailQuantity" type="number" min="1" max={this.props.products[this.productIndex].quantity} ref="purchaseQuantity" placeholder="Select Quantity"/>
             </div>
-            {userAuthMsg}
-            {userPurchaseBuy}
+
+            <div>
+              <button className="btn btn-lg btn-primary" type="button" disabled={this.props.user.token === ''} onClick={this.handleBuy.bind(this)}>Confirm</button>
+            </div>
+                {userAuthMsg}
+                {userPurchaseBuy}
             </div>
           </div>
         </div>

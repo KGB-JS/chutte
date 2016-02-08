@@ -1103,7 +1103,7 @@ a {
 }
 a:hover,
 a:focus {
-  color: #00AC69;
+  color: #085E3D;
   text-decoration: underline;
 }
 a:focus {
@@ -1606,10 +1606,13 @@ pre code {
   }
 }
 .container-fluid {
+  padding-top: 7px;
+  padding-bottom: 7px;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  margin-bottom: 7px;
 }
 .row {
   margin-right: -15px;
@@ -5472,7 +5475,7 @@ button.list-group-item-danger.active:focus {
   padding: 15px;
 }
 .panel-heading {
-  padding: 10px 15px;
+  padding: 5px 8px;
   border-bottom: 1px solid transparent;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
