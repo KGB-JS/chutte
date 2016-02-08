@@ -37,7 +37,7 @@ export default class ProductList extends React.Component{
     <div>
       <div className="col-sm-12 col-md-12 input-lg">
        <div>
-         <input className="col-md-offset-4 col-md-6 input-lg" type="text"
+         <input className="col-md-offset-3 col-md-6 input-lg" type="text"
           placeholder="Search for..." 
           value = {this.state.searchVal}
           onChange={(event) => this.onChangeFunc(event.target.value)} />

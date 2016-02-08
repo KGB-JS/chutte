@@ -12,7 +12,7 @@ class DashBoardTile extends React.Component {
           <div className="panel-heading"><span className="glyphicon glyphicon-time"></span>
           </div>
             <div className="panel-body">
-            <h2>We put time on your side</h2>
+            <h2>Time on your side</h2>
             <p>Working off the guidlines given to Chutte, an individually tailored, price schedule is created for each item. This price schedule emulates the idea of supply and demand. As time passes, Chutte adjusts to reach an optimal price point for buyers and sellers.</p>
             </div>
           </div>
