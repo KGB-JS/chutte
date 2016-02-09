@@ -19,7 +19,7 @@ class BrowsePage extends React.Component {
         <div className="container-fluid BG">
         <BrowseSideBar className="col-xs-2 col-sm-2 col-md-2" filter={this.props.filter}/>
           <row>
-            <div className="col-sm-10 col-md-10 col-lg-10 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 productList">
+            <div className="col-sm-10 col-md-10 col-lg-10 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 productList bumpDown">
               <ProductList products={products} userPurchases={this.props.userPurchases} resetBuyMsg={this.props.resetBuyMsg}/>
             </div>
           </row>
