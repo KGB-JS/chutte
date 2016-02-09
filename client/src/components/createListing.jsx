@@ -29,7 +29,7 @@ export default class CreateListing extends React.Component {
       this.setState({ validateCategory: false });
     } else {
       this.setState({ validateCategory: true });
-    }  
+    }
     this.setState({categorySelected: event.target.value});
   }
 
@@ -86,7 +86,7 @@ export default class CreateListing extends React.Component {
       <div className="col-md-5">
         <div className="row text-center">
         <div className="container2">
-          <img src={ this.state.imgFile } height="250" width="250"></img>
+          <img src={ this.state.imgFile } height="250" width="auto"></img>
         </div>
         <label for="file-upload" className="btn btn-primary custom-file-upload">
         <span className="glyphicon glyphicon-upload"></span> Upload Picture
