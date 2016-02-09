@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c778d09cc3d0718b0da2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5d26c7fbfec89da3ab85"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -62955,7 +62955,7 @@
 	            null,
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'col-sm-10 col-md-10 col-lg-10 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 productList' },
+	              { className: 'col-sm-10 col-md-10 col-lg-10 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 productList bumpDown' },
 	              _react2.default.createElement(_productList2.default, { products: products, userPurchases: this.props.userPurchases, resetBuyMsg: this.props.resetBuyMsg })
 	            )
 	          )
@@ -77905,7 +77905,7 @@
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'container2' },
-	                _react2.default.createElement('img', { src: this.state.imgFile, height: '250', width: '250' })
+	                _react2.default.createElement('img', { src: this.state.imgFile, height: '250', width: 'auto' })
 	              ),
 	              _react2.default.createElement(
 	                'label',
