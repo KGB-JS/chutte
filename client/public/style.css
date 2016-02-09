@@ -626,7 +626,7 @@ input[type="file"] {
 
 .productCardDetail img {
     width: auto;
-    height: auto;
+    height: 175px;
     max-width: 100%;
     min-width: 225px;
     background-image: url('http://res.cloudinary.com/chutteapi/image/upload/c_scale,w_225/v1453918622/default_oczf9m.png');
@@ -802,7 +802,7 @@ ul{
 }
 
 .productList{
-    
+
 }
 
 .bumpDown{
