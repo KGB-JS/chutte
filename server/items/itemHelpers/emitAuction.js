@@ -60,7 +60,7 @@ module.exports = {
               image: item.image,
               auctionEnds: item.auctionEnds
             };
-            app.io.sockets.emit('productUpdate', transmitObject);
+            app.io.sockets.emit('getAllProducts', transmitObject);
           }
         }
       });
