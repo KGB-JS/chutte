@@ -753,6 +753,9 @@ textarea{
 ul{
     margin-left: -225px;
 }
+.bumpDown{
+    top:200px;
+}
 
 @media(min-width:768px) {
     #wrapper {
@@ -760,6 +763,10 @@ ul{
     }
     ul{
         margin-left: -25px;
+    }
+
+    .bumpDown{
+    top:95px;
     }
 
 
@@ -801,13 +808,8 @@ ul{
     width: 100%;
 }
 
-.productList{
 
-}
 
-.bumpDown{
-    top:95px;
-}
 
 #signOut{
     padding-right: 10px;
