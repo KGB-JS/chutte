@@ -27,30 +27,6 @@ module.exports = {
 };
 
 io.on('connection', function(socket) {
-    Item.find({}, function(err, items) {
-        var now = moment().valueOf();
-        var itemMap = [];
-        items.forEach(function(item) {
-            if (item.auctionEnds < now) {
-                item.active = false;
-                item.save();
-            }
-            if(item.quantity === 0){
-                item.active = false;
-                item.save();
-            }
-            if (item.active) {
-                var priceFlag = true;
-                for (var i = 0; i < item.priceSchedule.length; i++) {
-                    if (priceFlag && item.priceSchedule[i].decrementTime > now) {
-                        priceFlag = false;
-                        item.price = item.priceSchedule[i].price;
-                        item.timeRemaining = item.auctionEnds;
-                        item.save();
-                        emit.emitAuctionGet(item._id);
-                    }
-                }
-            } 
-        });
-    });
+    emit.emitAuctionGet();
+    console.log("connected")
 });

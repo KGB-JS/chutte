@@ -11,6 +11,7 @@ var timeStorage = {};
 
 module.exports = {
     getItems: function(req, res, next) {
+      emit.emitAuctionGet();
       Item.find({}, function(err, items) {
         var now = moment().valueOf();
         var itemMap = [];
@@ -27,7 +28,7 @@ module.exports = {
                         item.price = item.priceSchedule[i].price;
                         item.timeRemaining = item.auctionEnds;
                         item.save();
-                        emit.emitAuctionGet(item._id);
+                        
                     }
                 }
                 var transmitObject = {
@@ -43,10 +44,9 @@ module.exports = {
                     auctionEnds: item.auctionEnds
                 };
                 itemMap.push(transmitObject)
-                emit.emitAuctionGet(item._id);
             }
         });
-        
+
         res.status(200).send(itemMap);
       })
     },
