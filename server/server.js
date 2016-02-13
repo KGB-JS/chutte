@@ -5,8 +5,7 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var init = require('./items/initController.js');
 var emit = require('./items/itemHelpers/emitAuction.js');
-var Item = require('./items/itemModel.js');
-var moment = require('moment');
+
 
 require('./config/middleware.js')(app, express);
 
@@ -28,5 +27,4 @@ module.exports = {
 
 io.on('connection', function(socket) {
     emit.emitAuctionGet();
-    console.log("connected")
 });
