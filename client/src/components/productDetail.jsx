@@ -22,7 +22,7 @@ class ProductDetail extends React.Component {
   handleBuy() {
     var purchaseDetails = {
       _id: this.props.products[this.productIndex]._id,
-      quantity: Number(this.refs.purchaseQuantity.value),
+      quantity: Number(this.refs.purchaseQuantity.value) || 1,
       price: this.props.products[this.productIndex].price
     };
     this.props.buyProduct(purchaseDetails, this.props.user.token);
@@ -65,9 +65,9 @@ class ProductDetail extends React.Component {
             <div className="productPrice">
               <p className="productinfo">Price: {numeral(this.props.products[this.productIndex].price).format('$0,0[.]00')}</p>
             </div>
-          
+
             <div>
-              <input className="productDetailQuantity" type="number" min="1" max={this.props.products[this.productIndex].quantity} ref="purchaseQuantity" placeholder="Select Quantity"/>
+              <input className="productDetailQuantity" type="number" min="1" max={this.props.products[this.productIndex].quantity} ref="purchaseQuantity" placeholder={this.props.products[this.productIndex].quantity === 1 ? "1" : "Select Quantity"}/>
             </div>
 
             <div>
