@@ -1,4 +1,4 @@
-import {updateProduct, removeProduct, removeSoldoutProduct} from './../actions/actionsProducts';
+import {updateProduct, removeProduct, removeSoldoutProduct, getProductsSuccess} from './../actions/actionsProducts';
 var socket = require('socket.io-client')();
 
 export default function(store){
@@ -9,7 +9,7 @@ export default function(store){
   socket.on('productUpdate', function(obj){
     store.dispatch(updateProduct(obj));
   });
-  
+
   socket.on('quantityUpdate', function(obj){
   	if(obj.quantity > 0){
       store.dispatch(updateProduct(obj));
