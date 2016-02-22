@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 const path = require('path');
 const ROOT_PATH = path.resolve(__dirname);
 
@@ -44,6 +45,11 @@ module.exports = {
     progress: true
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new uglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
   ]
 };
