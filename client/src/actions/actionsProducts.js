@@ -75,13 +75,6 @@ export function filterByCategory(category){
   };
 }
 
-export function filterByCategory(category){
-  return {
-    type: PRODUCT_CATEGORY_FILTER,
-    category: category
-  };
-}
-
 export function fetchProducts(){
   return function(dispatch){
     dispatch(getProducts());
