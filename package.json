@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "client-test": "mocha test/client/ --compilers js:babel-register --recursive",
+    "test-client": "mocha test/client/ --compilers js:babel-register --recursive",
     "test": "npm run test-server",
     "test-server": "mocha -R spec ./test/serverSpec.js",
     "webserver": "nodemon server/server.js",
