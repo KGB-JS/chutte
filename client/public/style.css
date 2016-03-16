@@ -17,11 +17,21 @@ ul.sidebar-font > li:hover{
 }
 
 ul.sidebar-font > li.active{
-    color: #085E3D;
+  color: white;
+  background-color: #00AC69;
+}
+
+ul.sidebar-font > li > a{
+  color: #00AC69;
+}
+
+ul.sidebar-font > li > a:hover{
+  color: #085E3D;
 }
 
 ul.sidebar-font > li > a.active{
-    color: #085E3D;
+  color: white;
+  background-color: #00AC69;
 }
 
 ul.nav > li > a.active{
@@ -677,7 +687,7 @@ textarea{
     height: 100%;
     margin-left: -250px;
     /*overflow-y: auto;*/
-    background: #00AC69;
+    background: white;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -746,12 +756,26 @@ textarea{
     background: none;
 }
 
+ul.sidebar-font{
+  margin-top: 73px;
+  padding-top: 0px;
+  padding-left: 25px;
+  border-top: 1px solid white;
+  border-bottom: 3px solid #00AC69;
+}
+
 .sidebar-font > li {
-    color: white;
+    color: #00AC69;
     font-weight: bold;
     font-size: 20px;
     list-style-type: none;
-    padding-top: 25px
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    border-top: 3px solid #00AC69;
+    border-left: 3px solid #00AC69;
+    border-right: 3px solid #00AC69;
 }
 
 .sidebar-font > li:hover {
