@@ -12,7 +12,7 @@ function mapDispatchToProps(dispatch){
 
 function mapStateToProps(state){
   return {
-    postErrorMSG: this.state.productStore.products.postErrorMSG
+    postErrorMSG: state.productStore.products.postErrorMSG
   }
 };
 
