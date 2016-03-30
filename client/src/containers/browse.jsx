@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import DefaultNavbar from './../components/navbar';
+import Navbar from './../components/navbar';
 import SearchBar from './../components/search';
 import ProductCard from './../components/productCard';
 import BrowseSideBar from './../components/BrowseSideBar';
@@ -14,7 +14,7 @@ class BrowsePage extends React.Component {
     let products = this.props.products.categoryFilter !== CategoryFilters[0] ? this.props.products.filteredProductList : this.props.products.productList;
     return (
     <div className="BG">
-      <DefaultNavbar submitSignout={this.props.submitSignout}
+      <Navbar submitSignout={this.props.submitSignout}
          user={this.props.userAuth}/>
         <div className="container-fluid BG">
         <BrowseSideBar className="col-xs-2 col-sm-2 col-md-2" filter={this.props.filter}/>

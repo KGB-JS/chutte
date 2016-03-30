@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {authenticateUser} from './../actions/actionsUserAuth';
-import HomeNavBar from './homenavbar';
 import { Form, ValidatedInput } from 'react-bootstrap-validation';
 
 class UserAuth extends React.Component{
@@ -58,7 +57,7 @@ class UserAuth extends React.Component{
                 value={ this.state.userEmail }
                 onChange={this.checkUserName.bind(this)}
                 name="checkemail"
-                type="email" 
+                type="email"
                 validate='required,isEmail'
                 errorHelp={{
                 required: 'Please enter your email',
@@ -68,7 +67,7 @@ class UserAuth extends React.Component{
             </div>
             <div className="row">
               <span><i className="fa fa-key fa-fw"></i></span>
-              <input 
+              <input
               onChange={this.checkValidation.bind(this)}
               className="form-control" ref="password" type="password" placeholder="Password" />
             </div>
