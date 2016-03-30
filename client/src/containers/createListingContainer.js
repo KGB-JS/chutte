@@ -11,7 +11,6 @@ function mapDispatchToProps(dispatch){
 };
 
 function mapStateToProps(state){
-console.log('state: ', state);
   return {
     postErrorMSG: state.productStore.products.postErrorMSG
   }
