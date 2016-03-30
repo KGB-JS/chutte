@@ -20,7 +20,7 @@ import ProductList from './components/productList';
 import UserAuth from './components/userAuth';
 import UserSignup from './components/userSignup';
 import DevTools from './containers/devTools';
-import UserProfile from './components/userProfile';
+import UserProfileContainer from './containers/UserProfileContainer';
 import CurrentListingContainer from './containers/currentListingContainer';
 import CreateListingContainer from './containers/CreateListingContainer';
 import {fetchProducts, removeEndedAuction} from './actions/actionsProducts';
@@ -74,7 +74,7 @@ ReactDOM.render(
         <IndexRoute component={Home}/>
         <Route path='browse' component={Browse}></Route>
         <Route path='dashboard' component={DashboardContainer}>
-          <IndexRoute component={UserProfile}/>
+          <IndexRoute component={UserProfileContainer}/>
           <Route path='create' component={CreateListingContainer} />
           <Route path='current' component={CurrentListingContainer} />
         </Route>

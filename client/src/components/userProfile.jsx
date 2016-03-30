@@ -1,9 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import DefaultNavbar from '../components/navbar';
-import ProfileSideNavBar from './../components/profileSideBar';
-import {userLogout} from './../actions/actionsUserAuth';
-import {postUpdateProfile} from './../actions/actionsUserSignup';
+// import {connect} from 'react-redux';
+// import DefaultNavbar from '../components/navbar';
+// import ProfileSideNavBar from './../components/profileSideBar';
+// import {userLogout} from './../actions/actionsUserAuth';
+// import {postUpdateProfile} from './../actions/actionsUserSignup';
 
 class UserProfile extends React.Component {
   constructor(props){
@@ -63,47 +63,47 @@ class UserProfile extends React.Component {
          <form>
            <div className = "col-md-6">
               <div className="form-group">
-                <label htmlFor="exampleInputPassword1">First Name</label>
-                <input ref="firstName" type="text" className="form-control" placeholder={this.props.userDetail.firstName}/>
+                <label htmlFor="inputFirstName">First Name</label>
+                <input id="inputFirstName" ref="firstName" type="text" className="form-control" placeholder={this.props.userDetail.firstName}/>
               </div>
               <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Last Name</label>
-                <input ref="lastName" type="text" className="form-control" placeholder={this.props.userDetail.lastName}/>
+                <label htmlFor="inputLastName">Last Name</label>
+                <input id="inputLastName" ref="lastName" type="text" className="form-control" placeholder={this.props.userDetail.lastName}/>
               </div>
               <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Phone</label>
-                <input ref="phone" type="text" className="form-control" placeholder={this.props.userDetail.phone}/>
+                <label htmlFor="inputPhone">Phone</label>
+                <input id="inputPhone" ref="phone" type="text" className="form-control" placeholder={this.props.userDetail.phone}/>
               </div>
               <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Street Address</label>
-                <input ref="address" type="text" className="form-control" placeholder={this.props.userDetail.address}/>
+                <label htmlFor="inputAddress">Street Address</label>
+                <input id="inputAddress" ref="address" type="text" className="form-control" placeholder={this.props.userDetail.address}/>
               </div>
               <div className="form-group">
-                <label htmlFor="exampleInputPassword1">State Region</label>
-                <input ref="state" type="text" className="form-control" placeholder={this.props.userDetail.state}/>
+                <label htmlFor="inputCity">City</label>
+                <input id="inputCity" ref="city" type="text" className="form-control" placeholder={this.props.userDetail.city}/>
               </div>
               <div className="form-group">
-                <label htmlFor="exampleInputPassword1">City</label>
-                <input ref="city" type="text" className="form-control" placeholder={this.props.userDetail.city}/>
+                <label htmlFor="inputState">State Region</label>
+                <input id="inputState" ref="state" type="text" className="form-control" placeholder={this.props.userDetail.state}/>
               </div>
               <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Zip</label>
-                <input ref="zip" type="text" className="form-control" placeholder={this.props.userDetail.zip}/>
+                <label htmlFor="inputZip">Zip</label>
+                <input id="inputZip" ref="zip" type="text" className="form-control" placeholder={this.props.userDetail.zip}/>
               </div>
             </div>
 
             <div className = "col-md-5">
               <div className="form-group">
-                <label htmlFor="exampleInputEmail1">Username</label>
-                <input ref="userName" type="email" className="form-control" id="exampleInputEmail1" placeholder={this.props.userDetail.userName}/>
+                <label htmlFor="inputEmail">Username</label>
+                <input ref="userName" type="email" className="form-control" id="inputEmail" placeholder={this.props.userDetail.userName}/>
               </div>
               <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Password</label>
-                <input type="password" className="form-control" id="exampleInputPassword1" value={this.state.password} onChange={this.validatePassword.bind(this)} placeholder="Password"/>
+                <label htmlFor="password1">Password</label>
+                <input type="password" className="form-control" id="password1" value={this.state.password} onChange={this.validatePassword.bind(this)} placeholder="Password"/>
               </div>
               <div className="form-group">
-                <label htmlFor="exampleInputPassword2">Confirm Password</label>
-                <input type="password" className="form-control" id="exampleInputPassword2" value={this.state.confirmPassword} onChange={this.checkPassword.bind(this)} placeholder="Confirm Password"/>
+                <label htmlFor="password2">Confirm Password</label>
+                <input type="password" className="form-control" id="password2" value={this.state.confirmPassword} onChange={this.checkPassword.bind(this)} placeholder="Confirm Password"/>
               </div>
                <button type="submit" className="btn btn-default" onClick={this.submitProfileUpdate.bind(this)} disabled={this.state.validation}>Submit</button>
             </div>
@@ -113,18 +113,18 @@ class UserProfile extends React.Component {
   }
 };
 
-function mapDispatchToProps(dispatch){
-  return {
-    updateProfile: function(user, token){
-      dispatch(postUpdateProfile(user, token))
-    }
-  }
-}
+// function mapDispatchToProps(dispatch){
+//   return {
+//     updateProfile: function(user, token){
+//       dispatch(postUpdateProfile(user, token))
+//     }
+//   }
+// }
+//
+// function mapStateToProps(state){
+//   return {
+//     userDetail: state.userStore.userAuth
+//   };
+// }
 
-function mapStateToProps(state){
-  return {
-    userDetail: state.userStore.userAuth
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
+export default UserProfile;
