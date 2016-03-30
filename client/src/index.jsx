@@ -17,8 +17,6 @@ import Browse from './containers/browse';
 import DashboardContainer from './containers/DashboardContainer';
 import ProductDetail from './components/productDetail';
 import ProductList from './components/productList';
-import UserAuth from './components/userAuth';
-import UserSignup from './components/userSignup';
 import DevTools from './containers/devTools';
 import UserProfileContainer from './containers/UserProfileContainer';
 import CurrentListingContainer from './containers/currentListingContainer';
@@ -78,9 +76,7 @@ ReactDOM.render(
           <Route path='create' component={CreateListingContainer} />
           <Route path='current' component={CurrentListingContainer} />
         </Route>
-        <Route path='signin' component={UserAuth}/>
-        <Route path='signup' component={UserSignup}/>
-        <Route path='*' component={Home} />
+        <Redirect from='*' to='/' />
       </Route>
     </Router>
   </Provider>, app);
