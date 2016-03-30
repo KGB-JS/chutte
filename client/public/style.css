@@ -29,7 +29,7 @@ ul.sidebar-font > li > a:hover{
   color: #085E3D;
 }
 
-ul.sidebar-font > li > a.active{
+ul.sidebar-font > li.active > a{
   color: white;
   background-color: #00AC69;
 }

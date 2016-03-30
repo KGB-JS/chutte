@@ -1,23 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {createListing, postListing} from './../actions/actionsCreateListing';
 import DropZone from 'react-dropzone';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import {CategoryFilters} from './../actions/actionConstants';
 
-export default class CreateListing extends React.Component {
+class CreateListing extends React.Component {
   constructor(props){
     super(props);
     this.state = { categorySelected: 'Select a category', description: '', startDate: moment(), endDate: moment(), imgFile: '', validateCategory: true };
-  }
-
-  validateForm(event){
-    if(this.state.password === event.target.value){
-      this.setState({ validation: false });
-    } else {
-      this.setState({ validation: true });
-    }
   }
 
   _descriptionInput(details){
@@ -77,7 +67,7 @@ export default class CreateListing extends React.Component {
   }
 
   render() {
-    let failedPostMSG = this.props.productListing.postErrorMSG === true ? <p className="alert alert-danger alert-dismissible">Please Fill out form completely</p> : "";
+    let failedPostMSG = this.props.postErrorMSG === true ? <p className="alert alert-danger alert-dismissible">Please Fill out form completely</p> : "";
     var defaultV = "Select a category";
     return (
       <div className="bumpDown col-sm-offset-3 col-md-10 col-md-offset-2">
@@ -165,6 +155,6 @@ export default class CreateListing extends React.Component {
       </div>
     )
   }
-}
+};
 
-export default CreateListing
+export default CreateListing;
