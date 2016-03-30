@@ -1,9 +1,4 @@
 import React from 'react';
-// import {connect} from 'react-redux';
-// import DefaultNavbar from '../components/navbar';
-// import ProfileSideNavBar from './../components/profileSideBar';
-// import {userLogout} from './../actions/actionsUserAuth';
-// import {postUpdateProfile} from './../actions/actionsUserSignup';
 
 class UserProfile extends React.Component {
   constructor(props){
@@ -113,18 +108,5 @@ class UserProfile extends React.Component {
   }
 };
 
-// function mapDispatchToProps(dispatch){
-//   return {
-//     updateProfile: function(user, token){
-//       dispatch(postUpdateProfile(user, token))
-//     }
-//   }
-// }
-//
-// function mapStateToProps(state){
-//   return {
-//     userDetail: state.userStore.userAuth
-//   };
-// }
 
 export default UserProfile;
