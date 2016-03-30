@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import HomeNavBar from './../components/homenavbar';
+import Navbar from './../components/navbar';
 import JumboTronButton from './../components/JumboTronButton';
 import DashboardTiles from './../components/dashboardTiles';
 import MadeBy from './../components/madeBy';
@@ -12,7 +12,7 @@ class Home extends React.Component {
     return (
       <div>
         <div className="full">
-          <HomeNavBar submitSignout={this.props.submitSignout} user={this.props.userAuth}/>
+          <Navbar submitSignout={this.props.submitSignout} user={this.props.userAuth}/>
           <JumboTronButton/>
         </div>
         <div className="homeInfo">
