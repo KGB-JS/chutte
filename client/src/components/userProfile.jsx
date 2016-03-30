@@ -54,18 +54,11 @@ class UserProfile extends React.Component {
         userUpdate[key] = this.props.userDetail[key];
       }
     }
-    console.log(userUpdate, "this is the user update profile");
     this.props.updateProfile(userUpdate, this.props.userDetail.token);
   }
 
   render() {
     return (
-      <div>
-        <DefaultNavbar submitSignout={this.props.submitSignout}
-           user={this.props.userDetail} />
-           <div className = "col-md-2">
-        <ProfileSideNavBar/>
-        </div>
         <div className = "bumpDown col-sm-offset-3 col-md-offset-2 col-md-offset-2 col-md-10">
          <form>
            <div className = "col-md-6">
@@ -116,16 +109,12 @@ class UserProfile extends React.Component {
             </div>
           </form>
         </div>
-      </div>
     )
   }
 };
 
 function mapDispatchToProps(dispatch){
   return {
-    submitSignout: function(){
-       dispatch(userLogout());
-    },
     updateProfile: function(user, token){
       dispatch(postUpdateProfile(user, token))
     }

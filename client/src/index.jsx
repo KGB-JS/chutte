@@ -14,14 +14,15 @@ import socket from './socket/socket';
 import App from './containers/app';
 import Home from './containers/home';
 import Browse from './containers/browse';
-import Dashboard from './containers/dashboard';
+import DashboardContainer from './containers/DashboardContainer';
 import ProductDetail from './components/productDetail';
 import ProductList from './components/productList';
 import UserAuth from './components/userAuth';
 import UserSignup from './components/userSignup';
 import DevTools from './containers/devTools';
 import UserProfile from './components/userProfile';
-import CurrentListing from './components/currentListing';
+import CurrentListingContainer from './containers/currentListingContainer';
+import CreateListingContainer from './containers/CreateListingContainer';
 import {fetchProducts, removeEndedAuction} from './actions/actionsProducts';
 
 const history = browserHistory;
@@ -71,11 +72,12 @@ ReactDOM.render(
     <Router history={history}>
        <Route path='/' component={App}>
         <IndexRoute component={Home}/>
-        <Route path='browse' component={Browse}/>
-        <Route path='browse/product/:id' component={ProductDetail}/>
-        <Route path='dashboard/profile' component={UserProfile}/>
-        <Route path='create' component={Dashboard}/>
-        <Route path='current' component={CurrentListing}/>
+        <Route path='browse' component={Browse}></Route>
+        <Route path='dashboard' component={DashboardContainer}>
+          <IndexRoute component={UserProfile}/>
+          <Route path='create' component={CreateListingContainer} />
+          <Route path='current' component={CurrentListingContainer} />
+        </Route>
         <Route path='signin' component={UserAuth}/>
         <Route path='signup' component={UserSignup}/>
         <Route path='*' component={Home} />
