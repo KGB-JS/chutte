@@ -15,8 +15,6 @@ import App from './containers/app';
 import HomeContainer from './containers/HomeContainer';
 import BrowseContainer from './containers/BrowseContainer';
 import DashboardContainer from './containers/DashboardContainer';
-import ProductDetail from './components/productDetail';
-import ProductList from './components/productList';
 import DevTools from './containers/devTools';
 import UserProfileContainer from './containers/UserProfileContainer';
 import CurrentListingContainer from './containers/currentListingContainer';
