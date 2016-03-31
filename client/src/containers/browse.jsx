@@ -13,7 +13,7 @@ class BrowsePage extends React.Component {
   render(){
     let products = this.props.products.categoryFilter !== CategoryFilters[0] ? this.props.products.filteredProductList : this.props.products.productList;
     return (
-    <div className="BG">
+    <div>
       <Navbar submitSignout={this.props.submitSignout}
          user={this.props.userAuth}/>
         <div className="container-fluid BG">

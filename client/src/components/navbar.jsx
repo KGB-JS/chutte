@@ -23,8 +23,8 @@ const Navbar = function({user, submitSignout}) {
     );
   } else {
     return (
-      <nav className="navbar navbar-default">
-        <div className="container-fluid">
+      <nav className="navbar navbar-default navBrowse">
+        <div className="container-fluid chutteGreen">
           <div className="navbar-header">
             <Link to="/" className="navbar-brand">{icon} Chutte</Link>
           </div>

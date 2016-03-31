@@ -521,7 +521,7 @@ a {
     background-color: #00AC69;
     color: #FFFFFF;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
     border-width: 0px;
 }
 
@@ -757,11 +757,11 @@ textarea{
 }
 
 ul.sidebar-font{
-  margin-top: 73px;
+  margin-top: 66px;
   padding-top: 0px;
   padding-left: 25px;
   border-top: 1px solid white;
-  border-bottom: 3px solid #00AC69;
+  border-bottom: 2.5px solid #00AC69;
 }
 
 .sidebar-font > li {
@@ -773,9 +773,9 @@ ul.sidebar-font{
     padding-left: 5px;
     padding-bottom: 10px;
     padding-right: 5px;
-    border-top: 3px solid #00AC69;
-    border-left: 3px solid #00AC69;
-    border-right: 3px solid #00AC69;
+    border-top: 2.5px solid #00AC69;
+    border-left: 2.5px solid #00AC69;
+    border-right: 2.5px solid #00AC69;
 }
 
 .sidebar-font > li:hover {
@@ -843,9 +843,6 @@ ul{
     position: fixed;
     width: 100%;
 }
-
-
-
 
 #signOut{
     padding-right: 10px;
