@@ -13,7 +13,7 @@ import rootReducer from './reducers/rootReducer';
 import socket from './socket/socket';
 import App from './containers/app';
 import Home from './containers/home';
-import Browse from './containers/browse';
+import BrowseContainer from './containers/BrowseContainer';
 import DashboardContainer from './containers/DashboardContainer';
 import ProductDetail from './components/productDetail';
 import ProductList from './components/productList';
@@ -70,7 +70,7 @@ ReactDOM.render(
     <Router history={history}>
        <Route path='/' component={App}>
         <IndexRoute component={Home}/>
-        <Route path='browse' component={Browse}></Route>
+        <Route path='browse' component={BrowseContainer}></Route>
         <Route path='dashboard' component={DashboardContainer}>
           <IndexRoute component={UserProfileContainer}/>
           <Route path='create' component={CreateListingContainer} />
