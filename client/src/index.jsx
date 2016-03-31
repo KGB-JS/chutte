@@ -12,7 +12,7 @@ import storeEnhancer from 'redux-history-transitions';
 import rootReducer from './reducers/rootReducer';
 import socket from './socket/socket';
 import App from './containers/app';
-import Home from './containers/home';
+import HomeContainer from './containers/HomeContainer';
 import BrowseContainer from './containers/BrowseContainer';
 import DashboardContainer from './containers/DashboardContainer';
 import ProductDetail from './components/productDetail';
@@ -69,7 +69,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
        <Route path='/' component={App}>
-        <IndexRoute component={Home}/>
+        <IndexRoute component={HomeContainer}/>
         <Route path='browse' component={BrowseContainer}></Route>
         <Route path='dashboard' component={DashboardContainer}>
           <IndexRoute component={UserProfileContainer}/>

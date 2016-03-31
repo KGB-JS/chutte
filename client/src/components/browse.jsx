@@ -1,5 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import Navbar from './../components/navbar';
 import SearchBar from './../components/search';
 import ProductCard from './../components/productCard';
