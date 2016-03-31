@@ -12,7 +12,8 @@ function mapDispatchToProps(dispatch){
 
 function mapStateToProps(state){
   return {
-    postErrorMSG: state.productStore.products.postErrorMSG
+    postErrorMSG: state.productStore.products.postErrorMSG,
+    user: state.userStore.userAuth
   }
 };
 
