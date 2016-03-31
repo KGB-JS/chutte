@@ -50,18 +50,19 @@ class CreateListing extends React.Component {
   }
 
   submitForm(){
-    var itemDetails ={product: {
-      productName: String(this.refs.name.value),
-      createdBy : String(this.refs.name.value),
-      category : String(this.state.categorySelected),
-      quantity : Number(this.refs.quantity.value),
-      auctionEnds : Number(this.state.endDate.valueOf()),
-      price: Number(this.refs.price.value),
-      minPrice: Number(this.refs.minPrice.value),
-      imgFile: this.state.imgFile,
-      description: String(this.state.description)
-    }};
-
+    var itemDetails ={
+      product: {
+        productName: String(this.refs.name.value),
+        createdBy : String(this.refs.name.value),
+        category : String(this.state.categorySelected),
+        quantity : Number(this.refs.quantity.value),
+        auctionEnds : Number(this.state.endDate.valueOf()),
+        price: Number(this.refs.price.value),
+        minPrice: Number(this.refs.minPrice.value),
+        imgFile: this.state.imgFile,
+        description: String(this.state.description)
+      }
+    };
     this.props.submitListing(itemDetails, this.props.user.token);
 
   }
