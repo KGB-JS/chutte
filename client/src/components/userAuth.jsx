@@ -69,7 +69,7 @@ class UserAuth extends React.Component{
               className="form-control" ref="password" type="password" placeholder="Password" />
             </div>
             <div className="row">
-              <button className="btn btn-primary" onClick={this.submitUserLogin.bind(this)} disabled={this.state.inactiveButton}>Sign In</button>
+              <button className="btn btn-primary signIn-btn" onClick={this.submitUserLogin.bind(this)} disabled={this.state.inactiveButton}>Sign In</button>
             </div>
           </Form>
           </div>
