@@ -554,6 +554,10 @@ a {
     color: #FFFFFF;
 }
 
+.signIn-btn {
+  margin-top: 10px;
+}
+
 .full {
     background: url('../assets/landing-bkg.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;

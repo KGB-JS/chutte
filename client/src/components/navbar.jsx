@@ -4,19 +4,19 @@ import SignUpModal from './../components/signupModal';
 import SignInModal from './../components/loginModal';
 
 const Navbar = function({user, submitSignout, signInUser, signupUser}) {
-  let icon = (<span><img className="logo" src="../assets/chutteLogo.png"  alt="Chutte Logo" height="50" width="50" /></span>);
+  let icon = (<span><img className="logo" src="../assets/chutteLogo.png"  alt="Chutte Logo" height="50" width="50" />Chutte</span>);
 
   if(user.token !== ''){
     return (
       <nav className="navbar navbar-default navBrowse">
         <div className="container-fluid chutteGreen">
             <div className="navbar-header">
-              <Link to="/" className="navbar-brand">{icon} Chutte</Link>
+              <Link to="/" className="navbar-brand">{icon}</Link>
             </div>
           <ul className="nav navbar-nav navbar-right">
-            <li><Link to="/browse" activeClassName="active"><span className="glyphicon glyphicon-shopping-cart"></span> Browse</Link></li>
-            <li><Link to="/dashboard" activeClassName="active"><span className="glyphicon glyphicon-user"></span> Dashboard</Link></li>
-            <li><a onClick={submitSignout} activeClassName="active"><span className="glyphicon glyphicon-log-out"></span> Sign out</a></li>
+            <li><Link to="/browse" activeClassName="active">Browse</Link></li>
+            <li><Link to="/dashboard" activeClassName="active">Dashboard</Link></li>
+            <li><a onClick={submitSignout} activeClassName="active">Sign out</a></li>
           </ul>
         </div>
       </nav>
@@ -26,7 +26,7 @@ const Navbar = function({user, submitSignout, signInUser, signupUser}) {
       <nav className="navbar navbar-default navBrowse">
         <div className="container-fluid chutteGreen">
           <div className="navbar-header">
-            <Link to="/" className="navbar-brand">{icon} Chutte</Link>
+            <Link to="/" className="navbar-brand">{icon}</Link>
           </div>
             <ul className="nav navbar-nav navbar-right">
               <li><SignUpModal signupUser={signupUser}/></li>
