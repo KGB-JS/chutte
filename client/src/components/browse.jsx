@@ -7,13 +7,12 @@ import ProductList from './../components/productList';
 import {CategoryFilters} from './../actions/actionConstants';
 
 
-const Browse = function({filter, submitSignout, resetBuyMsg, products, userAuth, userPurchases}) {
+const Browse = function({filter, submitSignout, signInUser, signupUser, resetBuyMsg, products, userAuth, userPurchases}) {
   let productList = products.categoryFilter !== CategoryFilters[0] ? products.filteredProductList : products.productList;
 
   return (
   <div>
-    <Navbar submitSignout={submitSignout}
-       user={userAuth}/>
+    <Navbar submitSignout={submitSignout} user={userAuth} signInUser={signInUser} signupUser={signupUser}/>
       <div className="container-fluid BG">
       <BrowseSideBar className="col-xs-2 col-sm-2 col-md-2" filter={filter}/>
         <row>

@@ -1,6 +1,7 @@
 import {connect} from 'react-redux';
 import Browse from '../components/browse';
-import {userLogout} from './../actions/actionsUserAuth';
+import {userLogout, actionsUserAuth} from './../actions/actionsUserAuth';
+import {postUserSignup} from './../actions/actionsUserSignup';
 import {filterByCategory, postBuyResetMsg} from './../actions/actionsProducts';
 
 function mapDispatchToProps(dispatch){
@@ -13,6 +14,12 @@ function mapDispatchToProps(dispatch){
     },
     resetBuyMsg: function(){
       dispatch(postBuyResetMsg());
+    },
+    signInUser: function(user) {
+      dispatch(authenticateUser(user));
+    },
+    signupUser: function(user) {
+      dispatch(postUserSignup(user));
     }
   }
 };
@@ -26,3 +33,9 @@ function mapStateToProps(state){
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Browse);
+
+function mapDispatchToProps(dispatch){
+  return {
+
+  }
+}

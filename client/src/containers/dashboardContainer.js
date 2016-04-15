@@ -1,7 +1,9 @@
 import {connect} from 'react-redux';
 import Dashboard from '../components/dashboard';
 import {postListing} from './../actions/actionsCreateListing';
-import {userLogout} from './../actions/actionsUserAuth';
+import {userLogout, authenticateUser} from './../actions/actionsUserAuth';
+import {postUserSignup} from './../actions/actionsUserSignup';
+
 
 function mapDispatchToProps(dispatch){
   return {
@@ -11,6 +13,12 @@ function mapDispatchToProps(dispatch){
     submitSignout: function(){
        dispatch(userLogout());
     },
+    signInUser: function(user) {
+      dispatch(authenticateUser(user));
+    },
+    signupUser: function(user) {
+      dispatch(postUserSignup(user));
+    }
   }
 }
 

@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import SignUpModal from './../components/signupModal';
 import SignInModal from './../components/loginModal';
 
-const Navbar = function({user, submitSignout}) {
+const Navbar = function({user, submitSignout, signInUser, signupUser}) {
   let icon = (<span><img className="logo" src="../assets/chutteLogo.png"  alt="Chutte Logo" height="50" width="50" /></span>);
 
   if(user.token !== ''){
@@ -29,8 +29,8 @@ const Navbar = function({user, submitSignout}) {
             <Link to="/" className="navbar-brand">{icon} Chutte</Link>
           </div>
             <ul className="nav navbar-nav navbar-right">
-              <li><SignUpModal/></li>
-              <li><SignInModal/></li>
+              <li><SignUpModal signupUser={signupUser}/></li>
+              <li><SignInModal signInUser={signInUser}/></li>
             </ul>
         </div>
       </nav>

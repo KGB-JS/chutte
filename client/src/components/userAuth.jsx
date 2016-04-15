@@ -1,6 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {authenticateUser} from './../actions/actionsUserAuth';
 import { Form, ValidatedInput } from 'react-bootstrap-validation';
 
 class UserAuth extends React.Component{
@@ -17,7 +15,6 @@ class UserAuth extends React.Component{
     };
 
     this.props.signInUser(user);
-    this.props.history.push('browse');
   }
 
   checkUserName(event){
@@ -82,18 +79,4 @@ class UserAuth extends React.Component{
   }
 };
 
-function mapDispatchToProps(dispatch){
-  return {
-    signInUser: function(user) {
-      dispatch(authenticateUser(user));
-    }
-  }
-}
-
-function mapStateToProps(state){
-  return {
-    user: state.userStore.userAuth
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserAuth);
+export default UserAuth;
