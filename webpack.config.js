@@ -1,7 +1,24 @@
 const webpack = require('webpack');
-const uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 const path = require('path');
 const ROOT_PATH = path.resolve(__dirname);
+
+var plugins = [
+  new webpack.optimize.OccurenceOrderPlugin(),
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+  })
+];
+
+if (process.env.NODE_ENV === 'production') {
+  plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        screw_ie8: true,
+        warnings: false
+      }
+    })
+  );
+}
 
 module.exports = {
   devtool: 'source-map',
@@ -44,12 +61,5 @@ module.exports = {
     inline: true,
     progress: true
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new uglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  ]
+  plugins: plugins
 };
