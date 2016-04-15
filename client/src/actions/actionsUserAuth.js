@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+//import fetch from 'isomorphic-fetch';
 import {routeActions} from 'react-router-redux';
 import {checkStatus, parseJSON} from './actionsHelper';
 import {USER_LOGIN, USER_LOGIN_SUCCESS, USER_LOGIN_FAILURE, USER_LOGOUT} from './actionConstants';
@@ -40,7 +40,7 @@ export function userLogout(){
 
 export function authenticateUser(user){
   return function(dispatch){
-    dispatch(userLogin(user.userName));
+    dispatch(userLogin(user.username));
     return fetch('/api/users/signin', {
       method: 'post',
       headers: {
@@ -53,7 +53,6 @@ export function authenticateUser(user){
     .then(parseJSON)
     .then(function(response){
       dispatch(userLoginSuccess(response));
-      dispatch(routeActions.push({pathname: 'browse'}));
     })
     .catch(function(error){
       dispatch(userLoginFailure(error));

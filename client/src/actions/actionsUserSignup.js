@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+//import fetch from 'isomorphic-fetch';
 import {checkStatus, parseJSON} from './actionsHelper';
 import {USER_SIGNUP, USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILURE, USER_PROFILE_UPDATE, USER_PROFILE_UPDATE_ERR } from './actionConstants';
 
@@ -95,12 +95,12 @@ export function postUpdateProfile(user, token){
     };
     return fetch('/api/users/userUpdate', {
       method: 'post',
-      body: JSON.stringify(userUpdated),
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'x-access-token': token
-      }
+      },
+      body: JSON.stringify(userUpdated)
     }).then(checkStatus)
     .then(parseJSON)
     .then(function(response){
