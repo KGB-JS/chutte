@@ -1,4 +1,3 @@
-//import fetch from 'isomorphic-fetch';
 import {checkStatus, parseJSON} from './actionsHelper';
 import {CREATE_LISTING, CREATE_LISTING_SUCCESS, CREATE_LISTING_FAILURE, ADD_TO_USER_LISTINGS} from './actionConstants';
 

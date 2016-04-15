@@ -1,4 +1,3 @@
-//import fetch from 'isomorphic-fetch';
 import {routeActions} from 'react-router-redux';
 import {checkStatus, parseJSON} from './actionsHelper';
 import {USER_LOGIN, USER_LOGIN_SUCCESS, USER_LOGIN_FAILURE, USER_LOGOUT} from './actionConstants';

@@ -34,7 +34,6 @@
     "express": "^4.13.3",
     "express-partials": "^0.3.0",
     "http": "0.0.0",
-    "isomorphic-fetch": "^2.2.1",
     "jwt-simple": "^0.4.1",
     "mocha": "^2.3.4",
     "moment": "^2.11.1",
@@ -60,9 +59,7 @@
     "sendgrid": "^2.0.0",
     "socket.io": "^1.4.4",
     "socket.io-client": "^1.4.4",
-    "webpack": "^1.12.11"
-  },
-  "devDependencies": {
+    "webpack": "^1.12.11",
     "babel-core": "^6.4.0",
     "babel-loader": "^6.2.1",
     "babel-polyfill": "^6.3.14",

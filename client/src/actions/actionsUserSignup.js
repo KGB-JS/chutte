@@ -1,4 +1,3 @@
-//import fetch from 'isomorphic-fetch';
 import {checkStatus, parseJSON} from './actionsHelper';
 import {USER_SIGNUP, USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILURE, USER_PROFILE_UPDATE, USER_PROFILE_UPDATE_ERR } from './actionConstants';
 
