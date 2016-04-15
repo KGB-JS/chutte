@@ -1,7 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import {bsStyle, hasFeedback, Input } from 'react-bootstrap';
-import {postUserSignup} from './../actions/actionsUserSignup';
 import { Form, ValidatedInput } from 'react-bootstrap-validation';
 
 export default class UserSignup extends React.Component {
@@ -17,7 +15,7 @@ export default class UserSignup extends React.Component {
   updateUserName(event){
     this.setState({username: event.target.value });
   }
-  
+
   validatePassword(event){
     this.setState({ checkpassword: event.target.value });
     if(this.state.password === event.target.value){
@@ -40,6 +38,7 @@ export default class UserSignup extends React.Component {
       city: String(this.refs.city.value),
       zip: Number(this.refs.zip.value)
     };
+
     this.props.signupUser(newUser);
   }
 
@@ -88,7 +87,7 @@ export default class UserSignup extends React.Component {
                   validate={(val, context) => val === context.password }
 
                   errorHelp='Passwords do not match'
-                  type="password" 
+                  type="password"
                   ref="passwordConfirm" className="form-control" placeholder='Re-enter Password' />
                 </div>
               </div>
@@ -139,18 +138,4 @@ export default class UserSignup extends React.Component {
    }
  }
 
- function mapDispatchToProps(dispatch){
-   return {
-     signupUser: function(user) {
-       dispatch(postUserSignup(user));
-     }
-   }
- }
-
- function mapStateToProps(state){
-   return {
-     user: state.userStore.userAuth
-   }
- }
-
- export default connect(mapStateToProps, mapDispatchToProps)(UserSignup);
+ export default UserSignup;

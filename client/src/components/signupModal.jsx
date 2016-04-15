@@ -26,7 +26,7 @@ class SignUpModal extends React.Component {
             <Modal.Title>Sign Up</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <UserSignup/>
+            <UserSignup signupUser={this.props.signupUser}/>
           </Modal.Body>
         </Modal>
       </div>

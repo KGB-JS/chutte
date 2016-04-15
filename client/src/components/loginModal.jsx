@@ -26,7 +26,7 @@ class SignInModal extends React.Component {
             <Modal.Title>Sign In</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <UserSignIn/>
+            <UserSignIn signInUser={this.props.signInUser}/>
           </Modal.Body>
         </Modal>
       </div>
