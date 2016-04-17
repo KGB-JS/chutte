@@ -90,24 +90,27 @@ export function fetchProducts(){
 }
 
 export function postBuy(purchaseDetails, token){
-  return function(dispatch){
-    dispatch(postingBuy(purchaseDetails));
-    return fetch('/api/items/buyItem', {
-      method: 'post',
-      body: JSON.stringify(purchaseDetails),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'x-access-token': token
-      }
-    })
-    .then(checkStatus)
-    .then(parseJSON)
-    .then(function(response){
-      dispatch(postBuySuccess());
-    })
-    .catch(function(err){
-      dispatch(postBuyFailure(err));
-    });
+  return function(dispatch, getState){
+    let state = getState();
+    if(!state.userStore.userPurchases.postingBuy){
+      dispatch(postingBuy(purchaseDetails));
+      return fetch('/api/items/buyItem', {
+        method: 'post',
+        body: JSON.stringify(purchaseDetails),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': token
+        }
+      })
+      .then(checkStatus)
+      .then(parseJSON)
+      .then(function(response){
+        dispatch(postBuySuccess());
+      })
+      .catch(function(err){
+        dispatch(postBuyFailure(err));
+      });
+    }
   };
 }
