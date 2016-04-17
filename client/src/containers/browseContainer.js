@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import Browse from '../components/browse';
-import {userLogout, actionsUserAuth} from './../actions/actionsUserAuth';
+import {userLogout, authenticateUser} from './../actions/actionsUserAuth';
 import {postUserSignup} from './../actions/actionsUserSignup';
 import {filterByCategory, postBuyResetMsg} from './../actions/actionsProducts';
 
