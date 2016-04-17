@@ -33,9 +33,3 @@ function mapStateToProps(state){
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Browse);
-
-function mapDispatchToProps(dispatch){
-  return {
-
-  }
-}
