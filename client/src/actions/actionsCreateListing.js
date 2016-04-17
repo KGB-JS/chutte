@@ -35,9 +35,11 @@ export function addToUserListings(product){
 }
 
 export function postListing(product, token){
-  return function(dispatch){
-    dispatch(createListing());
-    fetch('/api/items/create', {
+  return function(dispatch, getState){
+    let state = getState();
+    if(!state.productStore.createListing.isPostingProduct){
+      dispatch(createListing());
+      fetch('/api/items/create', {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -55,5 +57,6 @@ export function postListing(product, token){
       .catch(function(err){
         dispatch(createListingFailure(err));
       });
+    }
   };
 }
