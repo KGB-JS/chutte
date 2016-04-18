@@ -64482,8 +64482,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        this.props.children,
-	        _react2.default.createElement(_devTools2.default, null)
+	        this.props.children
 	      );
 	    }
 	  }]);
@@ -65048,7 +65047,9 @@
 	function configureStore(history) {
 	  var initialState = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 	
-	  var enhancer = (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default, (0, _reactRouterRedux.routerMiddleware)(history), (0, _reduxLogger2.default)()), (0, _reduxHistoryTransitions2.default)(history), _devTools2.default.instrument());
+	  var enhancer = (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default, (0, _reactRouterRedux.routerMiddleware)(history)), (0, _reduxHistoryTransitions2.default)(history)
+	  //DevTools.instrument()
+	  );
 	
 	  var store = (0, _redux.createStore)(_rootReducer2.default, initialState, enhancer);
 	
