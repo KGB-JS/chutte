@@ -3980,7 +3980,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-left: -1px;
 }
 .nav {
-  padding-left: 0;
+  padding-left: 10;
   margin-bottom: 0;
   list-style: none;
 }
@@ -4336,7 +4336,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-nav {
-  margin: 7.5px -15px;
+  margin: 7.5px 15px;
 }
 .navbar-nav > li > a {
   padding-top: 10px;
@@ -4375,7 +4375,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     float: left;
   }
   .navbar-nav > li > a {
-    padding-top: 15px;
+    padding-top: 14px;
     padding-bottom: 15px;
   }
 }
@@ -4501,7 +4501,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
   .navbar-right {
     float: right !important;
-    margin-right: -15px;
+    margin-right: 0px;
   }
   .navbar-right ~ .navbar-right {
     margin-right: 0;

@@ -20,7 +20,7 @@ class SignUpModal extends React.Component {
   render() {
     return (
       <div>
-        <a href='#' onClick={this.open.bind(this)}>Signup</a>
+        <button className="btn btn-signUp" onClick={this.open.bind(this)}>Sign Up</button>
         <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
           <Modal.Header closeButton>
             <Modal.Title>Sign Up</Modal.Title>
