@@ -16,6 +16,28 @@ ul.sidebar-font > li:hover{
     color: #085E3D;
 }
 
+ul.sidebar-font > li.active{
+  color: white;
+  background-color: #00AC69;
+}
+
+ul.sidebar-font > li > a{
+  color: #00AC69;
+}
+
+ul.sidebar-font > li > a:hover{
+  color: #085E3D;
+}
+
+ul.sidebar-font > li.active > a{
+  color: white;
+  background-color: #00AC69;
+}
+
+ul.nav > li > a.active{
+  color: #085E3D;
+}
+
 a {
     color: #FFF;
 
@@ -41,6 +63,40 @@ a {
     border-style: solid;
     border-width: 0px;
     border-color: #D6D6D6;
+}
+
+.nav > li > button {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+
+.nav > li > div > button {
+  position: relative;
+  display: block;
+  padding: 10px 15px 10px 15px;
+}
+
+.btn-login{
+  background-color: #00AC69;
+  border: 1px solid #fff;
+  margin: 5px;
+  width: 80px;
+}
+
+.btn-signUp {
+  background-color: #fff;
+  border: 1px solid #fff;
+  color: #00AC69;
+  margin: 5px;
+  width: 80px;
+}
+
+.btn-signOut {
+  background-color: #00AC69;
+  border: 1px solid #fff;
+  margin: 5px;
+  width: 98px;
 }
 
 .sidebar-nav {
@@ -499,12 +555,13 @@ a {
     background-color: #00AC69;
     color: #FFFFFF;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
     border-width: 0px;
 }
 
 .navbar {
     border-radius: 0px;
+    height: 67px;
 }
 
 .navbar-brand .logo {
@@ -530,6 +587,10 @@ a {
 
 .navbar-default .navbar-nav > li > a {
     color: #FFFFFF;
+}
+
+.signIn-btn {
+  margin-top: 10px;
 }
 
 .full {
@@ -665,7 +726,7 @@ textarea{
     height: 100%;
     margin-left: -250px;
     /*overflow-y: auto;*/
-    background: #00AC69;
+    background: white;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -734,12 +795,26 @@ textarea{
     background: none;
 }
 
+ul.sidebar-font{
+  margin-top: 67px;
+  padding-top: 0px;
+  padding-left: 25px;
+  border-top: 1px solid white;
+  border-bottom: 2.5px solid #00AC69;
+}
+
 .sidebar-font > li {
-    color: white;
+    color: #00AC69;
     font-weight: bold;
     font-size: 20px;
     list-style-type: none;
-    padding-top: 25px
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    border-top: 2.5px solid #00AC69;
+    border-left: 2.5px solid #00AC69;
+    border-right: 2.5px solid #00AC69;
 }
 
 .sidebar-font > li:hover {
@@ -807,9 +882,6 @@ ul{
     position: fixed;
     width: 100%;
 }
-
-
-
 
 #signOut{
     padding-right: 10px;

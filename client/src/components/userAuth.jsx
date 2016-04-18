@@ -1,7 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {authenticateUser} from './../actions/actionsUserAuth';
-import HomeNavBar from './homenavbar';
 import { Form, ValidatedInput } from 'react-bootstrap-validation';
 
 class UserAuth extends React.Component{
@@ -18,7 +15,6 @@ class UserAuth extends React.Component{
     };
 
     this.props.signInUser(user);
-    this.props.history.push('browse');
   }
 
   checkUserName(event){
@@ -58,7 +54,7 @@ class UserAuth extends React.Component{
                 value={ this.state.userEmail }
                 onChange={this.checkUserName.bind(this)}
                 name="checkemail"
-                type="email" 
+                type="email"
                 validate='required,isEmail'
                 errorHelp={{
                 required: 'Please enter your email',
@@ -68,12 +64,12 @@ class UserAuth extends React.Component{
             </div>
             <div className="row">
               <span><i className="fa fa-key fa-fw"></i></span>
-              <input 
+              <input
               onChange={this.checkValidation.bind(this)}
               className="form-control" ref="password" type="password" placeholder="Password" />
             </div>
             <div className="row">
-              <button className="btn btn-primary" onClick={this.submitUserLogin.bind(this)} disabled={this.state.inactiveButton}>Sign In</button>
+              <button className="btn btn-primary signIn-btn" onClick={this.submitUserLogin.bind(this)} disabled={this.state.inactiveButton}>Sign In</button>
             </div>
           </Form>
           </div>
@@ -83,18 +79,4 @@ class UserAuth extends React.Component{
   }
 };
 
-function mapDispatchToProps(dispatch){
-  return {
-    signInUser: function(user) {
-      dispatch(authenticateUser(user));
-    }
-  }
-}
-
-function mapStateToProps(state){
-  return {
-    user: state.userStore.userAuth
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserAuth);
+export default UserAuth;

@@ -3,18 +3,24 @@ import {Link} from 'react-router';
 import {UserOptions} from './../actions/actionConstants';
 
 export default class ProfileSideNavbar extends React.Component {
-  render() {
-    var userOptions = ["User Profile", "Create Listing", "Current Listing"];
-    var icon = (<img className="logo" src="/assets/chutteLogo.png"  alt="Chutte Logo" height="50" width="50" />)
+  constructor(props){
+    super(props);
+    this.state = {activeSelection: UserOptions[0]};
+  }
 
+  handleClick(e){
+    let selection = e.target.id;
+    this.setState({activeSelection: selection});
+  }
+
+  render() {
     return (
         <div id="wrapper">
           <div id="sidebar-wrapper">
-           <Link className="navbar-brand" id="logo" to="/"> {icon} Chutte</Link>
             <ul className="sidebar-font">
-              <li id={userOptions[0]}><Link to="dashboard/profile">{userOptions[0]}</Link></li>
-              <li id={userOptions[1]}><Link to='/create'>{userOptions[1]}</Link></li>
-              <li id={userOptions[2]}><Link to='/current'>{userOptions[2]}</Link></li>
+              <li className={this.state.activeSelection === UserOptions[0] ? 'active' : ''} id={UserOptions[0]}><Link to="/dashboard" activeClassName="active" id={UserOptions[0]} onClick={this.handleClick.bind(this)}>{UserOptions[0]}</Link></li>
+              <li className={this.state.activeSelection === UserOptions[1] ? 'active' : ''} id={UserOptions[1]}><Link to='/dashboard/create' activeClassName="active" id={UserOptions[1]} onClick={this.handleClick.bind(this)}>{UserOptions[1]}</Link></li>
+              <li className={this.state.activeSelection === UserOptions[2] ? 'active' : ''} id={UserOptions[2]}><Link to='/dashboard/current' activeClassName="active" id={UserOptions[2]} onClick={this.handleClick.bind(this)}>{UserOptions[2]}</Link></li>
             </ul>
           </div>
         </div>

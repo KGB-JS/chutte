@@ -1,23 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {createListing, postListing} from './../actions/actionsCreateListing';
 import DropZone from 'react-dropzone';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import {CategoryFilters} from './../actions/actionConstants';
 
-export default class CreateListing extends React.Component {
+class CreateListing extends React.Component {
   constructor(props){
     super(props);
     this.state = { categorySelected: 'Select a category', description: '', startDate: moment(), endDate: moment(), imgFile: '', validateCategory: true };
-  }
-
-  validateForm(event){
-    if(this.state.password === event.target.value){
-      this.setState({ validation: false });
-    } else {
-      this.setState({ validation: true });
-    }
   }
 
   _descriptionInput(details){
@@ -60,24 +50,25 @@ export default class CreateListing extends React.Component {
   }
 
   submitForm(){
-    var itemDetails ={product: {
-      productName: String(this.refs.name.value),
-      createdBy : String(this.refs.name.value),
-      category : String(this.state.categorySelected),
-      quantity : Number(this.refs.quantity.value),
-      auctionEnds : Number(this.state.endDate.valueOf()),
-      price: Number(this.refs.price.value),
-      minPrice: Number(this.refs.minPrice.value),
-      imgFile: this.state.imgFile,
-      description: String(this.state.description)
-    }};
-
+    var itemDetails ={
+      product: {
+        productName: String(this.refs.name.value),
+        createdBy : String(this.refs.name.value),
+        category : String(this.state.categorySelected),
+        quantity : Number(this.refs.quantity.value),
+        auctionEnds : Number(this.state.endDate.valueOf()),
+        price: Number(this.refs.price.value),
+        minPrice: Number(this.refs.minPrice.value),
+        imgFile: this.state.imgFile,
+        description: String(this.state.description)
+      }
+    };
     this.props.submitListing(itemDetails, this.props.user.token);
 
   }
 
   render() {
-    let failedPostMSG = this.props.productListing.postErrorMSG === true ? <p className="alert alert-danger alert-dismissible">Please Fill out form completely</p> : "";
+    let failedPostMSG = this.props.postErrorMSG === true ? <p className="alert alert-danger alert-dismissible">Please Fill out form completely</p> : "";
     var defaultV = "Select a category";
     return (
       <div className="bumpDown col-sm-offset-3 col-md-10 col-md-offset-2">
@@ -165,6 +156,6 @@ export default class CreateListing extends React.Component {
       </div>
     )
   }
-}
+};
 
-export default CreateListing
+export default CreateListing;

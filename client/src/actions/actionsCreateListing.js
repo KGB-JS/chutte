@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-fetch';
 import {checkStatus, parseJSON} from './actionsHelper';
 import {CREATE_LISTING, CREATE_LISTING_SUCCESS, CREATE_LISTING_FAILURE, ADD_TO_USER_LISTINGS} from './actionConstants';
 
@@ -36,16 +35,18 @@ export function addToUserListings(product){
 }
 
 export function postListing(product, token){
-  return function(dispatch){
-    dispatch(createListing());
-      return fetch('/api/items/', {
+  return function(dispatch, getState){
+    let state = getState();
+    if(!state.productStore.createListing.isPostingProduct){
+      dispatch(createListing());
+      fetch('/api/items/create', {
         method: 'post',
-        body: JSON.stringify(product),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'x-access-token': token
-        }
+        },
+        body: JSON.stringify(product)
       })
       .then(checkStatus)
       .then(parseJSON)
@@ -56,5 +57,6 @@ export function postListing(product, token){
       .catch(function(err){
         dispatch(createListingFailure(err));
       });
+    }
   };
 }
