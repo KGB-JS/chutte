@@ -65,6 +65,40 @@ a {
     border-color: #D6D6D6;
 }
 
+.nav > li > button {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+
+.nav > li > div > button {
+  position: relative;
+  display: block;
+  padding: 10px 15px 10px 15px;
+}
+
+.btn-login{
+  background-color: #00AC69;
+  border: 1px solid #fff;
+  margin: 5px;
+  width: 80px;
+}
+
+.btn-signUp {
+  background-color: #fff;
+  border: 1px solid #fff;
+  color: #00AC69;
+  margin: 5px;
+  width: 80px;
+}
+
+.btn-signOut {
+  background-color: #00AC69;
+  border: 1px solid #fff;
+  margin: 5px;
+  width: 98px;
+}
+
 .sidebar-nav {
     position: absolute;
     top: 0;
@@ -527,6 +561,7 @@ a {
 
 .navbar {
     border-radius: 0px;
+    height: 67px;
 }
 
 .navbar-brand .logo {
@@ -761,7 +796,7 @@ textarea{
 }
 
 ul.sidebar-font{
-  margin-top: 66px;
+  margin-top: 67px;
   padding-top: 0px;
   padding-left: 25px;
   border-top: 1px solid white;

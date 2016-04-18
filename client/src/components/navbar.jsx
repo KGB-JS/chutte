@@ -13,10 +13,12 @@ const Navbar = function({user, submitSignout, signInUser, signupUser}) {
             <div className="navbar-header">
               <Link to="/" className="navbar-brand">{icon}</Link>
             </div>
-          <ul className="nav navbar-nav navbar-right">
+          <ul className="nav navbar-nav">
             <li><Link to="/browse" activeClassName="active">Browse</Link></li>
             <li><Link to="/dashboard" activeClassName="active">Dashboard</Link></li>
-            <li><a onClick={submitSignout} activeClassName="active">Sign out</a></li>
+          </ul>
+          <ul className="nav navbar-right">
+            <li><button onClick={submitSignout} className="btn btn-signOut">Sign out</button></li>
           </ul>
         </div>
       </nav>
@@ -29,8 +31,8 @@ const Navbar = function({user, submitSignout, signInUser, signupUser}) {
             <Link to="/" className="navbar-brand">{icon}</Link>
           </div>
             <ul className="nav navbar-nav navbar-right">
-              <li><SignUpModal signupUser={signupUser}/></li>
               <li><SignInModal signInUser={signInUser}/></li>
+              <li><SignUpModal signupUser={signupUser}/></li>
             </ul>
         </div>
       </nav>
