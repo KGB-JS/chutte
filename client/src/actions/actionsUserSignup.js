@@ -8,12 +8,11 @@ export function userSignup(userName){
   };
 };
 
-export function userSignupSuccess(token, user){
+export function userSignupSuccess(token){
   localStorage.setItem('token', token);
   return {
     type: USER_SIGNUP_SUCCESS,
     token: token,
-    user: user,
     meta: {
         transition: (state, action) => ({
           pathname: 'browse'
@@ -52,13 +51,6 @@ export function postUserSignup(user){
     let newUser = {
       username: user.username,
       password: user.password,
-      firstname: user.firstName,
-      lastname: user.lastName,
-      phone: user.phone,
-      streetAddress: user.address,
-      stateRegion: user.state,
-      city: user.city,
-      zip: user.zip
     }
     return fetch('/api/users/signup', {
       method: 'post',
@@ -71,7 +63,7 @@ export function postUserSignup(user){
     .then(checkStatus)
     .then(parseJSON)
     .then(function(response){
-      dispatch(userSignupSuccess(response.token, user));
+      dispatch(userSignupSuccess(response.token));
     })
     .catch(function(error){
       dispatch(userSignupFailure(error));

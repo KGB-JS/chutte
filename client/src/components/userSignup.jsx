@@ -30,13 +30,6 @@ export default class UserSignup extends React.Component {
     var newUser = {
       username: String(this.state.username),
       password: String(this.state.password),
-      firstName: String(this.refs.firstName.value),
-      lastName: String(this.refs.lastName.value),
-      phone: String(this.refs.phoneNumber.value),
-      address: String(this.refs.address.value),
-      state: String(this.refs.state.value),
-      city: String(this.refs.city.value),
-      zip: Number(this.refs.zip.value)
     };
 
     this.props.signupUser(newUser);
@@ -44,12 +37,11 @@ export default class UserSignup extends React.Component {
 
   render() {
     return (
-      <div>
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-12">
             <Form role="form">
-             <div className="col-md-4">
+             <div className="col-md-12">
               <div className="form-group">
                   <ValidatedInput
                   value={this.state.username }
@@ -90,50 +82,14 @@ export default class UserSignup extends React.Component {
                   type="password"
                   ref="passwordConfirm" className="form-control" placeholder='Re-enter Password' />
                 </div>
-              </div>
-
-              <div className="col-md-4">
-                <div className="form-group">
-                  <label>First Name</label>
-                  <input type="text" ref="firstName" className="form-control" placeholder='First Name'/>
-                </div>
-                <div className="form-group">
-                  <label>Last Name</label>
-                  <input type="text" ref="lastName" className="form-control" placeholder='Last Name'/>
-                </div>
-                <div className="form-group">
-                  <label>Phone Number</label>
-                  <input type="text" ref="phoneNumber" className="form-control" placeholder='Phone Number'/>
-                </div>
-              </div>
-
-              <div className="col-md-4">
-                <div className="form-group">
-                  <label>Address</label>
-                  <input type="text" ref="address" className="form-control" placeholder='Address'/>
-                </div>
-                <div className="form-group">
-                  <label>City</label>
-                  <input type="text" ref="city" className="form-control" placeholder='City'/>
-                </div>
-                <div className="form-group">
-                  <label>State</label>
-                  <input type="text" ref="state" className="form-control" placeholder='State'/>
-                </div>
-                <div className="form-group">
-                  <label>Zip Code</label>
-                  <input type="text" ref="zip" className="form-control" placeholder='Zip Code'/>
-                </div>
                 <div className="form-group">
                   <button className="btn btn-primary btn-lg" onClick={this.submitSignUp.bind(this)} disabled={this.state.validation}>Submit</button>
                 </div>
               </div>
-
               </Form>
             </div>
           </div>
         </div>
-      </div>
     )
    }
  }
