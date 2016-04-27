@@ -74,7 +74,11 @@ a {
 .nav > li > div > button {
   position: relative;
   display: block;
-  padding: 10px 15px 10px 15px;
+  padding: 7px 7px 7px 7px;
+}
+
+ul.navbar-right {
+  margin-top: 5px;
 }
 
 .btn-login{
@@ -838,6 +842,10 @@ ul{
     }
     ul{
         margin-left: -25px;
+    }
+
+    ul.navbar-right {
+      margin-top: 5px;
     }
 
     .bumpDown{
