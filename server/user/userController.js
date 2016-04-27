@@ -45,17 +45,10 @@ module.exports = {
         next(error);
       });
   },
-    
+
   signup: function(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
-    var firstName = req.body.firstName;
-    var lastName = req.body.lastName;
-    var phone = req.body.phone;
-    var streetAddress = req.body.address;
-    var stateRegion = req.body.state;
-    var city = req.body.city;
-    var zip = req.body.zip;
 
     var findOne = Q.nbind(User.findOne, User);
     // check to see if user already exists
@@ -72,13 +65,6 @@ module.exports = {
           var newUser = {
             username: username,
             password: password,
-            firstname: firstName,
-            lastname: lastName,
-            phone: phone,
-            streetAddress: streetAddress,
-            stateRegion: stateRegion,
-            city: city,
-            zip: zip
           };
           var newSignupUser = new User(newUser);
           return newSignupUser.save();
